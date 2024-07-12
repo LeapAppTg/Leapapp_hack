@@ -1,4 +1,3 @@
-import { HeroGood } from '@assets';
 import { PageTitleBackground, PageTitleBackgroundColor } from "@components";
 import { FC } from "react";
 import Lottie from 'react-lottie';
