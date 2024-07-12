@@ -1,0 +1,24 @@
+body {
+    --color-main-bg: #111217;
+    --color-main-white: #FFF;
+    --color-main-accent: #B51CF7;
+
+    --color-grey-400: #9197AA;
+    --color-grey-500: #70767F;
+    --color-grey-600: #505760;
+    --color-grey-700: #29313D;
+    --color-grey-800: #1D2734;
+    --color-grey-900: #1A1C23;
+
+    --color-purple-400: #C084FC;
+    --color-purple-700: #7E22CE;
+    --color-purple-800: #731999;
+    --color-purple-925: #6F567B;
+    --color-purple-950: #5A3D68;
+    --color-purple-975: #3B2D42;
+
+    --color-green-600: #059669;
+
+    --color-experimental-1: #A4A9AD;
+
+}

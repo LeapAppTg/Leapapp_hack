@@ -1,0 +1,74 @@
+.primary, .secondary, .tertiary, .link {
+    height: 52px;
+    padding: 12px 20px;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: 0.3s all;
+    border: 2px solid transparent;
+}
+
+/* Primary */
+
+.primary {
+    background: var(--color-main-accent);
+    border-color: rgba(255, 255, 255, 0.20);
+}
+.primary:hover, .primary:active {
+    background: var(--color-purple-800);
+}
+.primary.disabled {
+    background: var(--color-purple-975);
+}
+
+/* Secondary */
+
+.secondary {
+    background: var(--color-purple-950);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+.secondary:hover, .secondary:active {
+    background: var(--color-grey-700);
+    border-color: transparent;
+}
+.secondary.disabled {
+    background: var(--color-grey-800);
+    border-color: transparent;
+}
+
+/* Tertiary */
+
+.tertiary {
+    background: transparent;
+    border-color: var(--color-grey-800);
+}
+.tertiary:hover, .tertiary:active {
+    background:var(--color-gray-700);
+    border-color: transparent;
+}
+.tertiary.disabled {
+    background: transparent;
+    border-color: var(--color-grey-800);
+}
+
+/* Link */
+
+.link {
+    border-radius: 0;
+    padding: 0;
+    height: unset;
+}
+.link:hover, .link:active {
+    color: var(--color-purple-700);
+}
+.link.disabled {
+    color: var(--color-grey-600);
+}
+
+/* Utils */
+
+.fill_full_width {
+    width: 100%;
+}

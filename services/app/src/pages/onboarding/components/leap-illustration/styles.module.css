@@ -1,0 +1,34 @@
+.wrapper {
+    width: 100%;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.illustration {
+    width: 100%;
+    position: relative;
+}
+
+.illustration p {
+    position: absolute;
+    color: #1E2029;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.illustration p:first-child {
+    left: 20%;
+    top: 60%;
+    transform: rotate(14.035deg);
+}
+
+.illustration p:last-child {
+    right: 10%;
+    bottom: -20%;
+    transform: rotate(-17.992deg);
+}
+
+.bg {
+    top: 32px;
+    overflow: visible;
+}

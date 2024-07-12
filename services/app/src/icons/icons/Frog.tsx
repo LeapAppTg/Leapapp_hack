@@ -1,0 +1,94 @@
+import { getIconClassName, IconFC } from "../common";
+
+export const FrogIcon: IconFC = (props) => {
+    const className = getIconClassName(props, true)
+    return (
+        <svg className={className} width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect id="Rectangle 26" x="1.89941" y="18.3999" width="3.6" height="1.2" fill="black"/>
+            <rect id="Rectangle 27" x="9.10059" y="18.3999" width="3.6" height="1.2" fill="black"/>
+            <rect id="Rectangle 28" x="16.2988" y="18.3999" width="3.6" height="1.2" fill="black"/>
+            <rect id="Rectangle 29" x="13.8994" y="18.3999" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 30" x="6.70117" y="18.3999" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 31" x="5.5" y="17.1997" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 40" x="1.89941" y="14.7998" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 41" x="4.29883" y="13.6001" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 43" x="1.89941" y="11.1997" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 45" x="1.89941" y="7.6001" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 50" x="7.89941" y="1.6001" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 51" x="12.7012" y="1.6001" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 54" x="17.5" y="1.6001" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 56" x="17.5" y="6.3999" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 57" x="18.7012" y="7.6001" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 59" x="18.7012" y="11.1997" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 61" x="16.2988" y="13.6001" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 60" x="15.1006" y="12.3999" width="3.6" height="1.2" fill="black"/>
+            <rect id="Rectangle 58" x="19.8994" y="8.7998" width="1.2" height="2.4" fill="black"/>
+            <rect id="Rectangle 55" x="18.7012" y="2.7998" width="1.2" height="3.6" fill="black"/>
+            <rect id="Rectangle 52" x="9.10059" y="2.7998" width="3.6" height="1.2" fill="black"/>
+            <rect id="Rectangle 53" x="13.8994" y="0.399902" width="3.6" height="1.2" fill="black"/>
+            <rect id="Rectangle 48" x="3.10059" y="1.6001" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 49" x="4.29883" y="0.399902" width="3.6" height="1.2" fill="black"/>
+            <rect id="Rectangle 47" x="1.89941" y="2.7998" width="1.2" height="3.6" fill="black"/>
+            <rect id="Rectangle 44" x="0.701172" y="8.7998" width="1.2" height="2.4" fill="black"/>
+            <rect id="Rectangle 42" x="3.10059" y="12.3999" width="3.6" height="1.2" fill="black"/>
+            <rect id="Rectangle 38" x="0.701172" y="16" width="1.2" height="2.4" fill="black"/>
+            <rect id="Rectangle 39" x="3.10059" y="14.7998" width="1.2" height="2.4" fill="black"/>
+            <rect id="Rectangle 32" x="7.89941" y="17.1997" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 33" x="12.7012" y="17.1997" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 34" x="15.1006" y="17.1997" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 36" x="17.5" y="16" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 37" x="17.5" y="14.7998" width="2.4" height="1.2" fill="black"/>
+            <rect id="Rectangle 35" x="19.8994" y="16" width="1.2" height="2.4" fill="black"/>
+            <rect id="Rectangle 46" x="3.10059" y="6.3999" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 67" x="9.10059" y="4" width="3.6" height="6" fill="#C084FC"/>
+            <rect id="Rectangle 68" x="7.89941" y="6.3999" width="1.2" height="3.6" fill="#C084FC"/>
+            <rect id="Rectangle 80" x="5.5" y="13.6001" width="1.2" height="3.6" fill="#C084FC"/>
+            <rect id="Rectangle 81" x="15.1006" y="13.6001" width="1.2" height="3.6" fill="#C084FC"/>
+            <rect id="Rectangle 82" x="15.1006" y="13.6001" width="1.2" height="3.6" fill="#C084FC"/>
+            <rect id="Rectangle 83" x="16.2988" y="14.7998" width="1.2" height="3.6" fill="#C084FC"/>
+            <rect id="Rectangle 84" x="13.8994" y="14.7998" width="1.2" height="3.6" fill="#C084FC"/>
+            <rect id="Rectangle 85" x="12.7012" y="14.7998" width="1.2" height="2.4" fill="#C084FC"/>
+            <rect id="Rectangle 86" x="7.89941" y="14.7998" width="1.2" height="2.4" fill="#C084FC"/>
+            <rect id="Rectangle 89" x="1.89941" y="16" width="1.2" height="2.4" fill="#C084FC"/>
+            <rect id="Rectangle 91" x="3.10059" y="17.1997" width="1.2" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 92" x="17.5" y="17.1997" width="1.2" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 93" x="9.10059" y="14.7998" width="1.2" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 94" x="11.5" y="14.7998" width="1.2" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 90" x="18.7012" y="16" width="1.2" height="2.4" fill="#C084FC"/>
+            <rect id="Rectangle 88" x="4.29883" y="14.7998" width="1.2" height="3.6" fill="#C084FC"/>
+            <rect id="Rectangle 87" x="6.70117" y="14.7998" width="1.2" height="3.6" fill="#C084FC"/>
+            <rect id="Rectangle 95" x="10.2988" y="14.7998" width="1.2" height="3.6" fill="white"/>
+            <rect id="Rectangle 96" x="9.10059" y="16" width="1.2" height="2.4" fill="white"/>
+            <rect id="Rectangle 97" x="11.5" y="16" width="1.2" height="2.4" fill="white"/>
+            <rect id="Rectangle 98" x="4.29883" y="5.19971" width="1.2" height="2.4" fill="white"/>
+            <rect id="Rectangle 108" x="4.29883" y="1.6001" width="2.4" height="3.6" fill="white"/>
+            <rect id="Rectangle 109" x="15.1006" y="1.6001" width="2.4" height="3.6" fill="white"/>
+            <rect id="Rectangle 101" x="3.10059" y="2.7998" width="1.2" height="3.6" fill="white"/>
+            <rect id="Rectangle 103" x="12.7012" y="2.7998" width="1.2" height="3.6" fill="white"/>
+            <rect id="Rectangle 102" x="7.89941" y="2.7998" width="1.2" height="3.6" fill="white"/>
+            <rect id="Rectangle 104" x="17.5" y="2.7998" width="1.2" height="3.6" fill="white"/>
+            <rect id="Rectangle 99" x="5.5" y="5.19971" width="1.2" height="2.4" fill="white"/>
+            <rect id="Rectangle 106" x="15.1006" y="5.19971" width="1.2" height="2.4" fill="white"/>
+            <rect id="Rectangle 107" x="16.2988" y="5.19971" width="1.2" height="2.4" fill="white"/>
+            <rect id="Rectangle 100" x="6.70117" y="1.6001" width="1.2" height="6" fill="white"/>
+            <rect id="Rectangle 105" x="13.8994" y="1.6001" width="1.2" height="6" fill="white"/>
+            <rect id="Rectangle 69" x="12.7012" y="6.3999" width="1.2" height="3.6" fill="#C084FC"/>
+            <rect id="Rectangle 70" x="13.8994" y="7.6001" width="2.4" height="2.4" fill="#C084FC"/>
+            <rect id="Rectangle 75" x="5.5" y="7.6001" width="2.4" height="2.4" fill="#C084FC"/>
+            <rect id="Rectangle 71" x="16.2988" y="7.6001" width="2.4" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 76" x="3.10059" y="7.6001" width="2.4" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 77" x="1.89941" y="8.7998" width="3.6" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 78" x="1.89941" y="10" width="3.6" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 79" x="6.70117" y="12.3999" width="8.4" height="2.4" fill="#C084FC"/>
+            <rect id="Rectangle 72" x="16.2988" y="8.7998" width="3.6" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 73" x="16.2988" y="10" width="3.6" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 74" x="3.10059" y="11.1997" width="15.6" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 110" x="5.5" y="10" width="10.8" height="1.2" fill="#C084FC"/>
+            <rect id="Rectangle 64" x="4.29883" y="10" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 65" x="16.2988" y="10" width="1.2" height="1.2" fill="black"/>
+            <rect id="Rectangle 66" x="5.5" y="8.7998" width="10.8" height="1.2" fill="black"/>
+            <rect id="Rectangle 63" x="15.1006" y="4" width="2.4" height="2.4" fill="black"/>
+            <rect id="Rectangle 62" x="5.5" y="4" width="2.4" height="2.4" fill="black"/>
+        </svg>
+    )
+}

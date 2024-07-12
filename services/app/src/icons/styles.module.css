@@ -1,0 +1,112 @@
+/* Size */
+
+/* Large */
+
+svg.large, .box.large svg {
+    height: 40px;
+    width: auto;
+}
+.box.large {
+    width: 40px;
+    height: 40px;
+}
+
+/* Medium Big */
+
+svg.medium_big, .box.medium_big svg {
+    height: 24px;
+    width: auto;
+}
+.box.medium_big {
+    width: 24px;
+    height: 24px;
+}
+
+/* Medium */
+
+svg.medium, .box.medium svg {
+    height: 20px;
+    width: auto;
+}
+.box.medium {
+    width: 20px;
+    height: 20px;
+}
+
+/* Small */
+
+svg.small, .box.small svg {
+    height: 16px;
+    width: auto;
+}
+.box.small {
+    width: 16px;
+    height: 16px;
+}
+
+/* Colors */
+
+/* main white */
+
+svg.color_main_white {
+    fill: var(--color-main-white);
+}
+.color_main_white_only_fill {
+    fill: var(--color-main-white);
+}
+.color_main_white_only_stroke {
+    stroke: var(--color-main-white);
+}
+
+/* grey 400 */
+
+svg.color_grey_400 {
+    fill: var(--color-grey-400);
+}
+.color_grey_400_only_fill {
+    fill: var(--color-grey-400);
+}
+.color_grey_400_only_stroke {
+    stroke: var(--color-grey-400);
+}
+
+/* purple 400 */
+
+svg.color_purple_400 {
+    fill: var(--color-purple-400);
+}
+.color_purple_400_only_fill {
+    fill: var(--color-purple-400);
+}
+.color_purple_400_only_stroke {
+    stroke: var(--color-purple-400);
+}
+
+/* Experimental 1 */
+
+svg.color_experimental_1 {
+    fill: var(--color-experimental-1);
+}
+.color_experimental_1_only_fill {
+    fill: var(--color-experimental-1);
+}
+.color_experimental_1_only_stroke {
+    stroke: var(--color-experimental-1);
+}
+
+/* Other */
+
+.box.clickable {
+    cursor: pointer;
+}
+
+/* Opacity */
+
+.opacity_half {
+    opacity: 50%;
+}
+/* Rotation */
+
+.rotation_180 {
+    transform: rotate(180deg);
+}

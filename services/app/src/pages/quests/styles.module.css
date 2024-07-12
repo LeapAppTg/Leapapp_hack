@@ -1,0 +1,37 @@
+.quests {
+    position: relative;
+    width: 100%;
+    padding: 60px 50px;
+    overflow: hidden;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.dots_background_repeat {
+    width: 100%;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+}
+
+.path_right, .path_left, .path_top {
+    position: absolute;
+    width: 98px;
+    height: 152px;
+    top: 26px;
+    z-index: -2;
+}
+
+.path_left {
+    left: 24px;
+}
+
+.path_right {
+    right: 24px;
+    transform: scaleX(-1);
+}
+
+.quests > div {
+    position: relative;
+}

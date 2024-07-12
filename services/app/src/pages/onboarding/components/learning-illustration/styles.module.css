@@ -1,0 +1,36 @@
+.illustration {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    flex-direction: column;
+    gap: 46px;
+    padding: 36px 28px 24px;
+    border-radius: 20px;
+    border: 1px solid var(--color-grey-700);
+}
+
+.illustration > div {
+    position: relative;
+}
+
+.path_left, .path_right {
+    position: absolute;
+    width: 98px;
+    height: 152px;
+    top: 26px;
+    z-index: -2;
+}
+
+.path_left {
+    left: 48px;
+}
+
+.path_right {
+    right: 48px;
+    transform: scaleX(-1);
+}
+
+.background {
+    position: absolute;
+    top: -32px;
+}

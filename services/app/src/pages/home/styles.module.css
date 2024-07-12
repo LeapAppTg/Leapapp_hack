@@ -1,0 +1,19 @@
+.stats_wrapper {
+    gap: 24px;
+}
+.stat {
+    gap: 8px;
+}
+
+.farming_stats {
+    width: 100%;
+    gap: 12px;
+}
+
+.farming_stat {
+    width: 100%;
+    gap: 4px;
+}
+.farming_stat > p:first-child {
+    margin-right: 4px;
+}

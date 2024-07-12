@@ -1,0 +1,52 @@
+.wrapper {
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.progress_wrapper {
+    position: relative;
+    width: 238px;
+    height: 238px;
+}
+
+.circle {
+    position: absolute;
+    width: 238px;
+    height: 238px;
+    border-radius: 100%;
+    border: 9px solid #151A20;
+    box-sizing: border-box;
+}
+
+.circle svg {
+    position: absolute;
+    width: calc(100% + 18px);
+    height: calc(100% + 18px);
+    left: -9px;
+    top: -9px;
+}
+
+.circle:nth-child(2) {
+    width: 205px;
+    height: 205px;
+}
+
+.circle:nth-child(3) {
+    width: 176px;
+    height: 176px;
+}
+
+.circle:nth-child(3)svg {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: -9px;
+    top: -9px;
+}
+
+.circle:nth-child(4) {
+    width: 145px;
+    height: 145px;
+}

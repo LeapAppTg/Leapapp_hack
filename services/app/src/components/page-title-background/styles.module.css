@@ -1,0 +1,60 @@
+.background {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: -16px;
+    left: 0;
+    z-index: -1;
+}
+
+.background > g {
+    opacity: 0;
+    animation: star_sparkle 8s infinite ease-in-out;
+}
+
+.background > g:nth-child(4n - 3) {
+    animation-delay: 6s;
+}
+.background > g:nth-child(4n - 2) {
+    animation-delay: 4s;
+}
+.background > g:nth-child(4n - 1) {
+    animation-delay: 2s;
+}
+.background > g:nth-child(4n) {
+    animation-delay: 0s;
+}
+
+.background > circle {
+    opacity: 0;
+    animation: circle_sparkle 9s infinite ease-in-out;
+}
+
+
+.background > circle:nth-child(3n - 2) {
+    animation-delay: 6s;
+}
+.background > circle:nth-child(3n - 1) {
+    animation-delay: 3s;
+}
+.background > circle:nth-child(3n) {
+    animation-delay: 0s;
+}
+
+@keyframes star_sparkle {
+    from, to, 25%, 75% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes circle_sparkle {
+    from, to, 25%, 75% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.1;
+    }
+}

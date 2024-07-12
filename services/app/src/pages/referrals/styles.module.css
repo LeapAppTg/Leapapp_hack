@@ -1,0 +1,14 @@
+.table_title {
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 12px;
+}
+
+.table {
+    width: 100%;
+    background: var(--color-grey-900);
+    border-radius: 20px;
+    padding: 12px;
+    gap: 20px;
+    flex-direction: column;
+}

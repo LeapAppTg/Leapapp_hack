@@ -1,0 +1,29 @@
+.illustration {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    flex-direction: column;
+    gap: 40px;
+    padding: 36px 50px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--color-grey-700);
+}
+
+.illustration > div {
+    position: relative;
+}
+
+.path_left {
+    position: absolute;
+    width: 98px;
+    height: 152px;
+    top: 26px;
+    left: 24px;
+    z-index: -2;
+}
+
+.background {
+    position: absolute;
+    top: -64px;
+    z-index: -2;
+}
