@@ -1,0 +1,32 @@
+.wrapper {
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: flex-end;
+    padding: 24px 0;
+}
+
+.content_wrapper {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.content {
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.confetti_bg {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -2;
+}
+
+.background {
+    overflow: visible;
+    top: 16px;
+}

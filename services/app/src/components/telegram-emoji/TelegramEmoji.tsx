@@ -9,6 +9,7 @@ const SourceMapping = new MultiMapping<TelegramEmojiType, [[string, undefined]]>
             [TelegramEmojiType.HatchingChick]: 'tg-emojis/hatching_chick.png',
             [TelegramEmojiType.Gamepad]: 'tg-emojis/gamepad.png',
             [TelegramEmojiType.FinishFlag]: 'tg-emojis/finish_flag.png',
+            [TelegramEmojiType.Rocket]: 'tg-emojis/rocket.png',
         },
         undefined
     ]

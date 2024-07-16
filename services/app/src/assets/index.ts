@@ -14,6 +14,9 @@ import HeroGood from './HeroGood.svg?react'
 import HeroHalfOpen from './HeroHalfOpen.svg?react'
 import HeroOpen from './HeroOpen.svg?react'
 import HeroSad from './HeroSad.svg?react'
-import HeroSad2 from './HeroSad2.svg'
+import HeroSad2 from './HeroSad2.svg?react'
+import DialogueCloud from './DialogueCloud.svg?react'
+import CoinsIlustration from './CoinsIlustration.svg?react'
+import SquaresPattern from './SquaresPattern.svg?react'
 
-export { DotsBackground, MapPathCorner, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }
+export { DotsBackground, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }

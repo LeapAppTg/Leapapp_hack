@@ -1,7 +1,7 @@
+import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
+import { CheckmarkIcon, ClockIcon, IconFC } from "@icons";
+import { EnumMatcher, EnumToFCMatcher } from "@utils";
 import { FC } from "react";
-import styles from "./styles.module.css";
-import { CheckmarkIcon, ClockIcon, IconBox, IconFC, IconSize } from "@icons";
-import { EnumToFCMatcher, classBuilder } from "@utils";
 import { TaskStatus } from "../task/Task";
 
 type TaskStatusIconProps = {
@@ -16,17 +16,13 @@ const IconMatcher = new EnumToFCMatcher<TaskStatus, IconFC, IconFC>(
     CheckmarkIcon
 )
 
+const ColorMatcher = new EnumMatcher<TaskStatus, CircleIconWrapperColor, CircleIconWrapperColor>(
+    {
+        [TaskStatus.Completed]: CircleIconWrapperColor.Green600,
+    },
+    CircleIconWrapperColor.Grey500
+)
+
 export const TaskStatusIcon: FC<TaskStatusIconProps> = ({ type }) => {
-
-    const className = classBuilder(
-        styles,
-        [type],
-        styles.status
-    )
-
-    return (
-        <div className={className}>
-            <IconBox icon={IconMatcher.match(type)} size={IconSize.Small}/>
-        </div>
-    )
+    return <CircleIconWrapper icon={IconMatcher.match(type)} color={ColorMatcher.match(type)}/>
 }

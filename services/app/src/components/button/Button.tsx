@@ -12,7 +12,7 @@ const ColorMapping = new MultiMapping<ButtonStyle, [[TextColor, undefined], [Ico
 
 export const Button: FC<PropsWithChildren<ButtonProps>> = ({ linkTo, ...restProps }) => {
     if (linkTo) return (
-        <Link to={linkTo} target="_blank">
+        <Link to={linkTo} className={restProps.fillFullWidth ? styles.fill_full_width : undefined}>
             <ButtonContent {...restProps}/>
         </Link>
     )

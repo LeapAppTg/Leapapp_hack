@@ -1,5 +1,5 @@
 import { Navigation } from '@elements'
-import { HomePage, OnboardingPage, QuestDetailsPage, QuestsPage, ReferralsPage } from '@pages'
+import { HomePage, OnboardingPage, QuestDetailsPage, QuestsPage, ReferralsPage, StreakPage } from '@pages'
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
@@ -42,6 +42,7 @@ const AppRouter: FC = () => {
             <Route path='/quests' element={<PageWrapper><QuestsPage/></PageWrapper>}/>
             <Route path='/quests/:id' element={<PageWrapper><QuestDetailsPage/></PageWrapper>}/>
             <Route path='/onboarding' element={<PageWrapper hideNavbar><OnboardingPage/></PageWrapper>}/>
+            <Route path='/streak' element={<PageWrapper hideNavbar><StreakPage/></PageWrapper>}/>
             <Route path='*' element={<Navigate to='/onboarding'/>}/>
         </Routes>
       </section>

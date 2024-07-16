@@ -1,0 +1,106 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: flex-end;
+    padding: 24px 0;
+}
+
+.illustration_wrapper {
+    flex-grow: 1;
+}
+
+.illustration {
+    position: relative;
+    flex-direction: column;
+}
+
+.coins {
+    position: absolute;
+    width: 300px;
+    top: -70px;
+    z-index: -1;
+}
+
+.bg_a, .bg_b {
+    overflow: visible;
+}
+
+.bg_a {
+    top: -64px;
+}
+
+.bg_b {
+    top: unset;
+    bottom: -128px;
+}
+
+.text_wrapper {
+    position: absolute;
+    width: 100%;
+    padding: 16px;
+    top: 0;
+    flex-direction: column;
+}
+
+.text_wrapper p {
+    width: 0;
+    display: block;
+    overflow: hidden;
+    border-right: 1px solid transparent;
+    white-space: nowrap;
+    animation: 
+        typing 3.5s steps(40, end) forwards,
+        blink-caret 3.5s ease
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, 20%, 40%, 60%, 80%, to { border-color: transparent }
+    10%, 30%, 50%, 70%, 90% { border-color: var(--color-main-bg); }
+}
+
+.text_wrapper div:nth-child(1) p {
+    animation-duration: 1s;
+}
+
+.text_wrapper div:nth-child(2) p {
+    animation-duration: 2s;
+    animation-delay: 1s;
+}
+
+.text_wrapper div:nth-child(3) p {
+    animation-duration: 2s;
+    animation-delay: 3s;
+}
+
+.text_wrapper div:nth-child(4) p {
+    animation-duration: 1.5s;
+    animation-delay: 5s;
+}
+
+.text_wrapper div:nth-child(5) p {
+    animation-duration: 2s;
+    animation-delay: 7s;
+}
+
+.text_wrapper div:nth-child(6) p {
+    animation-duration: 2s;
+    animation-delay: 9s;
+}
+
+.text_wrapper div:nth-child(7) p {
+    animation-duration: 1s;
+    animation-delay: 11s;
+}
+
+.text_wrapper div:nth-child(8) p {
+    animation-duration: 1s;
+    animation-delay: 13s;
+}

@@ -1,7 +1,19 @@
 /* Font size */
 
+.x_x_x_large {
+    font-size: 48px;
+}
+
+.x_x_large {
+    font-size: 40px;
+}
+
 .extra_large {
     font-size: 32px;
+}
+
+.large {
+    font-size: 24px;
 }
 
 .medium {
@@ -42,6 +54,10 @@
     color: var(--color-purple-400);
 }
 
+.color_main_bg {
+    color: var(--color-main-bg);
+}
+
 /* Font weight */
 
 .medium_weight {
@@ -52,7 +68,15 @@
     font-weight: 600;
 }
 
+.bold_weight {
+    font-weight: 700;
+}
+
 /* Line height */
+
+.extra_large_line_height {
+    line-height: 160%;
+}
 
 .large_line_height {
     line-height: 150%;

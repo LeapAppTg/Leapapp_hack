@@ -1,0 +1,36 @@
+.status {
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+}
+
+.green_600 {
+    background: var(--color-green-600);
+    box-shadow: 0px 0px 0px 4px rgba(5, 150, 105, 0.25);
+}
+
+.grey_500 {
+    background: var(--color-grey-500);
+    box-shadow: 0px 0px 0px 4px rgba(112, 118, 127, 0.25);
+}
+
+.yellow {
+    background: #FFC300;
+    box-shadow: 0px 0px 0px 4px rgba(255, 195, 0, 0.25);
+}
+
+.pink {
+    background: #F72585;
+    box-shadow: 0px 0px 0px 4px rgba(247, 37, 133, 0.25);
+}
+
+.blue {
+    background: #4CC9F0;
+    box-shadow: 0px 0px 0px 4px rgba(37, 188, 247, 0.25);
+}
+
+.light_green {
+    background: #5ED400;
+    box-shadow: 0px 0px 0px 4px rgba(37, 247, 58, 0.25);
+}

@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { FrogIcon, IconBox, IconSize, PointsIcon } from "@icons";
 import { TextMSemiBold, TextXSMedium, TextXSRegular } from "@utils";
 import { Button, ButtonStyle, ContentBlock } from "@components";
+import { GamePreview } from "./components";
 
 export const HomePage: FC = () => {
     return (
@@ -17,6 +18,7 @@ export const HomePage: FC = () => {
                 <p className={TextMSemiBold.className}>{Number(1).format()}</p>
             </div>
         </div>
+        <GamePreview/>
         <ContentBlock>
             <p className={TextMSemiBold.className}>Farming</p>
             <div className={styles.farming_stats}>

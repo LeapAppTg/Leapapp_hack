@@ -3,9 +3,21 @@ import styles from './styles.module.css';
 
 export enum TextSize {
     /**
+     *@size 48px
+    */
+    XXXLarge = 'x_x_x_large',
+    /**
+     *@size 40px
+    */
+    XXLarge = 'x_x_large',
+    /**
      *@size 32px
     */
     ExtraLarge = 'extra_large',
+    /**
+     *@size 24px
+    */
+    Large = 'large',
     /**
      *@size 20px
     */
@@ -44,7 +56,11 @@ export enum TextColor {
     /**
      *@color color-purple-400
     */
-    Purple400 = 'color_purple_400'
+    Purple400 = 'color_purple_400',
+    /**
+     *@color color-main-bg
+    */
+    MainBg = 'color_main_bg',
 }
 
 /**@default weight 400 */
@@ -52,11 +68,15 @@ export enum TextWeight {
     /**@weight 500*/
     Medium = 'medium_weight',
     /**@weight 600*/
-    SemiBold = 'semi_bold_weight'
+    SemiBold = 'semi_bold_weight',
+    /**@weight 700*/
+    Bold = 'bold_weight'
 }
 
 /**@default line-height unset */
 export enum TextLineHeight {
+    /**@line-height 160% */
+    ExtraLarge = 'extra_large_line_height',
     /**@line-height 150% */
     Large = 'large_line_height',
     /**@line-height 140% */
@@ -138,4 +158,9 @@ export const TextXSMedium = TextXSRegular.update({ weight: TextWeight.Medium })
 export const TextXXSRegular = new TextStyleBuilder({ size: TextSize.XXSmall, color: TextColor.MainWhite, lineHeight: TextLineHeight.Big })
 export const TextXXSRegularGrey400 = TextXXSRegular.update({ color: TextColor.Grey400 })
 export const TextMSemiBold = new TextStyleBuilder({ size: TextSize.Medium, color: TextColor.MainWhite, weight: TextWeight.SemiBold, lineHeight: TextLineHeight.Big })
+export const TextMMedium = TextMSemiBold.update({ weight: TextWeight.Medium })
+export const TextLSemiBold = new TextStyleBuilder({ size: TextSize.Large, color: TextColor.MainWhite, weight: TextWeight.SemiBold })
 export const TextXLSemiBold = new TextStyleBuilder({ size: TextSize.ExtraLarge, color: TextColor.MainWhite, weight: TextWeight.SemiBold, lineHeight: TextLineHeight.Big })
+export const TextXLMedium = TextXLSemiBold.update({ weight: TextWeight.Medium })
+export const TextXXLMedium = new TextStyleBuilder({ size: TextSize.XXLarge, color: TextColor.MainWhite, weight: TextWeight.Medium, lineHeight: TextLineHeight.ExtraLarge })
+export const TextXXXLBold = new TextStyleBuilder({ size: TextSize.XXXLarge, color: TextColor.MainWhite, weight: TextWeight.Bold, lineHeight: TextLineHeight.ExtraLarge })

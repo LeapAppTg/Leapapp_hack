@@ -8,11 +8,13 @@ type ContentWrapperProps = {
     title: string,
     description: string,
     noSkip?: boolean,
-    topButtonLabel?: string
+    topButtonLabel?: string,
+    onNext?: () => any,
+    onSkip?: () => any
 }
 
 export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = ({
-    title, description, children, color, noSkip, topButtonLabel
+    title, description, children, color, noSkip, topButtonLabel, onNext, onSkip
 }) => {
 
     return (
@@ -30,7 +32,7 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = ({
             </div>
 
             <div className={FlexGapColumn20FullWidth.className}>
-                <Button style={ButtonStyle.Primary} fillFullWidth>
+                <Button style={ButtonStyle.Primary} fillFullWidth onClick={onNext}>
                     {topButtonLabel || 'Next'}
                 </Button>
                 {
@@ -38,7 +40,7 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = ({
                     ?
                     null
                     :
-                    <Button style={ButtonStyle.Link} fillFullWidth>
+                    <Button style={ButtonStyle.Link} fillFullWidth onClick={onSkip}>
                         Skip
                     </Button>
                 }
