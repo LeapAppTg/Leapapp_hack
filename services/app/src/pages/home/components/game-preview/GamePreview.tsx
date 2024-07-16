@@ -1,8 +1,8 @@
-import { DotsBackground, EyeCoin, GoldCoin, HeroHalfOpen, HeroSad2, UfoCoin } from "@assets";
+import { DotsBackground, EyeCoin, GoldCoin, HeroSad2, UfoCoin } from "@assets";
 import { GameSlider, PageTitleBackground, PageTitleBackgroundColor } from "@components";
+import { TextLSemiBold, TextSRegular } from "@utils";
 import { FC, PropsWithChildren } from "react";
 import styles from "./styles.module.css";
-import { TextLSemiBold, TextSRegular } from "@utils";
 
 export const GamePreview: FC<PropsWithChildren> = () => {
     return (
