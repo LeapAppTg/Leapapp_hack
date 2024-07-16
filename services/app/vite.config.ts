@@ -24,4 +24,7 @@ export default defineConfig({
       "@assets": path.resolve("./src/assets/index.ts")
     },
   },
+  build: {
+    target: 'esnext'
+  }
 })
