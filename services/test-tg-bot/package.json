@@ -1,0 +1,19 @@
+{
+  "name": "test-tg-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p .",
+    "dev": "set NODE_ENV=dev&& nodemon --watch src/**/*.ts --watch .env --exec ts-node src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "@types/node-telegram-bot-api": "^0.64.7",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4"
+  }
+}

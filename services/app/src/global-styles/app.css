@@ -26,6 +26,12 @@ section.page {
     justify-content: flex-start;
 }
 
+@supports (-webkit-touch-callout: none) {
+    section.page {
+        min-height: -webkit-fill-available;
+    }
+}
+
 button {
     border: none;
     cursor: pointer;
