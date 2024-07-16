@@ -23,6 +23,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "types": ["node"],
+
     "paths": {
       "@styles": ["./src/global-styles/index.ts"],
       "@pages": ["./src/pages/index.ts"],
