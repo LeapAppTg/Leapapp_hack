@@ -1,0 +1,6 @@
+.env
+node_modules
+
+# Ignore user-specific stuff
+.idea
+.DS_Store
