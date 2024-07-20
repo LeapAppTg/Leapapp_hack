@@ -1,22 +1,22 @@
-import { API_URL } from "@constants"
-import { retrieveLaunchParams } from '@telegram-apps/sdk'
-import { FC, PropsWithChildren, createContext, useContext } from "react"
+import { postEvent, retrieveLaunchParams } from '@telegram-apps/sdk'
+import { FC, PropsWithChildren, createContext, useContext, useEffect } from "react"
 
 type TelegramContextLayout = {
-    initData: string | null
+    initData: string | null,
+    setup: () => void,
 }
 
 const TelegramContext = createContext<TelegramContextLayout>({
-    initData: null
+    initData: null,
+    setup: () => null
 })
 
 export const useTelegram = () => useContext(TelegramContext)
 
-const getInitData = () => {
+function getInitData () {
     try {
-        const { initDataRaw } = retrieveLaunchParams();
-        console.log('init data', initDataRaw)
-        console.log('Api URL', API_URL)
+        const { initDataRaw, platform } = retrieveLaunchParams();
+        if (!/android||iphone/.test(platform)) return null
         return initDataRaw ? initDataRaw : null
     } catch {
         return null
@@ -27,10 +27,19 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const initData = getInitData()
 
+    function setup () {
+        postEvent('web_app_expand')
+        postEvent('web_app_set_background_color', { color: '#111217' })
+        postEvent('web_app_set_header_color', { color: '#111217' })
+        postEvent('web_app_ready')
+        postEvent('web_app_trigger_haptic_feedback', { type: "impact", impact_style: "heavy" })
+    }
+
     return (
         <TelegramContext.Provider
         value={{
-            initData
+            initData,
+            setup
         }}
         >
             {children}
@@ -39,5 +48,12 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 }
 
 export const TelegramConsumer: FC = () => {
+    const { initData, setup } = useTelegram()
+
+    useEffect(() => {
+        if (!initData) return
+        setup()
+    }, [])
+
     return null
 }
