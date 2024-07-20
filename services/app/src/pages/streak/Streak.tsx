@@ -1,11 +1,40 @@
 import { SquaresPattern } from "@assets";
-import { Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
+import { AlertStatus, Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
+import { ApiRoutes, useData } from "@hooks";
 import { FrogIcon, IconBox, IconSize, PointsIcon } from "@icons";
+import { useAlerts, useAuth } from "@providers";
+import { postDailyReward } from "@services";
 import { FlexGapColumn, FlexGapColumn8, FlexGapColumn8FullWidth, FlexGapRow12FullWidth, FlexGapRow8, TextColor, TextSRegular, TextXLMedium, TextXSRegular, TextXXLMedium, TextXXXLBold } from "@utils";
-import { FC } from "react";
+import { FC, useCallback } from "react";
+import { Navigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
 export const StreakPage: FC = () => {
+    
+    const { data, mutate } = useData(ApiRoutes.GetDailyReward)
+    const { sendAlert } = useAlerts()
+    const { authToken } = useAuth()
+
+    async function onClaim () {
+        if (!data || !data.canClaim || !authToken) return
+
+        try {
+            await postDailyReward(authToken)
+            sendAlert({
+                message: `You got +${data.points.toString()} points`,
+                status: AlertStatus.Success,
+            })
+            mutate({ ...data, canClaim: false })
+        } catch (e) {
+            sendAlert({
+                message: 'Hey, hey',
+                status: AlertStatus.Error,
+            })
+        }
+    }
+
+    if (!data || !data.canClaim) return <Navigate to={'/home'}/>
+
     return (
         <div className={styles.wrapper}>
 
@@ -21,7 +50,7 @@ export const StreakPage: FC = () => {
                     <div className={FlexGapColumn8.className}>
                         <div className={FlexGapColumn.className}>
                             <h1 className={TextXXXLBold.className}>
-                                2
+                                {data.days.format()}
                             </h1>
                             <h3 className={TextXXLMedium.className}>
                                 days in a row
@@ -41,7 +70,7 @@ export const StreakPage: FC = () => {
                             </p>
                             <div className={FlexGapRow8.className}>
                                 <IconBox size={IconSize.Large} icon={PointsIcon}/>
-                                <p className={TextXLMedium.className}>20</p>
+                                <p className={TextXLMedium.className}>{data.points.format()}</p>
                             </div>
                         </div>
                         <div className={FlexGapColumn8FullWidth.className}>
@@ -50,7 +79,7 @@ export const StreakPage: FC = () => {
                             </p>
                             <div className={FlexGapRow8.className}>
                                 <IconBox size={IconSize.Large} icon={FrogIcon}/>
-                                <p className={TextXLMedium.className}>2</p>
+                                <p className={TextXLMedium.className}>{data.gameTickets.format()}</p>
                             </div>
                         </div>
                     </div>
@@ -60,7 +89,7 @@ export const StreakPage: FC = () => {
                 </div>
             </div>
 
-            <Button style={ButtonStyle.Primary} fillFullWidth linkTo="/home">
+            <Button style={ButtonStyle.Primary} fillFullWidth onClick={onClaim}>
                 Take and continue
             </Button>
         </div>

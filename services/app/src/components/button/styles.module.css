@@ -21,6 +21,7 @@
 }
 .primary.disabled {
     background: var(--color-purple-975);
+    color: var(--color-purple-925);
 }
 
 /* Secondary */
@@ -36,6 +37,7 @@
 .secondary.disabled {
     background: var(--color-grey-800);
     border-color: transparent;
+    color: var(--color-grey-600);
 }
 
 /* Tertiary */
@@ -51,6 +53,7 @@
 .tertiary.disabled {
     background: transparent;
     border-color: var(--color-grey-800);
+    color: var(--color-grey-700);
 }
 
 /* Link */

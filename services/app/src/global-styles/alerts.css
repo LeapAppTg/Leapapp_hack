@@ -1,0 +1,10 @@
+.alerts {
+    position: fixed;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px;
+    top: 16px;
+    width: 100%;
+    z-index: 11;
+    align-items: flex-start;
+}

@@ -6,7 +6,8 @@ export enum CircleIconWrapperColor {
     Grey500 = 'grey_500',
     Green600 = 'green_600',
     Blue = 'blue',
-    LightGreen = 'light_green'
+    LightGreen = 'light_green',
+    Red500 = 'red_500'
 }
 
 export type CircleIconWrapperProps = {

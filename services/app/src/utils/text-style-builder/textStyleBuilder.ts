@@ -58,6 +58,10 @@ export enum TextColor {
     */
     Purple400 = 'color_purple_400',
     /**
+     *@color color-purple-925
+    */
+    Purple925 = 'color_purple_925',
+    /**
      *@color color-main-bg
     */
     MainBg = 'color_main_bg',

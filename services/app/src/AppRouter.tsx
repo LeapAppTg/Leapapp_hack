@@ -1,5 +1,6 @@
 import { Navigation } from '@elements'
-import { HomePage, OnboardingPage, QuestDetailsPage, QuestsPage, ReferralsPage, StreakPage } from '@pages'
+import { HomePage, LoaderPage, OnboardingPage, QrCodePage, QuestDetailsPage, QuestsPage, ReferralsPage, StreakPage } from '@pages'
+import { useAuth, useTelegram } from '@providers'
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
@@ -24,6 +25,8 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = ({children, hideNav
 const AppRouter: FC = () => {
     
     const { pathname } = useLocation()
+    const { initData } = useTelegram()
+    const { isAuthorized, isFirstTimeLogin } = useAuth()
 
     useEffect(() => {
         window.scrollTo({
@@ -33,6 +36,28 @@ const AppRouter: FC = () => {
         })
     }, [pathname])
 
+    if (!initData) return (
+        <>
+            <section className='page'>
+            <Routes>
+                <Route path='/' element={<PageWrapper hideNavbar><QrCodePage/></PageWrapper>}/>
+                <Route path='*' element={<Navigate to='/'/>}/>
+            </Routes>
+            </section>
+        </>
+    )
+
+    if (!isAuthorized) return (
+        <>
+            <section className='page'>
+            <Routes>
+                <Route path='/' element={<PageWrapper hideNavbar><LoaderPage/></PageWrapper>}/>
+                <Route path='*' element={<Navigate to='/'/>}/>
+            </Routes>
+            </section>
+        </>
+    )
+
     return (
     <>
       <section className='page'>
@@ -41,9 +66,17 @@ const AppRouter: FC = () => {
             <Route path='/referrals' element={<PageWrapper><ReferralsPage/></PageWrapper>}/>
             <Route path='/quests' element={<PageWrapper><QuestsPage/></PageWrapper>}/>
             <Route path='/quests/:id' element={<PageWrapper><QuestDetailsPage/></PageWrapper>}/>
-            <Route path='/onboarding' element={<PageWrapper hideNavbar><OnboardingPage/></PageWrapper>}/>
             <Route path='/streak' element={<PageWrapper hideNavbar><StreakPage/></PageWrapper>}/>
-            <Route path='*' element={<Navigate to='/onboarding'/>}/>
+            {
+                isFirstTimeLogin
+                ?
+                <>
+                <Route path='/onboarding' element={<PageWrapper hideNavbar><OnboardingPage/></PageWrapper>}/>
+                <Route path='*' element={<Navigate to='/onboarding'/>}/>
+                </>
+                :
+                <Route path='*' element={<Navigate to='/streak'/>}/>
+            }
         </Routes>
       </section>
     </>

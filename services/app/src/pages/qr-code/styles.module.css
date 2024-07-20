@@ -1,0 +1,27 @@
+.wrapper {
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.bg_a {
+    overflow: visible;
+    top: 32px;
+}
+
+.bg_b {
+    overflow: visible;
+    top: unset;
+    bottom: -32px;
+}
+
+.qr {
+    width: 300px;
+    height: 300px;
+}
+
+.hero {
+    margin-top: 12px;
+    width: 80px;
+    height: 80px;
+}

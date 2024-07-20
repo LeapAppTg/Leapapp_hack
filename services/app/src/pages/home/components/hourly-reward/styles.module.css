@@ -1,0 +1,26 @@
+.extra_margin {
+    margin-right: 4px;
+}
+
+.progress_wrapper {
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    background: #261D2A;
+    position: relative;
+    height: 52px;
+}
+
+.progress_wrapper p {
+    z-index: 1;
+}
+
+.progress {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background: var(--color-purple-975);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

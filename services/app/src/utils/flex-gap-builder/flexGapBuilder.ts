@@ -114,6 +114,7 @@ export const FlexGapRowFullWidthJustifyFlexEnd = FlexGapRowFullWidth.update({ ju
 export const FlexGapRowFullWidthJustifySpaceBetween = FlexGapRowFullWidth.update({ justifyContent: JustifyContent.SpaceBetween })
 
 export const FlexGapRow4 = new FlexGapBuilder({ direction: FlexDirection.Row, gap: FlexGap.Gap4 })
+export const FlexGapRow4FullWidth = FlexGapRow4.update({ fillFullWidth: true })
 export const FlexGapRow8 = new FlexGapBuilder({ direction: FlexDirection.Row, gap: FlexGap.Gap8 })
 export const FlexGapRow8FullWidthJustifySpaceBetween = FlexGapRow8.update({ fillFullWidth: true, justifyContent: JustifyContent.SpaceBetween })
 export const FlexGapRow12 = new FlexGapBuilder({ direction: FlexDirection.Row, gap: FlexGap.Gap12 })
