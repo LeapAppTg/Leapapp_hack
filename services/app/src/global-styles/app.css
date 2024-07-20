@@ -6,7 +6,7 @@
 
 body {
     background: var(--color-main-bg);
-    overflow-y: scroll !important;
+    overflow-y: hidden !important;
 }
 
 body div {
@@ -20,13 +20,12 @@ section.page {
     min-height: 100vh;
     min-height: -webkit-fill-available;
     position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-bottom: 0;
-    margin-bottom: 0;
+    overflow-x: hidden;
+    overflow-y: scroll !important;
 }
 
 button {
