@@ -1,11 +1,12 @@
 import { SquaresPattern } from "@assets";
+import { ApiError } from "@builders";
 import { AlertStatus, Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData } from "@hooks";
 import { FrogIcon, IconBox, IconSize, PointsIcon } from "@icons";
 import { useAlerts, useAuth } from "@providers";
 import { postDailyReward } from "@services";
 import { FlexGapColumn, FlexGapColumn8, FlexGapColumn8FullWidth, FlexGapRow12FullWidth, FlexGapRow8, TextColor, TextSRegular, TextXLMedium, TextXSRegular, TextXXLMedium, TextXXXLBold } from "@utils";
-import { FC, useCallback } from "react";
+import { FC } from "react";
 import { Navigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
@@ -27,7 +28,7 @@ export const StreakPage: FC = () => {
             mutate({ ...data, canClaim: false })
         } catch (e) {
             sendAlert({
-                message: 'Hey, hey',
+                message: ApiError.isApiError(e) ? e.detail || 'Something went wrong' : 'Something went wrong',
                 status: AlertStatus.Error,
             })
         }

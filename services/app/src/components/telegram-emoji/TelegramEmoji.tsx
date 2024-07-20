@@ -2,14 +2,19 @@ import { FC } from "react";
 import styles from "./styles.module.css";
 import { TelegramEmojiProps, TelegramEmojiType } from "./TelegramEmoji.t";
 import { MultiMapping, classBuilder } from "@utils";
+import Lottie from "react-lottie";
+import chickData from "./hatching_chick.json"
+import finishData from "./finish.json"
+import rocketData from "./rocket.json"
+import gamepadData from "./game.json"
 
-const SourceMapping = new MultiMapping<TelegramEmojiType, [[string, undefined]]>(
+const SourceMapping = new MultiMapping<TelegramEmojiType, [[any, undefined]]>(
     [
         {
-            [TelegramEmojiType.HatchingChick]: 'tg-emojis/hatching_chick.png',
-            [TelegramEmojiType.Gamepad]: 'tg-emojis/gamepad.png',
-            [TelegramEmojiType.FinishFlag]: 'tg-emojis/finish_flag.png',
-            [TelegramEmojiType.Rocket]: 'tg-emojis/rocket.png',
+            [TelegramEmojiType.HatchingChick]: chickData,
+            [TelegramEmojiType.Gamepad]: gamepadData,
+            [TelegramEmojiType.FinishFlag]: finishData,
+            [TelegramEmojiType.Rocket]: rocketData,
         },
         undefined
     ]
@@ -24,11 +29,19 @@ export const TelegramEmoji: FC<TelegramEmojiProps> = ({
         [size],
         styles.emoji_wrapper
     )
-    const [imgSrc] = SourceMapping.match(type)
+    const [animationData] = SourceMapping.match(type)
 
     return (
         <div className={className}>
-            <img src={imgSrc}/>
+            <Lottie
+                options={{
+                    loop: true,
+                    autoplay: true,
+                    animationData
+                }}
+                isClickToPauseDisabled
+            />
+            {/* <img src={imgSrc}/> */}
         </div>
     )
 }

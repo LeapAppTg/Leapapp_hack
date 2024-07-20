@@ -1,6 +1,5 @@
-import { ApiError } from '@builders'
 import { Alert, AlertProps } from '@components'
-import { createContext, FC, PropsWithChildren, useContext, useReducer } from 'react'
+import { FC, PropsWithChildren, createContext, useContext, useReducer } from 'react'
 
 type RemoveAlert = {
     action: AlertAction.Remove,
