@@ -4,6 +4,7 @@ import { postTokenRefresh, postUserAuth } from "@services"
 import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useContext, useEffect, useState } from "react"
 import { SWRConfig } from "swr"
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
+import { API_URL } from "@constants"
 
 type TelegramContextLayout = {
     initData: string | null
@@ -18,6 +19,8 @@ export const useTelegram = () => useContext(TelegramContext)
 const getInitData = () => {
     try {
         const { initDataRaw } = retrieveLaunchParams();
+        console.log('init data', initDataRaw)
+        console.log('Api URL', API_URL)
         return initDataRaw ? initDataRaw : null
     } catch {
         return null
@@ -27,7 +30,7 @@ const getInitData = () => {
 export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const initData = getInitData()
-    
+
     return (
         <TelegramContext.Provider
         value={{
