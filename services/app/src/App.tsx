@@ -1,7 +1,7 @@
 import '@styles';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './AppRouter';
-import { AlertsConsumer, AlertsProvider, AuthConsumer, AuthProvider, TelegramProvider } from '@providers';
+import { AlertsConsumer, AlertsProvider, AuthConsumer, AuthProvider, TelegramConsumer, TelegramProvider } from '@providers';
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
           <AlertsProvider>
             <AlertsConsumer/>
             <AppRouter/>
+            <TelegramConsumer/>
             <AuthConsumer/>
           </AlertsProvider>
         </AuthProvider>
