@@ -7,6 +7,8 @@ pipeline {
         AWS_DEFAULT_REGION = 'us-west-2'
         AWS_S3_BUCKET      = 'leap-prod-app-fe-cdn-origin'
         AWS_CLOUDFRONT_ID  = 'E2XG8IXXIMREQS'
+        API_URL            = 'https://api.leapapp.fun'
+        APP_URL            = 'https://leapapp.fun'
     }
     stages {
         stage('Clean Workspace') {
@@ -18,6 +20,16 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
+            }
+        }
+        stage('Update Env') {
+            steps {
+                script {
+                    dir('services/app') {
+                        sh "sed -i 's|^ENV VITE_API_URL=.*|ENV VITE_API_URL=${env.API_URL}|g' Dockerfile"
+                        sh "sed -i 's|^ENV VITE_HOSTNAME=.*|ENV VITE_HOSTNAME=${env.APP_URL}|g' Dockerfile"
+                    }
+                }
             }
         }
         stage('Build') {
