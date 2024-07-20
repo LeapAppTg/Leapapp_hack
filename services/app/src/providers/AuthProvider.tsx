@@ -116,14 +116,17 @@ export const AuthConsumer: FC = () => {
 }
 
 const AuthConsumerContent: FC = () => {
-    const { error, isLoading } = useData(ApiRoutes.GetDailyReward)
-    const { isAuthorized, setIsAuthorized } = useAuth()
+    const { data } = useData(ApiRoutes.GetDailyReward)
+    const { isAuthorized, setIsAuthorized, authToken, tryRefreshToken } = useAuth()
 
     useEffect(() => {
-        if (isAuthorized || isLoading) return
-        if (error) return
+        if (!authToken) tryRefreshToken()
+    }, [authToken])
+
+    useEffect(() => {
+        if (isAuthorized || !data) return
         setIsAuthorized(true)
-    }, [isAuthorized, isLoading, error])
+    }, [isAuthorized, data])
 
     return null
 }

@@ -1,10 +1,6 @@
-import { ApiError } from "@builders"
-import { ApiRoutes, useData, useLocalStorage } from "@hooks"
-import { postTokenRefresh, postUserAuth } from "@services"
-import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useContext, useEffect, useState } from "react"
-import { SWRConfig } from "swr"
-import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import { API_URL } from "@constants"
+import { retrieveLaunchParams } from '@telegram-apps/sdk'
+import { FC, PropsWithChildren, createContext, useContext } from "react"
 
 type TelegramContextLayout = {
     initData: string | null

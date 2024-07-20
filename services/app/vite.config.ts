@@ -24,6 +24,9 @@ export default defineConfig({
       "@assets": path.resolve("./src/assets/index.ts")
     },
   },
+  define: {
+    'process.env': process.env ?? {},
+  },
   build: {
     target: 'esnext'
   }
