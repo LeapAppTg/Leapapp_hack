@@ -27,6 +27,7 @@ const getInitData = () => {
 export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const initData = getInitData()
+    
     return (
         <TelegramContext.Provider
         value={{

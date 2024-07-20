@@ -3,7 +3,6 @@ import { ApiRoutes, useData, useLocalStorage } from "@hooks"
 import { postTokenRefresh, postUserAuth } from "@services"
 import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useContext, useEffect, useState } from "react"
 import { SWRConfig } from "swr"
-import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import { useTelegram } from "./"
 
 type AuthContextLayout = {
@@ -111,21 +110,20 @@ export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
 export const AuthConsumer: FC = () => {
     const { initData } = useTelegram()
     
-    if (initData) return <AuthConsumerContent/>
+    if (initData !== null) return <AuthConsumerContent/>
+    
     return null
 }
 
 const AuthConsumerContent: FC = () => {
-    const { initData } = useTelegram()
     const { error, isLoading } = useData(ApiRoutes.GetDailyReward)
-
     const { isAuthorized, setIsAuthorized } = useAuth()
 
     useEffect(() => {
-        if (isAuthorized || isLoading || !initData) return
+        if (isAuthorized || isLoading) return
         if (error) return
         setIsAuthorized(true)
-    }, [isAuthorized, isLoading, error, initData])
+    }, [isAuthorized, isLoading, error])
 
     return null
 }

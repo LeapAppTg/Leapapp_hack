@@ -36,7 +36,7 @@ const AppRouter: FC = () => {
         })
     }, [pathname])
 
-    if (!initData) return (
+    if (initData === null) return (
         <>
             <section className='page'>
             <Routes>
