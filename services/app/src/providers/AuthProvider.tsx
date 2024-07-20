@@ -9,6 +9,7 @@ type AuthContextLayout = {
     authToken: string | null,
     isAuthorized: boolean,
     setIsAuthorized: Dispatch<SetStateAction<boolean>>,
+    setIsFirstTimeLogin: Dispatch<SetStateAction<boolean>>,
     logout: () => any,
     tryRefreshToken: () => Promise<any>,
     isFirstTimeLogin: boolean
@@ -18,6 +19,7 @@ const AuthContext = createContext<AuthContextLayout>({
     authToken: null,
     isAuthorized: false,
     setIsAuthorized: () => null,
+    setIsFirstTimeLogin: () => null,
     logout: () => null,
     tryRefreshToken: async () => null,
     isFirstTimeLogin: true
@@ -37,32 +39,19 @@ export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
     const tryAuth = async () => {
         try {
             if (!initData) return
-
             const response = await postUserAuth(initData)
-
-            setIsFirstTimeLogin(true)
             setAuthToken(response.access_token)
-            
-            return response.access_token
-        } catch (e) {
-            return
-        }
+        } catch (e) {}
     }
 
     const tryRefreshToken = async () => {
         try {
             const response = await postTokenRefresh()
-
             setAuthToken(response.access_token)
-            
-            return response.access_token
         } catch (e) {
-
             if (ApiError.isApiError(e) && e.statusCode === 404) {
                 tryAuth()
             }
-            
-            return null
         }
     }
 
@@ -76,6 +65,11 @@ export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
         }
     }
 
+    useEffect(() => {
+        setAuthToken(null)
+        tryAuth()
+    }, [])
+
     return (
         <AuthContext.Provider
         value={{
@@ -84,7 +78,8 @@ export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
             isAuthorized,
             setIsAuthorized,
             tryRefreshToken,
-            isFirstTimeLogin
+            isFirstTimeLogin,
+            setIsFirstTimeLogin
         }}
         >
             <SWRConfig value={{
@@ -116,16 +111,14 @@ export const AuthConsumer: FC = () => {
 }
 
 const AuthConsumerContent: FC = () => {
-    const { data } = useData(ApiRoutes.GetDailyReward)
-    const { isAuthorized, setIsAuthorized, authToken, tryRefreshToken } = useAuth()
+    const { isAuthorized, setIsAuthorized, setIsFirstTimeLogin } = useAuth()
 
-    useEffect(() => {
-        if (!authToken) tryRefreshToken()
-    }, [authToken])
+    const { data } = useData(ApiRoutes.GetDailyReward)
 
     useEffect(() => {
         if (isAuthorized || !data) return
         setIsAuthorized(true)
+        if (data.days <= 1) setIsFirstTimeLogin(true)
     }, [isAuthorized, data])
 
     return null
