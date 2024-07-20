@@ -3,14 +3,14 @@ import styles from "./styles.module.css";
 import { AlertProps, AlertStatus } from "./Alert.t";
 import { EnumMatcher, EnumToFCMatcher, TextXSRegular, classJoiner } from "@utils";
 import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
-import { CheckmarkIcon, CloseIcon } from "@icons";
+import { CheckmarkIcon, CloseIcon, IconFC } from "@icons";
 
-const statusIconMatcher = new EnumToFCMatcher<AlertStatus>(
+const statusIconMatcher = new EnumToFCMatcher<AlertStatus, IconFC, IconFC>(
     {
         [AlertStatus.Success]: CheckmarkIcon,
         [AlertStatus.Error]: CloseIcon
     },
-    undefined
+    CheckmarkIcon
 )
 
 const statusIconColorMatcher = new EnumMatcher<AlertStatus, CircleIconWrapperColor, CircleIconWrapperColor.Green600>(
@@ -58,7 +58,7 @@ export const Alert: FC<AlertProps> = ({
     useEffect(() => startTimer(), [])
     
     return (
-        <div className={classJoiner(styles.alert, disappear ? styles.disappear : null)}>
+        <div className={classJoiner(styles.alert, disappear ? styles.disappear : '')}>
             {
                 status
                 ?
