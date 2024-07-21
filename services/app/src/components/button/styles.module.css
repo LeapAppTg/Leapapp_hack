@@ -16,7 +16,7 @@
     background: var(--color-main-accent);
     border-color: rgba(255, 255, 255, 0.20);
 }
-.primary:hover, .primary:active {
+.primary:active {
     background: var(--color-purple-800);
 }
 .primary.disabled {
@@ -30,7 +30,7 @@
     background: var(--color-purple-950);
     border-color: rgba(255, 255, 255, 0.08);
 }
-.secondary:hover, .secondary:active {
+.secondary:active {
     background: var(--color-grey-700);
     border-color: transparent;
 }
@@ -46,7 +46,7 @@
     background: transparent;
     border-color: var(--color-grey-800);
 }
-.tertiary:hover, .tertiary:active {
+.tertiary:active {
     background:var(--color-gray-700);
     border-color: transparent;
 }
@@ -63,7 +63,7 @@
     padding: 0;
     height: unset;
 }
-.link:hover, .link:active {
+.link:active {
     color: var(--color-purple-700);
 }
 .link.disabled {
