@@ -5,8 +5,8 @@ import { ApiRoutes, useData } from "@hooks";
 import { FrogIcon, IconBox, IconSize, PointsIcon } from "@icons";
 import { useAlerts, useAuth, useTelegram } from "@providers";
 import { postDailyReward } from "@services";
-import { FlexGapColumn, FlexGapColumn8, FlexGapColumn8FullWidth, FlexGapRow12FullWidth, FlexGapRow8, TextColor, TextSRegular, TextXLMedium, TextXSRegular, TextXXLMedium, TextXXXLBold } from "@utils";
-import { FC, useEffect } from "react";
+import { FlexGapColumn, FlexGapColumn8, FlexGapColumn8FullWidth, FlexGapRow12FullWidth, FlexGapRow8, TextColor, TextSRegular, TextXLMedium, TextXSRegular, TextXXLMedium, TextXXXLBold, classJoiner } from "@utils";
+import { FC, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import Lottie from "react-lottie";
@@ -44,6 +44,31 @@ export const StreakPage: FC = () => {
         return () => clearTimeout(to)
     }, [])
 
+    const [day, setDay] = useState<number>(0)
+    const [dayProgress, setDayProgress] = useState<number>(0)
+    const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
+
+    useEffect(() => {
+        if (!data?.days) return
+        const speed = data.days < 10 ? 200 : 2000 / data.days
+        let int: NodeJS.Timeout
+        int = setInterval(() => {
+            const progressStep = 100 / data.days
+            setDayProgress(prev => prev + progressStep)
+            setDay(prev => {
+                if (prev >= data.days - 1) clearInterval(int)
+                return prev + 1
+            })
+        }, speed)
+
+        return () => clearInterval(int)
+    }, [data?.days])
+
+    useEffect(() => {
+        const to = setTimeout(() => setButtonDisabled(false), 2_000)
+        return () => clearTimeout(to)
+    }, [])
+
     if (!data || !data.canClaim) return <Navigate to={'/home'}/>
 
     return (
@@ -69,8 +94,8 @@ export const StreakPage: FC = () => {
 
                     <div className={FlexGapColumn8.className}>
                         <div className={FlexGapColumn.className}>
-                            <h1 className={TextXXXLBold.className}>
-                                {data.days.format()}
+                            <h1 className={TextXXXLBold.className} style={{ opacity: `${dayProgress}%` }}>
+                                {day.format()}
                             </h1>
                             <h3 className={TextXXLMedium.className}>
                                 days in a row
@@ -84,7 +109,7 @@ export const StreakPage: FC = () => {
 
 
                     <div className={FlexGapRow12FullWidth.className}>
-                        <div className={FlexGapColumn8FullWidth.className}>
+                        <div className={classJoiner(FlexGapColumn8FullWidth.className, styles.reward)}>
                             <p className={TextSRegular.update({ color: TextColor.Grey400 }).className}>
                                 Bonus points
                             </p>
@@ -93,7 +118,7 @@ export const StreakPage: FC = () => {
                                 <p className={TextXLMedium.className}>{data.points.format()}</p>
                             </div>
                         </div>
-                        <div className={FlexGapColumn8FullWidth.className}>
+                        <div className={classJoiner(FlexGapColumn8FullWidth.className, styles.reward)}>
                             <p className={TextSRegular.update({ color: TextColor.Grey400 }).className}>
                                 Games
                             </p>
@@ -109,7 +134,7 @@ export const StreakPage: FC = () => {
                 </div>
             </div>
 
-            <Button style={ButtonStyle.Primary} fillFullWidth onClick={onClaim}>
+            <Button style={ButtonStyle.Primary} fillFullWidth onClick={onClaim} disabled={buttonDisabled}>
                 Take and continue
             </Button>
         </div>
