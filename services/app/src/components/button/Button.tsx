@@ -4,6 +4,7 @@ import { FC, PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
 import { ButtonProps, ButtonStyle } from "./Button.t";
 import styles from './styles.module.css';
+import { useTelegram } from "@providers";
 
 const ColorMapping = new MultiMapping<ButtonStyle, [[TextColor, undefined], [IconColor, undefined]]>(
     [{ [ButtonStyle.Link]: TextColor.Purple400 }, undefined],
@@ -24,6 +25,14 @@ const ButtonContent: FC<PropsWithChildren<ButtonProps>> = ({
     style, disabled, onClick, children, fillFullWidth
 }) => {
 
+    const { triggerHapticFeedback } = useTelegram()
+
+    function click () {
+        if (!onClick) return
+        triggerHapticFeedback({ type: 'impact', impact_style: 'soft' })
+        onClick()
+    }
+
     const className = classBuilder(
         styles,
         [style, { disabled }, { fill_full_width: fillFullWidth }], 
@@ -31,7 +40,7 @@ const ButtonContent: FC<PropsWithChildren<ButtonProps>> = ({
     )
 
     return (
-        <button className={className} disabled={disabled} onClick={onClick}>
+        <button className={className} disabled={disabled} onClick={click}>
             {children}
         </button>
     )
