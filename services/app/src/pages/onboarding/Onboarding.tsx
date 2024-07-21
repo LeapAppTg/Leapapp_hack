@@ -4,7 +4,7 @@ import { Game, Hello, Leap, Learning, Personalization, Quests } from "./elements
 export const OnboardingPage: FC = () => {
 
     const [step, setStep] = useState<number>(1)
-    
+
     return (
         <>
         {

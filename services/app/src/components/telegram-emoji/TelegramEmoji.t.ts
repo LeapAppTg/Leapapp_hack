@@ -2,7 +2,8 @@ export enum TelegramEmojiType {
     HatchingChick = 'hatching_chich',
     Gamepad = 'gamepad',
     FinishFlag = 'finish_flag',
-    Rocket = 'rocket'
+    Rocket = 'rocket',
+    MoneyBag = 'money_bag'
 }
 
 export enum TelegramEmojiSize {
@@ -17,7 +18,11 @@ export enum TelegramEmojiSize {
     /**
      * @width 40px
      */
-    Medium = 'medium'
+    Medium = 'medium',
+    /**
+     * @width 20px
+     */
+    Small = 'small'
 }
 
 export type TelegramEmojiProps = {

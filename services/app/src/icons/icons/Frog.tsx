@@ -3,92 +3,52 @@ import { getIconClassName, IconFC } from "../common";
 export const FrogIcon: IconFC = (props) => {
     const className = getIconClassName(props, true)
     return (
-        <svg className={className} width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect id="Rectangle 26" x="1.89941" y="18.3999" width="3.6" height="1.2" fill="black"/>
-            <rect id="Rectangle 27" x="9.10059" y="18.3999" width="3.6" height="1.2" fill="black"/>
-            <rect id="Rectangle 28" x="16.2988" y="18.3999" width="3.6" height="1.2" fill="black"/>
-            <rect id="Rectangle 29" x="13.8994" y="18.3999" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 30" x="6.70117" y="18.3999" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 31" x="5.5" y="17.1997" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 40" x="1.89941" y="14.7998" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 41" x="4.29883" y="13.6001" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 43" x="1.89941" y="11.1997" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 45" x="1.89941" y="7.6001" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 50" x="7.89941" y="1.6001" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 51" x="12.7012" y="1.6001" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 54" x="17.5" y="1.6001" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 56" x="17.5" y="6.3999" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 57" x="18.7012" y="7.6001" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 59" x="18.7012" y="11.1997" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 61" x="16.2988" y="13.6001" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 60" x="15.1006" y="12.3999" width="3.6" height="1.2" fill="black"/>
-            <rect id="Rectangle 58" x="19.8994" y="8.7998" width="1.2" height="2.4" fill="black"/>
-            <rect id="Rectangle 55" x="18.7012" y="2.7998" width="1.2" height="3.6" fill="black"/>
-            <rect id="Rectangle 52" x="9.10059" y="2.7998" width="3.6" height="1.2" fill="black"/>
-            <rect id="Rectangle 53" x="13.8994" y="0.399902" width="3.6" height="1.2" fill="black"/>
-            <rect id="Rectangle 48" x="3.10059" y="1.6001" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 49" x="4.29883" y="0.399902" width="3.6" height="1.2" fill="black"/>
-            <rect id="Rectangle 47" x="1.89941" y="2.7998" width="1.2" height="3.6" fill="black"/>
-            <rect id="Rectangle 44" x="0.701172" y="8.7998" width="1.2" height="2.4" fill="black"/>
-            <rect id="Rectangle 42" x="3.10059" y="12.3999" width="3.6" height="1.2" fill="black"/>
-            <rect id="Rectangle 38" x="0.701172" y="16" width="1.2" height="2.4" fill="black"/>
-            <rect id="Rectangle 39" x="3.10059" y="14.7998" width="1.2" height="2.4" fill="black"/>
-            <rect id="Rectangle 32" x="7.89941" y="17.1997" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 33" x="12.7012" y="17.1997" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 34" x="15.1006" y="17.1997" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 36" x="17.5" y="16" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 37" x="17.5" y="14.7998" width="2.4" height="1.2" fill="black"/>
-            <rect id="Rectangle 35" x="19.8994" y="16" width="1.2" height="2.4" fill="black"/>
-            <rect id="Rectangle 46" x="3.10059" y="6.3999" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 67" x="9.10059" y="4" width="3.6" height="6" fill="#C084FC"/>
-            <rect id="Rectangle 68" x="7.89941" y="6.3999" width="1.2" height="3.6" fill="#C084FC"/>
-            <rect id="Rectangle 80" x="5.5" y="13.6001" width="1.2" height="3.6" fill="#C084FC"/>
-            <rect id="Rectangle 81" x="15.1006" y="13.6001" width="1.2" height="3.6" fill="#C084FC"/>
-            <rect id="Rectangle 82" x="15.1006" y="13.6001" width="1.2" height="3.6" fill="#C084FC"/>
-            <rect id="Rectangle 83" x="16.2988" y="14.7998" width="1.2" height="3.6" fill="#C084FC"/>
-            <rect id="Rectangle 84" x="13.8994" y="14.7998" width="1.2" height="3.6" fill="#C084FC"/>
-            <rect id="Rectangle 85" x="12.7012" y="14.7998" width="1.2" height="2.4" fill="#C084FC"/>
-            <rect id="Rectangle 86" x="7.89941" y="14.7998" width="1.2" height="2.4" fill="#C084FC"/>
-            <rect id="Rectangle 89" x="1.89941" y="16" width="1.2" height="2.4" fill="#C084FC"/>
-            <rect id="Rectangle 91" x="3.10059" y="17.1997" width="1.2" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 92" x="17.5" y="17.1997" width="1.2" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 93" x="9.10059" y="14.7998" width="1.2" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 94" x="11.5" y="14.7998" width="1.2" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 90" x="18.7012" y="16" width="1.2" height="2.4" fill="#C084FC"/>
-            <rect id="Rectangle 88" x="4.29883" y="14.7998" width="1.2" height="3.6" fill="#C084FC"/>
-            <rect id="Rectangle 87" x="6.70117" y="14.7998" width="1.2" height="3.6" fill="#C084FC"/>
-            <rect id="Rectangle 95" x="10.2988" y="14.7998" width="1.2" height="3.6" fill="white"/>
-            <rect id="Rectangle 96" x="9.10059" y="16" width="1.2" height="2.4" fill="white"/>
-            <rect id="Rectangle 97" x="11.5" y="16" width="1.2" height="2.4" fill="white"/>
-            <rect id="Rectangle 98" x="4.29883" y="5.19971" width="1.2" height="2.4" fill="white"/>
-            <rect id="Rectangle 108" x="4.29883" y="1.6001" width="2.4" height="3.6" fill="white"/>
-            <rect id="Rectangle 109" x="15.1006" y="1.6001" width="2.4" height="3.6" fill="white"/>
-            <rect id="Rectangle 101" x="3.10059" y="2.7998" width="1.2" height="3.6" fill="white"/>
-            <rect id="Rectangle 103" x="12.7012" y="2.7998" width="1.2" height="3.6" fill="white"/>
-            <rect id="Rectangle 102" x="7.89941" y="2.7998" width="1.2" height="3.6" fill="white"/>
-            <rect id="Rectangle 104" x="17.5" y="2.7998" width="1.2" height="3.6" fill="white"/>
-            <rect id="Rectangle 99" x="5.5" y="5.19971" width="1.2" height="2.4" fill="white"/>
-            <rect id="Rectangle 106" x="15.1006" y="5.19971" width="1.2" height="2.4" fill="white"/>
-            <rect id="Rectangle 107" x="16.2988" y="5.19971" width="1.2" height="2.4" fill="white"/>
-            <rect id="Rectangle 100" x="6.70117" y="1.6001" width="1.2" height="6" fill="white"/>
-            <rect id="Rectangle 105" x="13.8994" y="1.6001" width="1.2" height="6" fill="white"/>
-            <rect id="Rectangle 69" x="12.7012" y="6.3999" width="1.2" height="3.6" fill="#C084FC"/>
-            <rect id="Rectangle 70" x="13.8994" y="7.6001" width="2.4" height="2.4" fill="#C084FC"/>
-            <rect id="Rectangle 75" x="5.5" y="7.6001" width="2.4" height="2.4" fill="#C084FC"/>
-            <rect id="Rectangle 71" x="16.2988" y="7.6001" width="2.4" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 76" x="3.10059" y="7.6001" width="2.4" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 77" x="1.89941" y="8.7998" width="3.6" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 78" x="1.89941" y="10" width="3.6" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 79" x="6.70117" y="12.3999" width="8.4" height="2.4" fill="#C084FC"/>
-            <rect id="Rectangle 72" x="16.2988" y="8.7998" width="3.6" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 73" x="16.2988" y="10" width="3.6" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 74" x="3.10059" y="11.1997" width="15.6" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 110" x="5.5" y="10" width="10.8" height="1.2" fill="#C084FC"/>
-            <rect id="Rectangle 64" x="4.29883" y="10" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 65" x="16.2988" y="10" width="1.2" height="1.2" fill="black"/>
-            <rect id="Rectangle 66" x="5.5" y="8.7998" width="10.8" height="1.2" fill="black"/>
-            <rect id="Rectangle 63" x="15.1006" y="4" width="2.4" height="2.4" fill="black"/>
-            <rect id="Rectangle 62" x="5.5" y="4" width="2.4" height="2.4" fill="black"/>
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 3V4H3V7H4V8H7V7H8V4H7V3H4ZM4 4H6V6H4V4Z" fill="white"/>
+            <path d="M9 14H10V15H11V17H8V15H9V14Z" fill="white"/>
+            <path d="M15 3V4H13V6H15V4H16V7H15V8H12V7H11V4H12V3H15Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11 5H8V7H7V8H3V9H2V11H3V12H6V13H5V14H4V16H3V15H2V17H5V16H6V17H7V16H8V15H9V14H10V15H11V16H12V17H13V16H14V17H17V15H16V16H15V14H14V13H13V12H16V11H17V9H16V8H12V7H11V5Z" fill="#C084FC"/>
+            <path d="M2 17H5V18H2V17Z" fill="black"/>
+            <path d="M8 17H11V18H8V17Z" fill="black"/>
+            <path d="M14 17H17V18H14V17Z" fill="black"/>
+            <path d="M12 17H13V18H12V17Z" fill="black"/>
+            <path d="M6 17H7V18H6V17Z" fill="black"/>
+            <path d="M5 16H6V17H5V16Z" fill="black"/>
+            <path d="M2 14H3V15H2V14Z" fill="black"/>
+            <path d="M4 13H5V14H4V13Z" fill="black"/>
+            <path d="M2 11H3V12H2V11Z" fill="black"/>
+            <path d="M2 8H3V9H2V8Z" fill="black"/>
+            <path d="M7 3H8V4H7V3Z" fill="black"/>
+            <path d="M11 3H12V4H11V3Z" fill="black"/>
+            <path d="M15 3H16V4H15V3Z" fill="black"/>
+            <path d="M15 7H16V8H15V7Z" fill="black"/>
+            <path d="M16 8H17V9H16V8Z" fill="black"/>
+            <path d="M16 11H17V12H16V11Z" fill="black"/>
+            <path d="M14 13H15V14H14V13Z" fill="black"/>
+            <path d="M13 12H16V13H13V12Z" fill="black"/>
+            <path d="M17 9H18V11H17V9Z" fill="black"/>
+            <path d="M16 4H17V7H16V4Z" fill="black"/>
+            <path d="M8 4H11V5H8V4Z" fill="black"/>
+            <path d="M12 2H15V3H12V2Z" fill="black"/>
+            <path d="M3 3H4V4H3V3Z" fill="black"/>
+            <path d="M4 2H7V3H4V2Z" fill="black"/>
+            <path d="M2 4H3V7H2V4Z" fill="black"/>
+            <path d="M1 9H2V11H1V9Z" fill="black"/>
+            <path d="M3 12H6V13H3V12Z" fill="black"/>
+            <path d="M1 15H2V17H1V15Z" fill="black"/>
+            <path d="M3 14H4V16H3V14Z" fill="black"/>
+            <path d="M7 16H8V17H7V16Z" fill="black"/>
+            <path d="M11 16H12V17H11V16Z" fill="black"/>
+            <path d="M13 16H14V17H13V16Z" fill="black"/>
+            <path d="M15 15H16V16H15V15Z" fill="black"/>
+            <path d="M15 14H17V15H15V14Z" fill="black"/>
+            <path d="M17 15H18V17H17V15Z" fill="black"/>
+            <path d="M3 7H4V8H3V7Z" fill="black"/>
+            <path d="M5 9H6V10H5V9Z" fill="black"/>
+            <path d="M13 9H14V10H13V9Z" fill="black"/>
+            <path d="M6 10H13V11H6V10Z" fill="black"/>
+            <path d="M4 4H6V6H4V4Z" fill="black"/>
+            <path d="M13 4H15V6H13V4Z" fill="black"/>
         </svg>
     )
 }

@@ -1,10 +1,10 @@
 import { ApiError } from "@builders";
-import { AlertStatus, Button, ButtonStyle, ContentBlock } from "@components";
+import { AlertStatus, Button, ButtonStyle, ContentBlock, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData, useUnixTimestamp } from "@hooks";
 import { FrogIcon, IconBox, IconSize, PointsIcon } from "@icons";
 import { useAlerts, useAuth } from "@providers";
 import { postHourlyReward } from "@services";
-import { FlexGapRow12FullWidth, FlexGapRow4FullWidth, TextColor, TextMSemiBold, TextXSMedium, TextXSRegular, TimeObject, classJoiner } from "@utils";
+import { FlexGapRow12FullWidth, FlexGapRow4, FlexGapRow4FullWidth, TextColor, TextMSemiBold, TextXSMedium, TextXSRegular, TimeObject, classJoiner } from "@utils";
 import { FC, useMemo } from "react";
 import styles from "./styles.module.css";
 
@@ -47,7 +47,10 @@ export const HourlyReward: FC = () => {
 
     return (
         <ContentBlock>
-            <p className={TextMSemiBold.className}>Farming</p>
+            <div className={FlexGapRow4.className}>
+                <TelegramEmoji size={TelegramEmojiSize.Small} type={TelegramEmojiType.MoneyBag}/>
+                <p className={TextMSemiBold.className}>Farming</p>
+            </div>
             <div className={FlexGapRow12FullWidth.className}>
                 <div className={FlexGapRow4FullWidth.className}>
                     <p className={classJoiner(TextXSRegular.className, styles.extra_margin)}>$LEAP:</p>

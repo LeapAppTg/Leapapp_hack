@@ -7,6 +7,7 @@ import chickData from "./hatching_chick.json"
 import finishData from "./finish.json"
 import rocketData from "./rocket.json"
 import gamepadData from "./game.json"
+import moneyBagData from "./moneybag.json"
 
 const SourceMapping = new MultiMapping<TelegramEmojiType, [[any, undefined]]>(
     [
@@ -15,6 +16,7 @@ const SourceMapping = new MultiMapping<TelegramEmojiType, [[any, undefined]]>(
             [TelegramEmojiType.Gamepad]: gamepadData,
             [TelegramEmojiType.FinishFlag]: finishData,
             [TelegramEmojiType.Rocket]: rocketData,
+            [TelegramEmojiType.MoneyBag]: moneyBagData
         },
         undefined
     ]

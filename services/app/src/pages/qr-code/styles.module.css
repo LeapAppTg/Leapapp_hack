@@ -15,7 +15,7 @@
     bottom: -32px;
 }
 
-.qr {
+.qr, .qr img {
     width: 300px;
     height: 300px;
 }

@@ -4,6 +4,7 @@ import { AlertProps, AlertStatus } from "./Alert.t";
 import { EnumMatcher, EnumToFCMatcher, TextXSRegular, classJoiner } from "@utils";
 import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
 import { CheckmarkIcon, CloseIcon, IconFC } from "@icons";
+import { useTelegram } from "@providers";
 
 const statusIconMatcher = new EnumToFCMatcher<AlertStatus, IconFC, IconFC>(
     {
@@ -21,12 +22,21 @@ const statusIconColorMatcher = new EnumMatcher<AlertStatus, CircleIconWrapperCol
     CircleIconWrapperColor.Green600
 )
 
+const hapticFeedbackMatcher = new EnumMatcher<AlertStatus, "success" | "error", "success">(
+    {
+        [AlertStatus.Success]: "success",
+        [AlertStatus.Error]: "error"
+    },
+    "success"
+)
+
 export const Alert: FC<AlertProps> = ({
     message, status, remove
 }) => {
     const [disappear, setDisappear] = useState<boolean>(false)
     const [expirationTime, setExpirationTime] = useState<number>(100)
     const [intervalID, setIntervalID] = useState<number>(0)
+    const { triggerHapticFeedback } = useTelegram()
 
     const startTimer = () => {
         let interval = window.setInterval(() => {
@@ -55,7 +65,10 @@ export const Alert: FC<AlertProps> = ({
         if (expirationTime === 0) closeNotification()
     }, [expirationTime])
 
-    useEffect(() => startTimer(), [])
+    useEffect(() => {
+        startTimer()
+        triggerHapticFeedback({ type: "notification", notification_type: hapticFeedbackMatcher.match(status) })
+    }, [])
     
     return (
         <div className={classJoiner(styles.alert, disappear ? styles.disappear : '')}>

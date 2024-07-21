@@ -20,7 +20,7 @@
 }
 
 .confetti_bg {
-    width: 100%;
+    width: 80%;
     position: absolute;
     top: 0;
     z-index: -2;
@@ -29,4 +29,31 @@
 .background {
     overflow: visible;
     top: 16px;
+}
+
+.squares rect {
+    animation: 5s swap-color infinite;
+    fill: #111217;
+}
+
+@keyframes swap-color {
+    from { fill: #111217; }
+    30% { fill: #1D2734; }
+    50% { fill: #111217; }
+}
+
+.squares rect:nth-child(6n - 5) {
+    animation-delay: 6s;
+}
+.squares rect:nth-child(6n - 4) {
+    animation-delay: 8s;
+}
+.squares rect:nth-child(6n - 3) {
+    animation-delay: 2s;
+}
+.squares rect:nth-child(6n - 2) {
+    animation-delay: 0s;
+}
+.squares rect:nth-child(6n - 1) {
+    animation-delay: 4s;
 }

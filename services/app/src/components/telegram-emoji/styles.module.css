@@ -13,6 +13,11 @@
     height: 40px;
 }
 
+.small {
+    width: 20px;
+    height: 20px;
+}
+
 .emoji_wrapper > img {
     width: 100%;
     height: 100%;

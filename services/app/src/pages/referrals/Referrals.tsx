@@ -39,13 +39,13 @@ export const ReferralsPage: FC = () => {
                     </Button>
                 </div>
             </ContentBlock>
-            <div className={FlexGapColumn16FullWidth.className}>
-                <div className={styles.table_title}>
-                    <p className={TextSMedium.className}>Referrals</p>
-                    <div className={FlexGapRow4.className}>
-                        <p className={TextXSRegularGrey400.className}>Total:</p>
-                        <p className={TextXSRegular.className}>190</p>
-                    </div>
+        </div>
+        <div className={FlexGapColumn16FullWidth.className}>
+            <div className={styles.table_title}>
+                <p className={TextSMedium.className}>Referrals</p>
+                <div className={FlexGapRow4.className}>
+                    <p className={TextXSRegularGrey400.className}>Total:</p>
+                    <p className={TextXSRegular.className}>190</p>
                 </div>
             </div>
             <div className={styles.table}>

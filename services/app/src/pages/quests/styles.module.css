@@ -13,6 +13,7 @@
     top: 0;
     left: 0;
     flex-direction: column;
+    z-index: -2;
 }
 
 .path_right, .path_left, .path_top {

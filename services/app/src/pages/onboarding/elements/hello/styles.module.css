@@ -45,62 +45,19 @@
     flex-direction: column;
 }
 
-.text_wrapper p {
-    width: 0;
+.text_wrapper div:last-child p {
     display: block;
     overflow: hidden;
-    border-right: 1px solid transparent;
+    border-right: 1px solid var(--color-main-bg);
     white-space: nowrap;
-    animation: 
-        typing 3.5s steps(40, end) forwards,
-        blink-caret 3.5s ease
-}
-
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-@keyframes blink-caret {
-    from, 20%, 40%, 60%, 80%, to { border-color: transparent }
-    10%, 30%, 50%, 70%, 90% { border-color: var(--color-main-bg); }
-}
-
-.text_wrapper div:nth-child(1) p {
-    animation-duration: 1s;
-}
-
-.text_wrapper div:nth-child(2) p {
-    animation-duration: 2s;
-    animation-delay: 1s;
-}
-
-.text_wrapper div:nth-child(3) p {
-    animation-duration: 2s;
-    animation-delay: 3s;
-}
-
-.text_wrapper div:nth-child(4) p {
-    animation-duration: 1.5s;
-    animation-delay: 5s;
-}
-
-.text_wrapper div:nth-child(5) p {
-    animation-duration: 2s;
-    animation-delay: 7s;
-}
-
-.text_wrapper div:nth-child(6) p {
-    animation-duration: 2s;
-    animation-delay: 9s;
-}
-
-.text_wrapper div:nth-child(7) p {
-    animation-duration: 1s;
-    animation-delay: 11s;
+    animation: blink-caret 3.5s ease
 }
 
 .text_wrapper div:nth-child(8) p {
-    animation-duration: 1s;
-    animation-delay: 13s;
+    animation: hide-caret 0.5s ease forwards
+}
+
+@keyframes hide-caret {
+    90% { border-color: var(--color-main-bg); }
+    to { border-color: transparent; }
 }

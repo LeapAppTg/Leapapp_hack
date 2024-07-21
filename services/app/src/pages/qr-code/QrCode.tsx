@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { TextMMedium, TextXLSemiBold } from "@utils";
 import { HeroGood } from "@assets";
 import { PageTitleBackground, PageTitleBackgroundColor } from "@components";
+import { Link } from "react-router-dom";
 
 export const QrCodePage: FC = () => {
     return (
@@ -12,10 +13,14 @@ export const QrCodePage: FC = () => {
             <h1 className={TextXLSemiBold.className}>
                 Play on your<br/>mobile
             </h1>
-            <img className={styles.qr} src='/other/tg_qr.png'/>
-            <h3 className={TextMMedium.className}>
-                @LeapTon
-            </h3>
+            <Link className={styles.qr} to={'https://t.me/testernightbot'}>
+                <img src='/other/tg_qr.png'/>
+            </Link>
+            <Link to={'https://t.me/testernightbot'}>
+                <h3 className={TextMMedium.className}>
+                    @LeapTon
+                </h3>
+            </Link>
             <HeroGood className={styles.hero}/>
         </div>
     )
