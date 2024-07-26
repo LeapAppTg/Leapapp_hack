@@ -8,6 +8,7 @@ body {
     height: 100%;
     overflow: hidden !important;
     background: var(--color-main-bg);
+    touch-action: none;
 }
 
 body div {
