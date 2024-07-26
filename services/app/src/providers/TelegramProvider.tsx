@@ -59,6 +59,25 @@ export const TelegramConsumer: FC = () => {
     const { initData, setup } = useTelegram()
 
     useEffect(() => {
+        const ch = document.documentElement.clientHeight;
+        document.documentElement.style.setProperty("--svh", ch + "px")
+        const ih = window.innerHeight;
+        document.documentElement.style.setProperty("--dvh", ih + "px");
+        const i = document.createElement("div");
+        i.style.width = "1px",
+        i.style.height = "100vh",
+        i.style.position = "fixed",
+        i.style.left = "0",
+        i.style.top = "0",
+        i.style.bottom = "0",
+        i.style.visibility = "hidden",
+        document.body.appendChild(i);
+        const newCh = i.clientHeight;
+        i.remove();
+        document.documentElement.style.setProperty("--lvh", newCh + "px")
+    }, [])
+
+    useEffect(() => {
         if (!initData) return
         setup()
     }, [])

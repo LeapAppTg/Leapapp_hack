@@ -29,6 +29,17 @@ section.page {
     justify-content: flex-start;
 }
 
+.tg_bottom_fix {
+    background: red;
+    bottom: calc(var(--lvh, 100vh) - var(--tg-viewport-height, 100vh));
+    height: 50px;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+}
+
 @supports (-webkit-touch-callout: none) {
     section.page {
         min-height: -webkit-fill-available;
