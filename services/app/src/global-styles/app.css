@@ -16,7 +16,8 @@ body div {
 
 section.page {
     min-width: 100%;
-    height: 100dvh;
+    /* height: 100dvh; */
+    height: 500px;
     padding: 16px;
     padding-bottom: 92px;
     position: relative;
