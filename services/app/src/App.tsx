@@ -11,7 +11,6 @@ function App() {
           <AlertsProvider>
             <AlertsConsumer/>
             <AppRouter/>
-            <div className='tg_bottom_fix'/>
             <TelegramConsumer/>
             <AuthConsumer/>
           </AlertsProvider>
