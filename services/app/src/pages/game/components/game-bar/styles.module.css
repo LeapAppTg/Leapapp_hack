@@ -46,6 +46,7 @@
 @keyframes score-scale {
     100% {
         transform: scale(0.25);
+        -webkit-transform: scale(0.25);
     }
 }
 

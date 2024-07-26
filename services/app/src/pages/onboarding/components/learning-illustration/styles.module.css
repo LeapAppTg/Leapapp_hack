@@ -28,6 +28,7 @@
 .path_right {
     right: 48px;
     transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
 }
 
 .background {

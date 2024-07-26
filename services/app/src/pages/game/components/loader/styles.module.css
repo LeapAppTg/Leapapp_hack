@@ -25,6 +25,7 @@
     from {
         opacity: 0;
         transform: scale(0.1);
+        -webkit-transform: scale(0.1);
     }
     10%, 60% {
         opacity: 1;
@@ -32,5 +33,6 @@
     to {
         opacity: 0;
         transform: scale(2);
+        -webkit-transform: scale(2);
     }
 }
