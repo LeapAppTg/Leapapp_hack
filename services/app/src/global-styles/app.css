@@ -6,7 +6,14 @@
 
 body {
     background: var(--color-main-bg);
-    overflow-y: scroll !important;
+    overflow: hidden;
+    height: 100vh;
+    padding-bottom: 0;
+}
+
+:root {
+    height: 100%;
+    overflow-y: scroll;
 }
 
 body div {
@@ -16,8 +23,8 @@ body div {
 }
 
 section.page {
-    min-width: 100%;
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
     position: relative;
     overflow: hidden;
     display: flex;
