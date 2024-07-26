@@ -6,6 +6,8 @@ import styles from "./styles.module.css";
 
 export const Navigation: FC = () => {
     return (
+        <>
+        <div className={styles.nav_placeholder}/>
         <div className={styles.navigation}>
             <CurrentLink to="/quests" icon={ListTaskCheckmarkIcon} title="Quests"/>
             <CurrentLink to="/referrals" icon={UserProfileIcon} title="Referrals"/>
@@ -13,6 +15,7 @@ export const Navigation: FC = () => {
             <CurrentLink to="/market" icon={BookOpenIcon} title="Learning"/>
             <CurrentLink to="/squads" icon={SubstractGroupIcon} title="Squads"/>
         </div>
+        </>
     )
 }
 
