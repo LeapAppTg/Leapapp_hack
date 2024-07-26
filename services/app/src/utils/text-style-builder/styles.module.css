@@ -54,6 +54,10 @@
     color: var(--color-purple-400);
 }
 
+.color_purple_500 {
+    color: var(--color-purple-500);
+}
+
 .color_purple_925 {
     color: var(--color-purple-925);
 }

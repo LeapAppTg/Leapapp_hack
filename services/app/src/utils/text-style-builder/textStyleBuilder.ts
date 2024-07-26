@@ -58,6 +58,10 @@ export enum TextColor {
     */
     Purple400 = 'color_purple_400',
     /**
+     *@color color-purple-500
+    */
+    Purple500 = 'color_purple_500',
+    /**
      *@color color-purple-925
     */
     Purple925 = 'color_purple_925',
@@ -159,6 +163,7 @@ export const TextSSemiBold = TextSRegular.update({ weight: TextWeight.SemiBold }
 export const TextXSRegular = new TextStyleBuilder({ size: TextSize.XSmall, color: TextColor.MainWhite, lineHeight: TextLineHeight.Big })
 export const TextXSRegularGrey400 = TextXSRegular.update({ color: TextColor.Grey400 })
 export const TextXSMedium = TextXSRegular.update({ weight: TextWeight.Medium })
+export const TextXSBold = TextXSRegular.update({ weight: TextWeight.Bold })
 export const TextXXSRegular = new TextStyleBuilder({ size: TextSize.XXSmall, color: TextColor.MainWhite, lineHeight: TextLineHeight.Big })
 export const TextXXSRegularGrey400 = TextXXSRegular.update({ color: TextColor.Grey400 })
 export const TextMSemiBold = new TextStyleBuilder({ size: TextSize.Medium, color: TextColor.MainWhite, weight: TextWeight.SemiBold, lineHeight: TextLineHeight.Big })

@@ -1,0 +1,27 @@
+.squares rect {
+    opacity: 0;
+    animation: 5s swap-color infinite;
+    fill: #1D2734;
+}
+
+@keyframes swap-color {
+    from { opacity: 0; }
+    30% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.squares rect:nth-child(6n - 5) {
+    animation-delay: 6s;
+}
+.squares rect:nth-child(6n - 4) {
+    animation-delay: 8s;
+}
+.squares rect:nth-child(6n - 3) {
+    animation-delay: 2s;
+}
+.squares rect:nth-child(6n - 2) {
+    animation-delay: 0s;
+}
+.squares rect:nth-child(6n - 1) {
+    animation-delay: 4s;
+}

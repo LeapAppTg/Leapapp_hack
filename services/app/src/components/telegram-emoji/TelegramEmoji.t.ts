@@ -3,7 +3,11 @@ export enum TelegramEmojiType {
     Gamepad = 'gamepad',
     FinishFlag = 'finish_flag',
     Rocket = 'rocket',
-    MoneyBag = 'money_bag'
+    MoneyBag = 'money_bag',
+    Time = 'time',
+    Ticket = 'ticket',
+    Bomb = 'bomb',
+    Lightning = 'lightning'
 }
 
 export enum TelegramEmojiSize {

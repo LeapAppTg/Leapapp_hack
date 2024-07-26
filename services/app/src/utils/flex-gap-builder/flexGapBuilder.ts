@@ -123,6 +123,10 @@ export const FlexGapRow16 = new FlexGapBuilder({ direction: FlexDirection.Row, g
 export const FlexGapRow16FullWidth = FlexGapRow16.update({ fillFullWidth: true })
 
 export const FlexGapColumn = new FlexGapBuilder({ direction: FlexDirection.Column })
+export const FlexGapColumnAlignFlexStart = FlexGapColumn.update({ alignItems: AlignItems.FlexStart })
+export const FlexGapColumnFullWidthAlignFlexStart = FlexGapColumnAlignFlexStart.update({ fillFullWidth: true })
+export const FlexGapColumnAlignFlexEnd = FlexGapColumn.update({ alignItems: AlignItems.FlexEnd })
+export const FlexGapColumnFullWidthAlignFlexEnd = FlexGapColumnAlignFlexEnd.update({ fillFullWidth: true })
 export const FlexGapColumn4 = new FlexGapBuilder({ direction: FlexDirection.Column, gap: FlexGap.Gap4 })
 export const FlexGapColumn4AlignFlexStart = FlexGapColumn4.update({ alignItems: AlignItems.FlexStart })
 export const FlexGapColumn8 = new FlexGapBuilder({ direction: FlexDirection.Column, gap: FlexGap.Gap8 })

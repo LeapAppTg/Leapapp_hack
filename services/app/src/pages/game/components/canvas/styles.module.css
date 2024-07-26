@@ -1,0 +1,44 @@
+.canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.hero_canvas {
+    position: absolute;
+    left: 0;
+    bottom: 100px;
+}
+
+.slider {
+    position: absolute;
+    bottom: 60px;
+    cursor: grab;
+    z-index: 1;
+    flex-direction: column;
+    gap: 6px;
+    animation: 0.3s ease-in appear;
+}
+
+.hero {
+    width: 60px;
+    height: 60px;
+}
+
+.magnet {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

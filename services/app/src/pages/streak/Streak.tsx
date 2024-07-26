@@ -1,16 +1,15 @@
-import { SquaresPattern } from "@assets";
 import { ApiError } from "@builders";
-import { AlertStatus, Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
+import { AlertStatus, AnimatedSquares, Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData } from "@hooks";
 import { FrogIcon, IconBox, IconSize, PointsIcon } from "@icons";
 import { useAlerts, useAuth, useTelegram } from "@providers";
 import { postDailyReward } from "@services";
 import { FlexGapColumn, FlexGapColumn8, FlexGapColumn8FullWidth, FlexGapRow12FullWidth, FlexGapRow8, TextColor, TextSRegular, TextXLMedium, TextXSRegular, TextXXLMedium, TextXXXLBold, classJoiner } from "@utils";
 import { FC, useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-import styles from "./styles.module.css";
 import Lottie from "react-lottie";
-import animationData from './confetti.json'
+import { Navigate } from "react-router-dom";
+import animationData from './confetti.json';
+import styles from "./styles.module.css";
 
 export const StreakPage: FC = () => {
     
@@ -129,7 +128,7 @@ export const StreakPage: FC = () => {
                         </div>
                     </div>
 
-                    <SquaresPattern className={styles.squares}/>
+                    <AnimatedSquares/>
 
                 </div>
             </div>

@@ -92,8 +92,10 @@ export class ApiPostRequestBuilder<
         this.responseTypeBuilder = responseTypeBuilder
     }
 
-    public setAccessToken(accessToken: string) {
-        this.accessToken = accessToken
+    public setAccessToken(accessToken: string | null | undefined) {
+        if (accessToken) {
+            this.accessToken = accessToken
+        }
         return this
     }
 
