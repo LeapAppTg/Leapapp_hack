@@ -28,7 +28,6 @@ function getInitData () {
 export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const initData = getInitData()
-    const [swipeBehavior] = initSwipeBehavior();
 
     function setup () {
         postEvent('web_app_expand')
@@ -36,7 +35,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
         postEvent('web_app_set_header_color', { color: '#111217' })
         postEvent('web_app_ready')
         postEvent('web_app_trigger_haptic_feedback', { type: "impact", impact_style: "heavy" })
-        swipeBehavior.disableVerticalSwipe()
+        postEvent('web_app_setup_swipe_behavior', { allow_vertical_swipe: false })
     }
 
     function triggerHapticFeedback (params: AnyHapticFeedbackParams) {
