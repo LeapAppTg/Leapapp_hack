@@ -49,6 +49,14 @@
         opacity: 1;
     }
 }
+@-webkit-keyframes star_sparkle {
+    from, to, 25%, 75% {
+        -webkit-opacity: 0;
+    }
+    50% {
+        -webkit-opacity: 1;
+    }
+}
 
 @keyframes circle_sparkle {
     from, to, 25%, 75% {
@@ -56,5 +64,13 @@
     }
     50% {
         opacity: 0.1;
+    }
+}
+@-webkit-keyframes circle_sparkle {
+    from, to, 25%, 75% {
+        -webkit-opacity: 0;
+    }
+    50% {
+        -webkit-opacity: 0.1;
     }
 }

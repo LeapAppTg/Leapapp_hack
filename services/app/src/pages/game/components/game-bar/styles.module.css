@@ -46,6 +46,10 @@
 @keyframes score-scale {
     100% {
         transform: scale(0.25);
+    }
+}
+@-webkit-keyframes score-scale {
+    100% {
         -webkit-transform: scale(0.25);
     }
 }
@@ -56,5 +60,13 @@
     }
     15%, 85% {
         opacity: 1;
+    }
+}
+@-webkit-keyframes score-opacity {
+    from, to {
+        -webkit-opacity: 0;
+    }
+    15%, 85% {
+        -webkit-opacity: 1;
     }
 }

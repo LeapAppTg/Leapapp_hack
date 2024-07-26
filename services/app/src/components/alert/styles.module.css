@@ -11,14 +11,22 @@
 
 @keyframes appear {
     from {
-        -webkit-transform: translateY(-200%);
         transform: translateY(-200%);
         opacity: 0;
     }
     to {
-        -webkit-transform: translateY(0);
         transform: translateY(0);
         opacity: 1;
+    }
+}
+@-webkit-keyframes appear {
+    from {
+        -webkit-transform: translateY(-200%);
+        -webkit-opacity: 0;
+    }
+    to {
+        -webkit-transform: translateY(0);
+        -webkit-opacity: 1;
     }
 }
 
@@ -28,13 +36,21 @@
 
 @keyframes disappear {
     from {
-        -webkit-transform: translateY(0);
         transform: translateY(0);
         opacity: 1;
     }
     to {
-        -webkit-transform: translateY(-200%);
         transform: translateY(-200%);
         opacity: 0;
+    }
+}
+@-webkit-keyframes disappear {
+    from {
+        -webkit-transform: translateY(0);
+        -webkit-opacity: 1;
+    }
+    to {
+        -webkit-transform: translateY(-200%);
+        -webkit-opacity: 0;
     }
 }

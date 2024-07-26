@@ -39,6 +39,9 @@
 @keyframes reward-title-appear {
     to { opacity: 1; }
 }
+@-webkit-keyframes reward-title-appear {
+    to { -webkit-opacity: 1; }
+}
 
 .reward > div {
     opacity: 0;
@@ -47,13 +50,21 @@
 
 @keyframes reward-appear {
     from {
-        -webkit-transform: translateY(25%);
         transform: translateY(25%);
         opacity: 0;
     }
     to {
-        -webkit-transform: translateY(0);
         transform: translateY(0);
         opacity: 1;
+    }
+}
+@-webkit-keyframes reward-appear {
+    from {
+        -webkit-transform: translateY(25%);
+        -webkit-opacity: 0;
+    }
+    to {
+        -webkit-transform: translateY(0);
+        -webkit-opacity: 1;
     }
 }
