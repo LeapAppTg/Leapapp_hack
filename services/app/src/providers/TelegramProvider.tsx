@@ -1,4 +1,4 @@
-import { AnyHapticFeedbackParams, postEvent, retrieveLaunchParams } from '@telegram-apps/sdk'
+import { AnyHapticFeedbackParams, postEvent, retrieveLaunchParams, initSwipeBehavior } from '@telegram-apps/sdk'
 import { FC, PropsWithChildren, createContext, useContext, useEffect } from "react"
 
 type TelegramContextLayout = {
@@ -28,6 +28,7 @@ function getInitData () {
 export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const initData = getInitData()
+    const [swipeBehavior] = initSwipeBehavior();
 
     function setup () {
         postEvent('web_app_expand')
@@ -35,6 +36,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
         postEvent('web_app_set_header_color', { color: '#111217' })
         postEvent('web_app_ready')
         postEvent('web_app_trigger_haptic_feedback', { type: "impact", impact_style: "heavy" })
+        swipeBehavior.disableVerticalSwipe()
     }
 
     function triggerHapticFeedback (params: AnyHapticFeedbackParams) {

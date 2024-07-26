@@ -6,7 +6,7 @@ type PostTokenRefreshResponse = {
 
 export async function postTokenRefresh () {
     return new ApiPostRequestBuilder<PostTokenRefreshResponse, PostTokenRefreshResponse>({
-        path: 'api/v1/auth/token/refresh/',
+        path: 'api/v1/auth/refresh/',
         responseTypeBuilder: new ApiTypeBuilder((i) => i)
     })
     .sendRequest()
