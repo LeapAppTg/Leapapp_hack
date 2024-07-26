@@ -6,7 +6,13 @@
 
 body {
     background: var(--color-main-bg);
-    overflow-y: scroll !important;
+    overflow: hidden;
+    height: 100vh;
+}
+
+:root {
+    height: 100%;
+    overflow-y: scroll;
 }
 
 body div {
