@@ -28,6 +28,18 @@ export default defineConfig({
     'process.env': process.env ?? {},
   },
   build: {
-    target: 'esnext'
+    target: 'esnext',
+    rollupOptions: {
+      output: {
+        manualChunks (id) {
+          if (id.includes('node_modules')) {
+            return 'node-modules'
+          }
+          if (id.includes('/app/src/')) {
+            return id.split('/app/src/')[1].split('/')[0]
+          }
+        }
+      }
+    }
   }
 })
