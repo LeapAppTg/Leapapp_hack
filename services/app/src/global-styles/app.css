@@ -18,7 +18,7 @@ body div {
 
 section.page {
     min-width: 100%;
-    min-height: 100dvh;
+    min-height: calc(100dvh + 1px);
     padding-bottom: calc(16px + var(--lvh, 100vh) - var(--tg-viewport-height, 100vh));
     position: relative;
     overflow: hidden;
