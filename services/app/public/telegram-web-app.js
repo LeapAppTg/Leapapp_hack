@@ -315,9 +315,6 @@
     if (theme_params) {
       setThemeParams(theme_params);
     }
-    if (initParams.tgWebAppVersion) {
-      webAppVersion = initParams.tgWebAppVersion;
-    }
     if (initParams.tgWebAppPlatform) {
       webAppPlatform = initParams.tgWebAppPlatform;
     }
