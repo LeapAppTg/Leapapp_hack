@@ -19,6 +19,7 @@ body div {
 section.page {
     min-width: 100%;
     min-height: calc(100dvh + 1px);
+    padding: 16px;
     padding-bottom: calc(16px + var(--lvh, 100vh) - var(--tg-viewport-height, 100vh));
     position: relative;
     overflow: hidden;
@@ -92,8 +93,6 @@ img {
 section.content {
     width: 100%;
     flex-grow: 1;
-    padding: 16px;
-    padding-bottom: 0;
     margin: 0;
     display: flex;
     align-items: center;
