@@ -9,11 +9,6 @@
     30% { opacity: 1; }
     50% { opacity: 0; }
 }
-@-webkit-keyframes swap-color {
-    from { -webkit-opacity: 0; }
-    30% { -webkit-opacity: 1; }
-    50% { -webkit-opacity: 0; }
-}
 
 .squares rect:nth-child(6n - 5) {
     animation-delay: 6s;

@@ -25,7 +25,3 @@
     from { transform: rotate(-90deg); }
     to { transform: rotate(270deg); }
 }
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(-90deg); }
-    to { -webkit-transform: rotate(270deg); }
-}

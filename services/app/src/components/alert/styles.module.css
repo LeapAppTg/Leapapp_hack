@@ -19,16 +19,6 @@
         opacity: 1;
     }
 }
-@-webkit-keyframes appear {
-    from {
-        -webkit-transform: translateY(-200%);
-        -webkit-opacity: 0;
-    }
-    to {
-        -webkit-transform: translateY(0);
-        -webkit-opacity: 1;
-    }
-}
 
 .disappear {
     animation: disappear 0.5s forwards;
@@ -42,15 +32,5 @@
     to {
         transform: translateY(-200%);
         opacity: 0;
-    }
-}
-@-webkit-keyframes disappear {
-    from {
-        -webkit-transform: translateY(0);
-        -webkit-opacity: 1;
-    }
-    to {
-        -webkit-transform: translateY(-200%);
-        -webkit-opacity: 0;
     }
 }
