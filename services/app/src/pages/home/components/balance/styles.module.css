@@ -1,6 +1,14 @@
-.stats_wrapper {
-    gap: 24px;
+.purple_bg {
+    position: absolute;
+    top: 32px;
+    overflow: visible;
 }
-.stat {
-    gap: 8px;
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    background: var(--color-purple-975);
+    border: 3px solid var(--color-main-accent);
+    border-radius: 100%;
+    margin-bottom: 4px;
 }

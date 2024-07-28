@@ -1,6 +1,7 @@
 function defaultFormat (number: number, shownDecimals: number = 0) {
     return new Intl.NumberFormat("en-US", { minimumFractionDigits: shownDecimals, maximumFractionDigits: shownDecimals })
         .format(number)
+        .replaceAll(',', ' ')
 }
 
 function shortFormat (number: number, minCroppedValue: number = 999_999) {

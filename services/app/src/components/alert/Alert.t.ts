@@ -1,6 +1,7 @@
 export type AlertProps = {
     message: string,
     status?: AlertStatus,
+    withConfetti?: boolean,
     remove: () => void
 }
 

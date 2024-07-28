@@ -5,6 +5,7 @@ type TelegramContextLayout = {
     initData: string | null,
     setup: () => void,
     triggerHapticFeedback: (params: AnyHapticFeedbackParams) => void,
+    userPfp?: string
 }
 
 const TelegramContext = createContext<TelegramContextLayout>({
@@ -26,9 +27,19 @@ function getInitData () {
     }
 }
 
+function getUserPfp () {
+    try {
+        const { initData } = retrieveLaunchParams()
+        return initData?.user?.photoUrl
+    } catch {
+        return undefined
+    }
+}
+
 export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const initData = getInitData()
+    const userPfp = getUserPfp()
 
     function setup () {
         return
@@ -50,7 +61,8 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
         value={{
             initData,
             setup,
-            triggerHapticFeedback
+            triggerHapticFeedback,
+            userPfp
         }}
         >
             {children}

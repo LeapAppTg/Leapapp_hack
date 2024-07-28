@@ -23,8 +23,10 @@ export const QuestsPage: FC = () => {
         </div>
         <div className={styles.quests}>
             <div className={styles.dots_background_repeat}>
-                <DotsBackground/>
-                <DotsBackground/>
+                <div>
+                    <DotsBackground/>
+                    <DotsBackground/>
+                </div>
             </div>
             <div className={FlexGapRowFullWidthJustifyFlexStart.className}>
                 <MapItem subtitle="Social" reward={150}/>

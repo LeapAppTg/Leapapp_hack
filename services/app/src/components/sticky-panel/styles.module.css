@@ -1,0 +1,8 @@
+.sticky_panel {
+    position: fixed;
+    width: 100%;
+    background: var(--color-main-bg);
+    padding: 20px 16px;
+    bottom: 86px;
+    z-index: 10;
+}

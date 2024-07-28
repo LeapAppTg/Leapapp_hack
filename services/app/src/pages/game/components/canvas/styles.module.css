@@ -17,7 +17,6 @@
     z-index: 1;
     flex-direction: column;
     gap: 6px;
-    animation: 0.3s ease-in appear;
 }
 
 .hero {
@@ -32,13 +31,4 @@
     left: 0;
     right: 0;
     margin: auto;
-}
-
-@keyframes appear {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }

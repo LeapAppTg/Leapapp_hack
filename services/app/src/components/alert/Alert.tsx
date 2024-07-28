@@ -5,6 +5,8 @@ import { EnumMatcher, EnumToFCMatcher, TextXSRegular, classJoiner } from "@utils
 import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
 import { CheckmarkIcon, CloseIcon, IconFC } from "@icons";
 import { useTelegram } from "@providers";
+import animationData from "./confetti.json"
+import Lottie from "react-lottie";
 
 const statusIconMatcher = new EnumToFCMatcher<AlertStatus, IconFC, IconFC>(
     {
@@ -31,7 +33,7 @@ const hapticFeedbackMatcher = new EnumMatcher<AlertStatus, "success" | "error", 
 )
 
 export const Alert: FC<AlertProps> = ({
-    message, status, remove
+    message, status, remove, withConfetti
 }) => {
     const [disappear, setDisappear] = useState<boolean>(false)
     const [expirationTime, setExpirationTime] = useState<number>(100)
@@ -82,6 +84,20 @@ export const Alert: FC<AlertProps> = ({
             <p className={TextXSRegular.className}>
                 {message}
             </p>
+            {
+                withConfetti
+                ?
+                <div className={styles.confetti}>
+                    <Lottie
+                        options={{
+                            animationData,
+                            loop: 0
+                        }}
+                    />
+                </div>
+                :
+                null
+            }
         </div>
     )
 }

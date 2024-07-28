@@ -1,4 +1,4 @@
-import { classBuilder } from "../classes";
+import { classBuilder, classJoiner } from "../classes";
 import styles from './styles.module.css';
 
 export enum TextSize {
@@ -153,6 +153,10 @@ export class TextStyleBuilder implements TextStyleBuilderProps {
             styles,
             [this.color, this.size, this.lineHeight, this.weight, this.textAlign, { fill_full_width: this.fillFullWidth }, this.textTransfrom, { crop_text: this.cropText }]
         )
+    }
+
+    public withExtraClasses (...rest: string[]) {
+        return classJoiner(this.className, ...rest)
     }
 }
 
