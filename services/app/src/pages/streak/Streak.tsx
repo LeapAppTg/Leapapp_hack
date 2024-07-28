@@ -10,6 +10,7 @@ import Lottie from "react-lottie";
 import { Navigate } from "react-router-dom";
 import animationData from './confetti.json';
 import styles from "./styles.module.css";
+import { HeroThugCoin } from "@assets";
 
 export const StreakPage: FC = () => {
     
@@ -110,19 +111,19 @@ export const StreakPage: FC = () => {
                     <div className={FlexGapRow12FullWidth.className}>
                         <div className={classJoiner(FlexGapColumn8FullWidth.className, styles.reward)}>
                             <p className={TextSRegular.update({ color: TextColor.Grey400 }).className}>
-                                Bonus points
+                                Bonus $LEAPs
                             </p>
                             <div className={FlexGapRow8.className}>
-                                <IconBox size={IconSize.Large} icon={PointsIcon}/>
+                                <HeroThugCoin width={40} height={40}/>
                                 <p className={TextXLMedium.className}>{data.points.format()}</p>
                             </div>
                         </div>
                         <div className={classJoiner(FlexGapColumn8FullWidth.className, styles.reward)}>
                             <p className={TextSRegular.update({ color: TextColor.Grey400 }).className}>
-                                Games
+                                Game Tickets
                             </p>
                             <div className={FlexGapRow8.className}>
-                                <IconBox size={IconSize.Large} icon={FrogIcon}/>
+                                <TelegramEmoji size={TelegramEmojiSize.MediumSmall} type={TelegramEmojiType.Ticket}/>
                                 <p className={TextXLMedium.className}>{data.gameTickets.format()}</p>
                             </div>
                         </div>

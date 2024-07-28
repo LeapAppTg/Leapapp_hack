@@ -24,6 +24,10 @@ export enum TelegramEmojiSize {
      */
     Medium = 'medium',
     /**
+     * @width 28px
+     */
+    MediumSmall = 'medium_small',
+    /**
      * @width 20px
      */
     Small = 'small'
