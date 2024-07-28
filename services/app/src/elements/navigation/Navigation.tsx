@@ -12,7 +12,7 @@ export const Navigation: FC = () => {
             <CurrentLink to="/quests" icon={ListTaskCheckmarkIcon} title="Quests"/>
             <CurrentLink to="/referrals" icon={UserProfileIcon} title="Referrals"/>
             <CurrentLink to="/home" icon={PackageBoxHomeIcon} title="Home"/>
-            <CurrentLink to="/market" icon={BookOpenIcon} title="Learning"/>
+            <CurrentLink to="/learning" icon={BookOpenIcon} title="Learning"/>
             <CurrentLink to="/squads" icon={SubstractGroupIcon} title="Squads"/>
         </div>
         </>

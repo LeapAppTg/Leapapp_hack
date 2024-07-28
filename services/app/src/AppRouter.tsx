@@ -1,5 +1,5 @@
 import { Navigation } from '@elements'
-import { GamePage, HomePage, LoaderPage, OnboardingPage, QrCodePage, QuestDetailsPage, QuestsPage, ReferralsPage, StreakPage } from '@pages'
+import { GamePage, HomePage, LearningPage, LoaderPage, OnboardingPage, QrCodePage, QuestDetailsPage, QuestsPage, ReferralsPage, SquadsPage, StreakPage } from '@pages'
 import { useAuth, useTelegram } from '@providers'
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
@@ -65,6 +65,8 @@ const AppRouter: FC = () => {
             <Route path='/home' element={<PageWrapper><HomePage/></PageWrapper>}/>
             <Route path='/referrals' element={<PageWrapper><ReferralsPage/></PageWrapper>}/>
             <Route path='/quests' element={<PageWrapper><QuestsPage/></PageWrapper>}/>
+            <Route path='/squads' element={<PageWrapper><SquadsPage/></PageWrapper>}/>
+            <Route path='/learning' element={<PageWrapper><LearningPage/></PageWrapper>}/>
             <Route path='/quests/:id' element={<PageWrapper><QuestDetailsPage/></PageWrapper>}/>
             <Route path='/streak' element={<PageWrapper hideNavbar><StreakPage/></PageWrapper>}/>
             <Route path='/game' element={<PageWrapper hideNavbar><GamePage/></PageWrapper>}/>

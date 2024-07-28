@@ -1,20 +1,23 @@
+import { HeroThugCoin } from "@assets";
+import { IconBox, IconColor, IconSize, UserProfileIcon } from "@icons";
+import { QuestInfo } from "@types";
+import { FlexGapColumn4, FlexGapRow4, TextColor, TextXSRegular, TextXXSRegular } from "@utils";
 import { FC } from "react";
 import styles from "./styles.module.css";
-import { FlexGapColumn4, FlexGapRow4, TextColor, TextXSRegular, TextXXSRegular, classJoiner } from "@utils";
-import { IconBox, IconColor, IconSize, PointsIcon, UserProfileIcon } from "@icons";
-import { Link } from "react-router-dom";
+import { useBottomPopup } from "@providers";
+import { QuestDetails } from "../../elements";
 
-type MapItemProps = {
-    reward?: number,
-    subtitle?: string,
-    title?: string
-}
+type QuestItemProps = QuestInfo
 
-export const MapItem: FC<MapItemProps> = ({
-    reward, subtitle, title
+export const QuestItem: FC<QuestItemProps> = ({
+    uuid, name, rewardPoints
 }) => {
+
+    const { showPopup } = useBottomPopup()
+    const onClick = () => showPopup(<QuestDetails uuid={uuid}/>)
+
     return (
-        <div className={FlexGapColumn4.className}>
+        <div className={FlexGapColumn4.className} onClick={onClick}>
             <div className={styles.icon_wrapper}>
                 <IconBox icon={UserProfileIcon} size={IconSize.MediumBig} color={IconColor.Grey400}/>
                 <svg className={styles.border} xmlns="http://www.w3.org/2000/svg" width="54" height="60" viewBox="0 0 54 60">
@@ -24,30 +27,11 @@ export const MapItem: FC<MapItemProps> = ({
                     <path d="M0.109375 14.6384C0.109375 13.0419 0.978628 11.5721 2.37773 10.8027L19.8912 1.17223C21.2051 0.449749 22.7974 0.44975 24.1113 1.17224L41.6248 10.8027C43.0239 11.5721 43.8932 13.0419 43.8932 14.6384V35.362C43.8932 36.9584 43.0239 38.4282 41.6248 39.1976L24.1113 48.8281C22.7974 49.5506 21.2051 49.5506 19.8912 48.8281L2.37773 39.1976C0.978626 38.4282 0.109375 36.9584 0.109375 35.362V14.6384Z"/>
                 </svg>
             </div>
-            {
-                title
-                ?
-                <p className={classJoiner(TextXSRegular.className, styles.title)}>{title}</p>
-                :
-                null
-            }
-            {
-                subtitle
-                ?
-                <p className={TextXXSRegular.update({ color: TextColor.Grey500 }).className}>{subtitle}</p>
-                :
-                null
-            }
-            {
-                reward
-                ?
-                <div className={FlexGapRow4.className}>
-                    <IconBox icon={PointsIcon} size={IconSize.Medium}/>
-                    <p className={TextXSRegular.className}>{reward.format()}</p>
-                </div>
-                :
-                null
-            }
+            <p className={TextXXSRegular.update({ color: TextColor.Grey500 }).withExtraClasses(styles.title)}>{name}</p>
+            <div className={FlexGapRow4.className}>
+                <HeroThugCoin width={20} height={20}/>
+                <p className={TextXSRegular.className}>{rewardPoints.format()}</p>
+            </div>
         </div>
     )
 }

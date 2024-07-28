@@ -72,7 +72,8 @@ type FlexGapBuilderProps = {
     fillFullWidth?: boolean,
     alignItems?: AlignItems,
     justifyContent?: JustifyContent,
-    hideOverflow?: boolean
+    hideOverflow?: boolean,
+    relativePosition?: boolean
 }
 
 export class FlexGapBuilder implements FlexGapBuilderProps {
@@ -82,6 +83,7 @@ export class FlexGapBuilder implements FlexGapBuilderProps {
     alignItems: AlignItems| undefined;
     justifyContent: JustifyContent | undefined;
     hideOverflow: boolean | undefined;
+    relativePosition: boolean | undefined;
 
     constructor(params: FlexGapBuilderProps) {
         Object.assign(this, params)
@@ -103,7 +105,7 @@ export class FlexGapBuilder implements FlexGapBuilderProps {
     public get className () {
         return classBuilder(
             styles,
-            [this.direction, this.gap, { fill_full_width: this.fillFullWidth }, this.alignItems, this.justifyContent, { hide_overflow: this.hideOverflow }]
+            [this.direction, this.gap, { fill_full_width: this.fillFullWidth }, this.alignItems, this.justifyContent, { hide_overflow: this.hideOverflow }, { relative_position: this.relativePosition }]
         )
     }
 }

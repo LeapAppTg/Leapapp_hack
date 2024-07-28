@@ -1,0 +1,17 @@
+.path_right, .path_left, .path_top {
+    position: absolute;
+    width: 98px;
+    height: 152px;
+    top: 26px;
+    z-index: -2;
+}
+
+.path_left {
+    left: 24px;
+}
+
+.path_right {
+    right: 24px;
+    transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+}

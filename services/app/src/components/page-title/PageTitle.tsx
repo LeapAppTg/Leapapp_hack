@@ -7,7 +7,7 @@ export const PageTitle: FC<PageTitleProps> = ({
     icon, subtitle, title, color
 }) => {
     return (
-        <div className={FlexGapColumn16FullWidth.className}>
+        <div className={FlexGapColumn16FullWidth.update({ relativePosition: true }).className}>
             {
                 icon
                 ?
@@ -16,8 +16,13 @@ export const PageTitle: FC<PageTitleProps> = ({
                 null
             }
             <h1 className={new TextStyleBuilder({ color: TextColor.MainWhite, size: TextSize.Medium, weight: TextWeight.SemiBold, lineHeight: TextLineHeight.Medium }).className}>{title}</h1>
-            <h3 className={new TextStyleBuilder({ color: TextColor.Grey400, size: TextSize.XSmall, lineHeight: TextLineHeight.Large }).className}>{subtitle}</h3>
-
+            {
+                subtitle
+                ?
+                <h3 className={new TextStyleBuilder({ color: TextColor.Grey400, size: TextSize.XSmall, lineHeight: TextLineHeight.Large }).className}>{subtitle}</h3>
+                :
+                null
+            }
             <PageTitleBackground color={color}/>
         </div>
     )

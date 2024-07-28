@@ -73,3 +73,7 @@
 .hide_overflow {
     overflow: hidden;
 }
+
+.relative_position {
+    position: relative;
+}

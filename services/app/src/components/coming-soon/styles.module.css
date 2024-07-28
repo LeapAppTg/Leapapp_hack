@@ -1,0 +1,16 @@
+.coming_soon {
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 16px;
+}
+
+.hero {
+    position: relative;
+}
+
+.wrench {
+    position: absolute;
+    transform: rotate(11.297deg);
+    right: -2px;
+    bottom: -6px;
+}

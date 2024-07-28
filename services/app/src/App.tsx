@@ -1,7 +1,7 @@
 import '@styles';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './AppRouter';
-import { AlertsConsumer, AlertsProvider, AuthConsumer, AuthProvider, TelegramConsumer, TelegramProvider } from '@providers';
+import { AlertsConsumer, AlertsProvider, AuthConsumer, AuthProvider, BottomPopupConsumer, BottomPopupProvider, TelegramConsumer, TelegramProvider } from '@providers';
 
 function App() {
   return (
@@ -9,10 +9,13 @@ function App() {
       <TelegramProvider>
         <AuthProvider>
           <AlertsProvider>
-            <AlertsConsumer/>
-            <AppRouter/>
-            <TelegramConsumer/>
-            <AuthConsumer/>
+            <BottomPopupProvider>
+              <AlertsConsumer/>
+              <AppRouter/>
+              <TelegramConsumer/>
+              <AuthConsumer/>
+              <BottomPopupConsumer/>
+            </BottomPopupProvider>
           </AlertsProvider>
         </AuthProvider>
       </TelegramProvider>

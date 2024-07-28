@@ -7,7 +7,9 @@ export enum TelegramEmojiType {
     Time = 'time',
     Ticket = 'ticket',
     Bomb = 'bomb',
-    Lightning = 'lightning'
+    Lightning = 'lightning',
+    Books = 'books',
+    RollerCoaster = 'roller_coaster'
 }
 
 export enum TelegramEmojiSize {

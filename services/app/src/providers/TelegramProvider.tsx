@@ -5,13 +5,15 @@ type TelegramContextLayout = {
     initData: string | null,
     setup: () => void,
     triggerHapticFeedback: (params: AnyHapticFeedbackParams) => void,
-    userPfp?: string
+    userPfp?: string,
+    openLink: (link: string) => void
 }
 
 const TelegramContext = createContext<TelegramContextLayout>({
     initData: null,
     setup: () => null,
-    triggerHapticFeedback: () => null
+    triggerHapticFeedback: () => null,
+    openLink: (link: string) => null
 })
 
 export const useTelegram = () => useContext(TelegramContext)
@@ -53,13 +55,22 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
         postEvent('web_app_trigger_haptic_feedback', params)
     }
 
+    function openLink (link: string) {
+        if (link.includes('t.me')) {
+            postEvent('web_app_open_tg_link', { path_full: link })
+        } else {
+            postEvent('web_app_open_link', { url: link })
+        }
+    }
+
     return (
         <TelegramContext.Provider
         value={{
             initData,
             setup,
             triggerHapticFeedback,
-            userPfp
+            userPfp,
+            openLink
         }}
         >
             {children}
