@@ -22,6 +22,7 @@
     padding: 4px;
     border-radius: 8px;
     background: var(--color-grey-800);
+    z-index: 1;
 }
 
 .content {
@@ -43,6 +44,9 @@
 }
 
 @keyframes popup-move-down {
+    from {
+        transform: translateY(0);
+    }
     to {
         transform: translateY(100%);
     }
@@ -55,6 +59,9 @@
 }
 
 @keyframes content-disappear {
+    from {
+        opacity: 1;
+    }
     to {
         opacity: 0;
     }

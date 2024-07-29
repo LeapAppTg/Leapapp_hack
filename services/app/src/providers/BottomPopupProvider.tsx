@@ -1,16 +1,18 @@
 import { Alert, AlertProps, BottomPopup } from '@components'
-import { FC, PropsWithChildren, ReactNode, createContext, useContext, useReducer, useState } from 'react'
+import { FC, PropsWithChildren, ReactNode, createContext, useContext, useEffect, useReducer, useState } from 'react'
 
 type BottomPopupContextProps = {
     popup: ReactNode,
     showPopup: (popup: ReactNode) => void,
-    hidePopup: () => void
+    hidePopup: () => void,
+    isClosing: boolean
 }
 
 const BottomPopupContext = createContext<BottomPopupContextProps>({
     popup: null,
     showPopup: (p) => null,
-    hidePopup: () => null
+    hidePopup: () => null,
+    isClosing: false
 })
 
 export const useBottomPopup = () => useContext(BottomPopupContext)
@@ -19,14 +21,26 @@ export const BottomPopupProvider: FC<PropsWithChildren> = ({children}) => {
 
     const [popup, setPopup] = useState<ReactNode | null>(null)
     const showPopup = (popup: ReactNode) => setPopup(popup)
-    const hidePopup = () => setPopup(null)
+    const onHide = () => setPopup(null)
+    const [isClosing, setIsClosing] = useState<boolean>(false)
+    const hidePopup = () => {
+        setIsClosing(prev => {
+            if (prev) return prev
+            setTimeout(onHide, 500)
+            return true
+        })
+    }
+    useEffect(() => {
+        setIsClosing(false)
+    }, [popup])
 
     return (
         <BottomPopupContext.Provider
             value={{
                 popup,
                 showPopup,
-                hidePopup
+                hidePopup,
+                isClosing
             }}
         >
             {children}

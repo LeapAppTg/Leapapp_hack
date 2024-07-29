@@ -1,4 +1,5 @@
-import { Alert, AlertProps } from '@components'
+import { ApiError } from '@builders'
+import { Alert, AlertProps, AlertStatus } from '@components'
 import { FC, PropsWithChildren, createContext, useContext, useReducer } from 'react'
 
 type RemoveAlert = {
@@ -21,13 +22,15 @@ type AlertWithId = AlertProps & { id: number }
 type AlertsContextProps = {
     alerts: AlertWithId[],
     sendAlert: (item: Omit<AlertProps, "remove">) => number,
+    sendApiErrorAlert: (maybeApiError: any) => number,
     removeAlert: (id: number) => void
 }
 
 const AlertsContext = createContext<AlertsContextProps>({
     alerts: [],
     sendAlert: () => 0,
-    removeAlert: () => null
+    removeAlert: () => null,
+    sendApiErrorAlert: () => 0
 })
 
 export const useAlerts = () => useContext(AlertsContext)
@@ -58,6 +61,15 @@ export const AlertsProvider: FC<PropsWithChildren> = ({children}) => {
         })
         return id
     }
+    
+    const sendApiErrorAlert = (e: any) => {
+        let message: string = 'Something went wrong :('
+        if (ApiError.isApiError(e) && e.detail) message = e.detail
+        return sendAlert({
+            status: AlertStatus.Error,
+            message
+        })
+    }
 
     return (
         <AlertsContext.Provider
@@ -65,6 +77,7 @@ export const AlertsProvider: FC<PropsWithChildren> = ({children}) => {
                 alerts,
                 sendAlert,
                 removeAlert,
+                sendApiErrorAlert
             }}
         >
             {children}

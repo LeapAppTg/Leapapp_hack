@@ -1,4 +1,4 @@
-import { classBuilder } from "../classes";
+import { classBuilder, classJoiner } from "../classes";
 import styles from './styles.module.css';
 
 export enum FlexGap {
@@ -107,6 +107,10 @@ export class FlexGapBuilder implements FlexGapBuilderProps {
             styles,
             [this.direction, this.gap, { fill_full_width: this.fillFullWidth }, this.alignItems, this.justifyContent, { hide_overflow: this.hideOverflow }, { relative_position: this.relativePosition }]
         )
+    }
+    
+    public withExtraClasses (...rest: string[]) {
+        return classJoiner(this.className, ...rest)
     }
 }
 

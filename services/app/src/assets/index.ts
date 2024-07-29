@@ -21,5 +21,10 @@ import DialogueCloud from './DialogueCloud.svg?react'
 import CoinsIlustration from './CoinsIlustration.svg?react'
 import SquaresPattern from './SquaresPattern.svg?react'
 import Wrench from './Wrench.svg?react'
+import Youtube from './Youtube.svg?react'
+import Discord from './DialogueCloud.svg?react'
+import Instagram from './Instagram.svg?react'
+import Telegram from './Telegram.svg?react'
+import X from './X.svg?react'
 
-export { DotsBackground, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }
+export { DotsBackground, Youtube, Discord, Instagram, Telegram, X, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }

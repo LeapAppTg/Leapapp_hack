@@ -2,7 +2,7 @@ import { MapPathCorner, MapPathVertical } from "@assets";
 import { QuestInfo } from "@types";
 import { FlexGapRowFullWidthJustifyFlexEnd, FlexGapRowFullWidthJustifyFlexStart } from "@utils";
 import { FC } from "react";
-import { QuestItem } from "..";
+import { HiddenQuestItem, QuestItem } from "..";
 import styles from "./styles.module.css";
 
 type QuestMapWrapperProps = {
@@ -14,24 +14,60 @@ type QuestMapWrapperProps = {
 export const QuestMapWrapper: FC<QuestMapWrapperProps> = ({
     index, quest, questsLength
 }) => {
-    const pos = (index + 1) % 6
+    const pos = 1 + index % 4
     const isLast = index === questsLength - 1
 
     return (
-        <div className={(pos === 1 || pos === 4) ? FlexGapRowFullWidthJustifyFlexStart.className : (pos === 2 || pos === 5) ? undefined : FlexGapRowFullWidthJustifyFlexEnd.className}>
+        <div className={pos === 1 ? FlexGapRowFullWidthJustifyFlexStart.className : (pos === 2 || pos === 4) ? undefined : FlexGapRowFullWidthJustifyFlexEnd.className}>
             <QuestItem {...quest}/>
             {
-                pos === 1 || pos === 4
+                pos === 1
                 ?
                 <MapPathCorner className={styles.path_left}/>
                 :
-                pos === 3 || pos === 6
+                pos === 3
                 ?
                 <MapPathCorner className={styles.path_right}/>
                 :
                 isLast
                 ?
                 <MapPathVertical className={styles.path_top}/>
+                :
+                pos === 2
+                ?
+                <MapPathCorner className={styles.path_left}/>
+                :
+                <MapPathCorner className={styles.path_right}/>
+            }
+        </div>
+    )
+}
+
+type HiddenQuestMapWrapperProps = {
+    index: number,
+    length: number
+}
+
+export const HiddenQuestMapWrapper: FC<HiddenQuestMapWrapperProps> = ({
+    index, length
+}) => {
+    const pos = 1 + (index + 1) % 4
+    const isLast = index === length - 1
+    return (
+        <div className={pos === 1 ? FlexGapRowFullWidthJustifyFlexStart.className : (pos === 2 || pos === 4) ? undefined : FlexGapRowFullWidthJustifyFlexEnd.className}>
+            <HiddenQuestItem/>
+            {
+                isLast
+                ?
+                null
+                :
+                pos === 1
+                ?
+                <MapPathCorner className={styles.path_left}/>
+                :
+                pos === 3
+                ?
+                <MapPathCorner className={styles.path_right}/>
                 :
                 pos === 2
                 ?

@@ -1,33 +1,48 @@
-import { GoldCoin, HeroThugCoin } from "@assets";
-import { TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
-import { ArrowIcon, IconBox, IconSize, PointsIcon } from "@icons";
-import { QuestTask, TaskCompletionStatus, TaskType } from "@types";
+import { Discord, GoldCoin, HeroThugCoin, Instagram, Telegram, X } from "@assets";
+import { AlertStatus, CircleIconWrapper, CircleIconWrapperColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
+import { ArrowIcon, CheckmarkIcon, IconBox, IconSize, PointsIcon } from "@icons";
+import { QuestCompletionStatus, QuestTask, TaskCompletionStatus, TaskType } from "@types";
 import { FlexGapColumn4AlignFlexStart, FlexGapRow12, FlexGapRow4, FlexGapRow8, FlexGapRow8FullWidthJustifySpaceBetween, TextAlign, TextXSMedium, TextXXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { useTelegram } from "@providers";
+import { useAlerts, useAuth, useTelegram } from "@providers";
+import { ApiError } from "@builders";
+import { postClaimTask } from "@services";
 
-type TaskProps = QuestTask
+type TaskProps = QuestTask & { questUuid: number }
 
 export const Task: FC<TaskProps> = ({
-    description, link, completionStatus, name, type
+    uuid, description, link, completionStatus, name, type, questUuid
 }) => {
 
     const { openLink } = useTelegram()
+    const { sendApiErrorAlert } = useAlerts()
+    const { authToken } = useAuth()
 
     async function onClick () {
+        if (completionStatus === TaskCompletionStatus.Completed) return
         if (type === TaskType.Link) {
-            
-            openLink(link)
+            try {
+                await postClaimTask(authToken, questUuid, uuid)
+                openLink(link)
+            } catch (e) {
+                sendApiErrorAlert(e)
+            }
         }
     }
 
     return (
-        <div className={FlexGapRow8FullWidthJustifySpaceBetween.className}>
+        <div className={FlexGapRow8FullWidthJustifySpaceBetween.className} onClick={onClick}>
             <div className={classJoiner(FlexGapRow12.update({ hideOverflow: true }).className, completionStatus === TaskCompletionStatus.Completed ? styles.half_opacity : undefined)}>
                 <div className={styles.icon}>
-                    <PointsIcon size={IconSize.Large}/>
+                    {
+                        link
+                        ?
+                        <LinkIcon link={link}/>
+                        :
+                        <PointsIcon size={IconSize.Large}/>
+                    }
                 </div>
                 <div className={FlexGapColumn4AlignFlexStart.update({ hideOverflow: true }).className}>
                     <p className={TextXSMedium.className}>{name}</p>
@@ -39,31 +54,42 @@ export const Task: FC<TaskProps> = ({
                 ?
                 link
                 ?
-                <Link to={link} target="_blank">
-                    <IconBox size={IconSize.MediumBig} icon={ArrowIcon}/>
-                </Link>
+                <IconBox size={IconSize.MediumBig} icon={ArrowIcon}/>
                 :
                 <div/>
                 :
-                null
+                <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
             }
-
         </div>
     )
 }
 
+type LinkIconProps = {
+    link: string
+}
+
+const LinkIcon: FC<LinkIconProps> = ({ link }) => {
+    if (link.includes('t.me')) return <Telegram width={28} height={28}/>
+    if (link.includes('youtube') || link.includes('youtu.be')) return <X width={28} height={28}/>
+    if (link.includes('discord')) return <Discord width={28} height={28}/>
+    if (link.includes('instagram')) return <Instagram width={28} height={28}/>
+    if (link.includes('x.com') || link.includes('twitter')) return <X width={28} height={28}/>
+    return <PointsIcon size={IconSize.Large}/>
+}
+
 type RewardTaskProps = {
     pointsReward: number,
-    gameTicketsReward: number
+    gameTicketsReward: number,
+    completionStatus: QuestCompletionStatus
 }
 
 export const RewardTask: FC<RewardTaskProps> = ({
-    gameTicketsReward, pointsReward
+    gameTicketsReward, pointsReward, completionStatus
 }) => {
 
     return (
         <div className={FlexGapRow8FullWidthJustifySpaceBetween.className}>
-            <div className={classJoiner(FlexGapRow12.update({ hideOverflow: true }).className)}>
+            <div className={classJoiner(FlexGapRow12.update({ hideOverflow: true }).className, completionStatus === QuestCompletionStatus.Claimed ? styles.half_opacity : undefined)}>
                 <div className={styles.icon}>
                     <GoldCoin width={28} height={28}/>
                 </div>
@@ -93,6 +119,13 @@ export const RewardTask: FC<RewardTaskProps> = ({
                     </div>
                 </div>
             </div>
+            {
+                completionStatus === QuestCompletionStatus.Claimed
+                ?
+                <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
+                :
+                null
+            }
         </div>
     )
 }

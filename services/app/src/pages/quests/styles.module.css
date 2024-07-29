@@ -24,3 +24,7 @@
 .quests > div {
     position: relative;
 }
+
+.separator {
+    width: 100%;
+}

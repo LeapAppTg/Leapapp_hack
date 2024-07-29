@@ -26,3 +26,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.status_icon {
+    position: absolute;
+    top: -6px;
+}
+
+.hidden {
+    margin-bottom: 50px;
+}

@@ -113,13 +113,16 @@ export const AuthConsumer: FC = () => {
 const AuthConsumerContent: FC = () => {
     const { isAuthorized, setIsAuthorized, setIsFirstTimeLogin } = useAuth()
 
-    const { data } = useData(ApiRoutes.GetDailyReward)
+    const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
+    useData(ApiRoutes.GetDailyReward)
+    useData(ApiRoutes.GetQuestsList)
+    useData(ApiRoutes.GetHourlyReward)
 
     useEffect(() => {
-        if (isAuthorized || !data) return
+        if (isAuthorized || !userProfile) return
         setIsAuthorized(true)
-        if (data.days <= 1) setIsFirstTimeLogin(true)
-    }, [isAuthorized, data])
+        if (userProfile.isFirstLogin) setIsFirstTimeLogin(true)
+    }, [isAuthorized, userProfile])
 
     return null
 }
