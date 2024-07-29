@@ -24,7 +24,6 @@ function getInitData () {
         if (!/android||iphone/.test(platform)) return null
         return initDataRaw ? initDataRaw : null
     } catch {
-        return 'query_id=AAFGSL8jAwAAAEZIvyOyWy8l&user=%7B%22id%22%3A7042189382%2C%22first_name%22%3A%22fedoras%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22fedgod%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1721232612&hash=95a0d2807982d1142112be5a2c052ab72edf8a76dd5ecc067f0e71edd9f4cf61'
         return null
     }
 }
@@ -44,7 +43,6 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
     const userPfp = getUserPfp()
 
     function setup () {
-        return
         postEvent('web_app_expand')
         postEvent('web_app_set_background_color', { color: '#111217' })
         postEvent('web_app_set_header_color', { color: '#111217' })
@@ -54,12 +52,10 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
     }
 
     function triggerHapticFeedback (params: AnyHapticFeedbackParams) {
-        return
         postEvent('web_app_trigger_haptic_feedback', params)
     }
 
     function openLink (link: string) {
-        return
         if (link.includes('t.me')) {
             postEvent('web_app_open_tg_link', { path_full: link })
         } else {
