@@ -61,6 +61,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const launchParams = getLaunchParams()
     const initData = getInitData()
+    console.log(launchParams)
     const userPfp = launchParams?.initData?.user?.photoUrl || null
     const refCode = launchParams?.startParam || null
     const utils = getUtils()
