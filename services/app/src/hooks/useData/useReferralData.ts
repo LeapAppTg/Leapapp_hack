@@ -27,10 +27,10 @@ export function useReferralsListData () {
     return useSWRInfinite(
         (pageIndex, prevData: ReferralsList) => {
             if (!authToken) return null
-            if (prevData && prevData.totalReferrals <= 1 + pageIndex * 5) return null
+            if (prevData && prevData.totalReferrals <= pageIndex * 10) return null
             return [ApiRoutes.GetReferralsList, authToken, pageIndex]
         },
-        ([_, authToken, pageIndex]) => getReferralsList(authToken, { limit: '5', offset: (1 + 5 * pageIndex).toString() }),
+        ([_, authToken, pageIndex]) => getReferralsList(authToken, { limit: '10', offset: (10 * pageIndex).toString() }),
         {
             revalidateFirstPage: false
         }
