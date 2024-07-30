@@ -1,5 +1,5 @@
-import { Alert, AlertProps, BottomPopup } from '@components'
-import { FC, PropsWithChildren, ReactNode, createContext, useContext, useEffect, useReducer, useState } from 'react'
+import { BottomPopup } from '@components'
+import { FC, PropsWithChildren, ReactNode, createContext, useContext, useEffect, useState } from 'react'
 
 type BottomPopupContextProps = {
     popup: ReactNode,

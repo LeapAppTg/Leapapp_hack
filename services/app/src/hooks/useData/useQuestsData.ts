@@ -7,7 +7,7 @@ import useSWR from "swr"
 
 export function useQuestsListData () {
     const { authToken } = useAuth()
-    return useSWR<QuestsList | undefined, ApiError, [ApiRoutes.GetQuestsList, string] | null>(
+    return useSWR(
         authToken ? [ApiRoutes.GetQuestsList, authToken] : null,
         ([_, authToken]) => getQuestsList(authToken)
     )
@@ -17,7 +17,7 @@ export type UseQuestDetailsProps = [id: number]
 
 export function useQuestDetailsData (...[id]: UseQuestDetailsProps) {
     const { authToken } = useAuth()
-    return useSWR<QuestDetails | undefined, ApiError, [ApiRoutes.GetHourlyReward, string, number] | null>(
+    return useSWR(
         authToken ? [ApiRoutes.GetHourlyReward, authToken, id] : null,
         ([_, authToken, id]) => getQuestDetails(authToken, id)
     )

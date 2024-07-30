@@ -34,12 +34,12 @@ export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
     const [isFirstTimeLogin, setIsFirstTimeLogin] = useState<boolean>(false)
 
-    const { initData } = useTelegram()
+    const { initData, refCode } = useTelegram()
 
     const tryAuth = async () => {
         try {
             if (!initData) return
-            const response = await postUserAuth(initData)
+            const response = await postUserAuth(initData, refCode || undefined)
             setAuthToken(response.access_token)
         } catch (e) {}
     }

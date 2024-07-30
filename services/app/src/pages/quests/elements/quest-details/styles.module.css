@@ -5,3 +5,7 @@
     border-radius: 20px;
     z-index: 1;
 }
+
+.margin_top {
+    margin-top: 16px;
+}

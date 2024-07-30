@@ -51,7 +51,7 @@ export const QuestDetails: FC<QuestDetailsProps> = ({ uuid }) => {
         {
             details.quest.completionStatus !== QuestCompletionStatus.Claimed
             ?
-            <div className={FlexGapColumn16FullWidth.className}>
+            <div className={FlexGapColumn16FullWidth.withExtraClasses(styles.margin_top)}>
                 <p className={TextXSRegularGrey400.className}>Complete the quests to get reward</p>
                 <Button style={ButtonStyle.Primary} fillFullWidth disabled={details.quest.completionStatus !== QuestCompletionStatus.Completed} onClick={onClaim}>
                     Get reward

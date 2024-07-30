@@ -28,7 +28,7 @@
 .content {
     width: 100%;
     flex-direction: column;
-    gap: 40px;
+    gap: 24px;
     opacity: 0;
     animation: content-appear 0.5s ease forwards 0.5s;
 }

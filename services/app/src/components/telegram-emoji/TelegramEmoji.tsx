@@ -14,6 +14,8 @@ import bombData from "./bomb.json"
 import lightningData from "./lightning.json"
 import booksData from "./books.json"
 import rollerCoasterData from "./rollercoaster.json"
+import champangeGlassesData from "./champange_glasses.json"
+import megaphoneData from "./megaphone.json"
 
 const SourceMapping = new MultiMapping<TelegramEmojiType, [[any, undefined]]>(
     [
@@ -29,6 +31,8 @@ const SourceMapping = new MultiMapping<TelegramEmojiType, [[any, undefined]]>(
             [TelegramEmojiType.Lightning]: lightningData,
             [TelegramEmojiType.Books]: booksData,
             [TelegramEmojiType.RollerCoaster]: rollerCoasterData,
+            [TelegramEmojiType.ChampangeGlasses]: champangeGlassesData,
+            [TelegramEmojiType.Megaphone]: megaphoneData
         },
         undefined
     ]

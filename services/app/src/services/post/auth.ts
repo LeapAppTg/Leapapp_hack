@@ -12,13 +12,14 @@ export async function postTokenRefresh () {
     .sendRequest()
 }
 
-export async function postUserAuth (initData: string) {
+export async function postUserAuth (initData: string, refCode?: string) {
     return new ApiPostRequestBuilder<PostTokenRefreshResponse, PostTokenRefreshResponse>({
         path: 'api/v1/auth/',
         responseTypeBuilder: new ApiTypeBuilder((i) => i),
     })
     .setParams({
-        initData
+        initData,
+        referral_code: refCode
     })
     .sendRequest()
 }
