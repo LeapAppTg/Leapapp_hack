@@ -27,7 +27,7 @@ type MapItemProps = {
     isCompleted?: boolean
 }
 
-export const MapItem: FC<MapItemProps> = ({
+const MapItem: FC<MapItemProps> = ({
     title, isCompleted
 }) => {
     return (

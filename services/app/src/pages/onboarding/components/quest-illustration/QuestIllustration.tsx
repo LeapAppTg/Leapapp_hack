@@ -27,7 +27,7 @@ type MapItemProps = {
     frog?: boolean
 }
 
-export const MapItem: FC<MapItemProps> = ({
+const MapItem: FC<MapItemProps> = ({
     reward, subtitle, frog
 }) => {
     return (
