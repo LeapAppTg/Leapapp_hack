@@ -123,7 +123,7 @@ const AuthConsumerContent: FC = () => {
 
     useEffect(() => {
         if (isAuthorized || !userProfile) return
-        if (userProfile.isFirstLogin) setIsFirstTimeLogin(true)
+        if (!userProfile.isFirstLogin) setIsFirstTimeLogin(true)
         setIsAuthorized(true)
     }, [isAuthorized, userProfile])
 

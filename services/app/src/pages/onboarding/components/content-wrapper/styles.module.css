@@ -7,3 +7,7 @@
     flex-grow: 1;
     justify-content: flex-end;
 }
+
+.full_height {
+    flex-grow: 1;
+}

@@ -10,11 +10,12 @@ type Props = {
 export const Learning: FC<Props> = ({ onNext, onSkip }) => {
     return (
         <ContentWrapper
-            title="Learning center"
+            title="Gamified learning"
             color={PageTitleBackgroundColor.Green}
-            description="Gain more games to feed your Leap and earn points."
+            description="The free, fun and effective way to explore crypto!"
             onNext={onNext}
             onSkip={onSkip}
+            fillFullHeight
         >
             <LearningIllustration/>
         </ContentWrapper>

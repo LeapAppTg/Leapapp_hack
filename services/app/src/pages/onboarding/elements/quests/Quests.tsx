@@ -10,11 +10,12 @@ type Props = {
 export const Quests: FC<Props> = ({ onNext, onSkip }) => {
     return (
         <ContentWrapper
-            title="Quest platform"
+            title="Quest hub"
             color={PageTitleBackgroundColor.Blue}
-            description="Gain more games to feed your Leap and earn points. "
+            description="I'm preparing quests for us to get to know each other better."
             onNext={onNext}
             onSkip={onSkip}
+            fillFullHeight
         >
             <QuestIllustration/>
         </ContentWrapper>

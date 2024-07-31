@@ -26,5 +26,6 @@ body {
     --color-yellow-400: #FBBF24;
 
     --color-experimental-1: #A4A9AD;
+    --color-metal-gold-2: linear-gradient(90deg, #FFFCA8 -0.05%, #FDB836 31.2%, #FDC966 75.92%, #F1DC83 100.02%);
 
 }

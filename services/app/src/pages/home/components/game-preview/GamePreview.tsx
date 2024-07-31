@@ -1,10 +1,10 @@
-import { BombCoin, DollarCoin, DotsBackground, EyeCoin, GoldCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2, UfoCoin } from "@assets";
-import { Button, ButtonStyle, GameSlider, PageTitleBackground, PageTitleBackgroundColor } from "@components";
-import { FlexGapColumn, FlexGapColumn8, TextColor, TextLSemiBold, TextSRegular, TextXSBold, TextXXSRegular, TextXXSRegularGrey400 } from "@utils";
-import { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
-import styles from "./styles.module.css";
-import { Link } from "react-router-dom";
+import { BombCoin, DollarCoin, EyeCoin, GoldCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2, UfoCoin } from "@assets";
+import { Button, ButtonStyle, GameSlider } from "@components";
 import { ApiRoutes, useData } from "@hooks";
+import { FlexGapColumn, FlexGapColumn8, TextLSemiBold, TextSRegular, TextXSBold, TextXXSRegularGrey400 } from "@utils";
+import { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "./styles.module.css";
 
 export const GamePreview: FC<PropsWithChildren> = () => {
 
@@ -54,8 +54,6 @@ export const GamePreview: FC<PropsWithChildren> = () => {
                     }
                 </div>
                 <div className={styles.illustration}>
-                    <DotsBackground className={styles.background}/>
-                    
                     <GoldCoin className={styles.game_token}/>
                     <UfoCoin className={styles.game_token}/>
                     <EyeCoin className={styles.game_token}/>

@@ -1,112 +1,9 @@
 import { GameSlider } from "@components";
 import { useTelegram } from "@providers";
 import { ElementRef, FC, useEffect, useRef, useState } from "react";
-import { GameConfig } from "../../config";
+import { GameConfig, Item, tokensPool } from "../../config";
 import { GameState, useGame } from "../../providers";
 import styles from "./styles.module.css";
-
-type ItemProps = {
-    src: string,
-    x: number,
-    reward: number
-}
-
-type ItemOpts = {
-    isBomb?: boolean,
-    isMagnet?: boolean
-}
-
-class Item {
-    public src: string
-    public x: number
-    public y: number
-    public reward: number
-    public isBomb?: boolean
-    public isMagnet?: boolean
-    
-    constructor(props: ItemProps, opts?: ItemOpts) {
-        this.src = props.src
-        this.x = props.x
-        this.y = -28
-        this.reward = props.reward
-        this.isBomb = opts?.isBomb
-        this.isMagnet = opts?.isMagnet
-    }
-
-    public createImg () {
-        const img = new Image(28, 28)
-        img.src = this.src
-        return img
-    }
-
-    public moveY () {
-        this.y += 2
-        return this
-    }
-    public moveX (x: number) {
-        this.x += x
-        return this
-    }
-}
-
-class Bomb extends Item {
-    constructor(x: number) {
-        super({
-            src: 'game-items/bomb.svg',
-            x,
-            reward: 0
-        }, {
-            isBomb: true
-        })
-    }
-}
-class Dollar extends Item {
-    constructor(x: number) {
-        super({
-            src: 'game-items/dollar.svg',
-            x,
-            reward: 100
-        })
-    }
-}
-class Gold extends Item {
-    constructor(x: number) {
-        super({
-            src: 'game-items/gold.svg',
-            x,
-            reward: 5
-        })
-    }
-}
-class Magnet extends Item {
-    constructor(x: number) {
-        super({
-            src: 'game-items/magnet.svg',
-            x,
-            reward: 0
-        }, {
-            isMagnet: true
-        })
-    }
-}
-class Rocket extends Item {
-    constructor(x: number) {
-        super({
-            src: 'game-items/rocket.svg',
-            x,
-            reward: -10
-        })
-    }
-}
-class Ufo extends Item {
-    constructor(x: number) {
-        super({
-            src: 'game-items/ufo.svg',
-            x,
-            reward: 25
-        })
-    }
-}
 
 export const Canvas: FC = () => {
 
@@ -117,6 +14,7 @@ export const Canvas: FC = () => {
 
     const [width, setWidth] = useState(document.body.clientWidth - 32)
     const [height, setHeight] = useState(document.body.clientHeight - 32)
+
     const [items, setItems] = useState<Item[]>([])
     const heroX = useRef(54)
     const isHeroActive = useRef(false)
@@ -132,6 +30,10 @@ export const Canvas: FC = () => {
         const timeout = setTimeout(() => isHeroEating.current = false, 200)
         return () => clearInterval(timeout)
     }, [isHeroEating.current])
+
+    useEffect(() => {
+        triggerHapticFeedback({ type: "impact", impact_style: "heavy" })
+    }, [])
 
     useEffect(() => {
         const listener = () => {
@@ -176,8 +78,8 @@ export const Canvas: FC = () => {
                 }
             }
 
-            ctx.drawImage(hero, heroX.current, ctx.canvas.height - 160, 60, 60)
-            ctx.drawImage(slider, heroX.current, ctx.canvas.height - 100, 60, 40)
+            ctx.drawImage(hero, heroX.current, ctx.canvas.height - 190, 60, 60)
+            ctx.drawImage(slider, heroX.current, ctx.canvas.height - 130, 60, 40)
 
             if (gameState === GameState.Play) {
 
@@ -203,7 +105,7 @@ export const Canvas: FC = () => {
                 if (magnetTimeLeftRef.current) moved = moved.map(i => i.y >= height - 260 && Math.abs(heroX.current - i.x) <= 100 ? i.moveX(heroX.current + 16 - i.x > 0 ? 1 : -1) : i)
                 const updated: Item[] = []
                 for (let item of moved) {
-                    if (item.y + 14 > height - 160 && item.y + 14 < height - 100 && item.x + 14 > heroX.current && item.x + 14 < heroX.current + 60) {
+                    if (item.y + 14 > height - 190 && item.y + 14 < height - 130 && item.x + 14 > heroX.current && item.x + 14 < heroX.current + 60) {
                         if (item.isBomb) {
                             setGameState(GameState.Bomb)
                             triggerHapticFeedback({ type: "impact", impact_style: "heavy" })
@@ -241,15 +143,9 @@ export const Canvas: FC = () => {
     useEffect(() => {
         if (gameState !== GameState.Play) return 
         function addItem () {
-            const seed = Math.floor(Math.random() * 999) + 1
+            const seed = Math.floor(Math.random() * 99)
             const x = Math.floor(Math.random() * (width - 28))
-            let item: Item
-            if (seed <= 500) item = new Gold(x)
-            else if (seed <= 720) item = new Ufo(x)
-            else if (seed <= 870) item = new Rocket(x)
-            else if (seed <= 900) item = new Dollar(x)
-            else if (seed <= 970) item = new Bomb(x)
-            else item = new Magnet(x)
+            const item = tokensPool[seed](x)
             setItems(prev => {
                 return [...prev, item]
             })

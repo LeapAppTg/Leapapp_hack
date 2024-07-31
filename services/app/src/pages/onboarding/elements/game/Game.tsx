@@ -9,10 +9,11 @@ type Props = {
 export const Game: FC<Props> = ({ onNext, onSkip }) => {
     return (
         <ContentWrapper
-            title="Timekiller for earning points"
-            description="Gain more games to feed your Leap and earn points."
+            title="Catch items and earn Leap Points"
+            description="Le really likes to eat different items, don't forget to feed him."
             onNext={onNext}
             onSkip={onSkip}
+            fillFullHeight
         >
             <GameIllustration/>
         </ContentWrapper>

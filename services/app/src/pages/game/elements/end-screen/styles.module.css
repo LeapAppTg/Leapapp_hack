@@ -6,6 +6,7 @@
     gap: 24px;
     justify-content: flex-end;
     animation: 0.5s appear ease;
+    padding-bottom: 44px;
 }
 
 @keyframes appear {

@@ -4,15 +4,9 @@
     top: 0;
 }
 
-.hero_canvas {
-    position: absolute;
-    left: 0;
-    bottom: 100px;
-}
-
 .slider {
     position: absolute;
-    bottom: 60px;
+    bottom: 90px;
     cursor: grab;
     z-index: 1;
     flex-direction: column;

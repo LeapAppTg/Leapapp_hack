@@ -9,10 +9,13 @@ export const Leap: FC<Props> = ({ onNext }) => {
     return (
         <ContentWrapper
             title="How about to take the leap?"
-            description="Gain more games to feed your Le and earn points. Participate in activities and secure Leap airdrops."
+            description={
+                <>Earn Leaps, invite frens, explore web3 and have fun.<br/>And secure Leap airdrop.</>
+            }
             topButtonLabel="Continue"
             noSkip
             onNext={onNext}
+            fillFullHeight
         >
             <LeapIllustration/>
         </ContentWrapper>

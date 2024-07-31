@@ -14,14 +14,14 @@ export const Hello: FC<Props> = ({ onNext }) => {
     const [disabled, setDisabled] = useState(true)
 
     const finalPhrases = [
-        "Hi, I'm Le.",
-        "And I'm going to help you",
-        "explore and immerse",
-        "yourself in web3.",
-        "First, let's play a game and",
-        "collect tokens for our",
-        "future rewards.",
-        "Are you ready?"
+        `Hey, adventurer! I'm Le.`,
+        " ",
+        "Collect Leaps, secure",
+        "airdrop, and have a",
+        "hopping good time.",
+        " ",
+        "Ready to hop into the fun?",
+        `Let's leap to victory!`
     ]
     const [phrases, setPhrases] = useState<string[]>([])
 

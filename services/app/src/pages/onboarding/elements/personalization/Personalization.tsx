@@ -21,6 +21,7 @@ export const Personalization: FC = () => {
         let progressDisplay: number
 
         if (progress >= 350) {
+            progressStep = 5
             step = 5
             progressDisplay = 100
         } else if (progress > 300) {
@@ -74,19 +75,19 @@ export const Personalization: FC = () => {
                             {
                                 progressStep === 1
                                 ?
-                                "Rewarding"
+                                "Vibing"
                                 :
                                 progressStep === 2
                                 ?
-                                "Personalizing"
+                                "Customizing"
                                 :
                                 progressStep === 3
                                 ?
-                                "Customizing"
+                                "Boosting"
                                 :
                                 progressStep === 4
                                 ?
-                                "Cooking"
+                                "Grinding Leap"
                                 :
                                 "Done!"
                             }
@@ -124,10 +125,10 @@ export const Personalization: FC = () => {
                 </div>
 
                 <div className={styles.steps}>
-                    <Step isWaiting={step <= 1} color={CircleIconWrapperColor.Yellow} title="Daily reward"/>
-                    <Step isWaiting={step <= 2} color={CircleIconWrapperColor.Pink} title="Personalizing app"/>
-                    <Step isWaiting={step <= 3} color={CircleIconWrapperColor.Blue} title="Customising app"/>
-                    <Step isWaiting={step <= 4} color={CircleIconWrapperColor.LightGreen} title="Gathering points"/>
+                    <Step isWaiting={step <= 1} color={CircleIconWrapperColor.Yellow} title="Creating a vibe"/>
+                    <Step isWaiting={step <= 2} color={CircleIconWrapperColor.Pink} title="Customise the app"/>
+                    <Step isWaiting={step <= 3} color={CircleIconWrapperColor.Blue} title="Boosting bonuses"/>
+                    <Step isWaiting={step <= 4} color={CircleIconWrapperColor.LightGreen} title="Gathering Leaps"/>
                 </div>
             </div>
 

@@ -1,6 +1,7 @@
 .wrapper {
     position: relative;
     width: 100%;
+    flex-grow: 1;
 }
 
 .purple_bg {
@@ -12,9 +13,12 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 270px;
+    min-height: 270px;
+    height: 100%;
     border-radius: 20px;
     border: 1px solid var(--color-grey-700);
+    background-image: url('/backgrounds/dots.svg');
+    flex-grow: 1;
 }
 
 .path_left, .path_right {
@@ -49,45 +53,60 @@
     height: 60px;
 }
 
-.magnet {
-    position: absolute;
-    left: 16px;
-    top: 35%;
-}
-
-.gold_a {
-    position: absolute;
-    top: 35%;
-    right: 80px;
-}
-
-.eye_a {
-    position: absolute;
-    top: 38%;
-    right: 21px;
-}
-
-.dollar {
-    position: absolute;
-    right: 45px;
-    top: 55%;
-}
-
-.eye_b {
-    position: absolute;
-    top: 75%;
-    right: 35px;
-}
-
 .hero_wrapper {
     position: absolute;
     left: 22px;
-    top: 55%;
+    bottom: 10%;
+    animation: hero-move 10s ease infinite;
 }
 
-.gold_b {
+.hero {
+    width: 60px;
+    height: 60px;
+}
+
+@keyframes hero-move {
+    50% {
+        transform: translateX(160px);
+    }
+}
+
+.game_token {
     position: absolute;
-    left: 20px;
-    top: 72%;
-    z-index: 1;
+    top: -28px;
+    right: 50%;
+    animation: 4s token-fall ease-in-out infinite;
+}
+
+.game_token:nth-child(6) {
+    right: 10%;
+}
+
+.game_token:nth-child(2) {
+    right: 55%;
+    animation-delay: 1s;
+}
+
+.game_token:nth-child(3) {
+    right: 20%;
+    animation-delay: 2s;
+}
+
+.game_token:nth-child(4) {
+    right: 30%;
+    animation-delay: 3s;
+}
+
+.game_token:nth-child(5) {
+    right: 40%;
+    animation-delay: 4s;
+}
+
+@keyframes token-fall {
+    from {
+        top: -28px;
+    }
+    to {
+        top: 100%
+    }
 }

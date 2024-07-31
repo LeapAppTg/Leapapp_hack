@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 40px;
     justify-content: flex-end;
-    padding: 24px 0;
+    padding: 44px 0;
 }
 
 .illustration_wrapper {
@@ -43,6 +43,10 @@
     padding: 16px;
     top: 0;
     flex-direction: column;
+}
+
+.text_wrapper div {
+    height: 22.4px;
 }
 
 .text_wrapper div:last-child p {

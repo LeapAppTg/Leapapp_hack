@@ -3,7 +3,7 @@ import { AnimatedSquares, Button, ButtonStyle, TelegramEmoji, TelegramEmojiSize,
 import { ApiRoutes, useData } from "@hooks";
 import { IconSize, ShareIcon } from "@icons";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { useAuth } from "@providers";
+import { useAuth, useTelegram } from "@providers";
 import { postEndGame } from "@services";
 import { FlexGapRow4, TextXLMedium, TextXSRegular, TextXXLMedium } from "@utils";
 import { FC, useEffect, useState } from "react";
@@ -17,6 +17,8 @@ export const EndScreen: FC = () => {
     const [scoreSubmitted, setScoreSubmitted] = useState<boolean>(false)
     const navigate = useNavigate()
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
+    const { shareLink } = useTelegram()
+    const { data: inviteLink } = useData(ApiRoutes.GetInviteLink)
 
     useEffect(() => {
         if (scoreSubmitted) return
@@ -35,6 +37,11 @@ export const EndScreen: FC = () => {
         }
         submitScore()
     }, [scoreSubmitted])
+
+    function share () {
+        if (!inviteLink) return
+        shareLink(inviteLink.inviteLink)
+    }
 
     if (!scoreSubmitted) return null
     
@@ -62,7 +69,7 @@ export const EndScreen: FC = () => {
                 {
                     gameState === GameState.BombEnd
                     ?
-                    'Leap ate the bomb :('
+                    'Leap ate the bomb'
                     :
                     'Great job!'
                 }
@@ -83,7 +90,7 @@ export const EndScreen: FC = () => {
                     `You're awesome today, share your achievement with your friends.`
                 }
             </p>
-            <Button style={ButtonStyle.Tertiary} fillFullWidth linkTo="/referrals">
+            <Button style={ButtonStyle.Tertiary} fillFullWidth onClick={share}>
                 <ShareIcon size={IconSize.Medium}/>
                 Invite friends for
                 <TicketEmoji width={20} height={20}/>

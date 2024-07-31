@@ -1,10 +1,9 @@
-import { FC } from "react";
-import styles from "./styles.module.css"
-import { DotsBackground } from "@assets";
-import { Canvas, GameBar, Loader } from "./components";
-import { GameProvider, GameState, useGame } from "./providers";
 import { classJoiner } from "@utils";
+import { FC } from "react";
+import { Canvas, GameBar, Loader } from "./components";
 import { EndScreen } from "./elements";
+import { GameProvider, GameState, useGame } from "./providers";
+import styles from "./styles.module.css";
 
 export const GamePage: FC = () => {
 
@@ -22,10 +21,6 @@ const GameContent: FC = () => {
 
     return (
         <div className={classJoiner(styles.game, magnetTimeLeft ? styles.pink_highlight : (gameState === GameState.Bomb || gameState === GameState.TimeExpired) ? styles.red_highlight : isNewHighScore ? styles.gold_highlight : undefined)}>
-            <div className={styles.background}>
-                <DotsBackground className={styles.dots}/>
-                <DotsBackground className={styles.dots}/>
-            </div>
             <GameBar/>
             {
                 gameState === GameState.Countdown

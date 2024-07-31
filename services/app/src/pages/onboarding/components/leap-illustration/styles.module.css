@@ -2,11 +2,16 @@
     width: 100%;
     flex-direction: column;
     gap: 32px;
+    flex-grow: 1;
+    height: 100%;
 }
 
 .illustration {
     width: 100%;
+    flex-grow: 1;
+    height: 100%;
     position: relative;
+    overflow: hidden;
 }
 
 .illustration p {
@@ -24,7 +29,7 @@
 
 .illustration p:last-child {
     right: 10%;
-    bottom: -20%;
+    bottom: 10%;
     transform: rotate(-17.992deg);
 }
 
@@ -36,4 +41,77 @@
 .frog {
     width: 80px;
     height: 80px;
+}
+
+.items {
+    width: calc(100% - 32px);
+    min-height: 250px;
+    flex-grow: 1;
+    height: 100%;
+    animation: appear 1s ease;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+}
+
+.items > svg {
+    position: absolute;
+    top: 50%;
+    left: -28px;
+    animation: 4s token-move ease-in-out infinite;
+}
+
+.items > svg:nth-child(1) {
+    top: 10%;
+}
+
+.items > svg:nth-child(2) {
+    top: 55%;
+    animation-delay: 0.5s;
+}
+
+.items > svg:nth-child(3) {
+    top: 65%;
+    animation-delay: 1s;
+}
+
+.items > svg:nth-child(4) {
+    top: 30%;
+    animation-delay: 1.5s;
+}
+
+.items > svg:nth-child(5) {
+    top: 70%;
+    animation-delay: 2s;
+}
+
+.items > svg:nth-child(6) {
+    top: 20%;
+    animation-delay: 2.5s;
+}
+
+.items > svg:nth-child(7) {
+    top: 50%;
+    animation-delay: 3s;
+}
+
+.items > svg:nth-child(8) {
+    top: 70%;
+    animation-delay: 3.5s;
+}
+
+.items > svg:nth-child(9) {
+    top: 45%;
+    animation-delay: 4s;
+}
+
+@keyframes token-move {
+    from {
+        left: -28px;
+    }
+    to {
+        left: 100%
+    }
 }
