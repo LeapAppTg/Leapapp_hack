@@ -1,9 +1,9 @@
 import { GameSlider } from "@components";
+import { useTelegram } from "@providers";
 import { ElementRef, FC, useEffect, useRef, useState } from "react";
+import { GameConfig } from "../../config";
 import { GameState, useGame } from "../../providers";
 import styles from "./styles.module.css";
-import { GameConfig } from "../../config";
-import { useTelegram } from "@providers";
 
 type ItemProps = {
     src: string,
@@ -217,6 +217,7 @@ export const Canvas: FC = () => {
         if (gameState !== GameState.Play && gameState !== GameState.TimeExpired) return 
         function moveItems () {
             setItems(prev => {
+                if (prev.length === 0) return prev
                 let moved = prev.map(i => i.moveY()).filter(i => i.y <= height)
                 if (magnetTimeLeftRef.current) moved = moved.map(i => i.y >= height - 260 && Math.abs(heroX.current - i.x) <= 100 ? i.moveX(heroX.current + 16 - i.x > 0 ? 1 : -1) : i)
                 const updated: Item[] = []

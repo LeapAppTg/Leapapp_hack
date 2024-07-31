@@ -1,4 +1,4 @@
 export const GameConfig = {
-    gameDuration: 90_000,
+    gameDuration: 90,
     magnetDuration: 10
 }

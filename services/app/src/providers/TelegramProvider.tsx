@@ -26,7 +26,7 @@ export const useTelegram = () => useContext(TelegramContext)
 function getInitData () {
     try {
         const { initDataRaw, platform } = retrieveLaunchParams();
-        if (!platform.includes('iphone') && !platform.includes('android')) return null
+        if (!platform.includes('ios') && !platform.includes('android')) return null
         return initDataRaw ? initDataRaw : null
     } catch {
         return null
