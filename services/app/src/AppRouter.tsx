@@ -2,7 +2,7 @@ import { Navigation } from '@elements'
 import { GamePage, HomePage, LearningPage, LoaderPage, OnboardingPage, QrCodePage, QuestDetailsPage, QuestsPage, ReferralsPage, SquadsPage, StreakPage } from '@pages'
 import { useAuth, useTelegram } from '@providers'
 import { FC, PropsWithChildren, useEffect } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 
 type PageWrapperProps = {
@@ -25,8 +25,9 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = ({children, hideNav
 const AppRouter: FC = () => {
     
     const { pathname } = useLocation()
-    const { initData } = useTelegram()
+    const { initData, backButton } = useTelegram()
     const { isAuthorized, isFirstTimeLogin } = useAuth()
+    const navigate = useNavigate()
 
     useEffect(() => {
         window.scrollTo({
@@ -34,6 +35,13 @@ const AppRouter: FC = () => {
             left: 0,
             top: 0
         })
+        if (backButton && ['referrals', 'quests', 'game', 'learning', 'squads'].findIndex(i => pathname.includes(i))) {
+            backButton.show()
+            backButton.on("click", () => {
+                navigate('/home')
+            })
+            return () => backButton.hide()
+        }
     }, [pathname])
 
     if (initData === null) return (

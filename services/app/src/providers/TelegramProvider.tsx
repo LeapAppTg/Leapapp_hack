@@ -1,4 +1,4 @@
-import { AnyHapticFeedbackParams, initHapticFeedback, initUtils, postEvent, retrieveLaunchParams } from '@telegram-apps/sdk'
+import { AnyHapticFeedbackParams, initHapticFeedback, initUtils, postEvent, retrieveLaunchParams, BackButton, initBackButton } from '@telegram-apps/sdk'
 import { FC, PropsWithChildren, createContext, useContext, useEffect } from "react"
 
 type TelegramContextLayout = {
@@ -9,6 +9,7 @@ type TelegramContextLayout = {
     refCode: string | null,
     openLink: (link: string) => void,
     shareLink: (link: string) => void,
+    backButton: BackButton | null
 }
 
 const TelegramContext = createContext<TelegramContextLayout>({
@@ -18,7 +19,8 @@ const TelegramContext = createContext<TelegramContextLayout>({
     openLink: (link: string) => null,
     refCode: null,
     shareLink: (link: string) => null,
-    userPfp: null
+    userPfp: null,
+    backButton: null
 })
 
 export const useTelegram = () => useContext(TelegramContext)
@@ -57,6 +59,14 @@ function getUtils () {
     }
 }
 
+function getBackButton () {
+    try {
+        return initBackButton()[0]
+    } catch {
+        return null
+    }
+}
+
 export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const launchParams = getLaunchParams()
@@ -65,6 +75,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
     const refCode = launchParams?.startParam || null
     const utils = getUtils()
     const hapticFeedback = getHapticFeedback()
+    const backButton = getBackButton()
 
     function setup () {
         postEvent('web_app_expand')
@@ -106,7 +117,8 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
             userPfp,
             openLink,
             refCode,
-            shareLink
+            shareLink,
+            backButton
         }}
         >
             {children}

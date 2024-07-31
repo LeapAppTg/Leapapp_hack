@@ -113,7 +113,6 @@ export const Canvas: FC = () => {
     const { triggerHapticFeedback } = useTelegram()
 
     const ref = useRef<ElementRef<"canvas">>(null)
-    const heroRef = useRef<ElementRef<"canvas">>(null)
     const sliderRef = useRef<ElementRef<"button">>(null)
 
     const [width, setWidth] = useState(document.body.clientWidth - 32)
@@ -139,16 +138,14 @@ export const Canvas: FC = () => {
             setWidth(document.body.clientWidth - 32)
             setHeight(document.body.clientHeight - 32)
         }
-        window.addEventListener("scroll", listener)
         window.addEventListener("resize", listener)
         return () => {
-            window.removeEventListener("scroll", listener)
             window.removeEventListener("resize", listener)
         }
     }, [])
 
     useEffect(() => {
-        if (gameState !== GameState.Play) return 
+        if (gameState !== GameState.Play && gameState !== GameState.Bomb && gameState !== GameState.TimeExpired) return 
         const canvas = ref.current
         if (!canvas) return
         const ctx = canvas.getContext("2d")
@@ -158,30 +155,7 @@ export const Canvas: FC = () => {
 
         const animatePoints = () => {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        
-            for (let item of items) {
-                ctx.drawImage(item.createImg(), item.x, item.y)
-            }
-            
-            frame = requestAnimationFrame(animatePoints)
-        }
-        
-        animatePoints()
-        
-        return () => cancelAnimationFrame(frame)
-    }, [gameState, items])
 
-    useEffect(() => {
-        if (gameState !== GameState.Play && gameState !== GameState.Bomb && gameState !== GameState.TimeExpired) return 
-        const canvas = heroRef.current
-        if (!canvas) return
-        const ctx = canvas.getContext("2d")
-        if (!ctx) return
-
-        let frame: number
-
-        const animatePoints = () => {
-            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
             const slider = new Image()
             slider.src = 'game-items/slider.svg'
             const hero = new Image()
@@ -202,19 +176,26 @@ export const Canvas: FC = () => {
                 }
             }
 
-            ctx.drawImage(hero, heroX.current, 0, 60, 60)
-            ctx.drawImage(slider, heroX.current, 60, 60, 40)
+            ctx.drawImage(hero, heroX.current, ctx.canvas.height - 160, 60, 60)
+            ctx.drawImage(slider, heroX.current, ctx.canvas.height - 100, 60, 40)
 
+            if (gameState === GameState.Play) {
+
+                for (let item of items) {
+                    ctx.drawImage(item.createImg(), item.x, item.y)
+                }
+            }
+            
             frame = requestAnimationFrame(animatePoints)
         }
         
         animatePoints()
         
         return () => cancelAnimationFrame(frame)
-    }, [gameState])
+    }, [gameState, items, ref.current])
     
     useEffect(() => {
-        if (gameState !== GameState.Play && gameState !== GameState.TimeExpired) return 
+        if (gameState !== GameState.Play) return 
         function moveItems () {
             setItems(prev => {
                 if (prev.length === 0) return prev
@@ -312,7 +293,6 @@ export const Canvas: FC = () => {
 
     return (
         <>
-            <canvas className={styles.hero_canvas} width={width} height={100} ref={heroRef}/>
             <button className={styles.slider} style={{ left: `${heroX.current}px` }} ref={sliderRef}>
                 <GameSlider/>
             </button>
