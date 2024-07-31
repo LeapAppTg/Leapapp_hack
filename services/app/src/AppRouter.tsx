@@ -4,7 +4,6 @@ import { useAuth, useTelegram } from '@providers'
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
-
 type PageWrapperProps = {
     hideNavbar?: boolean
 }
