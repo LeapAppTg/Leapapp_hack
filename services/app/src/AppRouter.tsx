@@ -35,12 +35,17 @@ const AppRouter: FC = () => {
             left: 0,
             top: 0
         })
-        if (backButton && ['referrals', 'quests', 'game', 'learning', 'squads'].findIndex(i => pathname.includes(i)) !== -1) {
-            backButton.show()
-            backButton.on("click", () => {
-                navigate('/home')
-            })
-            return () => backButton.hide()
+        if (backButton) {
+            if(['referrals', 'quests', 'game', 'learning', 'squads'].findIndex(i => pathname.includes(i)) !== -1) {
+                if (!backButton.isVisible) {
+                    backButton.show()
+                    backButton.on("click", () => {
+                        navigate('/home')
+                    })
+                }
+            } else {
+                backButton.hide()
+            }
         }
     }, [pathname])
 

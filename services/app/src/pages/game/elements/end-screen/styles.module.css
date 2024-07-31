@@ -16,7 +16,15 @@
 
 .confetti_bg {
     position: absolute;
-    width: 100%;
-    top: 0;
+    width: calc(100% + 32px);
+    top: -16px;
+    flex-grow: 1;
+    height: 100%;
     z-index: -1;
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+.explosion_bg {
+    position: absolute;
+    width: 100vw;
 }

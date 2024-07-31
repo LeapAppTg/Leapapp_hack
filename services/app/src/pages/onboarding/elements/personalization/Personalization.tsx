@@ -97,7 +97,7 @@ export const Personalization: FC = () => {
                     <div className={styles.circle}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                             <circle fill="none" stroke="#5ED400" strokeDashoffset={350} stroke-width="4" stroke-mitterlimit="0" cx="50" cy="50" r="48" stroke-dasharray="360" stroke-linecap="round"transform="rotate(-90) translate(-100 0)">
-                                <animate attributeName="stroke-dashoffset" values="350;55" dur="1.2s" begin="6.2s" fill="freeze"/>
+                                <animate attributeName="stroke-dashoffset" values="350;55" dur="1.1s" begin="6.2s" fill="freeze"/>
                             </circle>
                         </svg>
                     </div>
@@ -126,7 +126,7 @@ export const Personalization: FC = () => {
 
                 <div className={styles.steps}>
                     <Step isWaiting={step <= 1} color={CircleIconWrapperColor.Yellow} title="Creating a vibe"/>
-                    <Step isWaiting={step <= 2} color={CircleIconWrapperColor.Pink} title="Customise the app"/>
+                    <Step isWaiting={step <= 2} color={CircleIconWrapperColor.Pink} title="Customizing the app"/>
                     <Step isWaiting={step <= 3} color={CircleIconWrapperColor.Blue} title="Boosting bonuses"/>
                     <Step isWaiting={step <= 4} color={CircleIconWrapperColor.LightGreen} title="Gathering Leaps"/>
                 </div>

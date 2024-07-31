@@ -9,7 +9,6 @@
 .illustration {
     width: 100%;
     flex-grow: 1;
-    height: 100%;
     position: relative;
     overflow: hidden;
 }
@@ -45,7 +44,7 @@
 
 .items {
     width: calc(100% - 32px);
-    min-height: 250px;
+    min-height: 150px;
     flex-grow: 1;
     height: 100%;
     animation: appear 1s ease;

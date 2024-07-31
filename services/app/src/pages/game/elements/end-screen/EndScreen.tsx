@@ -2,7 +2,7 @@ import { HeroThug, TicketEmoji } from "@assets";
 import { AnimatedSquares, Button, ButtonStyle, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData } from "@hooks";
 import { IconSize, ShareIcon } from "@icons";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { DotLottie, DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useAuth, useTelegram } from "@providers";
 import { postEndGame } from "@services";
 import { FlexGapRow4, TextXLMedium, TextXSRegular, TextXXLMedium } from "@utils";
@@ -20,6 +20,24 @@ export const EndScreen: FC = () => {
     const { shareLink } = useTelegram()
     const { data: inviteLink } = useData(ApiRoutes.GetInviteLink)
 
+    const [lottie, setLottie] = useState<DotLottie | null>(null)
+    const dotLottieRefCallback = (lottie: DotLottie) => {
+        setLottie(lottie)
+    }
+
+    useEffect(() => {
+        if (!lottie) return
+        let interval: NodeJS.Timeout
+        const timeout = setTimeout(() => {
+            lottie.play()
+            interval = setInterval(() => lottie.play(), 3_000)
+        }, 1_200)
+        return () => {
+            clearTimeout(timeout)
+            if (interval) clearInterval(interval)
+        }
+    }, [lottie])
+
     useEffect(() => {
         if (scoreSubmitted) return
         let retries = 0
@@ -31,8 +49,7 @@ export const EndScreen: FC = () => {
                 if (retries <= 2) {
                     retries += 1
                     return submitScore()
-                }
-                else navigate('/')
+                } else navigate('/')
             }
         }
         submitScore()
@@ -50,12 +67,7 @@ export const EndScreen: FC = () => {
             {
                 gameState === GameState.BombEnd
                 ?
-                <div className={styles.confetti_bg}>
-                    <DotLottieReact
-                        autoplay
-                        src="/animations/explosion.lottie"
-                    />
-                </div>
+                null
                 :
                 <div className={styles.confetti_bg}>
                     <DotLottieReact
@@ -64,7 +76,21 @@ export const EndScreen: FC = () => {
                     />
                 </div>
             }
-            <TelegramEmoji size={TelegramEmojiSize.XXLarge} type={gameState === GameState.BombEnd ? TelegramEmojiType.Bomb : TelegramEmojiType.Lightning}/>
+            <div className={FlexGapRow4.update({ relativePosition: true }).className}>
+                {
+                    gameState === GameState.BombEnd
+                    ?
+                    <div className={styles.explosion_bg}>
+                        <DotLottieReact
+                            src="/animations/explosion.lottie"
+                            dotLottieRefCallback={dotLottieRefCallback}
+                        />
+                    </div>
+                    :
+                    null
+                }
+                <TelegramEmoji size={TelegramEmojiSize.XXLarge} type={gameState === GameState.BombEnd ? TelegramEmojiType.Bomb : TelegramEmojiType.Lightning}/>
+            </div>
             <p className={TextXXLMedium.className}>
                 {
                     gameState === GameState.BombEnd
