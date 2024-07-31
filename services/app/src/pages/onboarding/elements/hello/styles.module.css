@@ -61,3 +61,8 @@
     90% { border-color: var(--color-main-bg); }
     to { border-color: transparent; }
 }
+
+.frogspeak {
+    width: 160px;
+    height: 160px;
+}

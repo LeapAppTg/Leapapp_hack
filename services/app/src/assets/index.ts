@@ -26,5 +26,6 @@ import Discord from './DialogueCloud.svg?react'
 import Instagram from './Instagram.svg?react'
 import Telegram from './Telegram.svg?react'
 import X from './X.svg?react'
+import TicketEmoji from './TicketEmoji.svg?react'
 
-export { DotsBackground, Youtube, Discord, Instagram, Telegram, X, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }
+export { DotsBackground, Youtube, TicketEmoji, Discord, Instagram, Telegram, X, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }

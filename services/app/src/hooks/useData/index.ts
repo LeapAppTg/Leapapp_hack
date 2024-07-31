@@ -1,5 +1,5 @@
 import { UseQuestDetailsProps, useQuestDetailsData, useQuestsListData } from "./useQuestsData";
-import { useInviteLinkData, useReferralsListData, useUnclaimedPointsData } from "./useReferralData";
+import { useInviteLinkData, useReferralsCountData, useReferralsListData, useUnclaimedPointsData } from "./useReferralData";
 import { useDailyRewardData, useHourlyRewardData, useUserProfileData } from "./useUserData";
 
 export enum ApiRoutes {
@@ -10,7 +10,8 @@ export enum ApiRoutes {
     GetQuestDetails = '/get/quest-details/',
     GetInviteLink = '/get/invite-link/',
     GetUnclaimedPoints = '/get/unclaimed-points/',
-    GetReferralsList = '/get/referrals-list/'
+    GetReferralsList = '/get/referrals-list/',
+    GetReferralsCount = '/get/referrals-count/'
 }
 
 type UseDataTypesMap = {
@@ -21,7 +22,8 @@ type UseDataTypesMap = {
     [ApiRoutes.GetQuestDetails]: [UseQuestDetailsProps, ReturnType<typeof useQuestDetailsData>],
     [ApiRoutes.GetInviteLink]: [[], ReturnType<typeof useInviteLinkData>],
     [ApiRoutes.GetUnclaimedPoints]: [[], ReturnType<typeof useUnclaimedPointsData>],
-    [ApiRoutes.GetReferralsList]: [[], ReturnType<typeof useReferralsListData>]
+    [ApiRoutes.GetReferralsList]: [[], ReturnType<typeof useReferralsListData>],
+    [ApiRoutes.GetReferralsCount]: [[], ReturnType<typeof useReferralsCountData>]
 }
   
 type UseDataParams<K extends ApiRoutes> = K extends keyof UseDataTypesMap ? UseDataTypesMap[K][0] : [];
@@ -50,6 +52,8 @@ export function useData<
             return useUnclaimedPointsData() as UseDataReturnType<K>;
         case ApiRoutes.GetReferralsList:
             return useReferralsListData() as UseDataReturnType<K>;
+        case ApiRoutes.GetReferralsCount:
+            return useReferralsCountData() as UseDataReturnType<K>;
         default:
             return null as UseDataReturnType<K>;
     }

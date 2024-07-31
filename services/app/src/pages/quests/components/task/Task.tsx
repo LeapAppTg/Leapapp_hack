@@ -1,14 +1,12 @@
-import { Discord, GoldCoin, HeroThugCoin, Instagram, Telegram, X } from "@assets";
-import { AlertStatus, CircleIconWrapper, CircleIconWrapperColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
+import { Discord, GoldCoin, HeroThugCoin, Instagram, Telegram, TicketEmoji, X } from "@assets";
+import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
 import { ArrowIcon, CheckmarkIcon, IconBox, IconSize, PointsIcon } from "@icons";
+import { useAlerts, useAuth, useTelegram } from "@providers";
+import { postClaimTask } from "@services";
 import { QuestCompletionStatus, QuestTask, TaskCompletionStatus, TaskType } from "@types";
 import { FlexGapColumn4AlignFlexStart, FlexGapRow12, FlexGapRow4, FlexGapRow8, FlexGapRow8FullWidthJustifySpaceBetween, TextAlign, TextXSMedium, TextXXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
 import { FC } from "react";
-import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { useAlerts, useAuth, useTelegram } from "@providers";
-import { ApiError } from "@builders";
-import { postClaimTask } from "@services";
 
 type TaskProps = QuestTask & { questUuid: number }
 
@@ -111,7 +109,7 @@ export const RewardTask: FC<RewardTaskProps> = ({
                             ?
                             <div className={FlexGapRow4.className}>
                                 <p className={TextXXSRegular.className}>+{gameTicketsReward.format("default", 2)}</p>
-                                <TelegramEmoji size={TelegramEmojiSize.Small} type={TelegramEmojiType.Ticket}/>
+                                <TicketEmoji width={20} height={20}/>
                             </div>
                             :
                             null

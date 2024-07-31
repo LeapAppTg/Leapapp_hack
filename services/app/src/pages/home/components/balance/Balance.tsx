@@ -1,10 +1,10 @@
-import { HeroThugCoin } from "@assets";
-import { PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
+import { HeroThugCoin, TicketEmoji } from "@assets";
+import { PageTitleBackground, PageTitleBackgroundColor } from "@components";
 import { ApiRoutes, useData } from "@hooks";
-import { FlexGapColumn8, FlexGapRow24, FlexGapRow8, TextLSemiBold, TextXLSemiBold, TextXSRegular, classJoiner } from "@utils";
+import { useTelegram } from "@providers";
+import { FlexGapColumn8, FlexGapRow24, FlexGapRow8, TextLSemiBold, TextXLSemiBold, TextXSRegular } from "@utils";
 import { FC } from "react";
 import styles from "./styles.module.css";
-import { useTelegram } from "@providers";
 
 export const Balance: FC = () => {
     
@@ -32,7 +32,7 @@ export const Balance: FC = () => {
                     <p className={TextLSemiBold.className}>{userProfile?.points.format() || '0'}</p>
                 </div>
                 <div className={FlexGapRow8.className}>
-                    <TelegramEmoji size={TelegramEmojiSize.Small} type={TelegramEmojiType.Ticket}/>
+                    <TicketEmoji width={28} height={28}/>
                     <p className={TextLSemiBold.className}>{userProfile?.gameTickets.format() || '0'}</p>
                 </div>
             </div>

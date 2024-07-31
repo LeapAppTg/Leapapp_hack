@@ -1,10 +1,9 @@
+import { CoinsIlustration, DialogueCloud } from "@assets";
 import { Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor } from "@components";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { TextColor, TextWeight, TextXSRegular } from "@utils";
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import Lottie from 'react-lottie';
-import animationData from './frogspeak.json';
-import { CoinsIlustration, DialogueCloud } from "@assets";
-import { TextColor, TextWeight, TextXSRegular } from "@utils";
 
 type Props = {
     onNext?: () => any
@@ -76,16 +75,13 @@ export const Hello: FC<Props> = ({ onNext }) => {
                         }
                     </div>
                     <PageTitleBackground color={PageTitleBackgroundColor.Purple} className={styles.bg_b}/>
-                    <Lottie
-                        options={{
-                            loop: true,
-                            autoplay: true,
-                            animationData
-                        }}
-                        isClickToPauseDisabled
-                        width={160}
-                        height={160}
-                    />
+                    <div className={styles.frogspeak}>
+                        <DotLottieReact
+                            src="/animations/frogspeak.lottie"
+                            autoplay
+                            loop
+                        />
+                    </div>
                 </div>
             </div>
             <Button style={ButtonStyle.Primary} fillFullWidth onClick={onNext} disabled={disabled}>

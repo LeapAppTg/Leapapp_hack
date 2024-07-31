@@ -115,7 +115,6 @@ const AuthConsumerContent: FC = () => {
 
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
     useData(ApiRoutes.GetDailyReward)
-    useData(ApiRoutes.GetQuestsList)
     useData(ApiRoutes.GetHourlyReward)
 
     useEffect(() => {

@@ -1,8 +1,6 @@
-import { ApiError } from "@builders"
 import { ApiRoutes } from "@hooks"
 import { useAuth } from "@providers"
 import { getQuestDetails, getQuestsList } from "@services"
-import { QuestDetails, QuestsList } from "@types"
 import useSWR from "swr"
 
 export function useQuestsListData () {

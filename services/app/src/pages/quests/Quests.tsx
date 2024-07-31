@@ -1,11 +1,10 @@
-import { DotsBackground, MapPathCorner, MapPathVertical, TilesDarkBackground } from "@assets";
-import { MapItem, PageTitle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
+import { TilesDarkBackground } from "@assets";
+import { PageTitle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData } from "@hooks";
-import { FlexGapColumn8FullWidth, FlexGapRowFullWidth, FlexGapRowFullWidthJustifyFlexEnd, FlexGapRowFullWidthJustifyFlexStart, TextXSBold, TextXXSRegularGrey400 } from "@utils";
+import { FlexGapColumn8FullWidth, FlexGapRowFullWidth, TextXSBold, TextXXSRegularGrey400 } from "@utils";
 import { FC } from "react";
-import styles from "./styles.module.css";
-import { QuestInfo } from "@types";
 import { HiddenQuestMapWrapper, QuestMapWrapper } from "./components";
+import styles from "./styles.module.css";
 
 export const QuestsPage: FC = () => {
 
@@ -23,12 +22,6 @@ export const QuestsPage: FC = () => {
             </p>
         </div>
         <div className={styles.quests}>
-            <div className={styles.dots_background_repeat}>
-                <div>
-                    <DotsBackground/>
-                    <DotsBackground/>
-                </div>
-            </div>
             {
                 quests
                 ?
@@ -53,12 +46,6 @@ export const QuestsPage: FC = () => {
             </p>
         </div>
         <div className={styles.quests}>
-            <div className={styles.dots_background_repeat}>
-                <div>
-                    <TilesDarkBackground/>
-                    <TilesDarkBackground/>
-                </div>
-            </div>
             {
                 [0, 1, 2, 3, 4].map(i => <HiddenQuestMapWrapper index={i} length={5} key={i}/>)
             }

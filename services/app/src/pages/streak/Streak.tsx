@@ -1,16 +1,14 @@
+import { HeroThugCoin, TicketEmoji } from "@assets";
 import { ApiError } from "@builders";
 import { AlertStatus, AnimatedSquares, Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData } from "@hooks";
-import { FrogIcon, IconBox, IconSize, PointsIcon } from "@icons";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useAlerts, useAuth, useTelegram } from "@providers";
 import { postDailyReward } from "@services";
 import { FlexGapColumn, FlexGapColumn8, FlexGapColumn8FullWidth, FlexGapRow12FullWidth, FlexGapRow8, TextColor, TextSRegular, TextXLMedium, TextXSRegular, TextXXLMedium, TextXXXLBold, classJoiner } from "@utils";
 import { FC, useEffect, useState } from "react";
-import Lottie from "react-lottie";
 import { Navigate } from "react-router-dom";
-import animationData from './confetti.json';
 import styles from "./styles.module.css";
-import { HeroThugCoin } from "@assets";
 
 export const StreakPage: FC = () => {
     
@@ -75,13 +73,10 @@ export const StreakPage: FC = () => {
         <div className={styles.wrapper}>
 
             <div className={styles.confetti_bg}>
-                <Lottie
-                    options={{
-                        loop: true,
-                        autoplay: true,
-                        animationData
-                    }}
-                    isClickToPauseDisabled
+                <DotLottieReact
+                    src="/animations/streak_confetti.lottie"
+                    loop
+                    autoplay
                 />
             </div>
 
@@ -123,7 +118,7 @@ export const StreakPage: FC = () => {
                                 Game Tickets
                             </p>
                             <div className={FlexGapRow8.className}>
-                                <TelegramEmoji size={TelegramEmojiSize.MediumSmall} type={TelegramEmojiType.Ticket}/>
+                                <TicketEmoji width={40} height={40}/>
                                 <p className={TextXLMedium.className}>{data.gameTickets.format()}</p>
                             </div>
                         </div>

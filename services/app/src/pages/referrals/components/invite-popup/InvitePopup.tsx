@@ -15,7 +15,8 @@ export const InvitePopup: FC = () => {
         if (!inviteLink) return
         navigator.clipboard.writeText(inviteLink.inviteLink)
         sendAlert({
-            message: 'Copied invite link'
+            message: 'Copied invite link',
+            withConfetti: true
         })
     }
 

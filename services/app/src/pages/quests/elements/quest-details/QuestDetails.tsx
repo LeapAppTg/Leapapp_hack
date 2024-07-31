@@ -1,13 +1,13 @@
-import { HeroGood } from "@assets";
-import { AlertStatus, Button, ButtonStyle, ContentBlock, PageTitle, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
+import { HeroGood, TicketEmoji } from "@assets";
+import { AlertStatus, Button, ButtonStyle, PageTitle, PageTitleBackgroundColor } from "@components";
 import { ApiRoutes, useData } from "@hooks";
-import { FlexGapColumn12FullWidth, FlexGapColumn16FullWidth, FlexGapRow4, TextXSRegular, TextXSRegularGrey400 } from "@utils";
+import { useAlerts, useAuth, useBottomPopup } from "@providers";
+import { postClaimQuest } from "@services";
+import { QuestCompletionStatus } from "@types";
+import { FlexGapColumn16FullWidth, FlexGapRow4, TextXSRegularGrey400 } from "@utils";
 import { FC } from "react";
 import { RewardTask, Task } from "../../components";
 import styles from "./styles.module.css";
-import { QuestCompletionStatus } from "@types";
-import { useAlerts, useAuth, useBottomPopup } from "@providers";
-import { postClaimQuest } from "@services";
 
 type QuestDetailsProps = {
     uuid: number
@@ -69,7 +69,7 @@ export const QuestDetails: FC<QuestDetailsProps> = ({ uuid }) => {
                         details.quest.rewardGameTickets
                         ?
                         <span className={FlexGapRow4.className}>
-                            <TelegramEmoji type={TelegramEmojiType.Ticket} size={TelegramEmojiSize.Small}/>
+                            <TicketEmoji width={20} height={20}/>
                             {details.quest.rewardGameTickets.format("default", 2)}
                         </span>
                         :

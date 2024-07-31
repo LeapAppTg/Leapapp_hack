@@ -1,17 +1,15 @@
-import { FC, useEffect, useState } from "react";
-import styles from "./styles.module.css";
+import { HeroThug, TicketEmoji } from "@assets";
 import { AnimatedSquares, Button, ButtonStyle, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
-import { FlexGapRow4, TextXLMedium, TextXSRegular, TextXXLMedium } from "@utils";
-import { GameState, useGame } from "../../providers";
-import { HeroThug } from "@assets";
-import confettiData from "./confetti.json"
-import explosionData from "./explosion.json"
-import Lottie from "react-lottie";
-import { postEndGame } from "@services";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@providers";
 import { ApiRoutes, useData } from "@hooks";
 import { IconSize, ShareIcon } from "@icons";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useAuth } from "@providers";
+import { postEndGame } from "@services";
+import { FlexGapRow4, TextXLMedium, TextXSRegular, TextXXLMedium } from "@utils";
+import { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { GameState, useGame } from "../../providers";
+import styles from "./styles.module.css";
 
 export const EndScreen: FC = () => {
     const { score, gameState, reset } = useGame()
@@ -46,24 +44,16 @@ export const EndScreen: FC = () => {
                 gameState === GameState.BombEnd
                 ?
                 <div className={styles.confetti_bg}>
-                    <Lottie
-                        options={{
-                            loop: 0,
-                            autoplay: true,
-                            animationData: explosionData
-                        }}
-                        isClickToPauseDisabled
+                    <DotLottieReact
+                        autoplay
+                        src="/animations/explosion.lottie"
                     />
                 </div>
                 :
                 <div className={styles.confetti_bg}>
-                    <Lottie
-                        options={{
-                            loop: 0,
-                            autoplay: true,
-                            animationData: confettiData
-                        }}
-                        isClickToPauseDisabled
+                    <DotLottieReact
+                        autoplay
+                        src="/animations/win_confetti.lottie"
                     />
                 </div>
             }
@@ -96,14 +86,14 @@ export const EndScreen: FC = () => {
             <Button style={ButtonStyle.Tertiary} fillFullWidth linkTo="/referrals">
                 <ShareIcon size={IconSize.Medium}/>
                 Invite friends for
-                <TelegramEmoji size={TelegramEmojiSize.Small} type={TelegramEmojiType.Ticket}/>
+                <TicketEmoji width={20} height={20}/>
             </Button>
             {
                 userProfile?.gameTickets
                 ?
                 <Button style={ButtonStyle.Primary} fillFullWidth onClick={reset}>
                     Play&nbsp;&nbsp;|
-                    <TelegramEmoji size={TelegramEmojiSize.Small} type={TelegramEmojiType.Ticket}/>
+                    <TicketEmoji width={20} height={20}/>
                     {userProfile.gameTickets.format()} left
                 </Button>
                 :

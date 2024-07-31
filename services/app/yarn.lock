@@ -340,6 +340,19 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@lottiefiles/dotlottie-react@^0.8.4":
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/@lottiefiles/dotlottie-react/-/dotlottie-react-0.8.4.tgz#fbec618f9a2bc9469e912bdfdf7728812c2013d3"
+  integrity sha512-F6JpzwvY5nsfFQfIjU0TfrqsTOXvFta1+mcLxHSft2thxhxj9zUBeE9MXJV+sd+z3Pnb690nTmrkYR59ZAYWKg==
+  dependencies:
+    "@lottiefiles/dotlottie-web" "0.30.0"
+    debounce "^2.0.0"
+
+"@lottiefiles/dotlottie-web@0.30.0":
+  version "0.30.0"
+  resolved "https://registry.yarnpkg.com/@lottiefiles/dotlottie-web/-/dotlottie-web-0.30.0.tgz#b6856069746dec7f9cd975fed840a54a03f03ad0"
+  integrity sha512-DQBstGtgdli25QE04KV5j1p7L3LfebrAc8qeAFN9Jwe4Fo/o7QBwZ1qYACyLmnMZwLPl3pAy0dO2zN1OHhuBYA==
+
 "@remix-run/router@1.17.1":
   version "1.17.1"
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.17.1.tgz#bf93997beb81863fde042ebd05013a2618471362"
@@ -772,6 +785,11 @@ csstype@^3.0.2:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
+
+debounce@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-2.1.0.tgz#eab25eaf254b848fcfccffbde75bdaa44842caa3"
+  integrity sha512-OkL3+0pPWCqoBc/nhO9u6TIQNTK44fnBnzuVtJAbp13Naxw9R6u21x+8tVTka87AhDZ3htqZ2pSSsZl9fqL2Wg==
 
 debug@^4.1.0, debug@^4.3.1:
   version "4.3.5"

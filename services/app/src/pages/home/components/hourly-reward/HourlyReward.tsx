@@ -1,13 +1,12 @@
+import { HeroThugCoin, TicketEmoji } from "@assets";
 import { ApiError } from "@builders";
-import { AlertStatus, Button, ButtonStyle, ContentBlock, StickyPanel, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
+import { AlertStatus, Button, ButtonStyle, StickyPanel, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData, useUnixTimestamp } from "@hooks";
-import { FrogIcon, IconBox, IconSize, PointsIcon } from "@icons";
 import { useAlerts, useAuth } from "@providers";
 import { postHourlyReward } from "@services";
-import { FlexGapColumn16FullWidth, FlexGapRow12FullWidth, FlexGapRow4, FlexGapRow4FullWidth, TextColor, TextMSemiBold, TextXSMedium, TextXSRegular, TimeObject, classJoiner } from "@utils";
+import { FlexGapColumn16FullWidth, FlexGapRow4, TextColor, TextMSemiBold, TextXSRegular, TimeObject } from "@utils";
 import { FC, useMemo } from "react";
 import styles from "./styles.module.css";
-import { HeroThugCoin } from "@assets";
 
 const rewardPeriod = 60 * 60 * 2
 
@@ -64,7 +63,7 @@ export const HourlyReward: FC = () => {
                             {pointsCount}
                         </span>
                         <span className={FlexGapRow4.className}>
-                            <TelegramEmoji size={TelegramEmojiSize.Small} type={TelegramEmojiType.Ticket}/>
+                            <TicketEmoji width={24} height={24}/>
                             {ticketsCount}
                         </span>
                     </Button>
@@ -80,7 +79,7 @@ export const HourlyReward: FC = () => {
                             </p>
                         </div>
                         <div className={FlexGapRow4.className}>
-                            <TelegramEmoji size={TelegramEmojiSize.Small} type={TelegramEmojiType.Ticket}/>
+                            <TicketEmoji width={24} height={24}/>
                             <p className={TextXSRegular.update({ color: TextColor.Purple925 }).className}>
                                 {ticketsCount}
                             </p>

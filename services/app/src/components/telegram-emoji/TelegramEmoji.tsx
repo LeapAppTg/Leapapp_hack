@@ -2,37 +2,23 @@ import { FC } from "react";
 import styles from "./styles.module.css";
 import { TelegramEmojiProps, TelegramEmojiType } from "./TelegramEmoji.t";
 import { MultiMapping, classBuilder } from "@utils";
-import Lottie from "react-lottie";
-import chickData from "./hatching_chick.json"
-import finishData from "./finish.json"
-import rocketData from "./rocket.json"
-import gamepadData from "./game.json"
-import moneyBagData from "./moneybag.json"
-import timeData from "./time.json"
-import ticketData from "./ticket.json"
-import bombData from "./bomb.json"
-import lightningData from "./lightning.json"
-import booksData from "./books.json"
-import rollerCoasterData from "./rollercoaster.json"
-import champangeGlassesData from "./champange_glasses.json"
-import megaphoneData from "./megaphone.json"
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-const SourceMapping = new MultiMapping<TelegramEmojiType, [[any, undefined]]>(
+const SourceMapping = new MultiMapping<TelegramEmojiType, [[string, undefined]]>(
     [
         {
-            [TelegramEmojiType.HatchingChick]: chickData,
-            [TelegramEmojiType.Gamepad]: gamepadData,
-            [TelegramEmojiType.FinishFlag]: finishData,
-            [TelegramEmojiType.Rocket]: rocketData,
-            [TelegramEmojiType.MoneyBag]: moneyBagData,
-            [TelegramEmojiType.Time]: timeData,
-            [TelegramEmojiType.Ticket]: ticketData,
-            [TelegramEmojiType.Bomb]: bombData,
-            [TelegramEmojiType.Lightning]: lightningData,
-            [TelegramEmojiType.Books]: booksData,
-            [TelegramEmojiType.RollerCoaster]: rollerCoasterData,
-            [TelegramEmojiType.ChampangeGlasses]: champangeGlassesData,
-            [TelegramEmojiType.Megaphone]: megaphoneData
+            [TelegramEmojiType.HatchingChick]: "/tg-emojis/hatching_chick.lottie",
+            [TelegramEmojiType.Gamepad]: "/tg-emojis/gamepad.lottie",
+            [TelegramEmojiType.FinishFlag]: "/tg-emojis/finish_flag.lottie",
+            [TelegramEmojiType.Rocket]: "/tg-emojis/rocket.lottie",
+            [TelegramEmojiType.MoneyBag]: "/tg-emojis/money_bag.lottie",
+            [TelegramEmojiType.Time]: "/tg-emojis/time.lottie",
+            [TelegramEmojiType.Bomb]: "/tg-emojis/bomb.lottie",
+            [TelegramEmojiType.Lightning]: "/tg-emojis/lightning.lottie",
+            [TelegramEmojiType.Books]: "/tg-emojis/books.lottie",
+            [TelegramEmojiType.RollerCoaster]: "/tg-emojis/rollercoaster.lottie",
+            [TelegramEmojiType.ChampangeGlasses]: "/tg-emojis/champange_glasses.lottie",
+            [TelegramEmojiType.Megaphone]: "/tg-emojis/megaphone.lottie"
         },
         undefined
     ]
@@ -47,19 +33,15 @@ export const TelegramEmoji: FC<TelegramEmojiProps> = ({
         [size],
         styles.emoji_wrapper
     )
-    const [animationData] = SourceMapping.match(type)
+    const [src] = SourceMapping.match(type)
 
     return (
         <div className={className}>
-            <Lottie
-                options={{
-                    loop: true,
-                    autoplay: true,
-                    animationData
-                }}
-                isClickToPauseDisabled
+            <DotLottieReact
+                src={src}
+                loop
+                autoplay
             />
-            {/* <img src={imgSrc}/> */}
         </div>
     )
 }

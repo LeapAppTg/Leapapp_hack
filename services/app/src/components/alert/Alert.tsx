@@ -1,12 +1,11 @@
-import { FC, useEffect, useState } from "react";
-import styles from "./styles.module.css";
-import { AlertProps, AlertStatus } from "./Alert.t";
-import { EnumMatcher, EnumToFCMatcher, TextXSRegular, classJoiner } from "@utils";
 import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
 import { CheckmarkIcon, CloseIcon, IconFC } from "@icons";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useTelegram } from "@providers";
-import animationData from "./confetti.json"
-import Lottie from "react-lottie";
+import { EnumMatcher, EnumToFCMatcher, TextXSRegular, classJoiner } from "@utils";
+import { FC, useEffect, useState } from "react";
+import { AlertProps, AlertStatus } from "./Alert.t";
+import styles from "./styles.module.css";
 
 const statusIconMatcher = new EnumToFCMatcher<AlertStatus, IconFC, IconFC>(
     {
@@ -88,11 +87,10 @@ export const Alert: FC<AlertProps> = ({
                 withConfetti
                 ?
                 <div className={styles.confetti}>
-                    <Lottie
-                        options={{
-                            animationData,
-                            loop: 0
-                        }}
+                    <DotLottieReact
+                        src="/animations/alert_confetti.lottie"
+                        autoplay
+                        width={"100%"}
                     />
                 </div>
                 :
