@@ -78,6 +78,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
     const backButton = getBackButton()
 
     function setup () {
+        postEvent('web_app_setup_closing_behavior', { need_confirmation: true })
         postEvent('web_app_expand')
         postEvent('web_app_set_background_color', { color: '#111217' })
         postEvent('web_app_set_header_color', { color: '#111217' })
