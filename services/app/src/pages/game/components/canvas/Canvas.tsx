@@ -64,6 +64,8 @@ export const Canvas: FC = () => {
 
             if (gameState === GameState.Bomb) {
                 hero.src = 'game-items/hero_blown.svg'
+            } else if (gameState === GameState.TimeExpired) {
+                hero.src = 'game-items/hero_thug.svg'
             } else if (magnetTimeLeftRef.current) {
                 if (isHeroEating.current) {
                     hero.src = 'game-items/hero_swallow_magnet.svg'

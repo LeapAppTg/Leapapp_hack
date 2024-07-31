@@ -1,6 +1,6 @@
-import { Discord, GoldCoin, HeroThugCoin, Instagram, Telegram, TicketEmoji, X } from "@assets";
+import { Discord, GoldCoin, HeroGood, HeroThugCoin, Instagram, Telegram, TicketEmoji, X } from "@assets";
 import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
-import { ArrowIcon, CheckmarkIcon, IconBox, IconSize, PointsIcon } from "@icons";
+import { ArrowIcon, CheckmarkIcon, IconBox, IconSize } from "@icons";
 import { useAlerts, useAuth, useTelegram } from "@providers";
 import { postClaimTask } from "@services";
 import { QuestCompletionStatus, QuestTask, TaskCompletionStatus, TaskType } from "@types";
@@ -39,7 +39,7 @@ export const Task: FC<TaskProps> = ({
                         ?
                         <LinkIcon link={link}/>
                         :
-                        <PointsIcon size={IconSize.Large}/>
+                        <HeroGood width={40} height={40}/>
                     }
                 </div>
                 <div className={FlexGapColumn4AlignFlexStart.update({ hideOverflow: true }).className}>
@@ -72,7 +72,7 @@ const LinkIcon: FC<LinkIconProps> = ({ link }) => {
     if (link.includes('discord')) return <Discord width={28} height={28}/>
     if (link.includes('instagram')) return <Instagram width={28} height={28}/>
     if (link.includes('x.com') || link.includes('twitter')) return <X width={28} height={28}/>
-    return <PointsIcon size={IconSize.Large}/>
+    return <HeroGood width={40} height={40}/>
 }
 
 type RewardTaskProps = {

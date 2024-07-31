@@ -1,4 +1,4 @@
-import { BookWithFrame, MapPathCorner, TilesDarkBackground } from "@assets";
+import { BookWithFrame, MapPathCorner } from "@assets";
 import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
 import { CheckmarkIcon, IconBox, IconColor, IconSize, UserProfileIcon } from "@icons";
 import { FlexGapColumn4, FlexGapRowFullWidth, FlexGapRowFullWidthJustifySpaceBetween, TextXSRegular, classJoiner } from "@utils";

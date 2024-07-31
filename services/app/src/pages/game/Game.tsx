@@ -1,5 +1,5 @@
 import { classJoiner } from "@utils";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { Canvas, GameBar, Loader } from "./components";
 import { EndScreen } from "./elements";
 import { GameProvider, GameState, useGame } from "./providers";
@@ -17,10 +17,18 @@ export const GamePage: FC = () => {
 const GameContent: FC = () => {
     const { magnetTimeLeft, gameState, isNewHighScore } = useGame()
 
+    const extraClass = useMemo(() => {
+        if (gameState === GameState.TimeEnd) return styles.gold_highlight
+        if (gameState === GameState.Bomb) return styles.red_highlight
+        if (isNewHighScore) return styles.gold_highlight
+        if (magnetTimeLeft) return styles.pink_highlight
+        return undefined
+    }, [gameState, isNewHighScore, magnetTimeLeft])
+
     if (gameState === GameState.TimeEnd || gameState === GameState.BombEnd) return <EndScreen/>
 
     return (
-        <div className={classJoiner(styles.game, magnetTimeLeft ? styles.pink_highlight : (gameState === GameState.Bomb || gameState === GameState.TimeExpired) ? styles.red_highlight : isNewHighScore ? styles.gold_highlight : undefined)}>
+        <div className={classJoiner(styles.game, extraClass)}>
             <GameBar/>
             {
                 gameState === GameState.Countdown
