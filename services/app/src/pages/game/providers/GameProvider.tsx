@@ -2,6 +2,7 @@ import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useCont
 import { NewScoreProps } from "../components";
 import { ApiRoutes, useData } from "@hooks";
 import { GameConfig } from "../config";
+import { useTelegram } from "@providers";
 
 export enum GameState {
     Countdown,
@@ -56,12 +57,17 @@ export const GameProvider: FC<PropsWithChildren> = ({
     const [timeLeft, setTimeLeft] = useState<number>(GameConfig.gameDuration)
     const [magnetTimeLeft, setMagnetTimeLeft] = useState<number>(0)
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
+    const { triggerHapticFeedback } = useTelegram()
 
     const [isNewHighScore, highScore] = useMemo(() => {
         if (!userProfile) return [false, 0]
         if (userProfile.gameRecord >= score) return [false, userProfile.gameRecord]
         return [true, score]
     }, [userProfile, score])
+
+    useEffect(() => {
+        if (isNewHighScore) triggerHapticFeedback({ type: "impact", impact_style: "medium" })
+    }, [isNewHighScore])
 
     const [pendingScores, managePendingScores] = useReducer((
         pendingScores: NewScoreProps[], managePendingScores: { add?: NewScoreProps, remove?: number }

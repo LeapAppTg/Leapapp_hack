@@ -32,3 +32,8 @@
     right: 0;
     margin: auto;
 }
+
+.hero_canvas {
+    bottom: 60px;
+    z-index: -1;
+}

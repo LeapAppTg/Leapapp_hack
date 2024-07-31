@@ -1,9 +1,9 @@
-import { ElementRef, FC, useCallback, useEffect, useRef, useState } from "react";
-import styles from "./styles.module.css";
-import { BombCoin, GoldCoin, HeroGood, HeroOpen, HeroSad2, MagnetCoin } from "@assets";
 import { GameSlider } from "@components";
+import { ElementRef, FC, useEffect, useRef, useState } from "react";
 import { GameState, useGame } from "../../providers";
-import { IconBox, IconSize } from "@icons";
+import styles from "./styles.module.css";
+import { GameConfig } from "../../config";
+import { useTelegram } from "@providers";
 
 type ItemProps = {
     src: string,
@@ -69,15 +69,6 @@ class Dollar extends Item {
         })
     }
 }
-class Eye extends Item {
-    constructor(x: number) {
-        super({
-            src: 'game-items/eye.svg',
-            x,
-            reward: 15
-        })
-    }
-}
 class Gold extends Item {
     constructor(x: number) {
         super({
@@ -103,7 +94,7 @@ class Rocket extends Item {
         super({
             src: 'game-items/rocket.svg',
             x,
-            reward: -5
+            reward: -10
         })
     }
 }
@@ -112,14 +103,17 @@ class Ufo extends Item {
         super({
             src: 'game-items/ufo.svg',
             x,
-            reward: 30
+            reward: 25
         })
     }
 }
 
 export const Canvas: FC = () => {
 
+    const { triggerHapticFeedback } = useTelegram()
+
     const ref = useRef<ElementRef<"canvas">>(null)
+    const heroRef = useRef<ElementRef<"canvas">>(null)
     const sliderRef = useRef<ElementRef<"button">>(null)
 
     const [width, setWidth] = useState(document.body.clientWidth - 32)
@@ -127,12 +121,18 @@ export const Canvas: FC = () => {
     const [items, setItems] = useState<Item[]>([])
     const heroX = useRef(54)
     const isHeroActive = useRef(false)
+    const isHeroEating = useRef(false)
     const magnetTimeLeftRef = useRef(0)
     const { gameState, setGameState, addPendingScore, setMagnetTimeLeft, magnetTimeLeft } = useGame()
 
     useEffect(() => {
         magnetTimeLeftRef.current = magnetTimeLeft
     }, [magnetTimeLeft])
+
+    useEffect(() => {
+        const timeout = setTimeout(() => isHeroEating.current = false, 200)
+        return () => clearInterval(timeout)
+    }, [isHeroEating.current])
 
     useEffect(() => {
         const listener = () => {
@@ -170,21 +170,77 @@ export const Canvas: FC = () => {
         
         return () => cancelAnimationFrame(frame)
     }, [gameState, items])
+
+    useEffect(() => {
+        if (gameState !== GameState.Play && gameState !== GameState.Bomb && gameState !== GameState.TimeExpired) return 
+        const canvas = heroRef.current
+        if (!canvas) return
+        const ctx = canvas.getContext("2d")
+        if (!ctx) return
+
+        let frame: number
+
+        const animatePoints = () => {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            const slider = new Image()
+            slider.src = 'game-items/slider.svg'
+            const hero = new Image()
+
+            if (gameState === GameState.Bomb) {
+                hero.src = 'game-items/hero_blown.svg'
+            } else if (magnetTimeLeftRef.current) {
+                if (isHeroEating.current) {
+                    hero.src = 'game-items/hero_swallow_magnet.svg'
+                } else {
+                    hero.src = 'game-items/hero_open_magnet.svg'
+                }
+            } else {
+                if (isHeroEating.current) {
+                    hero.src = 'game-items/hero_swallow.svg'
+                } else {
+                    hero.src = 'game-items/hero_open.svg'
+                }
+            }
+
+            ctx.drawImage(hero, heroX.current, 0, 60, 60)
+            ctx.drawImage(slider, heroX.current, 60, 60, 40)
+
+            frame = requestAnimationFrame(animatePoints)
+        }
+        
+        animatePoints()
+        
+        return () => cancelAnimationFrame(frame)
+    }, [gameState])
     
     useEffect(() => {
         if (gameState !== GameState.Play && gameState !== GameState.TimeExpired) return 
         function moveItems () {
             setItems(prev => {
-                let moved = prev.map(i => i.moveY())
+                let moved = prev.map(i => i.moveY()).filter(i => i.y <= height)
                 if (magnetTimeLeftRef.current) moved = moved.map(i => i.y >= height - 260 && Math.abs(heroX.current - i.x) <= 100 ? i.moveX(heroX.current + 16 - i.x > 0 ? 1 : -1) : i)
-                const filtered = moved.filter(i => i.y <= height)
                 const updated: Item[] = []
-                for (let item of filtered) {
-                    if (item.y > height - 160 && item.y < height - 100 && item.x > heroX.current - 24 && item.x < heroX.current + 24) {
-                        if (item.isBomb) setGameState(GameState.Bomb)
+                for (let item of moved) {
+                    if (item.y + 14 > height - 160 && item.y + 14 < height - 100 && item.x + 14 > heroX.current && item.x + 14 < heroX.current + 60) {
+                        if (item.isBomb) {
+                            setGameState(GameState.Bomb)
+                            triggerHapticFeedback({ type: "impact", impact_style: "heavy" })
+                        }
                         else if (isHeroActive.current) {
-                            if (item.reward) addPendingScore(item.reward)
-                            if (item.isMagnet) setMagnetTimeLeft(20)
+                            if (item.reward) {
+                                isHeroEating.current = true
+                                addPendingScore(item.reward)
+                                if (item.reward > 0) {
+                                    triggerHapticFeedback({ type: "impact", impact_style: "light" })
+                                } else {
+                                    triggerHapticFeedback({ type: "impact", impact_style: "heavy" })
+                                }
+                            }
+                            if (item.isMagnet) {
+                                isHeroEating.current = true
+                                setMagnetTimeLeft(GameConfig.magnetDuration)
+                                triggerHapticFeedback({ type: "impact", impact_style: "medium" })
+                            }
                         } else {
                             updated.push(item)
                         }
@@ -206,12 +262,11 @@ export const Canvas: FC = () => {
             const seed = Math.floor(Math.random() * 999) + 1
             const x = Math.floor(Math.random() * (width - 28))
             let item: Item
-            if (seed <= 450) item = new Gold(x)
-            else if (seed <= 600) item = new Eye(x)
-            else if (seed <= 750) item = new Rocket(x)
-            else if (seed <= 850) item = new Ufo(x)
+            if (seed <= 500) item = new Gold(x)
+            else if (seed <= 720) item = new Ufo(x)
+            else if (seed <= 870) item = new Rocket(x)
             else if (seed <= 900) item = new Dollar(x)
-            else if (seed <= 950) item = new Bomb(x)
+            else if (seed <= 970) item = new Bomb(x)
             else item = new Magnet(x)
             setItems(prev => {
                 return [...prev, item]
@@ -256,24 +311,8 @@ export const Canvas: FC = () => {
 
     return (
         <>
+            <canvas className={styles.hero_canvas} width={width} height={100} ref={heroRef}/>
             <button className={styles.slider} style={{ left: `${heroX.current}px` }} ref={sliderRef}>
-                {
-                    magnetTimeLeft
-                    ?
-                    <>
-                    <HeroGood className={styles.hero}/>
-                    <MagnetCoin className={styles.magnet}/>
-                    </>
-                    :
-                    gameState === GameState.Bomb
-                    ?
-                    <>
-                    <HeroSad2 className={styles.hero}/>
-                    <BombCoin className={styles.magnet}/>
-                    </>
-                    :
-                    <HeroOpen className={styles.hero}/>
-                }
                 <GameSlider/>
             </button>
             <canvas className={styles.canvas} width={width} height={height} ref={ref}/>

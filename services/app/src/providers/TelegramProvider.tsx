@@ -26,7 +26,7 @@ export const useTelegram = () => useContext(TelegramContext)
 function getInitData () {
     try {
         const { initDataRaw, platform } = retrieveLaunchParams();
-        if (!/android||iphone/.test(platform)) return null
+        if (!platform.includes('iphone') && !platform.includes('android')) return null
         return initDataRaw ? initDataRaw : null
     } catch {
         return null
@@ -61,7 +61,6 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const launchParams = getLaunchParams()
     const initData = getInitData()
-    console.log(launchParams)
     const userPfp = launchParams?.initData?.user?.photoUrl || null
     const refCode = launchParams?.startParam || null
     const utils = getUtils()

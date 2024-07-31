@@ -17,7 +17,6 @@ export const Loader: FC = () => {
 
     useEffect(() => {
         if (gameSubmitted) return
-        let retries = 0
         async function submitGame () {
             try {
                 await postStartGame(authToken)

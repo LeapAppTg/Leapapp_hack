@@ -116,6 +116,10 @@ const AuthConsumerContent: FC = () => {
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
     useData(ApiRoutes.GetDailyReward)
     useData(ApiRoutes.GetHourlyReward)
+    useData(ApiRoutes.GetQuestsList)
+    useData(ApiRoutes.GetReferralsCount)
+    useData(ApiRoutes.GetReferralsList)
+    useData(ApiRoutes.GetUnclaimedPoints)
 
     useEffect(() => {
         if (isAuthorized || !userProfile) return
