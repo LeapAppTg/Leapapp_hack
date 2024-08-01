@@ -28,4 +28,9 @@ body {
     --color-experimental-1: #A4A9AD;
     --color-metal-gold-2: linear-gradient(90deg, #FFFCA8 -0.05%, #FDB836 31.2%, #FDC966 75.92%, #F1DC83 100.02%);
 
+    --color-quests-colors-blue-1: #28448A;
+    --color-quests-colors-blue-1-dark: #1D2B51;
+    --color-quests-colors-blue-2: #0E276A;
+    --color-quests-colors-blue-2-dark: #101D41;
+
 }

@@ -13,16 +13,28 @@
     animation: star_sparkle 8s infinite ease-in-out;
 }
 
-.background > g:nth-child(4n - 3) {
+.background > g:nth-child(8n - 7) {
+    animation-delay: 7s;
+}
+.background > g:nth-child(8n - 6) {
     animation-delay: 6s;
 }
-.background > g:nth-child(4n - 2) {
+.background > g:nth-child(8n - 5) {
+    animation-delay: 5s;
+}
+.background > g:nth-child(8n - 4) {
     animation-delay: 4s;
 }
-.background > g:nth-child(4n - 1) {
+.background > g:nth-child(8n - 3) {
+    animation-delay: 3s;
+}
+.background > g:nth-child(8n - 2) {
     animation-delay: 2s;
 }
-.background > g:nth-child(4n) {
+.background > g:nth-child(8n - 1) {
+    animation-delay: 1s;
+}
+.background > g:nth-child(8n) {
     animation-delay: 0s;
 }
 

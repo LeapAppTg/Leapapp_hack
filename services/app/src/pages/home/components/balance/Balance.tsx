@@ -13,7 +13,7 @@ export const Balance: FC = () => {
 
     return (
         <div className={FlexGapColumn8.className}>
-            <PageTitleBackground color={PageTitleBackgroundColor.Purple} className={styles.purple_bg}/>
+            <PageTitleBackground color={PageTitleBackgroundColor.LightBlue} className={styles.purple_bg}/>
             {
                 userPfp
                 ?
