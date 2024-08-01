@@ -5,6 +5,7 @@
 .icon_wrapper {
     position: relative;
     width: 54px;
+    min-width: 54px;
     height: 60px;
 }
 
@@ -31,16 +32,6 @@
 
 .locked .background {
     fill: #101D41;
-}
-
-.title {
-    height: 20px;
-    width: 60px;
-}
-
-.title p {
-    position: absolute;
-    text-wrap: nowrap !important;
 }
 
 .status_icon {

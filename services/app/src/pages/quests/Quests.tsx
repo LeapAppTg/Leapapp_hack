@@ -3,7 +3,7 @@ import { PageTitle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji
 import { ApiRoutes, useData } from "@hooks";
 import { FlexGapColumn8FullWidth, FlexGapRowFullWidth, TextXSBold, TextXXSRegularGrey400 } from "@utils";
 import { FC } from "react";
-import { HiddenQuestMapWrapper, QuestMapWrapper } from "./components";
+import { HiddenQuestMapWrapper, QuestItem, QuestMapWrapper } from "./components";
 import styles from "./styles.module.css";
 
 export const QuestsPage: FC = () => {
@@ -25,7 +25,7 @@ export const QuestsPage: FC = () => {
             {
                 quests
                 ?
-                quests.quests.map((q, i) => <QuestMapWrapper quest={q} index={i} questsLength={quests.quests.length} key={q.uuid}/>)
+                quests.quests.map((q, i) => <QuestItem {...q} key={q.uuid}/>)
                 :
                 null
             }

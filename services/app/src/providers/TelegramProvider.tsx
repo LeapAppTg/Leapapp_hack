@@ -1,5 +1,6 @@
 import { AnyHapticFeedbackParams, initHapticFeedback, initUtils, postEvent, retrieveLaunchParams, BackButton, initBackButton } from '@telegram-apps/sdk'
 import { FC, PropsWithChildren, createContext, useContext, useEffect } from "react"
+import { useLocation, useNavigate } from 'react-router-dom'
 
 type TelegramContextLayout = {
     initData: string | null,
@@ -10,7 +11,8 @@ type TelegramContextLayout = {
     openLink: (link: string) => void,
     openTelegramLink: (link: string) => void,
     shareLink: (link: string) => void,
-    backButton: BackButton | null
+    backButton: BackButton | null,
+    backButtonDefaultCallback: () => void
 }
 
 const TelegramContext = createContext<TelegramContextLayout>({
@@ -22,7 +24,8 @@ const TelegramContext = createContext<TelegramContextLayout>({
     refCode: null,
     shareLink: (link: string) => null,
     userPfp: null,
-    backButton: null
+    backButton: null,
+    backButtonDefaultCallback: () => null
 })
 
 export const useTelegram = () => useContext(TelegramContext)
@@ -79,6 +82,9 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
     const hapticFeedback = getHapticFeedback()
     const backButton = getBackButton()
 
+    const { pathname } = useLocation()
+    const navigate = useNavigate()
+
     function setup () {
         postEvent('web_app_setup_closing_behavior', { need_confirmation: true })
         postEvent('web_app_expand')
@@ -109,6 +115,26 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
         if (utils) utils.shareURL(link)
     }
 
+    function backButtonDefaultCallback () {
+        navigate('/home')
+    }
+
+    useEffect(() => {
+        if (backButton) {
+            if(['referrals', 'quests', 'game', 'learning', 'squads'].findIndex(i => pathname.includes(i)) !== -1) {
+                if (!backButton.isVisible) {
+                    backButton.show()
+                    backButton.on("click", backButtonDefaultCallback)
+                    return () => {
+                        backButton.off("click", backButtonDefaultCallback)
+                    }
+                }
+            } else {
+                backButton.hide()
+            }
+        }
+    }, [pathname])
+
     return (
         <TelegramContext.Provider
         value={{
@@ -120,7 +146,8 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
             openTelegramLink,
             refCode,
             shareLink,
-            backButton
+            backButton,
+            backButtonDefaultCallback
         }}
         >
             {children}
@@ -130,6 +157,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
 export const TelegramConsumer: FC = () => {
     const { initData, setup } = useTelegram()
+
 
     useEffect(() => {
         if (!initData) return

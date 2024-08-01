@@ -1,17 +1,19 @@
 .quests {
     position: relative;
     width: 100%;
-    padding: 60px 50px;
     flex-direction: column;
-    gap: 40px;
+    gap: 28px;
     background-image: url('/backgrounds/dots.svg');
+    padding: 32px 16px;
 }
 
 .quests:last-child {
     background-image: url('/backgrounds/tiles_dark.svg');
+    padding: 60px 50px;
+    gap: 40px;
 }
 
-.quests > div {
+.quests:last-child > div {
     position: relative;
 }
 

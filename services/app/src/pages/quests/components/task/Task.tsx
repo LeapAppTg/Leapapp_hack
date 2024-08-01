@@ -24,11 +24,14 @@ export const Task: FC<TaskProps> = ({
 
     async function onClick () {
         if (completionStatus === TaskCompletionStatus.Completed) return
-        if ((type === TaskType.Link || type === TaskType.X || type === TaskType.Telegram) && link) {
+        if ((
+            type === TaskType.Link || type === TaskType.X || type === TaskType.Telegram || type === TaskType.Discord || type === TaskType.Youtube ||
+            type === TaskType.Facebook || type === TaskType.Instagram || type === TaskType.Threads
+        ) && link) {
             try {
                 await postClaimTask(authToken, questUuid, uuid)
                 if (type === TaskType.Telegram) openTelegramLink(link)
-                openLink(link)
+                else openLink(link)
             } catch (e) {
                 sendApiErrorAlert(e)
             }

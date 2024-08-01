@@ -1,7 +1,7 @@
 import { CloseIcon, IconBox, IconSize } from "@icons";
-import { useBottomPopup } from "@providers";
+import { useBottomPopup, useTelegram } from "@providers";
 import { FlexGapRowFullWidthJustifyFlexEnd, classJoiner } from "@utils";
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, useEffect } from "react";
 import styles from './styles.module.css';
 
 export const BottomPopup: FC<PropsWithChildren> = ({
@@ -9,6 +9,26 @@ export const BottomPopup: FC<PropsWithChildren> = ({
 }) => {
 
     const { hidePopup, isClosing } = useBottomPopup()
+    const { backButton, backButtonDefaultCallback } = useTelegram()
+
+    useEffect(() => {
+        if (!backButton) return
+        if (!backButton.isVisible) {
+            backButton.show()
+            backButton.on("click", hidePopup)
+            return () => {
+                backButton.off("click", hidePopup)
+                backButton.hide()
+            }
+        } else {
+            backButton.off("click", backButtonDefaultCallback)
+            backButton.on("click", hidePopup)
+            return () => {
+                backButton.off("click", hidePopup)
+                backButton.on("click", backButtonDefaultCallback)
+            }
+        }
+    }, [])
 
     return (
         <div className={classJoiner(styles.popup, isClosing ? styles.close : undefined)}>

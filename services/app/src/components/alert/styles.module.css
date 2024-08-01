@@ -43,4 +43,5 @@
     top: -64px;
     left: -16px;
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    z-index: -1;
 }

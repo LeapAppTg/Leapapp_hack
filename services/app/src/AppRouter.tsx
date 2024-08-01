@@ -24,9 +24,8 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = ({children, hideNav
 const AppRouter: FC = () => {
     
     const { pathname } = useLocation()
-    const { initData, backButton } = useTelegram()
+    const { initData } = useTelegram()
     const { isAuthorized, isFirstTimeLogin } = useAuth()
-    const navigate = useNavigate()
 
     useEffect(() => {
         window.scrollTo({
@@ -34,18 +33,6 @@ const AppRouter: FC = () => {
             left: 0,
             top: 0
         })
-        if (backButton) {
-            if(['referrals', 'quests', 'game', 'learning', 'squads'].findIndex(i => pathname.includes(i)) !== -1) {
-                if (!backButton.isVisible) {
-                    backButton.show()
-                    backButton.on("click", () => {
-                        navigate('/home')
-                    })
-                }
-            } else {
-                backButton.hide()
-            }
-        }
     }, [pathname])
 
     if (initData === null) return (

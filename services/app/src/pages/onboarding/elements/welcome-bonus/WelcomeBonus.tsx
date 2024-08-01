@@ -56,7 +56,7 @@ export const WelcomeBonus: FC = () => {
                     <div className={FlexGapRow12FullWidth.className}>
                         <div className={classJoiner(FlexGapColumn8FullWidth.className, styles.reward)}>
                             <p className={TextSRegular.update({ color: TextColor.Grey400 }).className}>
-                                Bonus $LEAPs
+                                Bonus Leaps
                             </p>
                             <div className={FlexGapRow8.className}>
                                 <HeroThugCoin width={40} height={40}/>
