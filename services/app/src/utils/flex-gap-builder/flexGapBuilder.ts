@@ -109,7 +109,7 @@ export class FlexGapBuilder implements FlexGapBuilderProps {
         )
     }
     
-    public withExtraClasses (...rest: string[]) {
+    public withExtraClasses (...rest: (string | undefined)[]) {
         return classJoiner(this.className, ...rest)
     }
 }

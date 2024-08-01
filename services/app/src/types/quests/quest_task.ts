@@ -5,8 +5,8 @@ export type QuestTaskApi = {
     uuid: number,
     type: string,
     name: string,
-    description: string,
-    link: string,
+    description: string | null,
+    link: string | null,
     completion_status: string
 }
 
@@ -14,8 +14,8 @@ export type QuestTask = {
     uuid: number,
     type: TaskType,
     name: string,
-    description: string,
-    link: string,
+    description: string | null,
+    link: string | null,
     completionStatus: TaskCompletionStatus
 }
 

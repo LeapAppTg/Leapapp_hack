@@ -15,6 +15,11 @@
     box-shadow: 0px 0px 0px 4px rgba(112, 118, 127, 0.25);
 }
 
+.grey_700 {
+    background: var(--color-grey-700);
+    box-shadow: 0px 0px 0px 4px rgba(41, 49, 61, 0.25);
+}
+
 .red_500 {
     background: var(--color-red-500);
     box-shadow: 0px 0px 0px 3px rgba(244, 63, 94, 0.32);

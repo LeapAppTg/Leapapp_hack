@@ -1,11 +1,13 @@
-import { Discord, GoldCoin, HeroGood, HeroThugCoin, Instagram, Telegram, TicketEmoji, X } from "@assets";
+import { Discord, Facebook, GoldCoin, HeroGood, HeroThugCoin, Instagram, Telegram, Threads, TicketEmoji, X, Youtube } from "@assets";
 import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
+import { ApiRoutes, useData } from "@hooks";
 import { ArrowIcon, CheckmarkIcon, IconBox, IconSize } from "@icons";
 import { useAlerts, useAuth, useTelegram } from "@providers";
 import { postClaimTask } from "@services";
 import { QuestCompletionStatus, QuestTask, TaskCompletionStatus, TaskType } from "@types";
-import { FlexGapColumn4AlignFlexStart, FlexGapRow12, FlexGapRow4, FlexGapRow8, FlexGapRow8FullWidthJustifySpaceBetween, TextAlign, TextXSMedium, TextXXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
+import { FlexGapColumn4AlignFlexStart, FlexGapRow12, FlexGapRow12FullWidth, FlexGapRow4, FlexGapRow8, FlexGapRow8FullWidthJustifySpaceBetween, JustifyContent, TextAlign, TextXSMedium, TextXXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
 type TaskProps = QuestTask & { questUuid: number }
@@ -14,65 +16,85 @@ export const Task: FC<TaskProps> = ({
     uuid, description, link, completionStatus, name, type, questUuid
 }) => {
 
-    const { openLink } = useTelegram()
+    const { openLink, openTelegramLink, shareLink } = useTelegram()
     const { sendApiErrorAlert } = useAlerts()
     const { authToken } = useAuth()
+    const navigate = useNavigate()
+    const { data: inviteLink } = useData(ApiRoutes.GetInviteLink)
 
     async function onClick () {
         if (completionStatus === TaskCompletionStatus.Completed) return
-        if (type === TaskType.Link) {
+        if ((type === TaskType.Link || type === TaskType.X || type === TaskType.Telegram) && link) {
             try {
                 await postClaimTask(authToken, questUuid, uuid)
+                if (type === TaskType.Telegram) openTelegramLink(link)
                 openLink(link)
             } catch (e) {
                 sendApiErrorAlert(e)
             }
         }
+        if (type === TaskType.Invite) {
+            if (inviteLink) shareLink(inviteLink.inviteLink)
+            else navigate('/referrals')
+        }
     }
 
     return (
-        <div className={FlexGapRow8FullWidthJustifySpaceBetween.className} onClick={onClick}>
-            <div className={classJoiner(FlexGapRow12.update({ hideOverflow: true }).className, completionStatus === TaskCompletionStatus.Completed ? styles.half_opacity : undefined)}>
+        <div className={FlexGapRow12FullWidth.update({ justifyContent: JustifyContent.SpaceBetween }).className} onClick={onClick}>
+            <div className={FlexGapRow12FullWidth.update({ hideOverflow: true }).withExtraClasses(completionStatus === TaskCompletionStatus.Completed ? styles.half_opacity : undefined)}>
                 <div className={styles.icon}>
-                    {
-                        link
-                        ?
-                        <LinkIcon link={link}/>
-                        :
-                        <HeroGood width={40} height={40}/>
-                    }
+                    <TaskIcon type={type}/>
                 </div>
-                <div className={FlexGapColumn4AlignFlexStart.update({ hideOverflow: true }).className}>
+                <div className={FlexGapColumn4AlignFlexStart.update({ hideOverflow: true, fillFullWidth: true }).className}>
                     <p className={TextXSMedium.className}>{name}</p>
-                    <p className={TextXXSRegularGrey400.update({ textAlign: TextAlign.Left, cropText: true }).className}>{description}</p>
+                    {
+                        false
+                        ?
+                        <div className={FlexGapRow12FullWidth.className}>
+                            <div className={styles.progress_wrapper}>
+                                <div style={{ width: `${90}%` }}/>
+                            </div>
+                            <p className={TextXXSRegular.className}>
+                                2/5
+                            </p>
+                        </div>
+                        :
+                        description
+                        ?
+                        <p className={TextXXSRegularGrey400.update({ textAlign: TextAlign.Left, cropText: true }).className}>{description}</p>
+                        :
+                        null
+                    }
                 </div>
             </div>
             {
-                completionStatus === TaskCompletionStatus.NotStarted
+                completionStatus === TaskCompletionStatus.Completed
                 ?
-                link
-                ?
-                <IconBox size={IconSize.MediumBig} icon={ArrowIcon}/>
+                <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
                 :
+                type === TaskType.Game || type === TaskType.Points || type === TaskType.Days
+                ?
                 <div/>
                 :
-                <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
+                <IconBox size={IconSize.MediumBig} icon={ArrowIcon}/>
             }
         </div>
     )
 }
 
-type LinkIconProps = {
-    link: string
+type TaskIconProps = {
+    type: TaskType
 }
 
-const LinkIcon: FC<LinkIconProps> = ({ link }) => {
-    if (link.includes('t.me')) return <Telegram width={28} height={28}/>
-    if (link.includes('youtube') || link.includes('youtu.be')) return <X width={28} height={28}/>
-    if (link.includes('discord')) return <Discord width={28} height={28}/>
-    if (link.includes('instagram')) return <Instagram width={28} height={28}/>
-    if (link.includes('x.com') || link.includes('twitter')) return <X width={28} height={28}/>
-    return <HeroGood width={40} height={40}/>
+const TaskIcon: FC<TaskIconProps> = ({ type }) => {
+    if (type === TaskType.Telegram) return <Telegram width={28} height={28}/>
+    if (type === TaskType.X) return <X width={28} height={28}/>
+    if (type === TaskType.Youtube) return <Youtube width={28} height={28}/>
+    if (type === TaskType.Instagram) return <Instagram width={28} height={28}/>
+    if (type === TaskType.Discord) return <Discord width={28} height={28}/>
+    if (type === TaskType.Facebook) return <Facebook width={28} height={28}/>
+    if (type === TaskType.Threads) return <Threads width={28} height={28}/>
+    return <HeroGood width={28} height={28}/>
 }
 
 type RewardTaskProps = {

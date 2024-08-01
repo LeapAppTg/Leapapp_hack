@@ -8,6 +8,7 @@ type TelegramContextLayout = {
     userPfp: string | null,
     refCode: string | null,
     openLink: (link: string) => void,
+    openTelegramLink: (link: string) => void,
     shareLink: (link: string) => void,
     backButton: BackButton | null
 }
@@ -17,6 +18,7 @@ const TelegramContext = createContext<TelegramContextLayout>({
     setup: () => null,
     triggerHapticFeedback: () => null,
     openLink: (link: string) => null,
+    openTelegramLink: (link: string) => null,
     refCode: null,
     shareLink: (link: string) => null,
     userPfp: null,
@@ -95,14 +97,12 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
         }
     }
 
+    function openTelegramLink (link: string) {
+        utils?.openTelegramLink(link)
+    }
+
     function openLink (link: string) {
-        if (utils) {
-            if (link.includes('t.me')) {
-                utils.openTelegramLink(link)
-            } else {
-                utils.openLink(link)
-            }
-        }
+        utils?.openLink(link)
     }
 
     function shareLink (link: string) {
@@ -117,6 +117,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
             triggerHapticFeedback,
             userPfp,
             openLink,
+            openTelegramLink,
             refCode,
             shareLink,
             backButton

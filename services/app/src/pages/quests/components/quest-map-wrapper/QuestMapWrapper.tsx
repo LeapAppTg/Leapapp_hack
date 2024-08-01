@@ -23,7 +23,15 @@ export const QuestMapWrapper: FC<QuestMapWrapperProps> = ({
             {
                 isLast
                 ?
-                <MapPathVertical className={styles.path_top}/>
+                    pos === 2 || pos === 4
+                    ?
+                    <MapPathVertical className={styles.path_top}/>
+                    :
+                    pos === 1
+                    ?
+                    <MapPathCorner className={styles.path_left}/>
+                    :
+                    <MapPathCorner className={styles.path_right}/>
                 :
                 pos === 1
                 ?

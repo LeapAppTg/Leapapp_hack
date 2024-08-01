@@ -41,7 +41,7 @@ export const QuestDetails: FC<QuestDetailsProps> = ({ uuid }) => {
 
     return (
         <>
-        <PageTitle color={PageTitleBackgroundColor.Yellow} title={details.quest.name} subtitle="Complete quest and get reward"/>
+        <PageTitle color={PageTitleBackgroundColor.Yellow} title={details.quest.name} subtitle="Complete tasks and get rewards"/>
         <div className={styles.tasks}>
             {
                 details.tasks.map(t => <Task {...t} questUuid={details.quest.uuid} key={t.uuid}/>)
@@ -52,7 +52,7 @@ export const QuestDetails: FC<QuestDetailsProps> = ({ uuid }) => {
             details.quest.completionStatus !== QuestCompletionStatus.Claimed
             ?
             <div className={FlexGapColumn16FullWidth.withExtraClasses(styles.margin_top)}>
-                <p className={TextXSRegularGrey400.className}>Complete the quests to get reward</p>
+                <p className={TextXSRegularGrey400.className}>Complete all the tasks to get reward</p>
                 <Button style={ButtonStyle.Primary} fillFullWidth disabled={details.quest.completionStatus !== QuestCompletionStatus.Completed} onClick={onClaim}>
                     Get reward
                     {

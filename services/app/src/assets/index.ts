@@ -28,5 +28,7 @@ import Telegram from './Telegram.svg?react'
 import X from './X.svg?react'
 import TicketEmoji from './TicketEmoji.svg?react'
 import BookWithFrame from './BookWithFrame.svg?react'
+import Facebook from './Facebook.svg?react'
+import Threads from './Threads.svg?react'
 
-export { DotsBackground, Youtube, BookWithFrame, TicketEmoji, Discord, Instagram, Telegram, X, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }
+export { DotsBackground, Threads, Facebook, Youtube, BookWithFrame, TicketEmoji, Discord, Instagram, Telegram, X, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }
