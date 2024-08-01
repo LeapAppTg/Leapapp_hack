@@ -4,7 +4,7 @@ import { AlertStatus, Button, ButtonStyle, StickyPanel, TelegramEmoji, TelegramE
 import { ApiRoutes, useData, useUnixTimestamp } from "@hooks";
 import { useAlerts, useAuth } from "@providers";
 import { postHourlyReward } from "@services";
-import { FlexGapColumn16FullWidth, FlexGapRow4, TextColor, TextMSemiBold, TextXSRegular, TimeObject } from "@utils";
+import { FlexGapColumn16FullWidth, FlexGapRow4, TextAlign, TextColor, TextMSemiBold, TextXSRegular, TimeObject } from "@utils";
 import { FC, useMemo } from "react";
 import styles from "./styles.module.css";
 
@@ -20,10 +20,10 @@ export const HourlyReward: FC = () => {
     
     const [ticketsCount, pointsCount, canClaim, timeLeft, progress] = useMemo(() => {
         if (!data) return ['0', '0.00', false, '', 50]
-        if (data.canClaim) return [data.gameTickets.format(), data.points.format(undefined, 2), true, '', 100]
+        if (data.canClaim) return [data.gameTickets.format(), data.points.format(), true, '', 100]
         const timeLeft = data.nextClaimTime - timestamp
         const progress = 1 - timeLeft / rewardPeriod
-        return [(progress * data.gameTickets).format(), (progress * data.points).format(undefined, 2), false, TimeObject.fromTimestamp(timeLeft * 1000).toDisplayString(2), Math.floor(progress * 100)]
+        return [(progress * data.gameTickets).format(), (progress * data.points).format(), false, TimeObject.fromTimestamp(timeLeft * 1000).toDisplayString(2), Math.floor(progress * 100)]
     }, [data, timestamp])
 
     async function onClaim () {
@@ -32,7 +32,7 @@ export const HourlyReward: FC = () => {
         try {
             await postHourlyReward(authToken)
             sendAlert({
-                message: `Claimed +${data.points.format(undefined, 2)} points +${data.gameTickets.format()} tickets`,
+                message: `Claimed +${data.points.format()} points +${data.gameTickets.format()} tickets`,
                 status: AlertStatus.Success,
                 withConfetti: true
             })
@@ -86,7 +86,7 @@ export const HourlyReward: FC = () => {
                         </div>
                         <div className={FlexGapRow4.className}>
                             <TelegramEmoji size={TelegramEmojiSize.Small} type={TelegramEmojiType.Time}/>
-                            <p className={TextXSRegular.update({ color: TextColor.Purple925 }).className}>
+                            <p className={TextXSRegular.update({ color: TextColor.Purple925, textAlign: TextAlign.Left }).withExtraClasses(styles.time_left)}>
                                 {timeLeft}
                             </p>
                         </div>

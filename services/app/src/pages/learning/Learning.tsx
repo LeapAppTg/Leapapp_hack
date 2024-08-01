@@ -5,7 +5,7 @@ export const LearningPage: FC = () => {
     return (
         <>
         <PageTitle icon={TelegramEmojiType.Books} color={PageTitleBackgroundColor.Blue} title="Learning" subtitle="Explore crypto and earn rewards"/>
-        <ComingSoon/>
+        <ComingSoon inTime={1723420800000}/>
         </>
     )
 }

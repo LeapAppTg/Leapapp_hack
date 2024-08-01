@@ -40,7 +40,7 @@
 
 .title p {
     position: absolute;
-    text-wrap: nowrap;
+    text-wrap: nowrap !important;
 }
 
 .status_icon {

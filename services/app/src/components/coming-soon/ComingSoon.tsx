@@ -4,10 +4,15 @@ import { useCountdown } from "@hooks";
 import { FlexGapRow8, TextMSemiBold, TextXSRegularGrey400, currentTimestamp } from "@utils";
 import { FC } from "react";
 import styles from "./styles.module.css";
+import { useAuth } from "@providers";
 
-export const ComingSoon: FC = () => {
+type Props = {
+    inTime: number
+}
 
-    const { timeLeft } = useCountdown(currentTimestamp() + 7 * 24 * 60 * 60 * 1000 - 1)
+export const ComingSoon: FC<Props> = ({ inTime }) => {
+
+    const { timeLeft } = useCountdown(inTime)
 
     return (
         <div className={styles.coming_soon}>

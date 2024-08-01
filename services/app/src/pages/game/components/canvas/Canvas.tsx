@@ -1,6 +1,6 @@
 import { GameSlider } from "@components";
 import { useTelegram } from "@providers";
-import { ElementRef, FC, useEffect, useRef, useState } from "react";
+import { ElementRef, FC, useEffect, useMemo, useRef, useState } from "react";
 import { GameConfig, Item, tokensPool } from "../../config";
 import { GameState, useGame } from "../../providers";
 import styles from "./styles.module.css";
@@ -19,8 +19,17 @@ export const Canvas: FC = () => {
     const heroX = useRef(54)
     const isHeroActive = useRef(false)
     const isHeroEating = useRef(false)
+    const speedModifier = useRef(0)
     const magnetTimeLeftRef = useRef(0)
-    const { gameState, setGameState, addPendingScore, setMagnetTimeLeft, magnetTimeLeft } = useGame()
+    const { gameState, setGameState, addPendingScore, setMagnetTimeLeft, magnetTimeLeft, timeLeft } = useGame()
+
+    useEffect(() => {
+        if (timeLeft <= 20) {
+            if (speedModifier.current !== 2) speedModifier.current = 2
+        } else if (timeLeft <= 40) {
+            if (speedModifier.current !== 1) speedModifier.current = 1
+        }
+    }, [timeLeft])
 
     useEffect(() => {
         magnetTimeLeftRef.current = magnetTimeLeft
@@ -103,7 +112,7 @@ export const Canvas: FC = () => {
         function moveItems () {
             setItems(prev => {
                 if (prev.length === 0) return prev
-                let moved = prev.map(i => i.moveY()).filter(i => i.y <= height)
+                let moved = prev.map(i => i.moveY(2 + speedModifier.current)).filter(i => i.y <= height)
                 if (magnetTimeLeftRef.current) moved = moved.map(i => i.y >= height - 260 && Math.abs(heroX.current - i.x) <= 100 ? i.moveX(heroX.current + 16 - i.x > 0 ? 1 : -1) : i)
                 const updated: Item[] = []
                 for (let item of moved) {
@@ -143,6 +152,7 @@ export const Canvas: FC = () => {
 
     
     useEffect(() => {
+        console.log('upp')
         if (gameState !== GameState.Play) return 
         function addItem () {
             const seed = Math.floor(Math.random() * 99)
@@ -152,9 +162,9 @@ export const Canvas: FC = () => {
                 return [...prev, item]
             })
         }
-        const interval = setInterval(addItem, 500)
+        const interval = setInterval(addItem, (3 - speedModifier.current) * 200)
         return () => clearInterval(interval)
-    }, [gameState])
+    }, [gameState, speedModifier.current])
 
     useEffect(() => {
         if (gameState !== GameState.Play && gameState !== GameState.TimeExpired) return 

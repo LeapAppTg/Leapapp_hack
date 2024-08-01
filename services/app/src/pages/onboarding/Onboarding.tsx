@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Game, Hello, Leap, Learning, Personalization, Quests } from "./elements";
+import { Game, Hello, Leap, Learning, Personalization, Quests, WelcomeBonus } from "./elements";
 
 export const OnboardingPage: FC = () => {
 
@@ -30,7 +30,11 @@ export const OnboardingPage: FC = () => {
             :
             step === 6
             ?
-            <Personalization/>
+            <Personalization onNext={() => setStep(7)}/>
+            :
+            step === 7
+            ?
+            <WelcomeBonus/>
             :
             null
         }

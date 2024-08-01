@@ -5,7 +5,7 @@ export const SquadsPage: FC = () => {
     return (
         <>
         <PageTitle icon={TelegramEmojiType.RollerCoaster} color={PageTitleBackgroundColor.Green} title="Squads" subtitle="Join squads and compete with others"/>
-        <ComingSoon/>
+        <ComingSoon inTime={1723766400000}/>
         </>
     )
 }

@@ -1,6 +1,7 @@
 export const GameConfig = {
     gameDuration: 60,
-    magnetDuration: 10
+    magnetDuration: 10,
+    speedIncreaseTime: 30
 }
 
 type ItemProps = {
@@ -37,8 +38,8 @@ export class Item {
         return img
     }
 
-    public moveY () {
-        this.y += 2
+    public moveY (y?: number) {
+        this.y += y ? y : 2
         return this
     }
     public moveX (x: number) {

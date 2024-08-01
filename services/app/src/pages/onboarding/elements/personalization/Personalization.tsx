@@ -5,7 +5,11 @@ import { FlexGapColumn, TextMMedium, TextXSRegular } from "@utils";
 import { FC, useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.css";
 
-export const Personalization: FC = () => {
+type Props = {
+    onNext?: () => any
+}
+
+export const Personalization: FC<Props> = ({ onNext }) => {
 
     const [progress, setProgress] = useState<number>(0)
     const { triggerHapticFeedback } = useTelegram()
@@ -133,7 +137,7 @@ export const Personalization: FC = () => {
             </div>
 
             
-            <Button style={ButtonStyle.Primary} fillFullWidth disabled={step !== 5} linkTo="/streak">
+            <Button style={ButtonStyle.Primary} fillFullWidth disabled={step !== 5} onClick={onNext}>
                 {step !== 5 ? 'Waiting...' : 'Next'}
             </Button>
 

@@ -11,7 +11,8 @@ export enum TelegramEmojiType {
     Books = 'books',
     RollerCoaster = 'roller_coaster',
     ChampangeGlasses = 'champange_glasses',
-    Megaphone = 'megaphone'
+    Megaphone = 'megaphone',
+    Handwave = 'handwave'
 }
 
 export enum TelegramEmojiSize {

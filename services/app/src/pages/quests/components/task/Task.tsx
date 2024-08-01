@@ -108,12 +108,12 @@ export const RewardTask: FC<RewardTaskProps> = ({
 }) => {
 
     return (
-        <div className={FlexGapRow8FullWidthJustifySpaceBetween.className}>
+        <div className={FlexGapRow12FullWidth.update({ justifyContent: JustifyContent.SpaceBetween }).className}>
             <div className={classJoiner(FlexGapRow12.update({ hideOverflow: true }).className, completionStatus === QuestCompletionStatus.Claimed ? styles.half_opacity : undefined)}>
                 <div className={styles.icon}>
                     <GoldCoin width={28} height={28}/>
                 </div>
-                <div className={FlexGapColumn4AlignFlexStart.update({ hideOverflow: true }).className}>
+                <div className={FlexGapColumn4AlignFlexStart.update({ hideOverflow: true, fillFullWidth: true }).className}>
                     <p className={TextXSMedium.className}>Get reward</p>
                     <div className={FlexGapRow8.className}>
                         {
@@ -144,7 +144,7 @@ export const RewardTask: FC<RewardTaskProps> = ({
                 ?
                 <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
                 :
-                null
+                <div/>
             }
         </div>
     )

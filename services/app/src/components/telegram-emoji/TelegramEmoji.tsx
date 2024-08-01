@@ -18,7 +18,8 @@ const SourceMapping = new MultiMapping<TelegramEmojiType, [[string, undefined]]>
             [TelegramEmojiType.Books]: "/tg-emojis/books",
             [TelegramEmojiType.RollerCoaster]: "/tg-emojis/rollercoaster",
             [TelegramEmojiType.ChampangeGlasses]: "/tg-emojis/champange_glasses",
-            [TelegramEmojiType.Megaphone]: "/tg-emojis/megaphone"
+            [TelegramEmojiType.Megaphone]: "/tg-emojis/megaphone",
+            [TelegramEmojiType.Handwave]: "/tg-emojis/handwave"
         },
         undefined
     ]

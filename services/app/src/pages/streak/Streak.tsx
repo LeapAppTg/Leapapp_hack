@@ -13,6 +13,7 @@ import styles from "./styles.module.css";
 export const StreakPage: FC = () => {
     
     const { data, mutate } = useData(ApiRoutes.GetDailyReward)
+    const { data: userProfile, mutate: mutateUser } = useData(ApiRoutes.GetUserProfile)
     const { sendAlert } = useAlerts()
     const { authToken } = useAuth()
     const { triggerHapticFeedback } = useTelegram()
@@ -22,11 +23,15 @@ export const StreakPage: FC = () => {
 
         try {
             await postDailyReward(authToken)
+            let message = 'You got'
+            if (data.points) message += ` +${data.points.toString()} points`
+            if (data.gameTickets) message += ` +${data.gameTickets.toString()} tickets`
             sendAlert({
-                message: `You got +${data.points.toString()} points`,
+                message,
                 status: AlertStatus.Success,
             })
             mutate({ ...data, canClaim: false })
+            mutateUser(userProfile ? { ...userProfile, points: userProfile.points + data.points, gameTickets: userProfile.gameTickets + data.gameTickets } : undefined)
         } catch (e) {
             sendAlert({
                 message: ApiError.isApiError(e) ? e.detail || 'Something went wrong' : 'Something went wrong',
@@ -106,7 +111,7 @@ export const StreakPage: FC = () => {
                     <div className={FlexGapRow12FullWidth.className}>
                         <div className={classJoiner(FlexGapColumn8FullWidth.className, styles.reward)}>
                             <p className={TextSRegular.update({ color: TextColor.Grey400 }).className}>
-                                Bonus $LEAPs
+                                Bonus Leaps
                             </p>
                             <div className={FlexGapRow8.className}>
                                 <HeroThugCoin width={40} height={40}/>

@@ -18,4 +18,14 @@
     height: calc(100% + 14px);
     left: -7px;
     top: -7px;
+    animation: 3s rotate infinite ease-in-out;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

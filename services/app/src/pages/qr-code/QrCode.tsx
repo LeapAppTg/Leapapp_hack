@@ -13,12 +13,12 @@ export const QrCodePage: FC = () => {
             <h1 className={TextXLSemiBold.className}>
                 Play on your<br/>mobile
             </h1>
-            <Link className={styles.qr} to={'https://t.me/testernightbot'}>
+            <Link className={styles.qr} to={'https://t.me/leapapp_bot'}>
                 <img src='/other/tg_qr.png'/>
             </Link>
             <Link to={'https://t.me/testernightbot'}>
                 <h3 className={TextMMedium.className}>
-                    @LeapTon
+                    @LeapApp_bot
                 </h3>
             </Link>
             <HeroGood className={styles.hero}/>
