@@ -1,28 +1,15 @@
 .canvas {
+    user-select: none;
     position: absolute;
     left: 0;
     top: 0;
 }
 
 .slider {
+    user-select: none;
     position: absolute;
-    bottom: 90px;
     cursor: grab;
     z-index: 1;
     flex-direction: column;
     gap: 6px;
-}
-
-.hero {
-    width: 60px;
-    height: 60px;
-}
-
-.magnet {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    left: 0;
-    right: 0;
-    margin: auto;
 }

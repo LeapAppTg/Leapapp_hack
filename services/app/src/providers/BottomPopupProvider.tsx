@@ -1,18 +1,22 @@
 import { BottomPopup } from '@components'
-import { FC, PropsWithChildren, ReactNode, createContext, useContext, useEffect, useState } from 'react'
+import { Dispatch, FC, PropsWithChildren, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from 'react'
 
 type BottomPopupContextProps = {
     popup: ReactNode,
     showPopup: (popup: ReactNode) => void,
     hidePopup: () => void,
-    isClosing: boolean
+    isClosing: boolean,
+    isPopupLoading: boolean,
+    setIsPopupLoading: Dispatch<SetStateAction<boolean>>
 }
 
 const BottomPopupContext = createContext<BottomPopupContextProps>({
     popup: null,
     showPopup: (p) => null,
     hidePopup: () => null,
-    isClosing: false
+    isClosing: false,
+    isPopupLoading: false,
+    setIsPopupLoading: () => null
 })
 
 export const useBottomPopup = () => useContext(BottomPopupContext)
@@ -20,6 +24,7 @@ export const useBottomPopup = () => useContext(BottomPopupContext)
 export const BottomPopupProvider: FC<PropsWithChildren> = ({children}) => {
 
     const [popup, setPopup] = useState<ReactNode | null>(null)
+    const [isPopupLoading, setIsPopupLoading] = useState<boolean>(false)
     const showPopup = (popup: ReactNode) => setPopup(popup)
     const onHide = () => setPopup(null)
     const [isClosing, setIsClosing] = useState<boolean>(false)
@@ -40,7 +45,9 @@ export const BottomPopupProvider: FC<PropsWithChildren> = ({children}) => {
                 popup,
                 showPopup,
                 hidePopup,
-                isClosing
+                isClosing,
+                isPopupLoading,
+                setIsPopupLoading
             }}
         >
             {children}
@@ -52,9 +59,9 @@ export const BottomPopupConsumer: FC = () => {
     return (
         <BottomPopupContext.Consumer>
             {
-                ({ popup }) => <>
+                ({ popup, isPopupLoading }) => <>
                     {
-                        popup === null
+                        popup === null || isPopupLoading
                         ?
                         null
                         :

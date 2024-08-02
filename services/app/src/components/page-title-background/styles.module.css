@@ -40,17 +40,26 @@
 
 .background > circle {
     opacity: 0;
-    animation: circle_sparkle 9s infinite ease-in-out;
+    animation: circle_sparkle 6s infinite ease-in-out;
 }
 
 
-.background > circle:nth-child(3n - 2) {
-    animation-delay: 6s;
+.background > circle:nth-child(6n - 5) {
+    animation-delay: 5s;
 }
-.background > circle:nth-child(3n - 1) {
+.background > circle:nth-child(6n - 4) {
+    animation-delay: 4s;
+}
+.background > circle:nth-child(6n - 3) {
     animation-delay: 3s;
 }
-.background > circle:nth-child(3n) {
+.background > circle:nth-child(6n - 2) {
+    animation-delay: 2s;
+}
+.background > circle:nth-child(6n - 1) {
+    animation-delay: 1s;
+}
+.background > circle:nth-child(6n) {
     animation-delay: 0s;
 }
 

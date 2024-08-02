@@ -3,6 +3,7 @@ import '@styles';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './AppRouter';
 import { useEffect } from 'react';
+import { SvgSharedColors } from '@components';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
               <TelegramConsumer/>
               <AuthConsumer/>
               <BottomPopupConsumer/>
+              <SvgSharedColors/>
             </BottomPopupProvider>
           </AlertsProvider>
         </AuthProvider>

@@ -43,14 +43,11 @@
     top: -6px;
 }
 
-.hidden {
-    margin-bottom: 50px;
-}
-
 .hidden .border {
-    fill: var(--color-grey-700);
+    fill: var(--color-grey-850);
 }
 
 .hidden .background {
-    fill: var(--color-grey-800);
+    fill: var(--color-grey-850);
+    filter: none;
 }

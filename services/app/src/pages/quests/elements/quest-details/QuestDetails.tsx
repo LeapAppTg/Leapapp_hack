@@ -1,14 +1,13 @@
 import { HeroGood, TicketEmoji } from "@assets";
 import { AlertStatus, Button, ButtonStyle, PageTitle, PageTitleBackgroundColor } from "@components";
 import { ApiRoutes, useData } from "@hooks";
-import { useAlerts, useAuth, useBottomPopup, useTelegram } from "@providers";
+import { useAlerts, useAuth, useBottomPopup } from "@providers";
 import { postClaimQuest } from "@services";
 import { QuestCompletionStatus } from "@types";
 import { FlexGapColumn16FullWidth, FlexGapRow4, TextXSRegularGrey400 } from "@utils";
 import { FC, useEffect } from "react";
 import { RewardTask, Task } from "../../components";
 import styles from "./styles.module.css";
-import { useNavigate } from "react-router-dom";
 
 type QuestDetailsProps = {
     uuid: number
@@ -20,21 +19,7 @@ export const QuestDetails: FC<QuestDetailsProps> = ({ uuid }) => {
     const { mutate } = useData(ApiRoutes.GetQuestsList)
     const { sendAlert, sendApiErrorAlert } = useAlerts()
     const { authToken } = useAuth()
-    const { hidePopup } = useBottomPopup()
-    const { backButton } = useTelegram()
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        if (!backButton) return
-        backButton.on("click", () => {
-            hidePopup()
-        })
-        return () => {
-            backButton.on("click", () => {
-                navigate('/home')
-            })
-        }
-    }, [])
+    const { hidePopup, setIsPopupLoading } = useBottomPopup()
 
     async function onClaim () {
         if (!details) return
@@ -51,6 +36,13 @@ export const QuestDetails: FC<QuestDetailsProps> = ({ uuid }) => {
             sendApiErrorAlert(e)
         }
     }
+
+    useEffect(() => {
+        if (!details) {
+            setIsPopupLoading(true)
+            return () => setIsPopupLoading(false)
+        }
+    }, [])
 
     if (!details) return null
 

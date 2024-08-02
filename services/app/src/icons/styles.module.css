@@ -70,6 +70,18 @@ svg.color_grey_400 {
     stroke: var(--color-grey-400);
 }
 
+/* grey 500 */
+
+svg.color_grey_500 {
+    fill: var(--color-grey-500);
+}
+.color_grey_500_only_fill {
+    fill: var(--color-grey-500);
+}
+.color_grey_500_only_stroke {
+    stroke: var(--color-grey-500);
+}
+
 /* purple 400 */
 
 svg.color_purple_400 {

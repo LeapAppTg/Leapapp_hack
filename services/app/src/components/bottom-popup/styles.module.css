@@ -11,12 +11,13 @@
     bottom: 0;
     z-index: 20;
     transform: translateY(100%);
-    animation: popup-move-up 0.5s ease forwards 0.5s;
-    transition: all 0.3s
+    animation: popup-move-up 300ms ease forwards 50ms;
+    transition: all 0.3s;
+    overflow: hidden
 }
 
 .popup.close {
-    animation: popup-move-down 0.5s ease;
+    animation: popup-move-down 300ms ease;
 }
 
 .close_wrapper {
@@ -31,11 +32,11 @@
     flex-direction: column;
     gap: 24px;
     opacity: 0;
-    animation: content-appear 0.5s ease forwards 0.5s;
+    animation: content-appear 300ms ease forwards 50ms;
 }
 
 .popup.close content {
-    animation: content-disappear 0.5s ease;
+    animation: content-disappear 300ms ease;
 }
 
 @keyframes popup-move-up {

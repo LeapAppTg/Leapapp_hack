@@ -46,6 +46,10 @@ export enum IconColor {
     */
     Grey400 = 'color_grey_400',
     /**
+     *@color color-grey-500
+    */
+    Grey500 = 'color_grey_500',
+    /**
      *@color color-purple-400
     */
     Purple400 = 'color_purple_400',

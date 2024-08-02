@@ -8,17 +8,14 @@
 .item {
     position: absolute;
     opacity: 0;
-    animation: 1s item-opacity ease, 1s item-scale ease;
+    animation: 500ms item-opacity ease, 500ms item-scale ease;
 }
 
 .item:nth-child(2) {
-    animation-delay: 1s;
+    animation-delay: 500ms;
 }
 .item:nth-child(3) {
-    animation-delay: 2s;
-}
-.item:nth-child(4) {
-    animation-delay: 3s;
+    animation-delay: 1000ms;
 }
 
 @keyframes item-opacity {
@@ -28,9 +25,9 @@
 }
 @keyframes item-scale {
     from {
-        transform: scale(0.1);
+        transform: scale(0.5);
     }
     to {
-        transform: scale(2);
+        transform: scale(1);
     }
 }

@@ -1,9 +1,8 @@
-import { TilesDarkBackground } from "@assets";
 import { PageTitle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData } from "@hooks";
 import { FlexGapColumn8FullWidth, FlexGapRowFullWidth, TextXSBold, TextXXSRegularGrey400 } from "@utils";
 import { FC } from "react";
-import { HiddenQuestMapWrapper, QuestItem, QuestMapWrapper } from "./components";
+import { HiddenQuestItem, QuestItem } from "./components";
 import styles from "./styles.module.css";
 
 export const QuestsPage: FC = () => {
@@ -47,7 +46,7 @@ export const QuestsPage: FC = () => {
         </div>
         <div className={styles.quests}>
             {
-                [0, 1, 2, 3, 4].map(i => <HiddenQuestMapWrapper index={i} length={5} key={i}/>)
+                [0, 1, 2].map(i => <HiddenQuestItem key={i}/>)
             }
         </div>
         </>

@@ -1,15 +1,18 @@
 import { CloseIcon, IconBox, IconSize } from "@icons";
 import { useBottomPopup, useTelegram } from "@providers";
 import { FlexGapRowFullWidthJustifyFlexEnd, classJoiner } from "@utils";
-import { FC, PropsWithChildren, useEffect } from "react";
+import { ElementRef, FC, PropsWithChildren, useEffect, useRef } from "react";
 import styles from './styles.module.css';
+import { useOutsideClick } from "@hooks";
 
 export const BottomPopup: FC<PropsWithChildren> = ({
     children
 }) => {
 
+    const ref = useRef<ElementRef<"div">>(null)
     const { hidePopup, isClosing } = useBottomPopup()
     const { backButton, backButtonDefaultCallback } = useTelegram()
+    useOutsideClick(() => hidePopup(), [ref])
 
     useEffect(() => {
         if (!backButton) return
@@ -31,7 +34,7 @@ export const BottomPopup: FC<PropsWithChildren> = ({
     }, [])
 
     return (
-        <div className={classJoiner(styles.popup, isClosing ? styles.close : undefined)}>
+        <div className={classJoiner(styles.popup, isClosing ? styles.close : undefined)} ref={ref}>
             <div className={FlexGapRowFullWidthJustifyFlexEnd.className}>
                 <button className={styles.close_wrapper} onClick={hidePopup}>
                     <IconBox size={IconSize.MediumBig} icon={CloseIcon}/>

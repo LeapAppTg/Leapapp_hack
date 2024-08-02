@@ -7,6 +7,7 @@ import { GameState, useGame } from "../../providers";
 import styles from "./styles.module.css";
 import { useAlerts, useAuth } from "@providers";
 import { ApiError } from "@builders";
+import { ApiRoutes, useData } from "@hooks";
 
 export const Loader: FC = () => {
     const { setGameState } = useGame()
@@ -14,6 +15,7 @@ export const Loader: FC = () => {
     const { sendAlert } = useAlerts()
     const [gameSubmitted, setGameSubmitted] = useState<boolean>(false)
     const navigate = useNavigate()
+    const { data: user, mutate: mutateUser } = useData(ApiRoutes.GetUserProfile)
 
     useEffect(() => {
         if (gameSubmitted) return
@@ -21,7 +23,8 @@ export const Loader: FC = () => {
             try {
                 await postStartGame(authToken)
                 setGameSubmitted(true)
-                const timeout = setTimeout(() => setGameState(GameState.Play), 4000)
+                mutateUser(user => user ? { ...user, gameTickets: user.gameTickets - 1 } : undefined)
+                const timeout = setTimeout(() => setGameState(GameState.Play), 1500)
                 return () => clearTimeout(timeout)
             } catch (e) {
                 navigate('/')
@@ -41,9 +44,9 @@ export const Loader: FC = () => {
             <svg className={styles.item} xmlns="http://www.w3.org/2000/svg" width="262" height="330" viewBox="0 0 262 330" fill="none">
                 <path d="M0 330.001V252.986L175.075 104.777V77.0159L161.642 63.5831H102.537L89.1045 77.0159V111.494H5.37314V43.8816L52.3881 0.000976562H211.343L258.806 43.8816V132.538L101.194 263.285H261.045V330.001H0Z" fill="white"/>
             </svg>
-            <svg className={styles.item} xmlns="http://www.w3.org/2000/svg" width="174" height="331" viewBox="0 0 174 331" fill="none">
+            {/* <svg className={styles.item} xmlns="http://www.w3.org/2000/svg" width="174" height="331" viewBox="0 0 174 331" fill="none">
                 <path d="M0.0146484 330.63V264.361H45.2385V67.3463H4.49226V0.629883H128.97V264.361H173.746V330.63H0.0146484Z" fill="white"/>
-            </svg>
+            </svg> */}
             <svg className={styles.item} xmlns="http://www.w3.org/2000/svg" width="446" height="130" viewBox="0 0 446 130" fill="none">
                 <path d="M5.70908 130V103.541H73.4431L79.6168 97.3677V82.9037L73.4431 76.73H20.1731L0.59375 56.9742V19.5794L20.1731 0H105.193V26.4586H39.2233L33.0497 32.6323V44.0977L39.2233 50.2714H92.4933L112.073 69.8507V110.421L92.4933 130H5.70908Z" fill="white"/>
                 <path d="M150.469 130L131.948 112.89V58.3853H125.246V37.924H133.183L143.237 11.6418H164.933V37.924H179.397V58.3853H164.933V104.247L169.696 109.009H183.102V130H150.469Z" fill="white"/>

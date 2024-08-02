@@ -30,12 +30,12 @@ export const PageTitleBackground: FC<PageTitleBackgroundProps> = ({
     return (
         <svg className={classJoiner(styles.background, className)} width="375" height="290" viewBox="0 0 375 290" fill="none" xmlns="http://www.w3.org/2000/svg"> 
             <g>
-                <rect x="57" width="1" height="7" fill="#505760"/>
-                <rect x="61" y="3" width="1" height="7" transform="rotate(90 61 3)" fill="#505760"/>
+                <rect x="80" y="32" width="1" height="7" fill="#505760"/>
+                <rect x="84" y="35" width="1" height="7" transform="rotate(90 84 35)" fill="#505760"/>
             </g>
             <g>
-                <rect x="327" y="170" width="1" height="7" fill="#505760"/>
-                <rect x="331" y="173" width="1" height="7" transform="rotate(90 331 173)" fill="#505760"/>
+                <rect x="137" y="77" width="1" height="7" fill="#505760"/>
+                <rect x="141" y="80" width="1" height="7" transform="rotate(90 141 80)" fill="#505760"/>
             </g>
             <g>
                 <rect x="185" y="143" width="1" height="7" fill="#505760"/>
@@ -45,28 +45,27 @@ export const PageTitleBackground: FC<PageTitleBackgroundProps> = ({
                 <rect x="280" y="70" width="1" height="7" fill="#505760"/>
                 <rect x="284" y="73" width="1" height="7" transform="rotate(90 284 73)" fill="#505760"/>
             </g>
+            <g>
+                <rect x="318" y="117" width="1" height="7" fill="#505760"/>
+                <rect x="322" y="120" width="1" height="7" transform="rotate(90 322 120)" fill="#505760"/>
+            </g>
+            <g>
+                <rect x="102" y="102" width="1" height="7" fill="#505760"/>
+                <rect x="106" y="105" width="1" height="7" transform="rotate(90 106 105)" fill="#505760"/>
+            </g>
+            <g>
+                <rect x="214" y="84" width="1" height="7" fill="#505760"/>
+                <rect x="218" y="87" width="1" height="7" transform="rotate(90 218 87)" fill="#505760"/>
+            </g>
+            <g>
+                <rect x="221" y="25" width="1" height="7" fill="#505760"/>
+                <rect x="225" y="28" width="1" height="7" transform="rotate(90 225 28)" fill="#505760"/>
+            </g>
+
             
             <circle opacity="0.1" cx="71.5" cy="62.5" r="6.5" fill="#D9D9D9"/>
             <circle opacity="0.1" cx="230" cy="61" r="3" fill="#D9D9D9"/>
             <circle opacity="0.1" cx="273" cy="122" r="4" fill="#D9D9D9"/>
-
-            <g>
-                <rect x="157" width="1" height="7" fill="#505760"/>
-                <rect x="161" y="3" width="1" height="7" transform="rotate(90 61 3)" fill="#505760"/>
-            </g>
-            <g>
-                <rect x="227" y="270" width="1" height="7" fill="#505760"/>
-                <rect x="231" y="273" width="1" height="7" transform="rotate(90 331 173)" fill="#505760"/>
-            </g>
-            <g>
-                <rect x="145" y="199" width="1" height="7" fill="#505760"/>
-                <rect x="149" y="202" width="1" height="7" transform="rotate(90 189 146)" fill="#505760"/>
-            </g>
-            <g>
-                <rect x="280" y="70" width="1" height="7" fill="#505760"/>
-                <rect x="284" y="73" width="1" height="7" transform="rotate(90 284 73)" fill="#505760"/>
-            </g>
-            
             <circle opacity="0.1" cx="171.5" cy="92.5" r="6.5" fill="#D9D9D9"/>
             <circle opacity="0.1" cx="130" cy="91" r="3" fill="#D9D9D9"/>
             <circle opacity="0.1" cx="173" cy="62" r="4" fill="#D9D9D9"/>

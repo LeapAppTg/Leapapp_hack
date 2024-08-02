@@ -7,21 +7,24 @@ import styles from "./styles.module.css";
 
 export const Canvas: FC = () => {
 
+    const { gameState, setGameState, addPendingScore, setMagnetTimeLeft, magnetTimeLeft, timeLeft } = useGame()
     const { triggerHapticFeedback } = useTelegram()
 
     const ref = useRef<ElementRef<"canvas">>(null)
     const sliderRef = useRef<ElementRef<"button">>(null)
-
-    const [width, setWidth] = useState(document.body.clientWidth - 32)
-    const [height, setHeight] = useState(document.body.clientHeight - 32)
-
+    
     const [items, setItems] = useState<Item[]>([])
+
+    const width = useRef(document.body.clientWidth - 32)
+    const height = useRef(document.body.clientHeight - 32)
     const heroX = useRef(54)
     const isHeroActive = useRef(false)
     const isHeroEating = useRef(false)
+    const baseMoveYValue = useRef(Math.floor(1 / 300 * height.current))
+    const heroYBottomPadding = useRef(Math.floor(height.current * 15 / 100))
     const speedModifier = useRef(0)
     const magnetTimeLeftRef = useRef(0)
-    const { gameState, setGameState, addPendingScore, setMagnetTimeLeft, magnetTimeLeft, timeLeft } = useGame()
+    
 
     useEffect(() => {
         if (timeLeft <= 20) {
@@ -46,14 +49,19 @@ export const Canvas: FC = () => {
 
     useEffect(() => {
         const listener = () => {
-            setWidth(document.body.clientWidth - 32)
-            setHeight(document.body.clientHeight - 32)
+            width.current = document.body.clientWidth - 32
+            height.current = document.body.clientHeight - 32
         }
         window.addEventListener("resize", listener)
         return () => {
             window.removeEventListener("resize", listener)
         }
     }, [])
+
+    useEffect(() => {
+        baseMoveYValue.current = Math.floor(1 / 300 * height.current)
+        heroYBottomPadding.current = Math.floor(height.current * 15 / 100)
+    }, [height.current])
 
     useEffect(() => {
         if (gameState !== GameState.Play && gameState !== GameState.Bomb && gameState !== GameState.TimeExpired) return 
@@ -89,8 +97,8 @@ export const Canvas: FC = () => {
                 }
             }
 
-            ctx.drawImage(hero, heroX.current, ctx.canvas.height - 190, 60, 60)
-            ctx.drawImage(slider, heroX.current, ctx.canvas.height - 130, 60, 40)
+            ctx.drawImage(hero, heroX.current, ctx.canvas.height - heroYBottomPadding.current - 100, 60, 60)
+            ctx.drawImage(slider, heroX.current, ctx.canvas.height - heroYBottomPadding.current - 40, 60, 40)
 
             if (gameState === GameState.Play) {
 
@@ -112,11 +120,11 @@ export const Canvas: FC = () => {
         function moveItems () {
             setItems(prev => {
                 if (prev.length === 0) return prev
-                let moved = prev.map(i => i.moveY(2 + speedModifier.current)).filter(i => i.y <= height)
-                if (magnetTimeLeftRef.current) moved = moved.map(i => i.y >= height - 260 && Math.abs(heroX.current - i.x) <= 100 ? i.moveX(heroX.current + 16 - i.x > 0 ? 1 : -1) : i)
+                let moved = prev.map(i => i.moveY(baseMoveYValue.current + speedModifier.current)).filter(i => i.y <= height.current)
+                if (magnetTimeLeftRef.current) moved = moved.map(i => i.y >= height.current - heroYBottomPadding.current - 160 && Math.abs(heroX.current - i.x) <= 100 ? i.moveX(heroX.current + 16 - i.x > 0 ? 1 : -1) : i)
                 const updated: Item[] = []
                 for (let item of moved) {
-                    if (item.y + 14 > height - 190 && item.y + 14 < height - 130 && item.x + 14 > heroX.current && item.x + 14 < heroX.current + 60) {
+                    if (item.y + 14 > height.current - heroYBottomPadding.current - 100 && item.y + 14 < height.current - heroYBottomPadding.current - 40 && item.x + 14 > heroX.current && item.x + 14 < heroX.current + 60) {
                         if (item.isBomb) {
                             setGameState(GameState.Bomb)
                             triggerHapticFeedback({ type: "impact", impact_style: "heavy" })
@@ -152,11 +160,10 @@ export const Canvas: FC = () => {
 
     
     useEffect(() => {
-        console.log('upp')
         if (gameState !== GameState.Play) return 
         function addItem () {
             const seed = Math.floor(Math.random() * 99)
-            const x = Math.floor(Math.random() * (width - 28))
+            const x = Math.floor(Math.random() * (width.current - 28))
             const item = tokensPool[seed](x)
             setItems(prev => {
                 return [...prev, item]
@@ -173,7 +180,7 @@ export const Canvas: FC = () => {
             if (!lastTouch) return
             let x = lastTouch.clientX
             if (x < 46) x = 46
-            if (x > width - 16) x = width - 16
+            if (x > width.current - 16) x = width.current - 16
             heroX.current = x - 46
         }
 
@@ -201,10 +208,10 @@ export const Canvas: FC = () => {
 
     return (
         <>
-            <button className={styles.slider} style={{ left: `${heroX.current}px` }} ref={sliderRef}>
+            <button className={styles.slider} style={{ left: `${heroX.current}px`, bottom: `${heroYBottomPadding.current}px` }} ref={sliderRef}>
                 <GameSlider/>
             </button>
-            <canvas className={styles.canvas} width={width} height={height} ref={ref}/>
+            <canvas className={styles.canvas} width={width.current} height={height.current} ref={ref}/>
         </>
     )
 }
