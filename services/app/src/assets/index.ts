@@ -30,5 +30,9 @@ import TicketEmoji from './TicketEmoji.svg?react'
 import BookWithFrame from './BookWithFrame.svg?react'
 import Facebook from './Facebook.svg?react'
 import Threads from './Threads.svg?react'
+import BronzeBadge from './BronzeBadge.svg?react'
+import SilverBadge from './SilverBadge.svg?react'
+import GoldBadge from './GoldBadge.svg?react'
+import SmallDialogueCloud from './SmallDialogueCloud.svg?react'
 
-export { DotsBackground, Threads, Facebook, Youtube, BookWithFrame, TicketEmoji, Discord, Instagram, Telegram, X, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }
+export { SmallDialogueCloud, BronzeBadge, SilverBadge, GoldBadge, DotsBackground, Threads, Facebook, Youtube, BookWithFrame, TicketEmoji, Discord, Instagram, Telegram, X, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }

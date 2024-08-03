@@ -1,0 +1,5 @@
+.table {
+    border-radius: 20px;
+    padding: 12px;
+    background: var(--color-grey-900);
+}

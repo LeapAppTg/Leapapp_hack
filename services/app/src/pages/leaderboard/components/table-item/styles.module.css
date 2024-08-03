@@ -1,0 +1,10 @@
+.place_wrapper {
+    position: relative;
+    width: 30px;
+    min-width: 30px;
+}
+
+.badge_frame {
+    width: 24px;
+    height: 24px;
+}

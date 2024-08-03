@@ -1,4 +1,4 @@
-import { IconColor } from "@icons";
+import { IconBox, IconColor, IconSize } from "@icons";
 import { MultiMapping, TextColor, TextXSRegular, classBuilder } from "@utils";
 import { FC, PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({ linkTo, ...restProp
 }
 
 const ButtonContent: FC<PropsWithChildren<ButtonProps>> = ({
-    style, disabled, onClick, children, fillFullWidth
+    style, disabled, onClick, children, fillFullWidth, rightIcon
 }) => {
 
     const { triggerHapticFeedback } = useTelegram()
@@ -42,6 +42,13 @@ const ButtonContent: FC<PropsWithChildren<ButtonProps>> = ({
     return (
         <button className={className} disabled={disabled} onClick={click}>
             {children}
+            {
+                rightIcon
+                ?
+                <IconBox size={IconSize.MediumBig} icon={rightIcon} color={ColorMapping.match(style)[1]} span/>
+                :
+                null
+            }
         </button>
     )
 }

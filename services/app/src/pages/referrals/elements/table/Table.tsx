@@ -1,7 +1,7 @@
 import { ApiRoutes, useData, usePagination } from "@hooks";
 import { FlexGapColumn16FullWidth, FlexGapRow4, TextSMedium, TextXSRegular, TextXSRegularGrey400 } from "@utils";
 import { FC } from "react";
-import { TableItem } from "../../components";
+import { NoReferrals, TableItem, TableTitle } from "../../components";
 import styles from "./styles.module.css";
 
 export const Table: FC = () => {
@@ -12,15 +12,7 @@ export const Table: FC = () => {
 
     return (
         <div className={FlexGapColumn16FullWidth.className}>
-            <div className={styles.table_title}>
-                <p className={TextSMedium.className}>Referrals</p>
-                <div className={FlexGapRow4.className}>
-                    <p className={TextXSRegularGrey400.className}>Total:</p>
-                    <p className={TextXSRegular.className}>
-                        {referralsCount ? referralsCount.count.format() : '0'}
-                    </p>
-                </div>
-            </div>
+            <TableTitle/>
             {
                 referralsList && referralsList[0].referrals.length
                 ?
@@ -28,7 +20,7 @@ export const Table: FC = () => {
                     {referralsList.flatMap(p => p.referrals).map(r => <TableItem {...r} key={r.username}/>)}
                 </div>
                 :
-                null
+                <NoReferrals/>
             }
         </div>
     )

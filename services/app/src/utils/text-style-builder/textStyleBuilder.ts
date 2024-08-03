@@ -161,6 +161,7 @@ export class TextStyleBuilder implements TextStyleBuilderProps {
 }
 
 export const TextXXXSRegularGrey400 = new TextStyleBuilder({ size: TextSize.XXXSmall, color: TextColor.Grey400, lineHeight: TextLineHeight.MediumSmall })
+export const TextXXXSSemiBold = new TextStyleBuilder({ size: TextSize.XXXSmall, color: TextColor.MainWhite, weight: TextWeight.SemiBold, lineHeight: TextLineHeight.MediumSmall })
 export const TextSRegular = new TextStyleBuilder({ size: TextSize.Small, color: TextColor.MainWhite, lineHeight: TextLineHeight.Big })
 export const TextSMedium = TextSRegular.update({ weight: TextWeight.Medium })
 export const TextSSemiBold = TextSRegular.update({ weight: TextWeight.SemiBold })

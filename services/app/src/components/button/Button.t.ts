@@ -1,3 +1,4 @@
+import { IconFC } from "@icons"
 
 export enum ButtonStyle {
     Primary = 'primary',
@@ -11,5 +12,6 @@ export type ButtonProps = {
     onClick?: () => any,
     disabled?: boolean,
     linkTo?: string,
-    fillFullWidth?: boolean
+    fillFullWidth?: boolean,
+    rightIcon?: IconFC
 }

@@ -70,6 +70,7 @@ type FlexGapBuilderProps = {
     direction?: FlexDirection,
     /** @width 100% */
     fillFullWidth?: boolean,
+    fillFullHeight?: boolean,
     alignItems?: AlignItems,
     justifyContent?: JustifyContent,
     hideOverflow?: boolean,
@@ -80,6 +81,7 @@ export class FlexGapBuilder implements FlexGapBuilderProps {
     gap: FlexGap | undefined;
     direction: FlexDirection | undefined;
     fillFullWidth: boolean | undefined;
+    fillFullHeight: boolean | undefined;
     alignItems: AlignItems| undefined;
     justifyContent: JustifyContent | undefined;
     hideOverflow: boolean | undefined;
@@ -105,7 +107,7 @@ export class FlexGapBuilder implements FlexGapBuilderProps {
     public get className () {
         return classBuilder(
             styles,
-            [this.direction, this.gap, { fill_full_width: this.fillFullWidth }, this.alignItems, this.justifyContent, { hide_overflow: this.hideOverflow }, { relative_position: this.relativePosition }]
+            [this.direction, this.gap, { fill_full_width: this.fillFullWidth }, { fill_full_height: this.fillFullHeight }, this.alignItems, this.justifyContent, { hide_overflow: this.hideOverflow }, { relative_position: this.relativePosition }]
         )
     }
     
@@ -140,6 +142,7 @@ export const FlexGapColumn8 = new FlexGapBuilder({ direction: FlexDirection.Colu
 export const FlexGapColumn8FullWidth = FlexGapColumn8.update({ fillFullWidth: true })
 export const FlexGapColumn12 = new FlexGapBuilder({ direction: FlexDirection.Column, gap: FlexGap.Gap12 })
 export const FlexGapColumn12FullWidth = FlexGapColumn12.update({ fillFullWidth: true })
+export const FlexGapColumn12FullWidthFullHeight = FlexGapColumn12FullWidth.update({ fillFullHeight: true })
 export const FlexGapColumn16 = new FlexGapBuilder({ direction: FlexDirection.Column, gap: FlexGap.Gap16 })
 export const FlexGapColumn16FullWidth = FlexGapColumn16.update({ fillFullWidth: true })
 export const FlexGapColumn20 = new FlexGapBuilder({ direction: FlexDirection.Column, gap: FlexGap.Gap20 })

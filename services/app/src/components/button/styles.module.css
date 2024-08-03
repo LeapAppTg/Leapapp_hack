@@ -62,6 +62,7 @@
     border-radius: 0;
     padding: 0;
     height: unset;
+    line-height: 150%;
 }
 .link:active {
     color: var(--color-purple-700);
