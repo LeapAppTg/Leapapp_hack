@@ -13,34 +13,20 @@
     position: absolute;
     width: 54px;
     height: 60px;
-    fill: var(--color-quests-colors-blue-1);
+    fill: var(--color-quests-colors-purple-1);
     z-index: -1;
 }
-
-.locked .border {
-    fill: var(--color-quests-colors-blue-1-dark);
-}
-
 .background {
     position: absolute;
     width: 43.784px;
     height: 48.74px;
-    fill: var(--color-quests-colors-blue-2);
-    filter: drop-shadow(0px 0px 32px rgba(14, 39, 106, 0.60));
+    fill: var(--color-quests-colors-purple-1);
+    filter: drop-shadow(0px 0px 32px rgba(71, 14, 165, 0.60));
     z-index: -1;
 }
 
-.locked .background {
-    fill: var(--color-quests-colors-blue-2-dark);
-}
-
-.locked .icon_wrapper svg:first-child path {
-    stroke: var(--color-grey-500);
-}
-
-.status_icon {
-    position: absolute;
-    top: -6px;
+.half_opacity > div:first-child, .half_opacity > div:nth-child(2) {
+    opacity: 0.5;
 }
 
 .hidden .border {

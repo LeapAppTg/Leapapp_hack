@@ -67,7 +67,7 @@ export const QuestDetails: FC<QuestDetailsProps> = ({ uuid }) => {
                         ?
                         <span className={FlexGapRow4.className}>
                             <HeroGood width={20} height={20}/>
-                            {details.quest.rewardPoints.format("default", 2)}
+                            {details.quest.rewardPoints.format()}
                         </span>
                         :
                         null
@@ -77,7 +77,7 @@ export const QuestDetails: FC<QuestDetailsProps> = ({ uuid }) => {
                         ?
                         <span className={FlexGapRow4.className}>
                             <TicketEmoji width={20} height={20}/>
-                            {details.quest.rewardGameTickets.format("default", 2)}
+                            {details.quest.rewardGameTickets.format()}
                         </span>
                         :
                         null

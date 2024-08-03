@@ -123,7 +123,7 @@ export const RewardTask: FC<RewardTaskProps> = ({
                             pointsReward
                             ?
                             <div className={FlexGapRow4.className}>
-                                <p className={TextXXSRegular.className}>+{pointsReward.format("default", 2)}</p>
+                                <p className={TextXXSRegular.className}>+{pointsReward.format()}</p>
                                 <HeroThugCoin width={20} height={20}/>
                             </div>
                             :
@@ -133,7 +133,7 @@ export const RewardTask: FC<RewardTaskProps> = ({
                             gameTicketsReward
                             ?
                             <div className={FlexGapRow4.className}>
-                                <p className={TextXXSRegular.className}>+{gameTicketsReward.format("default", 2)}</p>
+                                <p className={TextXXSRegular.className}>+{gameTicketsReward.format()}</p>
                                 <TicketEmoji width={20} height={20}/>
                             </div>
                             :

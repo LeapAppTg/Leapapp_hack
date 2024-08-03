@@ -24,7 +24,7 @@ export const QuestItem: FC<QuestItemProps> = ({
     return (
         <div className={classJoiner(
             FlexGapRow16FullWidth.update({ justifyContent: JustifyContent.SpaceBetween }).className, styles.task,
-            status === QuestStatus.Locked ? styles.locked : undefined
+            status === QuestStatus.Locked || completionStatus === QuestCompletionStatus.Claimed ? styles.half_opacity : undefined
         )} onClick={onClick}>
             <div className={styles.icon_wrapper}>
                 <IconBox icon={StarsLightSparkleIcon} size={IconSize.MediumBig}/>
@@ -34,21 +34,6 @@ export const QuestItem: FC<QuestItemProps> = ({
                 <svg className={styles.background} xmlns="http://www.w3.org/2000/svg" width="44" height="50" viewBox="0 0 44 50">
                     <path d="M0.109375 14.6384C0.109375 13.0419 0.978628 11.5721 2.37773 10.8027L19.8912 1.17223C21.2051 0.449749 22.7974 0.44975 24.1113 1.17224L41.6248 10.8027C43.0239 11.5721 43.8932 13.0419 43.8932 14.6384V35.362C43.8932 36.9584 43.0239 38.4282 41.6248 39.1976L24.1113 48.8281C22.7974 49.5506 21.2051 49.5506 19.8912 48.8281L2.37773 39.1976C0.978626 38.4282 0.109375 36.9584 0.109375 35.362V14.6384Z"/>
                 </svg>
-                {
-                    completionStatus === QuestCompletionStatus.Claimed
-                    ?
-                    <div className={styles.status_icon}>
-                        <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
-                    </div>                
-                    :
-                    status === QuestStatus.Locked
-                    ?
-                    <div className={styles.status_icon}>
-                        <CircleIconWrapper color={CircleIconWrapperColor.Grey700} icon={SecurityLockIcon}/>
-                    </div>    
-                    :
-                    null
-                }
             </div>
             <div className={FlexGapColumn4AlignFlexStart.update({ fillFullWidth: true }).className}>
                 <p className={TextXSMedium.className}>{name}</p>
@@ -58,9 +43,17 @@ export const QuestItem: FC<QuestItemProps> = ({
                 </div>
             </div>
             {
-                status !== QuestStatus.Locked
+                completionStatus === QuestCompletionStatus.Claimed
+                ?
+                <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
+                :
+                status === QuestStatus.Active
                 ?
                 <IconBox icon={ArrowIcon} size={IconSize.MediumBig}/>
+                :
+                status === QuestStatus.Locked || status === QuestStatus.Finished
+                ?
+                <CircleIconWrapper color={CircleIconWrapperColor.Grey700} icon={SecurityLockIcon}/>
                 :
                 null
             }

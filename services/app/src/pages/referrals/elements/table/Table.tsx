@@ -1,14 +1,14 @@
+import { ApiRoutes, useData, usePagination } from "@hooks";
 import { FlexGapColumn16FullWidth, FlexGapRow4, TextSMedium, TextXSRegular, TextXSRegularGrey400 } from "@utils";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { TableItem } from "../../components";
 import styles from "./styles.module.css";
-import { ApiRoutes, useData, usePagination } from "@hooks";
 
 export const Table: FC = () => {
 
     const { data: referralsList, setSize, isValidating } = useData(ApiRoutes.GetReferralsList)
     const { data: referralsCount } = useData(ApiRoutes.GetReferralsCount)
-    const tableRef = usePagination(setSize, isValidating, referralsList !== undefined && !referralsList[0].next)
+    const tableRef = usePagination(setSize, isValidating, referralsList !== undefined && !referralsList[referralsList.length - 1].next)
 
     return (
         <div className={FlexGapColumn16FullWidth.className}>

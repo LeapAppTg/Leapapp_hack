@@ -17,7 +17,7 @@ export const ClaimButton: FC = () => {
             await postClaimReferralsPoints(authToken)
             sendAlert({
                 status: AlertStatus.Success,
-                message: `Claimed +${unclaimedPoints?.count.format("default", 2)} points`,
+                message: `Claimed +${unclaimedPoints?.count.format()} points`,
                 withConfetti: true
             })
             mutate({ count: 0 })
@@ -37,7 +37,7 @@ export const ClaimButton: FC = () => {
             Claim
             <span className={FlexGapRow4.className}>
                 <HeroThugCoin width={20} height={20}/>
-                {unclaimedPoints.count.format("default", 2)}
+                {unclaimedPoints.count.format()}
             </span>
         </Button>
     )
