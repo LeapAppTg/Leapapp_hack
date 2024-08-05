@@ -32,9 +32,7 @@ export const TableItem: FC<TableItemProps> = ({
             </div>
             <div className={FlexGapRowFullWidthJustifyFlexStart.className}>
                 <p className={TextXSMedium.className}>
-                    @{username.slice(0, 2)}
-                    {username.length <= 6 ? '***' : Array(username.length - 3).fill('*').join('')}
-                    {username.slice(-1)}
+                    @{username}
                 </p>
             </div>
             <div className={FlexGapRow4.className}>

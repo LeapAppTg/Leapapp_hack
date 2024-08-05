@@ -12,9 +12,7 @@ export const TableItem: FC<Referral> = ({
         <div className={FlexGapRow8FullWidthJustifySpaceBetween.className}>
             <div className={FlexGapColumn4AlignFlexStart.className}>
                 <p className={TextXSMedium.className}>
-                    @{username.slice(0, 2)}
-                    {username.length <= 6 ? '***' : Array(username.length - 3).fill('*').join('')}
-                    {username.slice(-1)}
+                    @{username}
                 </p>
                 <div className={FlexGapRow4.className}>
                     <IconBox icon={UserProfileIcon} size={IconSize.Medium} color={IconColor.Grey400}/>
