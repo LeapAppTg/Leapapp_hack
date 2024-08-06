@@ -44,7 +44,7 @@ pipeline {
                         APP_URL            = 'https://leapapp.fun'
                     }
                     else if (env.BRANCH_NAME == 'dev') {
-                        AWS_DEFAULT_REGION = 'us-west-2'
+                        AWS_DEFAULT_REGION = 'us-east-1'
                         AWS_S3_BUCKET      = 'leap-dev-app-fe-cdn-origin'
                         AWS_CLOUDFRONT_ID  = 'E1OEDALGBRCTOI'
                         API_URL            = 'https://api.dev.leapapp.fun'
