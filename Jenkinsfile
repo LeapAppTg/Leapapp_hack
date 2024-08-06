@@ -37,18 +37,18 @@ pipeline {
             steps {
                 script {
                     if (env.BRANCH_NAME == 'master') {
-                        AWS_DEFAULT_REGION = 'us-west-2'
-                        AWS_S3_BUCKET      = 'leap-prod-app-fe-cdn-origin'
-                        AWS_CLOUDFRONT_ID  = 'E2XG8IXXIMREQS'
-                        API_URL            = 'https://api.leapapp.fun'
-                        APP_URL            = 'https://leapapp.fun'
+                        env.AWS_DEFAULT_REGION = 'us-west-2'
+                        env.AWS_S3_BUCKET      = 'leap-prod-app-fe-cdn-origin'
+                        env.AWS_CLOUDFRONT_ID  = 'E2XG8IXXIMREQS'
+                        env.API_URL            = 'https://api.leapapp.fun'
+                        env.APP_URL            = 'https://leapapp.fun'
                     }
                     else if (env.BRANCH_NAME == 'dev') {
-                        AWS_DEFAULT_REGION = 'us-east-1'
-                        AWS_S3_BUCKET      = 'leap-dev-app-fe-cdn-origin'
-                        AWS_CLOUDFRONT_ID  = 'E1OEDALGBRCTOI'
-                        API_URL            = 'https://api.dev.leapapp.fun'
-                        APP_URL            = 'https://dev.leapapp.fun'
+                        env.AWS_DEFAULT_REGION = 'us-east-1'
+                        env.AWS_S3_BUCKET      = 'leap-dev-app-fe-cdn-origin'
+                        env.AWS_CLOUDFRONT_ID  = 'E1OEDALGBRCTOI'
+                        env.API_URL            = 'https://api.dev.leapapp.fun'
+                        env.APP_URL            = 'https://dev.leapapp.fun'
                     }
                 }
             }
