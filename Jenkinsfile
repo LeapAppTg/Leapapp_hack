@@ -36,14 +36,14 @@ pipeline {
             }
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'master') {
+                    if (BRANCH_NAME = 'master') {
                         AWS_DEFAULT_REGION = 'us-west-2'
                         AWS_S3_BUCKET      = 'leap-prod-app-fe-cdn-origin'
                         AWS_CLOUDFRONT_ID  = 'E2XG8IXXIMREQS'
                         API_URL            = 'https://api.leapapp.fun'
                         APP_URL            = 'https://leapapp.fun'
                     }
-                    else if (env.BRANCH_NAME == 'dev') {
+                    else if (BRANCH_NAME = 'dev') {
                         AWS_DEFAULT_REGION = 'us-east-1'
                         AWS_S3_BUCKET      = 'leap-dev-app-fe-cdn-origin'
                         AWS_CLOUDFRONT_ID  = 'E1OEDALGBRCTOI'
