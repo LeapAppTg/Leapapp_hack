@@ -3,26 +3,63 @@ pipeline {
     options {
         skipDefaultCheckout(true)
     }
-    environment {
-        AWS_DEFAULT_REGION = 'us-west-2'
-        AWS_S3_BUCKET      = 'leap-prod-app-fe-cdn-origin'
-        AWS_CLOUDFRONT_ID  = 'E2XG8IXXIMREQS'
-        API_URL            = 'https://api.leapapp.fun'
-        APP_URL            = 'https://leapapp.fun'
-    }
     stages {
         stage('Clean Workspace') {
+            when {
+                anyOf {
+                    branch 'master'
+                    branch 'dev'
+                }
+            }
             steps {
                 cleanWs()
                 sh 'docker system prune -a --volumes -f'
             }
         }
         stage('Checkout') {
+            when {
+                anyOf {
+                    branch 'master'
+                    branch 'dev'
+                }
+            }
             steps {
                 checkout scm
             }
         }
+        stage('Set Env') {
+            when {
+                anyOf {
+                    branch 'master'
+                    branch 'dev'
+                }
+            }
+            steps {
+                script {
+                    if (env.BRANCH_NAME == 'master') {
+                        env.AWS_DEFAULT_REGION = 'us-west-2'
+                        env.AWS_S3_BUCKET      = 'leap-prod-app-fe-cdn-origin'
+                        env.AWS_CLOUDFRONT_ID  = 'E2XG8IXXIMREQS'
+                        env.API_URL            = 'https://api.leapapp.fun'
+                        env.APP_URL            = 'https://leapapp.fun'
+                    }
+                    else if (env.BRANCH_NAME == 'dev') {
+                        env.AWS_DEFAULT_REGION = 'us-east-1'
+                        env.AWS_S3_BUCKET      = 'leap-dev-app-fe-cdn-origin'
+                        env.AWS_CLOUDFRONT_ID  = 'E1OEDALGBRCTOI'
+                        env.API_URL            = 'https://api.dev.leapapp.fun'
+                        env.APP_URL            = 'https://dev.leapapp.fun'
+                    }
+                }
+            }
+        }
         stage('Update Env') {
+            when {
+                anyOf {
+                    branch 'master'
+                    branch 'dev'
+                }
+            }
             steps {
                 script {
                     dir('services/app') {
