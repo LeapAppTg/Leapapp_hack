@@ -1,16 +1,19 @@
 import { HeroGood } from "@assets";
 import { AlertStatus, Loader as LoaderComponent } from "@components";
 import { postStartGame } from "@services";
-import { FC, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GameState, useGame } from "../../providers";
 import styles from "./styles.module.css";
 import { useAlerts, useAuth } from "@providers";
 import { ApiError } from "@builders";
 import { ApiRoutes, useData } from "@hooks";
+import { GameState } from "../../config";
 
-export const Loader: FC = () => {
-    const { setGameState } = useGame()
+type Props = {
+    setGameState: Dispatch<SetStateAction<GameState>>
+}
+
+export const Loader: FC<Props> = ({ setGameState }) => {
     const { authToken } = useAuth()
     const { sendAlert } = useAlerts()
     const [gameSubmitted, setGameSubmitted] = useState<boolean>(false)

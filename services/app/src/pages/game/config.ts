@@ -1,5 +1,14 @@
+export enum GameState {
+    Countdown,
+    Play,
+    Bomb,
+    TimeExpired,
+    BombEnd,
+    TimeEnd
+}
+
 export const GameConfig = {
-    gameDuration: 60,
+    gameDuration: 61,
     magnetDuration: 10,
     speedIncreaseTime: 30
 }
