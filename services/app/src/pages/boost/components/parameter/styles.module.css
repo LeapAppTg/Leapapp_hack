@@ -33,6 +33,7 @@
 .button {
     min-width: 110px;
     width: 110px;
+    gap: 4px;
     padding: 0;
     flex-direction: column;
     white-space: nowrap;

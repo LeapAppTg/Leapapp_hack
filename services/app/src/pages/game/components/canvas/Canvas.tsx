@@ -223,7 +223,8 @@ const CanvasContent: FC<Props> = ({
     }, [gameState])
 
     useEffect(() => {
-        if (gameState !== GameState.Play && gameState !== GameState.TimeExpired) return 
+        if (gameState !== GameState.Play && gameState !== GameState.TimeExpired) return
+        
         function onMove (e: TouchEvent) {
             const lastTouch = e.touches.item(e.touches.length - 1)
             if (!lastTouch) return
@@ -255,7 +256,7 @@ const CanvasContent: FC<Props> = ({
         }
 
         return () => clean()
-    }, [gameState, sliderRef.current])
+    }, [gameState])
 
 
     return (

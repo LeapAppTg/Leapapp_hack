@@ -1,4 +1,4 @@
-import { ApiRoutes, useData } from "@hooks";
+import { ApiRoutes, useData, useUnixTimestamp } from "@hooks";
 import { useTelegram } from "@providers";
 import { classJoiner, currentUnixTimestamp } from "@utils";
 import { FC, useCallback, useEffect, useMemo, useReducer, useState } from "react";
@@ -10,10 +10,16 @@ import styles from "./styles.module.css";
 export const GamePage: FC = () => {
     const [gameState, setGameState] = useState<GameState>(GameState.Countdown)
     const [score, setScore] = useState<number>(0)
-    const [gameEndAt, setGameEndAt] = useState<number>(currentUnixTimestamp() + GameConfig.gameDuration)
-    const [magnetEndAt, setMagnetEndAt] = useState<number>(currentUnixTimestamp())
+    const currrentTime = useUnixTimestamp()
+    const [gameEndAt, setGameEndAt] = useState<number>(currrentTime + GameConfig.gameDuration)
+    const [magnetEndAt, setMagnetEndAt] = useState<number>(currrentTime)
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
     const { triggerHapticFeedback } = useTelegram()
+
+    const magnetActive = useMemo(() => {
+        if (magnetEndAt > currrentTime) return true
+        return false
+    }, [magnetEndAt, currrentTime])
 
     const highScore = userProfile?.gameRecord || 0;
     const isNewHighScore = score > highScore;
@@ -76,9 +82,9 @@ export const GamePage: FC = () => {
         if (gameState === GameState.TimeEnd) return styles.gold_highlight
         if (gameState === GameState.Bomb) return styles.red_highlight
         if (isNewHighScore) return styles.gold_highlight
-        if (magnetEndAt > currentUnixTimestamp()) return styles.pink_highlight
+        if (magnetActive) return styles.pink_highlight
         return undefined
-    }, [gameState, isNewHighScore, magnetEndAt])
+    }, [gameState, isNewHighScore, magnetActive])
 
     if (gameState === GameState.TimeEnd || gameState === GameState.BombEnd) return <EndScreen gameState={gameState} reset={reset} score={score}/>
 

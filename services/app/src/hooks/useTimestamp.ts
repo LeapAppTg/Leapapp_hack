@@ -32,24 +32,25 @@ export const useUnixTimestamp = () => {
 
 export const useCountdown = (timeEnd: Date | number) => {
 
-  const [endTimestamp] = useState(typeof timeEnd === 'number' ? timeEnd : timeEnd.getTime())
+  const endTimestamp = useMemo(() => typeof timeEnd === 'number' ? timeEnd : timeEnd.getTime(), [timeEnd])
   const timestamp = useCurrentTimestamp()
 
   const timeLeft = useMemo(() => {
       return TimeObject.fromTimestamp(endTimestamp - timestamp)
-  }, [timestamp])
+  }, [timestamp, endTimestamp])
 
   return { timeLeft }
 }
 
-export const useUnixCountdown = (timeEnd:  number) => {
+export const useUnixCountdown = (timeEnd: number) => {
 
-    const [endTimestamp] = useState(timeEnd)
     const timestamp = useUnixTimestamp()
 
+    console.log(timestamp)
+
     const timeLeft = useMemo(() => {
-        return TimeObject.fromTimestamp((endTimestamp - timestamp) * 1000)
-    }, [timestamp])
+        return TimeObject.fromTimestamp((timeEnd - timestamp) * 1000)
+    }, [timestamp, timeEnd])
 
     return { timeLeft }
 }

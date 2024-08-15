@@ -30,7 +30,7 @@ export const Balance: FC = () => {
                 </div>
             }
             <p className={TextXSRegular.className}>
-                Your balance
+                {userProfile?.firstName} {userProfile?.lastName}
             </p>
             <div className={FlexGapRow24.className}>
                 <div className={FlexGapRow8.className}>
