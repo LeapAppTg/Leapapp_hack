@@ -1,11 +1,11 @@
-import { Discord, Facebook, GoldCoin, HeroGood, HeroThugCoin, Instagram, Telegram, Threads, TicketEmoji, X, Youtube } from "@assets";
+import { Coin, Discord, Facebook, GoldCoin, HeroGood, Instagram, Telegram, Threads, TicketEmoji, X, Youtube } from "@assets";
 import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
 import { ApiRoutes, useData } from "@hooks";
 import { ArrowIcon, CheckmarkIcon, IconBox, IconSize } from "@icons";
 import { useAlerts, useAuth, useTelegram } from "@providers";
 import { postClaimTask } from "@services";
 import { QuestCompletionStatus, QuestTask, TaskCompletionStatus, TaskType } from "@types";
-import { FlexGapColumn4AlignFlexStart, FlexGapRow12, FlexGapRow12FullWidth, FlexGapRow4, FlexGapRow8, FlexGapRow8FullWidthJustifySpaceBetween, JustifyContent, TextAlign, TextXSMedium, TextXXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
+import { FlexGapColumn4AlignFlexStart, FlexGapRow12, FlexGapRow12FullWidth, FlexGapRow4, FlexGapRow8, JustifyContent, TextAlign, TextXSMedium, TextXXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
@@ -124,7 +124,7 @@ export const RewardTask: FC<RewardTaskProps> = ({
                             ?
                             <div className={FlexGapRow4.className}>
                                 <p className={TextXXSRegular.className}>+{pointsReward.format()}</p>
-                                <HeroThugCoin width={20} height={20}/>
+                                <Coin width={20} height={20}/>
                             </div>
                             :
                             null

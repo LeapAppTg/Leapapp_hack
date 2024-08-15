@@ -1,4 +1,4 @@
-import { BookOpenIcon, IconBox, IconColor, IconFC, IconSize, ListTaskCheckmarkIcon, PackageBoxHomeIcon, SubstractGroupIcon, UserProfileIcon } from "@icons";
+import { ColorPaletteIcon, IconBox, IconColor, IconFC, IconSize, ListTaskCheckmarkIcon, PackageBoxHomeIcon, SpaceRocketIcon, UserProfileIcon } from "@icons";
 import { TextColor, TextXXXSRegularGrey400, classJoiner } from "@utils";
 import { FC } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
@@ -12,8 +12,8 @@ export const Navigation: FC = () => {
             <CurrentLink to="/quests" icon={ListTaskCheckmarkIcon} title="Quests"/>
             <CurrentLink to="/referrals" icon={UserProfileIcon} title="Referrals"/>
             <CurrentLink to="/home" icon={PackageBoxHomeIcon} title="Home"/>
-            <CurrentLink to="/learning" icon={BookOpenIcon} title="Learning"/>
-            <CurrentLink to="/squads" icon={SubstractGroupIcon} title="Squads"/>
+            <CurrentLink to="/boost" icon={SpaceRocketIcon} title="Boost"/>
+            <CurrentLink to="/customize" icon={ColorPaletteIcon} title="Customize"/>
         </div>
         </>
     )

@@ -1,4 +1,4 @@
-import { HeroThugCoin, TicketEmoji } from "@assets";
+import { Coin, TicketEmoji } from "@assets";
 import { AlertStatus, AnimatedSquares, Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useAlerts, useTelegram } from "@providers";
@@ -59,7 +59,7 @@ export const WelcomeBonus: FC = () => {
                                 Bonus Leaps
                             </p>
                             <div className={FlexGapRow8.className}>
-                                <HeroThugCoin width={40} height={40}/>
+                                <Coin width={40} height={40}/>
                                 <p className={TextXLMedium.className}>
                                     {Number(3000).format()}
                                 </p>

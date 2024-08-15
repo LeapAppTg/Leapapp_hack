@@ -13,7 +13,12 @@ export enum TelegramEmojiType {
     ChampangeGlasses = 'champange_glasses',
     Megaphone = 'megaphone',
     Handwave = 'handwave',
-    Cup = 'cup'
+    Cup = 'cup',
+    Arm = 'arm',
+    Leg = 'leg',
+    Dance = 'dance',
+    Nerd = 'nerd',
+    ColorPalette = 'color_palette'
 }
 
 export enum TelegramEmojiSize {
@@ -29,6 +34,10 @@ export enum TelegramEmojiSize {
      * @width 40px
      */
     Medium = 'medium',
+    /**
+     * @width 32px
+     */
+    Submedium = 'submedium',
     /**
      * @width 28px
      */

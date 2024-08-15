@@ -3,7 +3,8 @@ export enum PageTitleBackgroundColor {
     LightBlue = 'light_blue',
     Yellow = 'yellow',
     Purple = 'purple',
-    Green = 'green'
+    Green = 'green',
+    Grey= 'grey'
 }
 
 export type PageTitleBackgroundProps = {

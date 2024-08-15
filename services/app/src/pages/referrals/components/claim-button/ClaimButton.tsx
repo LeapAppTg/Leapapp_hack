@@ -1,4 +1,4 @@
-import { HeroThugCoin } from "@assets";
+import { Coin } from "@assets";
 import { AlertStatus, Button, ButtonStyle } from "@components";
 import { ApiRoutes, useData } from "@hooks";
 import { useAlerts, useAuth } from "@providers";
@@ -36,7 +36,7 @@ export const ClaimButton: FC = () => {
         <Button fillFullWidth style={ButtonStyle.Secondary} onClick={onClaim}>
             Claim
             <span className={FlexGapRow4.className}>
-                <HeroThugCoin width={20} height={20}/>
+                <Coin width={20} height={20}/>
                 {unclaimedPoints.count.format()}
             </span>
         </Button>

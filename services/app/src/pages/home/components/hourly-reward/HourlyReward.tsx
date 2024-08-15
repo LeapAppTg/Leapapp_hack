@@ -1,4 +1,4 @@
-import { HeroThugCoin, TicketEmoji } from "@assets";
+import { Coin, TicketEmoji } from "@assets";
 import { ApiError } from "@builders";
 import { AlertStatus, Button, ButtonStyle, StickyPanel, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData, useUnixTimestamp } from "@hooks";
@@ -59,7 +59,7 @@ export const HourlyReward: FC = () => {
                     <Button style={ButtonStyle.Primary} fillFullWidth onClick={onClaim}>
                         Claim
                         <span className={FlexGapRow4.className}>
-                            <HeroThugCoin height={24} width={24}/>
+                            <Coin height={24} width={24}/>
                             {pointsCount}
                         </span>
                         <span className={FlexGapRow4.className}>
@@ -73,7 +73,7 @@ export const HourlyReward: FC = () => {
                             Farming...
                         </p>
                         <div className={FlexGapRow4.className}>
-                            <HeroThugCoin height={24} width={24}/>
+                            <Coin height={24} width={24}/>
                             <p className={TextXSRegular.update({ color: TextColor.Purple925 }).className}>
                                 {pointsCount}
                             </p>

@@ -1,9 +1,9 @@
-import { HeroThugCoin } from "@assets";
+import { Coin } from "@assets";
 import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
 import { ArrowIcon, CheckmarkIcon, IconBox, IconColor, IconSize, QuestionCircleIcon, SecurityLockIcon, StarsLightSparkleIcon } from "@icons";
 import { useBottomPopup } from "@providers";
 import { QuestCompletionStatus, QuestInfo, QuestStatus } from "@types";
-import { AlignItems, FlexGapColumn4, FlexGapColumn4AlignFlexStart, FlexGapRow16FullWidth, FlexGapRow4, FlexGapRow4FullWidth, JustifyContent, TextColor, TextXSMedium, TextXSRegular, TextXSRegularGrey400, classJoiner } from "@utils";
+import { FlexGapColumn4AlignFlexStart, FlexGapRow16FullWidth, FlexGapRow4, FlexGapRow4FullWidth, JustifyContent, TextXSMedium, TextXSRegular, TextXSRegularGrey400, classJoiner } from "@utils";
 import { FC } from "react";
 import { QuestDetails } from "../../elements";
 import styles from "./styles.module.css";
@@ -38,7 +38,7 @@ export const QuestItem: FC<QuestItemProps> = ({
             <div className={FlexGapColumn4AlignFlexStart.update({ fillFullWidth: true }).className}>
                 <p className={TextXSMedium.className}>{name}</p>
                 <div className={FlexGapRow4.className}>
-                    <HeroThugCoin width={20} height={20}/>
+                    <Coin width={20} height={20}/>
                     <p className={TextXSRegular.className}>{rewardPoints.format()}</p>
                 </div>
             </div>

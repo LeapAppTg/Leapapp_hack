@@ -16,7 +16,7 @@ export const QrCodePage: FC = () => {
             <Link className={styles.qr} to={'https://t.me/leapapp_bot'}>
                 <img src='/other/tg_qr.png'/>
             </Link>
-            <Link to={'https://t.me/testernightbot'}>
+            <Link to={'https://t.me/leapapp_bot'}>
                 <h3 className={TextMMedium.className}>
                     @LeapApp_bot
                 </h3>

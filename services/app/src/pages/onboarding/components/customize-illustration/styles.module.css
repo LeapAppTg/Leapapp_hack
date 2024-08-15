@@ -1,0 +1,10 @@
+.bg {
+    top: 20%;
+    right: -15%;
+    left: unset;
+    z-index: 0;
+}
+
+.bg_wrapper {
+    overflow: hidden;
+}

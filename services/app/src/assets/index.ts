@@ -34,5 +34,10 @@ import BronzeBadge from './BronzeBadge.svg?react'
 import SilverBadge from './SilverBadge.svg?react'
 import GoldBadge from './GoldBadge.svg?react'
 import SmallDialogueCloud from './SmallDialogueCloud.svg?react'
+import AirdropOnboarding from './AirdropOnboarding.svg?react'
+import UpgradesOnboarding from './UpgradesOnboarding.svg?react'
+import ReferralsOnboarding from './ReferralsOnboarding.svg?react'
+import CustomizationOnboarding from './CustomizationOnboarding.svg?react'
+import Coin from './Coin.svg?react'
 
-export { SmallDialogueCloud, BronzeBadge, SilverBadge, GoldBadge, DotsBackground, Threads, Facebook, Youtube, BookWithFrame, TicketEmoji, Discord, Instagram, Telegram, X, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }
+export { AirdropOnboarding, Coin, UpgradesOnboarding, ReferralsOnboarding, CustomizationOnboarding, SmallDialogueCloud, BronzeBadge, SilverBadge, GoldBadge, DotsBackground, Threads, Facebook, Youtube, BookWithFrame, TicketEmoji, Discord, Instagram, Telegram, X, HeroThug, Wrench, HeroThugCoin, MapPathCorner, DialogueCloud, SquaresPattern, CoinsIlustration, MapPathVertical, TriadSpaceBackground, TilesDarkBackground, BombCoin, DollarCoin, EyeCoin, GoldCoin, MagnetCoin, RocketCoin, UfoCoin, HeroGood, HeroHalfOpen, HeroOpen, HeroSad, HeroSad2 }

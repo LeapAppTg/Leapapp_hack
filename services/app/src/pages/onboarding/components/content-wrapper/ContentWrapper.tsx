@@ -1,52 +1,56 @@
 import { Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor } from "@components";
-import { FlexGapColumn20FullWidth, FlexGapColumn24FullWidth, TextSRegular, TextXLSemiBold, classJoiner } from "@utils";
+import { FlexGapColumn20FullWidth, FlexGapColumn24FullWidth, FlexGapRow8, TextSRegular, TextXLSemiBold, classJoiner } from "@utils";
 import { FC, PropsWithChildren, ReactNode } from "react";
 import styles from "./styles.module.css";
 
 type ContentWrapperProps = {
-    color?: PageTitleBackgroundColor,
-    title: string,
+    title: string | ReactNode,
     description: string | ReactNode,
-    noSkip?: boolean,
-    topButtonLabel?: string,
     onNext?: () => any,
-    onSkip?: () => any,
-    fillFullHeight?: boolean
+    step: number
 }
 
 export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = ({
-    title, description, children, color, noSkip, topButtonLabel, onNext, onSkip, fillFullHeight
+    title, description, children, onNext, step
 }) => {
 
     return (
         <div className={styles.wrapper}>
-            { color ? <PageTitleBackground color={color}/> : null }
-
-            <div className={classJoiner(FlexGapColumn24FullWidth.className, fillFullHeight ? styles.full_height : undefined)}>
-                {children}
-                <h1 className={TextXLSemiBold.className}>
-                    {title}
-                </h1>
-                <p className={TextSRegular.className}>
-                    {description}
-                </p>
-            </div>
+            {children}
 
             <div className={FlexGapColumn20FullWidth.className}>
+
+                <div className={FlexGapColumn24FullWidth.className}>
+                    <h1 className={TextXLSemiBold.className}>
+                        {title}
+                    </h1>
+                    <p className={TextSRegular.className}>
+                        {description}
+                    </p>
+                </div>
+
+                <div className={FlexGapRow8.className}>
+                    <Dot isActive={step === 1}/>
+                    <Dot isActive={step === 2}/>
+                    <Dot isActive={step === 3}/>
+                    <Dot isActive={step === 4}/>
+                    <Dot isActive={step === 5}/>
+                </div>
+
                 <Button style={ButtonStyle.Primary} fillFullWidth onClick={onNext}>
-                    {topButtonLabel || 'Next'}
+                    Continue
                 </Button>
-                {
-                    noSkip
-                    ?
-                    null
-                    :
-                    <Button style={ButtonStyle.Link} fillFullWidth onClick={onSkip}>
-                        Skip
-                    </Button>
-                }
             </div>
 
         </div>
     )
+}
+
+const Dot: FC<{ isActive?: boolean }> = ({ isActive }) => {
+    if (isActive) return (
+        <div className={styles.active_dot}>
+            <div/>
+        </div>
+    )
+    return <div className={styles.dot}/>
 }

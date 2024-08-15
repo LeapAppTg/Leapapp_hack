@@ -1,4 +1,4 @@
-import { HeroThugCoin, TicketEmoji } from "@assets";
+import { Coin, TicketEmoji } from "@assets";
 import { ApiError } from "@builders";
 import { AlertStatus, AnimatedSquares, Button, ButtonStyle, PageTitleBackground, PageTitleBackgroundColor, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { ApiRoutes, useData } from "@hooks";
@@ -114,7 +114,7 @@ export const StreakPage: FC = () => {
                                 Bonus Leaps
                             </p>
                             <div className={FlexGapRow8.className}>
-                                <HeroThugCoin width={40} height={40}/>
+                                <Coin width={40} height={40}/>
                                 <p className={TextXLMedium.className}>{data.points.format()}</p>
                             </div>
                         </div>
