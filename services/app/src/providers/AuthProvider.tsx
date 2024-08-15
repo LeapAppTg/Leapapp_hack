@@ -121,6 +121,7 @@ const AuthConsumerContent: FC = () => {
     useData(ApiRoutes.GetReferralsList)
     useData(ApiRoutes.GetUnclaimedPoints)
     useData(ApiRoutes.GetGameLeaderboard)
+    useData(ApiRoutes.GetMarketItemsList)
 
     useEffect(() => {
         if (isAuthorized || !userProfile) return

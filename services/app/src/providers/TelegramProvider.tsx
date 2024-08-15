@@ -126,7 +126,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     useEffect(() => {
         if (backButton) {
-            if(['referrals', 'quests', 'game', 'learning', 'squads', 'leaderboard'].findIndex(i => pathname.includes(i)) !== -1) {
+            if(['referrals', 'quests', 'game', 'customize', 'boost', 'leaderboard'].findIndex(i => pathname.includes(i)) !== -1) {
                 if (!backButton.isVisible) {
                     backButton.show()
                     backButton.on("click", backButtonDefaultCallback)
