@@ -28,11 +28,12 @@ const AppRouter: FC = () => {
     const { isAuthorized, isFirstTimeLogin } = useAuth()
 
     useEffect(() => {
-        window.scrollTo({
+        const timeout = setTimeout(() => window.scrollTo({
             behavior: "smooth",
             left: 0,
-            top: 0
-        })
+            top: -1
+        }), 10)
+        return () => clearTimeout(timeout)
     }, [pathname])
 
     if (initData === null) return (
