@@ -10,15 +10,16 @@ import { ApiRoutes, useData } from "@hooks";
 import { GameState } from "../../config";
 
 type Props = {
-    setGameState: Dispatch<SetStateAction<GameState>>
+    setGameState: Dispatch<SetStateAction<GameState>>,
+    startTimer: () => any
 }
 
-export const Loader: FC<Props> = ({ setGameState }) => {
+export const Loader: FC<Props> = ({ setGameState, startTimer }) => {
     const { authToken } = useAuth()
     const { sendAlert } = useAlerts()
     const [gameSubmitted, setGameSubmitted] = useState<boolean>(false)
     const navigate = useNavigate()
-    const { data: user, mutate: mutateUser } = useData(ApiRoutes.GetUserProfile)
+    const { mutate: mutateUser } = useData(ApiRoutes.GetUserProfile)
 
     useEffect(() => {
         if (gameSubmitted) return
@@ -27,7 +28,10 @@ export const Loader: FC<Props> = ({ setGameState }) => {
                 await postStartGame(authToken)
                 setGameSubmitted(true)
                 mutateUser(user => user ? { ...user, gameTickets: user.gameTickets - 1 } : undefined)
-                const timeout = setTimeout(() => setGameState(GameState.Play), 1500)
+                const timeout = setTimeout(() => {
+                    setGameState(GameState.Play)
+                    startTimer()
+                }, 1500)
                 return () => clearTimeout(timeout)
             } catch (e) {
                 navigate('/')

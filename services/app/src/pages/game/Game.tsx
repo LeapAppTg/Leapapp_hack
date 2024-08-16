@@ -10,19 +10,19 @@ import styles from "./styles.module.css";
 export const GamePage: FC = () => {
     const [gameState, setGameState] = useState<GameState>(GameState.Countdown)
     const [score, setScore] = useState<number>(0)
-    const currrentTime = useUnixTimestamp()
-    const [gameEndAt, setGameEndAt] = useState<number>(currrentTime + GameConfig.gameDuration)
-    const [magnetEndAt, setMagnetEndAt] = useState<number>(currrentTime)
+    const currentTime = useUnixTimestamp()
+    const [gameEndAt, setGameEndAt] = useState<number>(currentTime)
+    const [magnetEndAt, setMagnetEndAt] = useState<number>(currentTime)
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
     const { triggerHapticFeedback } = useTelegram()
 
     const magnetActive = useMemo(() => {
-        if (magnetEndAt > currrentTime) return true
+        if (magnetEndAt > currentTime) return true
         return false
-    }, [magnetEndAt, currrentTime])
+    }, [magnetEndAt, currentTime])
 
-    const highScore = userProfile?.gameRecord || 0;
-    const isNewHighScore = score > highScore;
+    const highScore = useMemo(() => userProfile?.gameRecord || 0, [userProfile]);
+    const isNewHighScore = useMemo(() => score > highScore, [score, highScore]);
 
     useEffect(() => {
         if (isNewHighScore) triggerHapticFeedback({ type: "impact", impact_style: "medium" })
@@ -70,13 +70,14 @@ export const GamePage: FC = () => {
             }
         }
     }, [gameState, gameEndAt])
-
+    
+    const startTimer = useCallback(() => setGameEndAt(currentTime + GameConfig.gameDuration), [currentTime])
     const reset = useCallback(() => {
         setGameState(GameState.Countdown)
         setScore(0)
-        setGameEndAt(currentUnixTimestamp() + GameConfig.gameDuration)
-        setMagnetEndAt(currentUnixTimestamp())
-    }, []);
+        setGameEndAt(currentTime)
+        setMagnetEndAt(currentTime)
+    }, [currentTime]);
 
     const extraClass = useMemo(() => {
         if (gameState === GameState.TimeEnd) return styles.gold_highlight
@@ -97,7 +98,7 @@ export const GamePage: FC = () => {
             {
                 gameState === GameState.Countdown
                 ?
-                <Loader setGameState={setGameState}/>
+                <Loader setGameState={setGameState} startTimer={startTimer}/>
                 :
                 <Canvas 
                     addPendingScore={addPendingScore} gameEndAt={gameEndAt} gameState={gameState} magnetEndAt={magnetEndAt}

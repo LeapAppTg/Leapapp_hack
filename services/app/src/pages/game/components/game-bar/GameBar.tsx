@@ -113,7 +113,7 @@ const NewScore: FC<NewScoreProps & { setScore: Dispatch<SetStateAction<number>>,
             setScore(prev => prev + score > 0 ? prev + score : 0)
             removePendingScore(id)
         }, 1000)
-        return () => clearTimeout(1000)
+        return () => clearTimeout(to)
     }, [])
 
     return (

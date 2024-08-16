@@ -46,8 +46,6 @@ export const useUnixCountdown = (timeEnd: number) => {
 
     const timestamp = useUnixTimestamp()
 
-    console.log(timestamp)
-
     const timeLeft = useMemo(() => {
         return TimeObject.fromTimestamp((timeEnd - timestamp) * 1000)
     }, [timestamp, timeEnd])
