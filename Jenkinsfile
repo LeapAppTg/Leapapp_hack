@@ -9,6 +9,7 @@ pipeline {
                 anyOf {
                     branch 'master'
                     branch 'dev'
+                    branch 'uat'
                 }
             }
             steps {
@@ -21,6 +22,7 @@ pipeline {
                 anyOf {
                     branch 'master'
                     branch 'dev'
+                    branch 'uat'
                 }
             }
             steps {
@@ -32,6 +34,7 @@ pipeline {
                 anyOf {
                     branch 'master'
                     branch 'dev'
+                    branch 'uat'
                 }
             }
             steps {
@@ -50,6 +53,13 @@ pipeline {
                         env.API_URL            = 'https://api.dev.leapapp.fun'
                         env.APP_URL            = 'https://dev.leapapp.fun'
                     }
+                    else if (env.BRANCH_NAME == 'uat') {
+                        env.AWS_DEFAULT_REGION = 'us-east-1'
+                        env.AWS_S3_BUCKET      = 'leap-uat-app-fe-cdn-origin'
+                        env.AWS_CLOUDFRONT_ID  = 'EI1G94KUT944V'
+                        env.API_URL            = 'https://api.dev.leapapp.fun'
+                        env.APP_URL            = 'https://dev.leapapp.fun'
+                    }
                 }
             }
         }
@@ -58,6 +68,7 @@ pipeline {
                 anyOf {
                     branch 'master'
                     branch 'dev'
+                    branch 'uat'
                 }
             }
             steps {
