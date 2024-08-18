@@ -39,6 +39,10 @@
     white-space: nowrap;
 }
 
+.button.disabled {
+    background-color: var(--color-grey-900);
+}
+
 /* Colors */
 
 .level_1 .icon, .level_1 .progress > div {

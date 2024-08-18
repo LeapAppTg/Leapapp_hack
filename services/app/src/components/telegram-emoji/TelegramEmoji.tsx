@@ -21,10 +21,10 @@ const SourceMapping = new MultiMapping<TelegramEmojiType, [[string, undefined]]>
             [TelegramEmojiType.Megaphone]: "/tg-emojis/megaphone",
             [TelegramEmojiType.Handwave]: "/tg-emojis/handwave",
             [TelegramEmojiType.Cup]: "/tg-emojis/cup",
-            [TelegramEmojiType.Nerd]: "/tg-emojis/nerd",
-            [TelegramEmojiType.Arm]: "/tg-emojis/arm",
-            [TelegramEmojiType.Leg]: "/tg-emojis/leg",
-            [TelegramEmojiType.Dance]: "/tg-emojis/dance",
+            [TelegramEmojiType.Butterfly]: "/tg-emojis/butterfly",
+            [TelegramEmojiType.Candy]: "/tg-emojis/candy",
+            [TelegramEmojiType.Eye]: "/tg-emojis/eye",
+            [TelegramEmojiType.PartyBall]: "/tg-emojis/party_ball",
             [TelegramEmojiType.ColorPalette]: "/tg-emojis/color_palette"
         },
         undefined

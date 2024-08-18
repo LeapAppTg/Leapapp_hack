@@ -49,7 +49,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
             const response = await postTokenRefresh()
             setAuthToken(response.access_token)
         } catch (e) {
-            if (ApiError.isApiError(e) && e.statusCode === 404) {
+            if (ApiError.isApiError(e) && (e.statusCode === 404 || e.statusCode === 400)) {
                 tryAuth()
             }
         }

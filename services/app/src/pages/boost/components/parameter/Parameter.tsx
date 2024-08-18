@@ -1,5 +1,5 @@
 import { AlertStatus, Button, ButtonStyle, TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
-import { AlignItems, EnumMatcher, FlexGapColumn4AlignFlexStart, FlexGapColumn8FullWidth, FlexGapRow10FullWidth, FlexGapRow12, FlexGapRow4, FlexGapRow8, FlexGapRow8FullWidth, TextColor, TextLineHeight, TextSize, TextStyleBuilder, TextXSMedium, TextXXSRegular, TextXXSRegularGrey400, TextXXXSRegularGrey400 } from "@utils";
+import { AlignItems, EnumMatcher, FlexGapColumn4AlignFlexStart, FlexGapColumn8FullWidth, FlexGapRow10FullWidth, FlexGapRow12, FlexGapRow4, FlexGapRow8, FlexGapRow8FullWidth, TextColor, TextLineHeight, TextSize, TextStyleBuilder, TextXSMedium, TextXXSRegular, TextXXSRegularGrey400, TextXXXSRegularGrey400, classJoiner } from "@utils";
 import { FC, useMemo } from "react";
 import styles from "./styles.module.css";
 import { Coin } from "@assets";
@@ -8,14 +8,14 @@ import { useAlerts, useAuth } from "@providers";
 import { postUpgradeMarketItem } from "@services";
 import { ApiRoutes, useData } from "@hooks";
 
-const IconMapping = new EnumMatcher<string, TelegramEmojiType, TelegramEmojiType.Arm>(
+const IconMapping = new EnumMatcher<string, TelegramEmojiType, TelegramEmojiType.Eye>(
     {
-        "Intelligence": TelegramEmojiType.Nerd,
-        "Endurance": TelegramEmojiType.Leg,
-        "Strength": TelegramEmojiType.Arm,
-        "Agility": TelegramEmojiType.Dance
+        "Observability": TelegramEmojiType.Eye,
+        "Pleasure": TelegramEmojiType.Candy,
+        "Ease": TelegramEmojiType.Butterfly,
+        "Partying": TelegramEmojiType.PartyBall
     },
-    TelegramEmojiType.Arm
+    TelegramEmojiType.Eye
 )
 
 export const Parameter: FC<MarketItem & { upgradeCallback: () => any }> = ({
@@ -89,13 +89,15 @@ export const Parameter: FC<MarketItem & { upgradeCallback: () => any }> = ({
                     </span>
                 </Button>
                 :
-                <Button style={ButtonStyle.Tertiary} fillFullHeight className={styles.button} disabled>
-                    <span className={new TextStyleBuilder({ size: TextSize.XXXSmall, lineHeight: TextLineHeight.MediumSmall }).className}>
+                <Button style={ButtonStyle.Tertiary} fillFullHeight className={classJoiner(styles.button, styles.disabled)} disabled>
+                    <span className={TextXXXSRegularGrey400.className}>
                         Not enough<br/>coins
                     </span>
                     <span className={FlexGapRow4.className}>
                         <Coin width={20} height={20}/>
-                        {upgradePrice.format()}
+                        <span className={TextXXSRegular.className}>
+                            {upgradePrice.format()}
+                        </span>
                     </span>
                 </Button>
                 :

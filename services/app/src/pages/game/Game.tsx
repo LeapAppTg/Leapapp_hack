@@ -80,7 +80,7 @@ export const GamePage: FC = () => {
     }, [currentTime]);
 
     const extraClass = useMemo(() => {
-        if (gameState === GameState.TimeEnd) return styles.gold_highlight
+        if (gameState === GameState.TimeExpired) return styles.gold_highlight
         if (gameState === GameState.Bomb) return styles.red_highlight
         if (isNewHighScore) return styles.gold_highlight
         if (magnetActive) return styles.pink_highlight

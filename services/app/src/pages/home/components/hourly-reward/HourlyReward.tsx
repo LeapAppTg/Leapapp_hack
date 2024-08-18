@@ -18,13 +18,14 @@ export const HourlyReward: FC = () => {
     const { data: userProfile, mutate: mutateUserProfile } = useData(ApiRoutes.GetUserProfile)
     const timestamp = useUnixTimestamp()
     
-    const [ticketsCount, totalPoints, pointsCount, canClaim, timeLeft, progress] = useMemo(() => {
-        if (!data) return ['0', '0', '0', false, '', 50]
+    const [ticketsCount, totalPoints, hourlyPoints, pointsCount, canClaim, timeLeft, progress] = useMemo(() => {
+        if (!data) return ['0', '0', '0', '0', false, '', 50]
         const totalPoints = data.points + data.income
-        if (data.canClaim) return [data.gameTickets.format(), totalPoints.format(), totalPoints.format(), true, '', 100]
+        const hourlyPoints = totalPoints / 2
+        if (data.canClaim) return [data.gameTickets.format(), totalPoints.format(), hourlyPoints.format(), totalPoints.format(), true, '', 100]
         const timeLeft = data.nextClaimTime - timestamp
-        const progress = 1 - timeLeft / rewardPeriod
-        return [(progress * data.gameTickets).format(), totalPoints.format(), (progress * totalPoints).format(), false, TimeObject.fromTimestamp(timeLeft * 1000).toDisplayString(2), Math.floor(progress * 100)]
+        const progress = Math.abs(1 - timeLeft / rewardPeriod)
+        return [(progress * data.gameTickets).format(), totalPoints.format(), hourlyPoints.format(), (progress * totalPoints).format(), false, TimeObject.fromTimestamp(timeLeft * 1000).toDisplayString(2), Math.floor(progress * 100)]
     }, [data, timestamp])
 
     async function onClaim () {
@@ -57,7 +58,7 @@ export const HourlyReward: FC = () => {
                     </div>
                     <div className={FlexGapRow4.className}>
                         <Coin width={24} height={24}/>
-                        <p className={TextXSRegularGrey400.className}>+{totalPoints}/hour</p>
+                        <p className={TextXSRegularGrey400.className}>+{hourlyPoints}/hour</p>
                     </div>
                 </div>
                 {

@@ -66,7 +66,7 @@ const tokens: {
         token: (x: number) => new Item({
             src: 'game-items/gold.svg',
             x,
-            reward: 5
+            reward: 2
         })
     },
     {
@@ -74,7 +74,7 @@ const tokens: {
         token: (x: number) => new Item({
             src: 'game-items/ufo.svg',
             x,
-            reward: 25
+            reward: 10
         })
     },
     {
@@ -82,7 +82,7 @@ const tokens: {
         token: (x: number) => new Item({
             src: 'game-items/durov.svg',
             x,
-            reward: 25
+            reward: 10
         })
     },
     {
@@ -90,7 +90,7 @@ const tokens: {
         token: (x: number) => new Item({
             src: 'game-items/rocket.svg',
             x,
-            reward: -10
+            reward: -5
         })
     },
     {
@@ -98,7 +98,7 @@ const tokens: {
         token: (x: number) => new Item({
             src: 'game-items/dollar.svg',
             x,
-            reward: 100
+            reward: 35
         })
     },
     {

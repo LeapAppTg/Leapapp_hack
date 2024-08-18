@@ -14,10 +14,10 @@ export enum TelegramEmojiType {
     Megaphone = 'megaphone',
     Handwave = 'handwave',
     Cup = 'cup',
-    Arm = 'arm',
-    Leg = 'leg',
-    Dance = 'dance',
-    Nerd = 'nerd',
+    Butterfly = 'butterfly',
+    Candy = 'candy',
+    Eye = 'eye',
+    PartyBall = 'party_ball',
     ColorPalette = 'color_palette'
 }
 
