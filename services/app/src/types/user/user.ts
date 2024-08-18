@@ -1,7 +1,7 @@
 import { ApiTypeBuilder } from "@builders"
 
 export type UserProfileApi = {
-    username: string,
+    username: string | null,
     first_name: string,
     last_name: string,
     game_tickets: number,
@@ -11,7 +11,7 @@ export type UserProfileApi = {
 }
 
 export type UserProfile = {
-    username: string,
+    username: string | null,
     firstName: string,
     lastName: string,
     gameTickets: number,

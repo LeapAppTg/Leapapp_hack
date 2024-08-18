@@ -22,7 +22,7 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({ linkTo, ...restProp
 }
 
 const ButtonContent: FC<PropsWithChildren<ButtonProps>> = ({
-    style, disabled, onClick, children, fillFullWidth, rightIcon
+    style, disabled, onClick, children, fillFullWidth, rightIcon, fillFullHeight, className: extraClasses
 }) => {
 
     const { triggerHapticFeedback } = useTelegram()
@@ -35,8 +35,9 @@ const ButtonContent: FC<PropsWithChildren<ButtonProps>> = ({
 
     const className = classBuilder(
         styles,
-        [style, { disabled }, { fill_full_width: fillFullWidth }], 
-        TextXSRegular.update({ color: ColorMapping.match(style)[0] }).className
+        [style, { disabled }, { fill_full_width: fillFullWidth }, { fill_full_height: fillFullHeight }],
+        TextXSRegular.update({ color: ColorMapping.match(style)[0] }).className,
+        extraClasses
     )
 
     return (

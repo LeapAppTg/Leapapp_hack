@@ -1,4 +1,4 @@
-import { HeroThugCoin } from "@assets";
+import { Coin } from "@assets";
 import { IconBox, IconColor, IconSize, UserProfileIcon } from "@icons";
 import { Referral } from "@types";
 import { FlexGapColumn4AlignFlexStart, FlexGapRow4, FlexGapRow8FullWidthJustifySpaceBetween, TextXSMedium, TextXSRegular, TextXSRegularGrey400 } from "@utils";
@@ -21,7 +21,7 @@ export const TableItem: FC<Referral> = ({
             </div>
             <div className={FlexGapRow4.className}>
                 <p className={TextXSRegular.className}>+ {points.format()}</p>
-                <HeroThugCoin width={20} height={20}/>
+                <Coin width={20} height={20}/>
             </div>
         </div>
     )

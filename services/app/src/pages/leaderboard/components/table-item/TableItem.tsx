@@ -1,6 +1,6 @@
-import { BronzeBadge, GoldBadge, HeroThugCoin, SilverBadge } from "@assets";
+import { BronzeBadge, Coin, GoldBadge, SilverBadge } from "@assets";
 import { GameLeaderboardMember } from "@types";
-import { FlexGapRow4, FlexGapRow8FullWidthJustifySpaceBetween, FlexGapRowFullWidthJustifyFlexStart, TextXSMedium, TextXSRegular, TextXSRegularGrey400, TextXXXSSemiBold } from "@utils";
+import { FlexGapRow4, FlexGapRow8FullWidthJustifySpaceBetween, FlexGapRowFullWidthJustifyFlexStart, TextXSMedium, TextXSRegular, TextXSRegularGrey400 } from "@utils";
 import { FC } from "react";
 import styles from "./styles.module.css";
 
@@ -39,7 +39,7 @@ export const TableItem: FC<TableItemProps> = ({
                 <p className={TextXSRegular.update({ cropText: true }).className}>
                     {record.format()}
                 </p>
-                <HeroThugCoin width={20} height={20}/>
+                <Coin width={20} height={20}/>
             </div>
         </div>
     )

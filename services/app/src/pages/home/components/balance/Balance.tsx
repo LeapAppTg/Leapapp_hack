@@ -1,4 +1,4 @@
-import { HeroThugCoin, TicketEmoji } from "@assets";
+import { Coin, TicketEmoji } from "@assets";
 import { PageTitleBackground, PageTitleBackgroundColor } from "@components";
 import { ApiRoutes, useData } from "@hooks";
 import { useTelegram } from "@providers";
@@ -20,15 +20,21 @@ export const Balance: FC = () => {
                 <img className={styles.avatar} src={userPfp}/>
                 :
                 <div className={styles.avatar}>
-                    <p className={TextXLSemiBold.className}>{userProfile?.username.charAt(0).toUpperCase()}</p>
+                    <p className={TextXLSemiBold.className}>{
+                        userProfile?.username
+                        ?
+                        userProfile?.username.charAt(0).toUpperCase()
+                        :
+                        userProfile?.firstName.charAt(0).toUpperCase()
+                    }</p>
                 </div>
             }
             <p className={TextXSRegular.className}>
-                Your balance
+                {userProfile?.firstName} {userProfile?.lastName}
             </p>
             <div className={FlexGapRow24.className}>
                 <div className={FlexGapRow8.className}>
-                    <HeroThugCoin width={28} height={28}/>
+                    <Coin width={28} height={28}/>
                     <p className={TextLSemiBold.className}>{userProfile?.points.format() || '0'}</p>
                 </div>
                 <div className={FlexGapRow8.className}>

@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Game, Hello, Leap, Learning, Quests, WelcomeBonus } from "./elements";
+import { Airdrop, Customize, Game, Invite, Upgrade, WelcomeBonus } from "./elements";
 
 export const OnboardingPage: FC = () => {
 
@@ -10,23 +10,23 @@ export const OnboardingPage: FC = () => {
         {
             step === 1
             ?
-            <Hello onNext={() => setStep(2)}/>
+            <Game onNext={() => setStep(2)} step={1}/>
             :
             step === 2
             ?
-            <Leap onNext={() => setStep(3)}/>
+            <Upgrade onNext={() => setStep(3)} step={2}/>
             :
             step === 3
             ?
-            <Game onNext={() => setStep(4)} onSkip={() => setStep(6)}/>
+            <Customize onNext={() => setStep(4)} step={3}/>
             :
             step === 4
             ?
-            <Quests onNext={() => setStep(5)} onSkip={() => setStep(6)}/>
+            <Invite onNext={() => setStep(5)} step={4}/>
             :
             step === 5
             ?
-            <Learning onNext={() => setStep(6)} onSkip={() => setStep(6)}/>
+            <Airdrop onNext={() => setStep(6)} step={5}/>
             :
             step === 6
             ?

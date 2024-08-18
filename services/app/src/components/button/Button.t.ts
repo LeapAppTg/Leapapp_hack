@@ -13,5 +13,7 @@ export type ButtonProps = {
     disabled?: boolean,
     linkTo?: string,
     fillFullWidth?: boolean,
-    rightIcon?: IconFC
+    fillFullHeight?: boolean,
+    rightIcon?: IconFC,
+    className?: string
 }

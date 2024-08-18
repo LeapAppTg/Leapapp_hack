@@ -3,17 +3,16 @@ import { ContentWrapper, GameIllustration } from "../../components";
 
 type Props = {
     onNext?: () => any,
-    onSkip?: () => any
+    step: number
 }
 
-export const Game: FC<Props> = ({ onNext, onSkip }) => {
+export const Game: FC<Props> = ({ onNext, step }) => {
     return (
         <ContentWrapper
-            title="Catch items and earn Leap Points"
-            description="Le really likes to eat different items, don't forget to feed him."
+            title="Catch falling tokens"
+            description={<>Catch crypto, earn coins!<br/>Start and win now!</>}
             onNext={onNext}
-            onSkip={onSkip}
-            fillFullHeight
+            step={step}
         >
             <GameIllustration/>
         </ContentWrapper>

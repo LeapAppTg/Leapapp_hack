@@ -1,4 +1,5 @@
 import { useGameLeaderboardData } from "./useLeaderboardData";
+import { useMarketItemsListData } from "./useMarketData";
 import { UseQuestDetailsProps, useQuestDetailsData, useQuestsListData } from "./useQuestsData";
 import { useInviteLinkData, useReferralsCountData, useReferralsListData, useUnclaimedPointsData } from "./useReferralData";
 import { useDailyRewardData, useHourlyRewardData, useUserProfileData } from "./useUserData";
@@ -13,7 +14,8 @@ export enum ApiRoutes {
     GetUnclaimedPoints = '/get/unclaimed-points/',
     GetReferralsList = '/get/referrals-list/',
     GetReferralsCount = '/get/referrals-count/',
-    GetGameLeaderboard = '/get/game-leaderboard/'
+    GetGameLeaderboard = '/get/game-leaderboard/',
+    GetMarketItemsList = '/get/market-items/'
 }
 
 type UseDataTypesMap = {
@@ -26,7 +28,8 @@ type UseDataTypesMap = {
     [ApiRoutes.GetUnclaimedPoints]: [[], ReturnType<typeof useUnclaimedPointsData>],
     [ApiRoutes.GetReferralsList]: [[], ReturnType<typeof useReferralsListData>],
     [ApiRoutes.GetReferralsCount]: [[], ReturnType<typeof useReferralsCountData>],
-    [ApiRoutes.GetGameLeaderboard]: [[], ReturnType<typeof useGameLeaderboardData>]
+    [ApiRoutes.GetGameLeaderboard]: [[], ReturnType<typeof useGameLeaderboardData>],
+    [ApiRoutes.GetMarketItemsList]: [[], ReturnType<typeof useMarketItemsListData>]
 }
   
 type UseDataParams<K extends ApiRoutes> = K extends keyof UseDataTypesMap ? UseDataTypesMap[K][0] : [];
@@ -59,6 +62,8 @@ export function useData<
             return useReferralsCountData() as UseDataReturnType<K>;
         case ApiRoutes.GetGameLeaderboard:
             return useGameLeaderboardData() as UseDataReturnType<K>;
+        case ApiRoutes.GetMarketItemsList:
+            return useMarketItemsListData() as UseDataReturnType<K>;
         default:
             return null as UseDataReturnType<K>;
     }

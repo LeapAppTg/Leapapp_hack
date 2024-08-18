@@ -3,13 +3,24 @@
     position: absolute;
     left: 0;
     top: 0;
+    z-index: 2;
+}
+
+.hero_canvas {
+    user-select: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
 }
 
 .slider {
     user-select: none;
     position: absolute;
     cursor: grab;
-    z-index: 1;
+    z-index: 3;
     flex-direction: column;
     gap: 6px;
+    width: 60px;
+    height: 140px;
 }

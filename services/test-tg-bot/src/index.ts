@@ -17,7 +17,7 @@ bot.on('message', async (msg) => {
                             {
                                 text: 'Launch',
                                 web_app: {
-                                    url: 'https://leapapp.fun'
+                                    url: 'https://leap-game-test.vercel.app/'
                                 }
                             }
                         ]

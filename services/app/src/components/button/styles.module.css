@@ -76,3 +76,7 @@
 .fill_full_width {
     width: 100%;
 }
+
+.fill_full_height {
+    height: 100%;
+}

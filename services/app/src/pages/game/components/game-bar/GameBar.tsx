@@ -1,19 +1,31 @@
 import { MagnetCoin } from "@assets";
 import { TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
-import { FlexGapColumn4, FlexGapColumnFullWidthAlignFlexEnd, FlexGapColumnFullWidthAlignFlexStart, FlexGapRow4, TextColor, TextXLSemiBold, TextXSBold, TextXSMedium, TextXXSRegularGrey400, TimeObject, classJoiner } from "@utils";
-import { FC, useEffect, useMemo, useState } from "react";
-import { useGame } from "../../providers";
+import { useUnixCountdown } from "@hooks";
+import { FlexGapColumn4, FlexGapColumnFullWidthAlignFlexEnd, FlexGapColumnFullWidthAlignFlexStart, FlexGapRow4, TextColor, TextXLSemiBold, TextXSBold, TextXSMedium, TextXXSRegularGrey400, classJoiner } from "@utils";
+import { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.css";
 
-export const GameBar: FC = () => {
+type Props = {
+    score: number,
+    gameEndAt: number,
+    magnetEndAt: number,
+    pendingScores: NewScoreProps[],
+    isNewHighScore: boolean,
+    highScore: number,
+    setScore: Dispatch<SetStateAction<number>>,
+    removePendingScore: (score: number) => any
+}
 
-    const { score, pendingScores, timeLeft, magnetTimeLeft, highScore, isNewHighScore } = useGame()
+export const GameBar: FC<Props>= ({
+    gameEndAt, highScore, isNewHighScore, magnetEndAt, pendingScores, score, setScore, removePendingScore
+}) => {
+    const { timeLeft } = useUnixCountdown(gameEndAt)
+    const { timeLeft: magnetTimeLeft } = useUnixCountdown(magnetEndAt)
 
     const timeLeftDisplay = useMemo(() => {
-        const obj = TimeObject.fromTimestamp(timeLeft * 1000)
-        const arr = obj.toTimerDisplayArray(2, true)
+        const arr = timeLeft.toTimerDisplayArray(2, true)
         const secs = arr[arr.length - 1].value
-        const mins = obj.minutes.format()
+        const mins = timeLeft.minutes.format()
         return `${mins}:${secs}`
     }, [timeLeft])
 
@@ -35,12 +47,12 @@ export const GameBar: FC = () => {
                     </p>
                 </div>
                 {
-                    magnetTimeLeft
+                    !magnetTimeLeft.isZeroed()
                     ?
                     <div className={FlexGapRow4.className}>
                         <MagnetCoin width={16} height={16}/>
                         <p className={TextXSMedium.update({ color: TextColor.Purple400 }).className}>
-                            0:{magnetTimeLeft < 10 ? '0' : null}{magnetTimeLeft.format()}
+                            0:{magnetTimeLeft.seconds < 10 ? '0' : null}{magnetTimeLeft.seconds.format()}
                         </p>
                     </div>
                     :
@@ -56,7 +68,7 @@ export const GameBar: FC = () => {
                 </p>
             </div>
             {
-                pendingScores.map(p => <NewScore {...p} key={p.id}/>)
+                pendingScores.map(p => <NewScore {...p} setScore={setScore} removePendingScore={removePendingScore} key={p.id}/>)
             }
         </div>
     )
@@ -67,8 +79,9 @@ export type NewScoreProps = {
     score: number
 }
 
-const NewScore: FC<NewScoreProps> = ({ id, score }) => {
-    const { removePendingScore, setScore } = useGame()
+const NewScore: FC<NewScoreProps & { setScore: Dispatch<SetStateAction<number>>, removePendingScore: (score: number) => any}> = (
+    { id, score, removePendingScore, setScore }
+) => {
     const [progress, setProgress] = useState<number>(0)
 
     useEffect(() => {
@@ -100,7 +113,7 @@ const NewScore: FC<NewScoreProps> = ({ id, score }) => {
             setScore(prev => prev + score > 0 ? prev + score : 0)
             removePendingScore(id)
         }, 1000)
-        return () => clearTimeout(1000)
+        return () => clearTimeout(to)
     }, [])
 
     return (

@@ -16,7 +16,7 @@ export type UseQuestDetailsProps = [id: number]
 export function useQuestDetailsData (...[id]: UseQuestDetailsProps) {
     const { authToken } = useAuth()
     return useSWR(
-        authToken ? [ApiRoutes.GetHourlyReward, authToken, id] : null,
+        authToken ? [ApiRoutes.GetQuestDetails, authToken, id] : null,
         ([_, authToken, id]) => getQuestDetails(authToken, id)
     )
 }

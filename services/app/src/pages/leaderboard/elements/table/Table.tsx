@@ -12,7 +12,7 @@ export const Table: FC = () => {
     return (
         <div className={FlexGapColumn20FullWidth.withExtraClasses(styles.table)}>
             {
-                data.map((m, i) => <TableItem {...m} place={i + 1} key={i.toString() + m.username}/>)
+                data.map((m, i) => <TableItem {...m} place={i + 1} key={i}/>)
             }
         </div>
     )

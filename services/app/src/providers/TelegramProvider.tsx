@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 type TelegramContextLayout = {
     initData: string | null,
+    isMobile: boolean,
     setup: () => void,
     triggerHapticFeedback: (params: AnyHapticFeedbackParams) => void,
     userPfp: string | null,
@@ -17,12 +18,13 @@ type TelegramContextLayout = {
 
 const TelegramContext = createContext<TelegramContextLayout>({
     initData: null,
+    isMobile: true,
     setup: () => null,
     triggerHapticFeedback: () => null,
-    openLink: (link: string) => null,
-    openTelegramLink: (link: string) => null,
+    openLink: () => null,
+    openTelegramLink: () => null,
     refCode: null,
-    shareLink: (link: string) => null,
+    shareLink: () => null,
     userPfp: null,
     backButton: null,
     backButtonDefaultCallback: () => null
@@ -33,10 +35,13 @@ export const useTelegram = () => useContext(TelegramContext)
 function getInitData () {
     try {
         const { initDataRaw, platform } = retrieveLaunchParams();
-        if (!platform.includes('ios') && !platform.includes('android')) return null
-        return initDataRaw ? initDataRaw : null
+        if (!initDataRaw) return [null, false] as const
+        return [initDataRaw, platform.includes('ios') || platform.includes('android')] as const
     } catch {
-        return null
+        return [
+            null,
+            false
+        ] as const
     }
 }
 
@@ -75,7 +80,7 @@ function getBackButton () {
 export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     const launchParams = getLaunchParams()
-    const initData = getInitData()
+    const [initData, isMobile] = getInitData()
     const userPfp = launchParams?.initData?.user?.photoUrl || null
     const refCode = launchParams?.startParam || null
     const utils = getUtils()
@@ -121,7 +126,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
     useEffect(() => {
         if (backButton) {
-            if(['referrals', 'quests', 'game', 'learning', 'squads', 'leaderboard'].findIndex(i => pathname.includes(i)) !== -1) {
+            if(['referrals', 'quests', 'game', 'customize', 'boost', 'leaderboard'].findIndex(i => pathname.includes(i)) !== -1) {
                 if (!backButton.isVisible) {
                     backButton.show()
                     backButton.on("click", backButtonDefaultCallback)
@@ -139,6 +144,7 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
         <TelegramContext.Provider
         value={{
             initData,
+            isMobile,
             setup,
             triggerHapticFeedback,
             userPfp,
@@ -157,7 +163,6 @@ export const TelegramProvider: FC<PropsWithChildren> = ({children}) => {
 
 export const TelegramConsumer: FC = () => {
     const { initData, setup } = useTelegram()
-
 
     useEffect(() => {
         if (!initData) return

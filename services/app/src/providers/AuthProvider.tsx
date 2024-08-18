@@ -49,7 +49,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
             const response = await postTokenRefresh()
             setAuthToken(response.access_token)
         } catch (e) {
-            if (ApiError.isApiError(e) && e.statusCode === 404) {
+            if (ApiError.isApiError(e) && (e.statusCode === 404 || e.statusCode === 400)) {
                 tryAuth()
             }
         }
@@ -121,10 +121,11 @@ const AuthConsumerContent: FC = () => {
     useData(ApiRoutes.GetReferralsList)
     useData(ApiRoutes.GetUnclaimedPoints)
     useData(ApiRoutes.GetGameLeaderboard)
+    useData(ApiRoutes.GetMarketItemsList)
 
     useEffect(() => {
         if (isAuthorized || !userProfile) return
-        if (userProfile.isFirstLogin) setIsFirstTimeLogin(true)
+        if (!userProfile.isFirstLogin) setIsFirstTimeLogin(true)
         setIsAuthorized(true)
     }, [isAuthorized, userProfile])
 

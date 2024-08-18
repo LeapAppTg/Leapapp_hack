@@ -9,7 +9,8 @@ const GradientColorMapping = new Mapping<PageTitleBackgroundColor, string, strin
         [PageTitleBackgroundColor.LightBlue]: "#C432F8",
         [PageTitleBackgroundColor.Yellow]: '#F83232',
         [PageTitleBackgroundColor.Purple]: '#7B0DAE',
-        [PageTitleBackgroundColor.Green]: '#06A31F'
+        [PageTitleBackgroundColor.Green]: '#06A31F',
+        [PageTitleBackgroundColor.Grey]: '#FFFFFF'
     },
     '#323AF8'
 );

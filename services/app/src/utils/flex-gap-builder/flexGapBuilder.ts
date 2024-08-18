@@ -19,6 +19,10 @@ export enum FlexGap {
     */
     Gap12 = 'gap_12',
     /**
+     *@gap 10px
+    */
+    Gap10 = 'gap_10',
+    /**
      *@gap 8px
     */
     Gap8 = 'gap_8',
@@ -117,6 +121,7 @@ export class FlexGapBuilder implements FlexGapBuilderProps {
 }
 
 export const FlexGapRowFullWidth = new FlexGapBuilder({ direction: FlexDirection.Row, fillFullWidth: true })
+export const FlexGapRowFullWidthFullHeight = FlexGapRowFullWidth.update({ fillFullHeight: true })
 export const FlexGapRowFullWidthJustifyFlexStart = FlexGapRowFullWidth.update({ justifyContent: JustifyContent.FlexStart })
 export const FlexGapRowFullWidthJustifyFlexEnd = FlexGapRowFullWidth.update({ justifyContent: JustifyContent.FlexEnd })
 export const FlexGapRowFullWidthJustifySpaceBetween = FlexGapRowFullWidth.update({ justifyContent: JustifyContent.SpaceBetween })
@@ -124,7 +129,10 @@ export const FlexGapRowFullWidthJustifySpaceBetween = FlexGapRowFullWidth.update
 export const FlexGapRow4 = new FlexGapBuilder({ direction: FlexDirection.Row, gap: FlexGap.Gap4 })
 export const FlexGapRow4FullWidth = FlexGapRow4.update({ fillFullWidth: true })
 export const FlexGapRow8 = new FlexGapBuilder({ direction: FlexDirection.Row, gap: FlexGap.Gap8 })
-export const FlexGapRow8FullWidthJustifySpaceBetween = FlexGapRow8.update({ fillFullWidth: true, justifyContent: JustifyContent.SpaceBetween })
+export const FlexGapRow8FullWidth = FlexGapRow8.update({ fillFullWidth: true })
+export const FlexGapRow8FullWidthJustifySpaceBetween = FlexGapRow8FullWidth.update({ justifyContent: JustifyContent.SpaceBetween })
+export const FlexGapRow10 = new FlexGapBuilder({ direction: FlexDirection.Row, gap: FlexGap.Gap10 })
+export const FlexGapRow10FullWidth = FlexGapRow10.update({ fillFullWidth: true })
 export const FlexGapRow12 = new FlexGapBuilder({ direction: FlexDirection.Row, gap: FlexGap.Gap12 })
 export const FlexGapRow12FullWidth = FlexGapRow12.update({ fillFullWidth: true })
 export const FlexGapRow16 = new FlexGapBuilder({ direction: FlexDirection.Row, gap: FlexGap.Gap16 })

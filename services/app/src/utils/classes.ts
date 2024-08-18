@@ -1,8 +1,8 @@
 export const classBuilder: (
     classes: { [key: string]: string }, 
     conditions: (string | { [key: string] : boolean | undefined } | undefined)[],
-    rest?: string
-) => string = (classes, conditions, rest) => {
+    ...rest: (string | undefined)[]
+) => string = (classes, conditions, ...rest) => {
 
     const matching = conditions.filter(condition => {
         if (typeof condition === 'object') return !!condition[Object.keys(condition)[0]]
@@ -15,7 +15,7 @@ export const classBuilder: (
     })
 
     const result = classNames.map(className => classes[className] || null).filter(v => v !== null) as string[]
-    if (rest) result.push(rest)
+    result.push(...rest.filter(r => r !== undefined) as string[])
 
     return result.join(' ')
 }

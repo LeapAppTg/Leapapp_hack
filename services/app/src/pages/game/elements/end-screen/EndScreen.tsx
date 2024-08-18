@@ -8,11 +8,16 @@ import { postEndGame } from "@services";
 import { FlexGapRow4, TextXLMedium, TextXSRegular, TextXXLMedium } from "@utils";
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GameState, useGame } from "../../providers";
 import styles from "./styles.module.css";
+import { GameState } from "../../config";
 
-export const EndScreen: FC = () => {
-    const { score, gameState, reset } = useGame()
+type Props = {
+    score: number,
+    gameState: GameState,
+    reset: () => any
+}
+
+export const EndScreen: FC<Props> = ({ gameState, reset, score }) => {
     const { authToken } = useAuth()
     const [scoreSubmitted, setScoreSubmitted] = useState<boolean>(false)
     const navigate = useNavigate()

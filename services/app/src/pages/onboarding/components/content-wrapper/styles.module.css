@@ -2,12 +2,42 @@
     position: relative;
     width: 100%;
     flex-direction: column;
-    gap: 40px;
-    padding: 44px 0;
+    gap: 24px;
+    padding: 0 0 24px 0;
     flex-grow: 1;
     justify-content: flex-end;
 }
 
-.full_height {
-    flex-grow: 1;
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    background: var(--color-purple-950);
+}
+
+.active_dot {
+    position: relative;
+    width: 20px;
+    height: 8px;
+    border-radius: 8px;
+    background: var(--color-purple-950);
+}
+
+.active_dot > div {
+    position: absolute;
+    left: 0;
+    width: 10px;
+    height: 8px;
+    border-radius: 8px;
+    background: var(--color-main-accent);
+    animation: dot_move 4s ease-in-out forwards;
+}
+
+@keyframes dot_move {
+    50% {
+        width: 15px;
+    }
+    to {
+        left: 10px;
+    }
 }
