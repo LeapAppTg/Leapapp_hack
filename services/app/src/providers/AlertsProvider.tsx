@@ -40,7 +40,7 @@ export const AlertsProvider: FC<PropsWithChildren> = ({children}) => {
     const [alerts, manageAlerts] = useReducer((
         alerts: AlertWithId[], manageAlerts: AddAlert | RemoveAlert
     ) => {
-        if (manageAlerts.action === AlertAction.Add) return [...alerts, {...manageAlerts.item }]
+        if (manageAlerts.action === AlertAction.Add) return [...alerts.slice(0, 2), {...manageAlerts.item }]
         else return alerts.filter(n => n.id !== manageAlerts.id)
     }, [])
 

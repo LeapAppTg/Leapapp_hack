@@ -12,5 +12,5 @@ export const Parameters: FC = () => {
 
     if (!data) return null
 
-    return data.map(i => <Parameter {...i} upgradeCallback={() => upgradeCallback(i.uuid)} key={i.uuid}/>)
+    return data.sort((a, b) => a.uuid - b.uuid).map(i => <Parameter {...i} upgradeCallback={() => upgradeCallback(i.uuid)} key={i.uuid}/>)
 }
