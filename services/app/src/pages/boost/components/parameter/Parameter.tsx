@@ -24,7 +24,7 @@ export const Parameter: FC<MarketItem & { upgradeCallback: () => any }> = ({
 
     const { authToken } = useAuth()
     const { sendAlert, sendApiErrorAlert } = useAlerts()
-    const { data: user } = useData(ApiRoutes.GetUserProfile)
+    const { data: user, mutate } = useData(ApiRoutes.GetUserProfile)
 
     const canUpgrade = useMemo(() => {
         if (!user) return false
@@ -40,6 +40,7 @@ export const Parameter: FC<MarketItem & { upgradeCallback: () => any }> = ({
                 message: `${name} was upgraded`
             })
             upgradeCallback()
+            mutate(prev => prev ? { ...prev, points: prev.points - upgradePrice } : undefined)
         } catch (e) {
             sendApiErrorAlert(e)
         }

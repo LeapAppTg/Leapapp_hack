@@ -166,7 +166,9 @@ export const TelegramConsumer: FC = () => {
 
     useEffect(() => {
         if (!initData) return
-        setup()
+        try {
+            setup()
+        } catch {}
     }, [])
 
     return null
