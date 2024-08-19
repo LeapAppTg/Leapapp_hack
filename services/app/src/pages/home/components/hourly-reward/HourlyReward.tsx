@@ -5,10 +5,10 @@ import { ApiRoutes, useData, useUnixTimestamp } from "@hooks";
 import { useAlerts, useAuth } from "@providers";
 import { postHourlyReward } from "@services";
 import { FlexGapColumn16FullWidth, FlexGapRow4, FlexGapRowFullWidthJustifySpaceBetween, TextAlign, TextColor, TextMSemiBold, TextXSRegular, TextXSRegularGrey400, TimeObject } from "@utils";
-import { FC, useMemo } from "react";
+import { CSSProperties, FC, useMemo } from "react";
 import styles from "./styles.module.css";
 
-const rewardPeriod = 60 * 60 * 2
+const rewardPeriod = 60 * 60
 
 export const HourlyReward: FC = () => {
     
@@ -18,14 +18,13 @@ export const HourlyReward: FC = () => {
     const { data: userProfile, mutate: mutateUserProfile } = useData(ApiRoutes.GetUserProfile)
     const timestamp = useUnixTimestamp()
     
-    const [ticketsCount, totalPoints, hourlyPoints, pointsCount, canClaim, timeLeft, progress] = useMemo(() => {
-        if (!data) return ['0', '0', '0', '0', false, '', 50]
+    const [ticketsCount, totalPoints, pointsCount, canClaim, timeLeft, progress] = useMemo(() => {
+        if (!data) return ['0', '0', '0', false, '', 50]
         const totalPoints = data.points + data.income
-        const hourlyPoints = totalPoints / 2
-        if (data.canClaim) return [data.gameTickets.format(), totalPoints.format(), hourlyPoints.format(), totalPoints.format(), true, '', 100]
+        if (data.canClaim) return [data.gameTickets.format(), totalPoints.format(), totalPoints.format(), true, '', 100]
         const timeLeft = data.nextClaimTime - timestamp
         const progress = Math.abs(1 - timeLeft / rewardPeriod)
-        return [(progress * data.gameTickets).format(), totalPoints.format(), hourlyPoints.format(), (progress * totalPoints).format(), false, TimeObject.fromTimestamp(timeLeft * 1000).toDisplayString(2), Math.floor(progress * 100)]
+        return [(progress * data.gameTickets).format(), totalPoints.format(), (progress * totalPoints).format(), false, TimeObject.fromTimestamp(timeLeft * 1000).toDisplayString(2), Math.floor(progress * 100)]
     }, [data, timestamp])
 
     async function onClaim () {
@@ -58,7 +57,7 @@ export const HourlyReward: FC = () => {
                     </div>
                     <div className={FlexGapRow4.className}>
                         <Coin width={24} height={24}/>
-                        <p className={TextXSRegularGrey400.className}>+{hourlyPoints}/hour</p>
+                        <p className={TextXSRegularGrey400.className}>+{totalPoints}/hour</p>
                     </div>
                 </div>
                 {
@@ -82,13 +81,13 @@ export const HourlyReward: FC = () => {
                         </p>
                         <div className={FlexGapRow4.className}>
                             <Coin height={24} width={24}/>
-                            <p className={TextXSRegular.update({ color: TextColor.Purple925 }).className}>
+                            <p className={TextXSRegular.update({ color: TextColor.Purple925 }).withExtraClasses(styles.counter)} style={{ "--chars": pointsCount.length } as CSSProperties}>
                                 {pointsCount}
                             </p>
                         </div>
                         <div className={FlexGapRow4.className}>
                             <TicketEmoji width={24} height={24}/>
-                            <p className={TextXSRegular.update({ color: TextColor.Purple925 }).className}>
+                            <p className={TextXSRegular.update({ color: TextColor.Purple925 }).withExtraClasses(styles.counter)} style={{ "--chars": ticketsCount.length } as CSSProperties}>
                                 {ticketsCount}
                             </p>
                         </div>

@@ -24,5 +24,12 @@
 }
 
 .time_left {
-    width: 75px;
+    width: 77px;
+    text-align: left;
+}
+
+.counter {
+    --chars: 1;
+    width: calc(11px * var(--chars));
+    text-align: left;
 }
