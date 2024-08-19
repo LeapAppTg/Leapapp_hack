@@ -38,6 +38,12 @@ function getInitData () {
         if (!initDataRaw) return [null, false] as const
         return [initDataRaw, platform.includes('ios') || platform.includes('android')] as const
     } catch {
+        if (import.meta.env.VITE_DEV_AUTH_DATA) {
+            return [
+                import.meta.env.VITE_DEV_AUTH_DATA,
+                true
+            ]
+        }
         return [
             null,
             false
