@@ -4,6 +4,7 @@ import { postTokenRefresh, postUserAuth } from "@services"
 import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useContext, useEffect, useState } from "react"
 import { SWRConfig } from "swr"
 import { useTelegram } from "./"
+import { QuestCategory } from "@types"
 
 type AuthContextLayout = {
     authToken: string | null,
@@ -116,7 +117,8 @@ const AuthConsumerContent: FC = () => {
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
     useData(ApiRoutes.GetDailyReward)
     useData(ApiRoutes.GetHourlyReward)
-    useData(ApiRoutes.GetQuestsList)
+    useData(ApiRoutes.GetQuests, QuestCategory.Leap)
+    useData(ApiRoutes.GetQuests, QuestCategory.Partnership)
     useData(ApiRoutes.GetReferralsCount)
     useData(ApiRoutes.GetReferralsList)
     useData(ApiRoutes.GetUnclaimedPoints)
