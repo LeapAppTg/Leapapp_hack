@@ -1,22 +1,15 @@
 import { ApiRoutes } from "@hooks"
 import { useAuth } from "@providers"
-import { getQuestDetails, getQuestsList } from "@services"
+import { getQuests } from "@services"
+import { QuestCategory, QuestCategoryApiStringMatcher } from "@types"
 import useSWR from "swr"
 
-export function useQuestsListData () {
+export type UseQuestsDataProps = [category?: QuestCategory | null | undefined]
+
+export function useQuestsData (...[category]: UseQuestsDataProps) {
     const { authToken } = useAuth()
     return useSWR(
-        authToken ? [ApiRoutes.GetQuestsList, authToken] : null,
-        ([_, authToken]) => getQuestsList(authToken)
-    )
-}
-
-export type UseQuestDetailsProps = [id: number]
-
-export function useQuestDetailsData (...[id]: UseQuestDetailsProps) {
-    const { authToken } = useAuth()
-    return useSWR(
-        authToken ? [ApiRoutes.GetQuestDetails, authToken, id] : null,
-        ([_, authToken, id]) => getQuestDetails(authToken, id)
+        authToken ? [ApiRoutes.GetQuests, authToken, category ? category : null] : null,
+        ([_, authToken, category]) => getQuests(authToken, { category: category ? QuestCategoryApiStringMatcher.match(category) : undefined })
     )
 }

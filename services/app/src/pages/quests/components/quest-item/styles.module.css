@@ -29,11 +29,8 @@
     opacity: 0.5;
 }
 
-.hidden .border {
-    fill: var(--color-grey-850);
-}
-
-.hidden .background {
-    fill: var(--color-grey-850);
-    filter: none;
+.button {
+    height: 40px;
+    padding: 12px;
+    border-radius: 16px;
 }

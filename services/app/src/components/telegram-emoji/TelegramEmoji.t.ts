@@ -1,7 +1,4 @@
 export enum TelegramEmojiType {
-    HatchingChick = 'hatching_chich',
-    Gamepad = 'gamepad',
-    FinishFlag = 'finish_flag',
     Rocket = 'rocket',
     MoneyBag = 'money_bag',
     Time = 'time',
@@ -18,7 +15,8 @@ export enum TelegramEmojiType {
     Candy = 'candy',
     Eye = 'eye',
     PartyBall = 'party_ball',
-    ColorPalette = 'color_palette'
+    ColorPalette = 'color_palette',
+    Folder = 'folder'
 }
 
 export enum TelegramEmojiSize {

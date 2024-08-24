@@ -7,9 +7,6 @@ import { DotLottie, DotLottieReact } from '@lottiefiles/dotlottie-react';
 const SourceMapping = new MultiMapping<TelegramEmojiType, [[string, undefined]]>(
     [
         {
-            [TelegramEmojiType.HatchingChick]: "/tg-emojis/hatching_chick",
-            [TelegramEmojiType.Gamepad]: "/tg-emojis/gamepad",
-            [TelegramEmojiType.FinishFlag]: "/tg-emojis/finish_flag",
             [TelegramEmojiType.Rocket]: "/tg-emojis/rocket",
             [TelegramEmojiType.MoneyBag]: "/tg-emojis/money_bag",
             [TelegramEmojiType.Time]: "/tg-emojis/time",
@@ -25,7 +22,8 @@ const SourceMapping = new MultiMapping<TelegramEmojiType, [[string, undefined]]>
             [TelegramEmojiType.Candy]: "/tg-emojis/candy",
             [TelegramEmojiType.Eye]: "/tg-emojis/eye",
             [TelegramEmojiType.PartyBall]: "/tg-emojis/party_ball",
-            [TelegramEmojiType.ColorPalette]: "/tg-emojis/color_palette"
+            [TelegramEmojiType.ColorPalette]: "/tg-emojis/color_palette",
+            [TelegramEmojiType.Folder]: "/tg-emojis/folder"
         },
         undefined
     ]
