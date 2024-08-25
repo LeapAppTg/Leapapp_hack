@@ -1,12 +1,13 @@
 import { Coin } from "@assets";
 import { AlertStatus, Button, ButtonStyle, CircleIconWrapper, CircleIconWrapperColor } from "@components";
-import { ArrowIcon, CheckmarkIcon, DiscordIcon, IconBox, IconSize, InstagramIcon, StarsLightSparkleIcon, TelegramIcon, TiktokIcon, XIcon, YoutubeIcon } from "@icons";
+import { ArrowIcon, CalendarIcon, CheckmarkIcon, DiscordIcon, IconBox, IconSize, InstagramIcon, StarsLightSparkleIcon, TelegramIcon, TiktokIcon, UserProfileIcon, XIcon, YoutubeIcon } from "@icons";
 import { useAlerts, useAuth, useTelegram } from "@providers";
 import { postClaimQuest } from "@services";
 import { Quest, QuestType } from "@types";
 import { EnumMatcher, EnumToFCMatcher, FlexGapColumn4AlignFlexStart, FlexGapRow12FullWidth, FlexGapRow4, JustifyContent, TextXSMedium, TextXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
 import { FC } from "react";
 import styles from "./styles.module.css";
+import { ApiRoutes, useData } from "@hooks";
 
 const IconMatcher = new EnumToFCMatcher<QuestType, FC, FC>(
     {
@@ -15,7 +16,9 @@ const IconMatcher = new EnumToFCMatcher<QuestType, FC, FC>(
         [QuestType.Instagram]: InstagramIcon,
         [QuestType.Youtube]: YoutubeIcon,
         [QuestType.Discord]: DiscordIcon,
-        [QuestType.Tiktok]: TiktokIcon
+        [QuestType.Tiktok]: TiktokIcon,
+        [QuestType.Days]: CalendarIcon,
+        [QuestType.Invite]: UserProfileIcon
     },
     StarsLightSparkleIcon
 )
@@ -35,16 +38,19 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
 
     const { authToken } = useAuth()
     const { sendAlert, sendApiErrorAlert } = useAlerts()
-    const { openLink, openTelegramLink } = useTelegram()
+    const { openLink, openTelegramLink, shareLink } = useTelegram()
+    const { data: refLink } = useData(ApiRoutes.GetInviteLink)
 
-    const claimQuest = async () => {
+    const claimQuest = async (noAlert?: boolean) => {
         try {
             await postClaimQuest(authToken, uuid)
-            let message: string = 'Claimed'
-            if (rewardPoints) message += ` +${rewardPoints.format()} points`
-            if (rewardGameTickets) message += ` +${rewardGameTickets.format()} tickets`
-            if (!rewardPoints && !rewardGameTickets) message += ` reward successfully`
-            sendAlert({ status: AlertStatus.Success, withConfetti: true, message })
+            if (!noAlert) {                
+                let message: string = 'Claimed'
+                if (rewardPoints) message += ` +${rewardPoints.format()} points`
+                if (rewardGameTickets) message += ` +${rewardGameTickets.format()} tickets`
+                if (!rewardPoints && !rewardGameTickets) message += ` reward successfully`
+                sendAlert({ status: AlertStatus.Success, withConfetti: true, message })
+            }
             onClaim()
         } catch (e) {
             sendApiErrorAlert(e)
@@ -54,9 +60,12 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
     const onClick = async () => {
         if (isClaimed) return
         if (link && [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube, QuestType.Telegram].includes(type)) {
-            await postClaimQuest(authToken, uuid)
+            await claimQuest(true)
             if (type === QuestType.Telegram) openTelegramLink(link)
             else openLink(link)
+        }
+        if (type === QuestType.Invite && refLink) {
+            shareLink(refLink.inviteLink)
         }
     }
 
@@ -95,7 +104,7 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
                 ?
                 <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
                 :
-                [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Telegram, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube].includes(type)
+                [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Telegram, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube, QuestType.Invite].includes(type)
                 ?
                 <IconBox icon={ArrowIcon} size={IconSize.MediumBig}/>
                 :
@@ -107,7 +116,10 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
                     Claim
                 </Button>
                 :
-                <Button style={ButtonStyle.Primary} className={styles.button} onClick={claimQuest}>
+                <Button style={ButtonStyle.Primary} className={styles.button} onClick={(e) => {
+                    e.stopPropagation()
+                    claimQuest()
+                }}>
                     Claim
                 </Button>
                 :

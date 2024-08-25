@@ -18,7 +18,7 @@ export const QuestsPage: FC = () => {
 
     return (
         <>
-        <PageTitle icon={TelegramEmojiType.Folder} color={PageTitleBackgroundColor.Yellow} title="Quests" subtitle="Earn more by completing tasks"/>
+        <PageTitle icon={TelegramEmojiType.Folder} color={PageTitleBackgroundColor.Yellow} title="Tasks hub" subtitle="Earn more by completing tasks"/>
 
         <div className={styles.switcher}>
             <div className={classJoiner(styles.switch, isLeapTasks ? undefined : styles.right)}/>
