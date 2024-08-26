@@ -41,16 +41,14 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
     const { openLink, openTelegramLink, shareLink } = useTelegram()
     const { data: refLink } = useData(ApiRoutes.GetInviteLink)
 
-    const claimQuest = async (noAlert?: boolean) => {
+    const claimQuest = async () => {
         try {
             await postClaimQuest(authToken, uuid)
-            if (!noAlert) {                
-                let message: string = 'Claimed'
-                if (rewardPoints) message += ` +${rewardPoints.format()} points`
-                if (rewardGameTickets) message += ` +${rewardGameTickets.format()} tickets`
-                if (!rewardPoints && !rewardGameTickets) message += ` reward successfully`
-                sendAlert({ status: AlertStatus.Success, withConfetti: true, message })
-            }
+            let message: string = 'Claimed'
+            if (rewardPoints) message += ` +${rewardPoints.format()} points`
+            if (rewardGameTickets) message += ` +${rewardGameTickets.format()} tickets`
+            if (!rewardPoints && !rewardGameTickets) message += ` reward successfully`
+            sendAlert({ status: AlertStatus.Success, withConfetti: true, message })
             onClaim()
         } catch (e) {
             sendApiErrorAlert(e)
@@ -60,7 +58,8 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
     const onClick = async () => {
         if (isClaimed) return
         if (link && [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube, QuestType.Telegram].includes(type)) {
-            await claimQuest(true)
+            await postClaimQuest(authToken, uuid)
+            setTimeout(onClaim, 1000)
             if (type === QuestType.Telegram) openTelegramLink(link)
             else openLink(link)
         }
