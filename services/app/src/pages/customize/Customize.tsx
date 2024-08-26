@@ -5,7 +5,7 @@ export const CustomizePage: FC = () => {
     return (
         <>
         <PageTitle icon={TelegramEmojiType.ColorPalette} color={PageTitleBackgroundColor.Grey} title="Customize" subtitle="Make your Leap unique"/>
-        <ComingSoon inTime={1724187600000}/>
+        <ComingSoon inTime={1725321600000}/>
         </>
     )
 }

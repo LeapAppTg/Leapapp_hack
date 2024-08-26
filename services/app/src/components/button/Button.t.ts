@@ -1,4 +1,5 @@
 import { IconFC } from "@icons"
+import { MouseEventHandler } from "react"
 
 export enum ButtonStyle {
     Primary = 'primary',
@@ -9,7 +10,7 @@ export enum ButtonStyle {
 
 export type ButtonProps = {
     style: ButtonStyle,
-    onClick?: () => any,
+    onClick?: MouseEventHandler<HTMLButtonElement>,
     disabled?: boolean,
     linkTo?: string,
     fillFullWidth?: boolean,

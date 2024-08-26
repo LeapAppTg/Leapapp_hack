@@ -2,22 +2,25 @@ import { ApiTypeBuilder } from "@builders"
 import { EnumMatcher } from "@utils"
 
 export enum QuestCategory {
-    Social = 'social'
+    Leap = 'leap',
+    Partnership = 'partnership'
 }
 
 const QuestCategoryMapping: Record<string, QuestCategory> = {
-    'social': QuestCategory.Social
+    'leap': QuestCategory.Leap,
+    'partnership': QuestCategory.Partnership
 }
 
 export const QuestCategoryApiTypeBuilder = new ApiTypeBuilder<string, QuestCategory, false>(
     (i) => {
-        return QuestCategoryMapping[i] || QuestCategory.Social
+        return QuestCategoryMapping[i] || QuestCategory.Leap
     }
 )
 
-export const QuestCategoryStringMatcher = new EnumMatcher<QuestCategory, string, 'Social'>(
+export const QuestCategoryApiStringMatcher = new EnumMatcher<QuestCategory, string, 'leap'>(
     {
-        [QuestCategory.Social]: 'Social',
+        [QuestCategory.Leap]: 'leap',
+        [QuestCategory.Partnership]: 'partnership'
     },
-    'Social'
+    'leap'
 )

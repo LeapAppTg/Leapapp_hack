@@ -1,6 +1,6 @@
 import { IconBox, IconColor, IconSize } from "@icons";
 import { MultiMapping, TextColor, TextXSRegular, classBuilder } from "@utils";
-import { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
 import { ButtonProps, ButtonStyle } from "./Button.t";
 import styles from './styles.module.css';
@@ -27,10 +27,10 @@ const ButtonContent: FC<PropsWithChildren<ButtonProps>> = ({
 
     const { triggerHapticFeedback } = useTelegram()
 
-    function click () {
+    function click (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         if (!onClick) return
         triggerHapticFeedback({ type: 'impact', impact_style: 'soft' })
-        onClick()
+        onClick(e)
     }
 
     const className = classBuilder(

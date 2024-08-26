@@ -1,6 +1,6 @@
 import { useGameLeaderboardData } from "./useLeaderboardData";
 import { useMarketItemsListData } from "./useMarketData";
-import { UseQuestDetailsProps, useQuestDetailsData, useQuestsListData } from "./useQuestsData";
+import { UseQuestsDataProps, useQuestsData } from "./useQuestsData";
 import { useInviteLinkData, useReferralsCountData, useReferralsListData, useUnclaimedPointsData } from "./useReferralData";
 import { useDailyRewardData, useHourlyRewardData, useUserProfileData } from "./useUserData";
 
@@ -8,8 +8,7 @@ export enum ApiRoutes {
     GetDailyReward = '/get/daily-reward/',
     GetHourlyReward = '/get/hourly-reward/',
     GetUserProfile = '/get/user-profile/',
-    GetQuestsList = '/get/quests-list/',
-    GetQuestDetails = '/get/quest-details/',
+    GetQuests = '/get/quests/',
     GetInviteLink = '/get/invite-link/',
     GetUnclaimedPoints = '/get/unclaimed-points/',
     GetReferralsList = '/get/referrals-list/',
@@ -22,8 +21,7 @@ type UseDataTypesMap = {
     [ApiRoutes.GetDailyReward]: [[], ReturnType<typeof useDailyRewardData>],
     [ApiRoutes.GetHourlyReward]: [[], ReturnType<typeof useHourlyRewardData>],
     [ApiRoutes.GetUserProfile]: [[], ReturnType<typeof useUserProfileData>],
-    [ApiRoutes.GetQuestsList]: [[], ReturnType<typeof useQuestsListData>],
-    [ApiRoutes.GetQuestDetails]: [UseQuestDetailsProps, ReturnType<typeof useQuestDetailsData>],
+    [ApiRoutes.GetQuests]: [UseQuestsDataProps, ReturnType<typeof useQuestsData>],
     [ApiRoutes.GetInviteLink]: [[], ReturnType<typeof useInviteLinkData>],
     [ApiRoutes.GetUnclaimedPoints]: [[], ReturnType<typeof useUnclaimedPointsData>],
     [ApiRoutes.GetReferralsList]: [[], ReturnType<typeof useReferralsListData>],
@@ -48,10 +46,8 @@ export function useData<
             return useHourlyRewardData() as UseDataReturnType<K>;
         case ApiRoutes.GetUserProfile:
             return useUserProfileData() as UseDataReturnType<K>;
-        case ApiRoutes.GetQuestsList:
-            return useQuestsListData() as UseDataReturnType<K>;
-        case ApiRoutes.GetQuestDetails:
-            return useQuestDetailsData(...params as UseQuestDetailsProps) as UseDataReturnType<K>;
+        case ApiRoutes.GetQuests:
+            return useQuestsData(...params as UseQuestsDataProps) as UseDataReturnType<K>;
         case ApiRoutes.GetInviteLink:
             return useInviteLinkData() as UseDataReturnType<K>;
         case ApiRoutes.GetUnclaimedPoints:
