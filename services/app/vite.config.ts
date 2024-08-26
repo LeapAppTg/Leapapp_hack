@@ -38,7 +38,8 @@ export default defineConfig({
           if (id.includes('/app/src/')) {
             return id.split('/app/src/')[1].split('/')[0]
           }
-        }
+        },
+        chunkFileNames: "[name]-[hash:10].js"
       }
     }
   }
