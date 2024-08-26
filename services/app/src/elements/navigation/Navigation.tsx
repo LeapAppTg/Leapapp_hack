@@ -9,7 +9,7 @@ export const Navigation: FC = () => {
         <>
         <div className={styles.nav_placeholder}/>
         <div className={styles.navigation}>
-            <CurrentLink to="/quests" icon={ListTaskCheckmarkIcon} title="Quests"/>
+            <CurrentLink to="/quests" icon={ListTaskCheckmarkIcon} title="Tasks"/>
             <CurrentLink to="/referrals" icon={UserProfileIcon} title="Referrals"/>
             <CurrentLink to="/home" icon={PackageBoxHomeIcon} title="Home"/>
             <CurrentLink to="/boost" icon={SpaceRocketIcon} title="Boost"/>
