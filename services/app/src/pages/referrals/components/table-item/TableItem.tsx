@@ -5,14 +5,14 @@ import { FlexGapColumn4AlignFlexStart, FlexGapRow4, FlexGapRow8FullWidthJustifyS
 import { FC } from "react";
 
 export const TableItem: FC<Referral> = ({
-    points, referrals, username
+    points, referrals, firstName, lastName
 }) => {
 
     return (
         <div className={FlexGapRow8FullWidthJustifySpaceBetween.className}>
-            <div className={FlexGapColumn4AlignFlexStart.className}>
-                <p className={TextXSMedium.className}>
-                    @{username}
+            <div className={FlexGapColumn4AlignFlexStart.update({ hideOverflow: true }).className}>
+                <p className={TextXSMedium.update({ cropText: true }).className}>
+                    {firstName} {lastName}
                 </p>
                 <div className={FlexGapRow4.className}>
                     <IconBox icon={UserProfileIcon} size={IconSize.Medium} color={IconColor.Grey400}/>
@@ -20,7 +20,7 @@ export const TableItem: FC<Referral> = ({
                 </div>
             </div>
             <div className={FlexGapRow4.className}>
-                <p className={TextXSRegular.className}>+ {points.format()}</p>
+                <p className={TextXSRegular.update({ noLineBreak: true }).className}>+ {points.format()}</p>
                 <Coin width={20} height={20}/>
             </div>
         </div>

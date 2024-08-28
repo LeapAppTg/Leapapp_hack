@@ -119,6 +119,10 @@
     text-overflow: ellipsis;
 }
 
+.no_line_break {
+    white-space: nowrap;
+}
+
 /* Transform */
 
 .uppercase {
