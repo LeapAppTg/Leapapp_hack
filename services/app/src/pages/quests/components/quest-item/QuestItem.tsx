@@ -5,7 +5,7 @@ import { useAlerts, useAuth, useTelegram } from "@providers";
 import { postClaimQuest } from "@services";
 import { Quest, QuestType } from "@types";
 import { EnumMatcher, EnumToFCMatcher, FlexGapColumn4AlignFlexStart, FlexGapRow12FullWidth, FlexGapRow4, JustifyContent, TextXSMedium, TextXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
-import { FC } from "react";
+import { FC, useState } from "react";
 import styles from "./styles.module.css";
 import { ApiRoutes, useData } from "@hooks";
 
@@ -40,6 +40,7 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
     const { sendAlert, sendApiErrorAlert } = useAlerts()
     const { openLink, openTelegramLink, shareLink } = useTelegram()
     const { data: refLink } = useData(ApiRoutes.GetInviteLink)
+    const [showLoader, setShowLoader] = useState<boolean>(false)
 
     const claimQuest = async () => {
         try {
@@ -58,10 +59,13 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
     const onClick = async () => {
         if (isClaimed) return
         if (link && [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube, QuestType.Telegram].includes(type)) {
-            await postClaimQuest(authToken, uuid)
-            setTimeout(onClaim, 1000)
             if (type === QuestType.Telegram) openTelegramLink(link)
             else openLink(link)
+            setShowLoader(true)
+            setTimeout(async () => {
+                await claimQuest()
+                setShowLoader(false)
+            }, 10_000)
         }
         if (type === QuestType.Invite && refLink) {
             shareLink(refLink.inviteLink)
@@ -99,6 +103,13 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
                 }
             </div>
             {
+                showLoader
+                ?
+                <svg className={styles.loader} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10.5" stroke="#505760" stroke-width="3"/>
+                    <path d="M12 1.5C13.9229 1.5 15.8089 2.02803 17.4522 3.02651C19.0955 4.02498 20.4331 5.45555 21.3191 7.16218C22.2051 8.86881 22.6054 10.786 22.4763 12.7045C22.3473 14.6231 21.6939 16.4694 20.5874 18.042" stroke="#B51CF7" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+                :
                 isClaimed
                 ?
                 <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
