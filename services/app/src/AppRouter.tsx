@@ -36,6 +36,17 @@ const AppRouter: FC = () => {
         return () => clearTimeout(timeout)
     }, [pathname])
 
+    return (
+        <>
+            <section className='page'>
+            <Routes>
+                <Route path='/' element={<PageWrapper hideNavbar><LoaderPage/></PageWrapper>}/>
+                <Route path='*' element={<Navigate to='/'/>}/>
+            </Routes>
+            </section>
+        </>
+    )
+
     if (initData === null) return (
         <>
             <section className='page'>
