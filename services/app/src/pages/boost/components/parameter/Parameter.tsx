@@ -3,7 +3,7 @@ import { AlignItems, EnumMatcher, FlexGapColumn4AlignFlexStart, FlexGapColumn8Fu
 import { FC, useMemo } from "react";
 import styles from "./styles.module.css";
 import { Coin } from "@assets";
-import { MarketItem } from "@types";
+import { MarketItem, MarketItemCategory } from "@types";
 import { useAlerts, useAuth } from "@providers";
 import { postUpgradeMarketItem } from "@services";
 import { ApiRoutes, useData } from "@hooks";
@@ -18,8 +18,15 @@ const IconMapping = new EnumMatcher<string, TelegramEmojiType, TelegramEmojiType
     TelegramEmojiType.Eye
 )
 
+const DescriptionMapping = new EnumMatcher<MarketItemCategory, string, string>(
+    {
+        [MarketItemCategory.HourlyRewardUpgrade]: 'to hourly claim'
+    },
+    'to hourly claim'
+)
+
 export const Parameter: FC<MarketItem & { upgradeCallback: () => any }> = ({
-    uuid, upgradePrice, name, level, maxLevel, description, upgradeCallback
+    uuid, upgradePrice, name, level, maxLevel, income, upgradeCallback, category
 }) => {
 
     const { authToken } = useAuth()
@@ -64,7 +71,7 @@ export const Parameter: FC<MarketItem & { upgradeCallback: () => any }> = ({
                             </p>
                         </div>
                         <p className={TextXXSRegularGrey400.className}>
-                            {description}
+                            + {income.format()} {DescriptionMapping.match(category)}
                         </p>
                     </div>
                 </div>
