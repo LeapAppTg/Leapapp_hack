@@ -13,7 +13,8 @@
 }
 
 .bar {
-    background: linear-gradient(90deg, var(--color-main-bg) 59%, var(--color-grey-900) 59.1%);
+    --progress: 0%;
+    background: linear-gradient(90deg, var(--color-main-bg) var(--progress), var(--color-grey-900) var(--progress));
 }
 
 .record {

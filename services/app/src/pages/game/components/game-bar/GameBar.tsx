@@ -2,8 +2,9 @@ import { MagnetCoin } from "@assets";
 import { TelegramEmoji, TelegramEmojiSize, TelegramEmojiType } from "@components";
 import { useUnixCountdown } from "@hooks";
 import { FlexGapColumn4, FlexGapColumnFullWidthAlignFlexEnd, FlexGapColumnFullWidthAlignFlexStart, FlexGapRow4, TextColor, TextXLSemiBold, TextXSBold, TextXSMedium, TextXXSRegularGrey400, classJoiner } from "@utils";
-import { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from "react";
+import { CSSProperties, Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.css";
+import { GameConfig } from "../../config";
 
 type Props = {
     score: number,
@@ -29,8 +30,13 @@ export const GameBar: FC<Props>= ({
         return `${mins}:${secs}`
     }, [timeLeft])
 
+    const progress = useMemo(() => {
+        if (timeLeft.minutes) return 0
+        return Math.floor((1 - timeLeft.seconds / GameConfig.gameDuration) * 1000) / 10
+    }, [timeLeft])
+
     return (
-        <div className={styles.bar}>
+        <div className={styles.bar} style={{ '--progress': `${progress}%` } as CSSProperties}>
             <div className={FlexGapColumnFullWidthAlignFlexStart.className}>
                 <p className={TextXXSRegularGrey400.className}>
                     Game

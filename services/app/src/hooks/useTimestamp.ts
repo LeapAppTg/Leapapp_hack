@@ -21,7 +21,7 @@ export const useUnixTimestamp = () => {
     const [timestamp, setTimestamp] = useState<number>(currentUnixTimestamp())
 
     useEffect(() => {
-      const interval = window.setInterval(() => setTimestamp(currentUnixTimestamp()), 1000)
+      const interval = window.setInterval(() => setTimestamp(currentUnixTimestamp()), 500)
     
       return () => window.clearInterval(interval)
     }, [])

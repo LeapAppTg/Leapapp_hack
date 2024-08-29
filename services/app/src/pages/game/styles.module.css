@@ -9,16 +9,29 @@
     background-image: url('/backgrounds/dots.svg');
 }
 
-.pink_highlight {
-    box-shadow: 0px 0px 94px 0px rgba(224, 87, 227, 0.25) inset;
+.shadow {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    transition: 0.3s opacity;
 }
 
-.red_highlight {
-    box-shadow: 0px 0px 94px 0px rgba(223, 7, 7, 0.25) inset;
+.pink_highlight .shadow {
+    box-shadow: 0px 0px 50px 0px rgba(224, 87, 227, 0.25) inset;
 }
 
-.gold_highlight {
-    box-shadow: 0px 0px 54px 0px rgba(223, 188, 7, 0.25) inset;
+.red_highlight .shadow {
+    box-shadow: 0px 0px 50px 0px rgba(223, 7, 7, 0.25) inset;
+}
+
+.gold_highlight .shadow {
+    box-shadow: 0px 0px 50px 0px rgba(223, 188, 7, 0.25) inset;
+}
+
+.pink_highlight .shadow, .red_highlight .shadow, .gold_highlight .shadow {
+    opacity: 1;
 }
 
 .dots {
