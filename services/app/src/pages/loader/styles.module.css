@@ -3,84 +3,17 @@
     flex-direction: column;
     flex-grow: 1;
     gap: 32px;
-}
 
-.coins_wrapper {
+}
+.frog, .frog_static {
     position: relative;
-    width: 100%;
-    height: 200px;
-}
-
-.coins_wrapper > svg {
-    top: 10%;
-}
-
-.coins {
-    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    height: 200px;
-}
-
-.coins > svg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    animation: 5s item-move infinite;
-    transform: translateX(-200%);
-}
-
-@keyframes item-move {
-    to {
-        transform: translateX(2000%);
-    }
-}
-
-.coins > svg:nth-child(1) {
-    top: 10%;
-    animation-delay: 0s;
-}
-.coins > svg:nth-child(2) {
-    top: 80%;
-    animation-delay: 0.5s;
-}
-.coins > svg:nth-child(3) {
-    top: 30%;
-    animation-delay: 1s;
-}
-.coins > svg:nth-child(4) {
-    top: 80%;
-    animation-delay: 1.5s;
-}
-.coins > svg:nth-child(5) {
-    top: 60%;
-    animation-delay: 2s;
-}
-.coins > svg:nth-child(6) {
-    top: 20%;
-    animation-delay: 2.5s;
-}
-.coins > svg:nth-child(7) {
-    top: 70%;
-    animation-delay: 3s;
-}
-.coins > svg:nth-child(8) {
-    top: 50%;
-    animation-delay: 3.5s;
-}
-.coins > svg:nth-child(9) {
-    top: 40%;
-    animation-delay: 4s;
-}
-.coins > svg:nth-child(10) {
-    top: 30%;
-    animation-delay: 4.5s;
-}
-
-.frog {
     width: 80px;
     height: 80px;
+}
+
+.frog_static {
+    position: absolute;
+    z-index: -1;
 }
 
 .loader_wrapper {
