@@ -10,7 +10,7 @@ export const Table: FC = () => {
     const tableRef = usePagination(setSize, isValidating, referralsList !== undefined && !referralsList[referralsList.length - 1].next)
 
     return (
-        <div className={FlexGapColumn16FullWidth.className}>
+        <div className={FlexGapColumn16FullWidth.withExtraClasses(styles.wrapper)}>
             <TableTitle/>
             {
                 referralsList && referralsList[0].referrals.length

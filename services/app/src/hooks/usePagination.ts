@@ -16,9 +16,11 @@ export function usePagination (
     useEffect(() => {
         onScroll()
         document.body.addEventListener('touchmove', onScroll)
+        document.body.addEventListener('wheel', onScroll)
         
         return () => {
             document.body.removeEventListener('touchmove', onScroll)
+            document.body.removeEventListener('wheel', onScroll)
         }
     }, [ref.current, isValidating, isReachedEnd])
 
