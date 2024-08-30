@@ -115,7 +115,7 @@ const AuthConsumerContent: FC = () => {
     const { isAuthorized, setIsAuthorized, setIsFirstTimeLogin } = useAuth()
 
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
-    useData(ApiRoutes.GetDailyReward)
+    const { data: dailyReward } = useData(ApiRoutes.GetDailyReward)
     useData(ApiRoutes.GetHourlyReward)
     useData(ApiRoutes.GetQuests, QuestCategory.Leap)
     useData(ApiRoutes.GetQuests, QuestCategory.Partnership)
@@ -126,10 +126,10 @@ const AuthConsumerContent: FC = () => {
     useData(ApiRoutes.GetMarketItemsList)
 
     useEffect(() => {
-        if (isAuthorized || !userProfile) return
+        if (isAuthorized || !userProfile || !dailyReward) return
         if (userProfile.isFirstLogin) setIsFirstTimeLogin(true)
         setIsAuthorized(true)
-    }, [isAuthorized, userProfile])
+    }, [isAuthorized, userProfile, dailyReward])
 
     return null
 }
