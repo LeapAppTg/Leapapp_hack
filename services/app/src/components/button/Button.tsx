@@ -22,7 +22,7 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({ linkTo, ...restProp
 }
 
 const ButtonContent: FC<PropsWithChildren<ButtonProps>> = ({
-    style, disabled, onClick, children, fillFullWidth, rightIcon, fillFullHeight, className: extraClasses
+    style, disabled, onClick, children, fillFullWidth, rightIcon, fillFullHeight, className: extraClasses, id
 }) => {
 
     const { triggerHapticFeedback } = useTelegram()
@@ -41,7 +41,7 @@ const ButtonContent: FC<PropsWithChildren<ButtonProps>> = ({
     )
 
     return (
-        <button className={className} disabled={disabled} onClick={click}>
+        <button className={className} disabled={disabled} onClick={click} id={id}>
             {children}
             {
                 rightIcon
