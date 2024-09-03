@@ -114,7 +114,7 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
                 ?
                 <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
                 :
-                [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Telegram, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube, QuestType.Invite].includes(type)
+                [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Telegram, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube].includes(type)
                 ?
                 <IconBox icon={ArrowIcon} size={IconSize.MediumBig}/>
                 :
@@ -122,6 +122,10 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
                 ?
                 required > progress
                 ?
+                type === QuestType.Invite
+                ?
+                <IconBox icon={ArrowIcon} size={IconSize.MediumBig}/>
+                :
                 <Button style={ButtonStyle.Primary} className={styles.button} disabled>
                     Claim
                 </Button>
