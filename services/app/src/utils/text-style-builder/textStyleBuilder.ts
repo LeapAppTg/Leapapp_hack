@@ -118,7 +118,8 @@ type TextStyleBuilderProps = {
     /** @width 100% */
     fillFullWidth?: boolean,
     textTransfrom?: TextTransform,
-    cropText?: boolean
+    cropText?: boolean,
+    noLineBreak?: boolean
 }
 
 export class TextStyleBuilder implements TextStyleBuilderProps {
@@ -130,6 +131,7 @@ export class TextStyleBuilder implements TextStyleBuilderProps {
     fillFullWidth?: boolean | undefined;
     textTransfrom?: TextTransform | undefined;
     cropText?: boolean | undefined;
+    noLineBreak?: boolean | undefined;
 
     constructor(params: TextStyleBuilderProps) {
         Object.assign(this, params)
@@ -151,7 +153,7 @@ export class TextStyleBuilder implements TextStyleBuilderProps {
     public get className () {
         return classBuilder(
             styles,
-            [this.color, this.size, this.lineHeight, this.weight, this.textAlign, { fill_full_width: this.fillFullWidth }, this.textTransfrom, { crop_text: this.cropText }]
+            [this.color, this.size, this.lineHeight, this.weight, this.textAlign, { fill_full_width: this.fillFullWidth }, this.textTransfrom, { crop_text: this.cropText }, { no_line_break: this.noLineBreak }]
         )
     }
 

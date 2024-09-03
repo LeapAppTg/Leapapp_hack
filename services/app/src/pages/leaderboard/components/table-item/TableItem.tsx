@@ -1,13 +1,13 @@
 import { BronzeBadge, Coin, GoldBadge, SilverBadge } from "@assets";
 import { GameLeaderboardMember } from "@types";
-import { FlexGapRow4, FlexGapRow8FullWidthJustifySpaceBetween, FlexGapRowFullWidthJustifyFlexStart, TextXSMedium, TextXSRegular, TextXSRegularGrey400 } from "@utils";
+import { FlexGapRow4, FlexGapRow8FullWidthJustifySpaceBetween, FlexGapRowFullWidthJustifyFlexStart, TextAlign, TextXSMedium, TextXSRegular, TextXSRegularGrey400 } from "@utils";
 import { FC } from "react";
 import styles from "./styles.module.css";
 
 type TableItemProps = GameLeaderboardMember & { place: number }
 
 export const TableItem: FC<TableItemProps> = ({
-    place, record, username
+    place, record, firstName, lastName
 }) => {
     return (
         <div className={FlexGapRow8FullWidthJustifySpaceBetween.className}>
@@ -30,9 +30,9 @@ export const TableItem: FC<TableItemProps> = ({
                     </p>
                 }
             </div>
-            <div className={FlexGapRowFullWidthJustifyFlexStart.className}>
-                <p className={TextXSMedium.className}>
-                    @{username}
+            <div className={FlexGapRowFullWidthJustifyFlexStart.update({ hideOverflow: true }).className}>
+                <p className={TextXSMedium.update({ cropText: true, textAlign: TextAlign.Left }).className}>  
+                    {firstName} {lastName}
                 </p>
             </div>
             <div className={FlexGapRow4.className}>

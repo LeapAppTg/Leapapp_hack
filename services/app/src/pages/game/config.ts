@@ -8,7 +8,7 @@ export enum GameState {
 }
 
 export const GameConfig = {
-    gameDuration: 61,
+    gameDuration: 60,
     magnetDuration: 10,
     speedIncreaseTime: 30
 }

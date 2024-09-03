@@ -13,6 +13,11 @@ type Props = {
     addPendingScore: (score: number) => any
 }
 
+const HERO_SIZE = 60;
+const ITEM_SIZE = 28;
+const SLIDER_HEIGHT = 40;
+const CANVAS_PADDING = 32;
+
 const CanvasContent: FC<Props> = ({
     gameState, setGameState, addPendingScore, gameEndAt, magnetEndAt, setMagnetEndAt
 }) => {
@@ -23,15 +28,15 @@ const CanvasContent: FC<Props> = ({
     const sliderRef = useRef<ElementRef<"button">>(null)
 
     const items = useRef<Item[]>([])
-    const width = useRef(document.body.clientWidth - 32)
-    const height = useRef(document.body.clientHeight - 32)
+    const width = useRef(document.body.clientWidth - CANVAS_PADDING)
+    const height = useRef(document.body.clientHeight - CANVAS_PADDING)
     const heroX = useRef(54)
     const isHeroActive = useRef(false)
     const isHeroEating = useRef(false)
-    const baseMoveYValue = useRef(Math.floor(1 / 300 * height.current))
     const heroYBottomPadding = useRef(Math.floor(height.current * 15 / 100))
     const gameEndAtRef = useRef(gameEndAt)
     const magnetEndAtRef = useRef(magnetEndAt)
+    const cachedImagesRef = useRef<Map<string, HTMLCanvasElement>>(new Map())
 
     useEffect(() => {
         gameEndAtRef.current = gameEndAt
@@ -47,8 +52,8 @@ const CanvasContent: FC<Props> = ({
 
     useEffect(() => {
         const listener = () => {
-            width.current = document.body.clientWidth - 32
-            height.current = document.body.clientHeight - 32
+            width.current = document.body.clientWidth - CANVAS_PADDING
+            height.current = document.body.clientHeight - CANVAS_PADDING
         }
         window.addEventListener("resize", listener)
         return () => {
@@ -57,12 +62,47 @@ const CanvasContent: FC<Props> = ({
     }, [])
 
     useEffect(() => {
-        baseMoveYValue.current = Math.floor(1 / 300 * height.current)
         heroYBottomPadding.current = Math.floor(height.current * 15 / 100)
     }, [height.current])
 
     useEffect(() => {
-        if (gameState !== GameState.Play) return 
+        const sources = [
+            { width: HERO_SIZE, height: HERO_SIZE, src: 'hero_blown' },
+            { width: HERO_SIZE, height: HERO_SIZE, src: 'hero_thug' },
+            { width: HERO_SIZE, height: HERO_SIZE, src: 'hero_swallow_magnet' },
+            { width: HERO_SIZE, height: HERO_SIZE, src: 'hero_open_magnet' },
+            { width: HERO_SIZE, height: HERO_SIZE, src: 'hero_swallow' },
+            { width: HERO_SIZE, height: HERO_SIZE, src: 'hero_open' },
+            { width: HERO_SIZE, height: SLIDER_HEIGHT, src: 'slider' },
+            { width: ITEM_SIZE, height: ITEM_SIZE, src: 'gold' },
+            { width: ITEM_SIZE, height: ITEM_SIZE, src: 'ufo' },
+            { width: ITEM_SIZE, height: ITEM_SIZE, src: 'durov' },
+            { width: ITEM_SIZE, height: ITEM_SIZE, src: 'rocket' },
+            { width: ITEM_SIZE, height: ITEM_SIZE, src: 'dollar' },
+            { width: ITEM_SIZE, height: ITEM_SIZE, src: 'magnet' },
+            { width: ITEM_SIZE, height: ITEM_SIZE, src: 'bomb' }
+        ]
+
+        for (let { width, height, src } of sources) {
+            const canvas = document.createElement('canvas')
+            canvas.width = width
+            canvas.height = height
+            const ctx = canvas.getContext("2d")
+            const img = new Image(width, height)
+            img.src = `game-items/${src}.svg`
+            img.onload = () => {
+                ctx!.drawImage(img, 0, 0, width, height)
+                cachedImagesRef.current.set(`game-items/${src}.svg`, canvas)
+            }
+        }
+
+        return () => {
+            cachedImagesRef.current.forEach(m => m.remove())
+        }
+    }, [])
+
+    useEffect(() => {
+        if (gameState !== GameState.Play) return
         const canvas = ref.current
         if (!canvas) return
         const ctx = canvas.getContext("2d")
@@ -71,82 +111,91 @@ const CanvasContent: FC<Props> = ({
         let frame: number
 
         const animatePoints = () => {
-            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
             for (let item of items.current) {
-                ctx.drawImage(item.createImg(), item.x, item.y)
+                const cachedImage = cachedImagesRef.current.get(item.src)
+                if (cachedImage) {
+                    ctx.drawImage(cachedImage, item.x, item.y)
+                }
             }
-            
+
             frame = requestAnimationFrame(animatePoints)
         }
-        
+
         animatePoints()
-        
+
         return () => cancelAnimationFrame(frame)
     }, [gameState, ref.current])
 
-
     useEffect(() => {
-        if (gameState !== GameState.Play && gameState !== GameState.Bomb && gameState !== GameState.TimeExpired) return 
-        const canvas = heroRef.current
-        if (!canvas) return
-        const ctx = canvas.getContext("2d")
-        if (!ctx) return
+        if (gameState !== GameState.Play && gameState !== GameState.Bomb && gameState !== GameState.TimeExpired) return;
 
-        let frame: number
+        const canvas = heroRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        let frame: number;
 
         const animateHero = () => {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-            const slider = new Image(60, 40)
-            slider.src = 'game-items/slider.svg'
-            const hero = new Image(60, 60)
-
+            let heroKey: string;
             if (gameState === GameState.Bomb) {
-                hero.src = 'game-items/hero_blown.svg'
+                heroKey = 'hero_blown'
             } else if (gameState === GameState.TimeExpired) {
-                hero.src = 'game-items/hero_thug.svg'
+                heroKey = 'hero_thug'
             } else if (magnetEndAtRef.current - currentUnixTimestamp() > 0) {
-                if (isHeroEating.current) {
-                    hero.src = 'game-items/hero_swallow_magnet.svg'
-                } else {
-                    hero.src = 'game-items/hero_open_magnet.svg'
-                }
+                heroKey = isHeroEating.current ? 'hero_swallow_magnet' : 'hero_open_magnet'
             } else {
-                if (isHeroEating.current) {
-                    hero.src = 'game-items/hero_swallow.svg'
-                } else {
-                    hero.src = 'game-items/hero_open.svg'
-                }
+                heroKey = isHeroEating.current ? 'hero_swallow' : 'hero_open'
             }
 
-            ctx.drawImage(hero, heroX.current, 0, 60, 60)
-            ctx.drawImage(slider, heroX.current, 60)
-            
-            frame = requestAnimationFrame(animateHero)
-        }
-        
-        animateHero()
-        
-        return () => cancelAnimationFrame(frame)
-    }, [gameState, heroRef.current])
-    
+            const hero = cachedImagesRef.current.get(`game-items/${heroKey}.svg`)
+            const slider = cachedImagesRef.current.get('game-items/slider.svg')
+            if (hero) ctx.drawImage(hero, heroX.current, 0);
+            if (slider) ctx.drawImage(slider, heroX.current, HERO_SIZE);
+
+            frame = requestAnimationFrame(animateHero);
+        };
+
+        animateHero();
+
+        return () => cancelAnimationFrame(frame);
+    }, [gameState, heroRef.current]);
+
     useEffect(() => {
-        if (gameState !== GameState.Play) return 
-        function moveItems () {
-            let baseMoveY = baseMoveYValue.current;
+        if (gameState !== GameState.Play) return;
+
+        let frame: number;
+        let lastTimestamp = performance.now();
+        let lastAt = lastTimestamp;
+
+        const animate = (timestamp: number) => {
+            const elapsed = timestamp - lastAt;
+
+            let interval = 600;
+            let baseMoveY = 3;
             const currentTimestamp = currentUnixTimestamp();
             const timeLeft = gameEndAtRef.current - currentTimestamp;
-            if (timeLeft <= 40) baseMoveY += 1;
-            if (timeLeft <= 20) baseMoveY += 1;
+            if (timeLeft <= 40) {
+                interval = 400;
+                baseMoveY += 1;
+            }
+            if (timeLeft <= 20) {
+                interval = 200;
+                baseMoveY += 1;
+            }
+
             const isMagnetActive = magnetEndAtRef.current - currentTimestamp > 0;
             const heroXCurrent = heroX.current;
-            const heroWidth = heroXCurrent + 60;
-            const heroBottom = height.current - heroYBottomPadding.current - 40;
-            const heroTop = heroBottom - 60;
-            const magnetZoneTop = heroTop - 60;
+            const heroWidth = heroXCurrent + HERO_SIZE;
+            const heroBottom = height.current - heroYBottomPadding.current - SLIDER_HEIGHT;
+            const heroTop = heroBottom - HERO_SIZE;
+            const magnetZoneTop = heroTop - HERO_SIZE;
 
-            const moved = items.current.reduce<Item[]>((acc, item) => {
+            items.current = items.current.reduce<Item[]>((acc, item) => {
                 item = item.moveY(baseMoveY);
 
                 if (item.y > height.current) return acc;
@@ -155,11 +204,11 @@ const CanvasContent: FC<Props> = ({
                     item = item.moveX(heroXCurrent + 16 - item.x > 0 ? 1 : -1);
                 }
 
-                const itemCenterX = item.x + 14
-                const itemCenterY = item.y + 14
+                const itemCenterX = item.x + ITEM_SIZE / 2;
+                const itemCenterY = item.y + ITEM_SIZE / 2;
                 const itemWithinHeroX = itemCenterX > heroXCurrent && itemCenterX < heroWidth;
                 const itemWithinHeroY = itemCenterY > heroTop && itemCenterY < heroBottom;
-                 
+
                 if (itemWithinHeroX && itemWithinHeroY) {
                     if (item.isBomb) {
                         setGameState(GameState.Bomb);
@@ -169,7 +218,7 @@ const CanvasContent: FC<Props> = ({
 
                     if (isHeroActive.current) {
                         isHeroEating.current = true;
-                        setTimeout(() => isHeroEating.current = false, 200)
+                        setTimeout(() => isHeroEating.current = false, 200);
 
                         if (item.reward) {
                             addPendingScore(item.reward);
@@ -192,39 +241,29 @@ const CanvasContent: FC<Props> = ({
                 return acc;
             }, []);
 
-            items.current = moved;
-        }
-        const interval = setInterval(moveItems, 10)
-        return () => clearInterval(interval)
-    }, [gameState])
+            if (elapsed >= interval) {
+                const seed = Math.floor(Math.random() * 99);
+                const x = Math.floor(Math.random() * (width.current - ITEM_SIZE));
+                const item = tokensPool[seed](x);
+                items.current.push(item);
 
-    
-    useEffect(() => {
-        if (gameState !== GameState.Play) return 
-        let interval = setInterval(addItem, 600)
-
-        function addItem () {
-            const seed = Math.floor(Math.random() * 99)
-            const x = Math.floor(Math.random() * (width.current - 28))
-            const item = tokensPool[seed](x)
-            items.current.push(item)
-
-            const timeLeft = gameEndAtRef.current - currentUnixTimestamp();
-            if (timeLeft === 20) {
-                clearInterval(interval)
-                interval = setInterval(addItem, 200)
-            } else if (timeLeft === 40) {
-                clearInterval(interval)
-                interval = setInterval(addItem, 400)
+                lastAt = timestamp;
             }
-        }
 
-        return () => clearInterval(interval)
-    }, [gameState])
+            frame = requestAnimationFrame(animate);
+        };
+
+        frame = requestAnimationFrame(animate);
+
+        return () => {
+            cancelAnimationFrame(frame);
+            items.current = [];
+        };
+    }, [gameState]);
 
     useEffect(() => {
         if (gameState !== GameState.Play && gameState !== GameState.TimeExpired) return
-        
+
         function onMove (e: TouchEvent) {
             const lastTouch = e.touches.item(e.touches.length - 1)
             if (!lastTouch) return

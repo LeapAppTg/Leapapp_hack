@@ -1,4 +1,4 @@
-import { ComingSoon, PageTitle, PageTitleBackgroundColor, TelegramEmojiType } from "@components";
+import { PageTitle, PageTitleBackgroundColor, TelegramEmojiType } from "@components";
 import { FC } from "react";
 import { Table } from "./elements";
 

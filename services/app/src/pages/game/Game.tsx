@@ -11,8 +11,10 @@ export const GamePage: FC = () => {
     const [gameState, setGameState] = useState<GameState>(GameState.Countdown)
     const [score, setScore] = useState<number>(0)
     const currentTime = useUnixTimestamp()
-    const [gameEndAt, setGameEndAt] = useState<number>(currentTime)
-    const [magnetEndAt, setMagnetEndAt] = useState<number>(currentTime)
+    const [gameEndAt, setGameEndAt] = useState<number>(currentUnixTimestamp())
+    const startTimer = () => setGameEndAt(currentUnixTimestamp() + GameConfig.gameDuration)
+    const [magnetEndAt, setMagnetEndAt] = useState<number>(currentUnixTimestamp())
+
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
     const { triggerHapticFeedback } = useTelegram()
 
@@ -71,13 +73,12 @@ export const GamePage: FC = () => {
         }
     }, [gameState, gameEndAt])
     
-    const startTimer = useCallback(() => setGameEndAt(currentTime + GameConfig.gameDuration), [currentTime])
-    const reset = useCallback(() => {
+    const reset = () => {
         setGameState(GameState.Countdown)
         setScore(0)
-        setGameEndAt(currentTime)
-        setMagnetEndAt(currentTime)
-    }, [currentTime]);
+        setGameEndAt(currentUnixTimestamp())
+        setMagnetEndAt(currentUnixTimestamp())
+    };
 
     const extraClass = useMemo(() => {
         if (gameState === GameState.TimeExpired) return styles.gold_highlight
@@ -91,6 +92,7 @@ export const GamePage: FC = () => {
 
     return (
         <div className={classJoiner(styles.game, extraClass)}>
+            <div className={styles.shadow}/>
             <GameBar
                 gameEndAt={gameEndAt} highScore={highScore} isNewHighScore={isNewHighScore} magnetEndAt={magnetEndAt}
                 pendingScores={pendingScores} removePendingScore={removePendingScore} score={score} setScore={setScore}

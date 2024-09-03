@@ -34,3 +34,16 @@
     padding: 12px;
     border-radius: 16px;
 }
+
+.loader {
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+    animation: 2s load ease infinite;
+}
+
+@keyframes load {
+    to {
+        transform: rotate(360deg);
+    }
+}

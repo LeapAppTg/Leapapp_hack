@@ -1,3 +1,45 @@
 .wrapper {
+    width: 100%;
+    flex-direction: column;
     flex-grow: 1;
+    gap: 32px;
+
+}
+.frog, .frog_static {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.frog_static {
+    position: absolute;
+    z-index: -1;
+}
+
+.loader_wrapper {
+    position: relative;
+    height: 24px;
+    width: 240px;
+    background: var(--color-grey-900);
+    border-radius: 12px;
+}
+
+.loader_wrapper > div {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+}
+
+.loader_wrapper > div:first-child {
+    width: 232px;
+    height: 16px;
+    background: var(--color-grey-800);
+    border-radius: 12px;
+}
+
+.loader_wrapper > div:last-child {
+    width: calc(var(--progress) - 8px);
+    height: 16px;
+    background: var(--color-main-accent);
+    border-radius: 12px;
 }
