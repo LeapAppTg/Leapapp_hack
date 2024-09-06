@@ -97,7 +97,7 @@ export const HourlyReward: FC = () => {
                                 {timeLeft}
                             </p>
                         </div>
-                        <div className={styles.progress} style={{ width: `${progress < 5 ? 95 : progress > 95 ? 5 : 100 - progress}%` }}/>
+                        <div className={styles.progress} style={{width: `${Math.max(1, Math.min(99, 100 - progress))}%`}}/>
                     </div>
                 }
             </div>
