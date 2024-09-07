@@ -4,6 +4,7 @@ import { ApiRoutes, useData } from "@hooks";
 import { useAlerts, useAuth } from "@providers";
 import { postClaimReferralsPoints } from "@services";
 import { FlexGapRow4 } from "@utils";
+import mixpanel from "mixpanel-browser";
 import { FC } from "react";
 
 export const ClaimButton: FC = () => {
@@ -21,6 +22,12 @@ export const ClaimButton: FC = () => {
                 withConfetti: true
             })
             mutate({ count: 0 })
+            mixpanel.track(
+                "claim_referrals_reward",
+                {
+                    "points": unclaimedPoints?.count
+                }
+            )
         } catch (e) {
             sendApiErrorAlert(e)
         }

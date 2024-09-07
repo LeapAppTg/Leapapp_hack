@@ -5,6 +5,7 @@ import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useCont
 import { SWRConfig } from "swr"
 import { useTelegram } from "./"
 import { QuestCategory } from "@types"
+import mixpanel from "mixpanel-browser"
 
 type AuthContextLayout = {
     authToken: string | null,
@@ -116,7 +117,7 @@ const AuthConsumerContent: FC = () => {
 
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
     const { data: dailyReward } = useData(ApiRoutes.GetDailyReward)
-    useData(ApiRoutes.GetHourlyReward)
+    const { data: hourlyReward } = useData(ApiRoutes.GetHourlyReward)
     useData(ApiRoutes.GetQuests, QuestCategory.Leap)
     useData(ApiRoutes.GetQuests, QuestCategory.Partnership)
     useData(ApiRoutes.GetReferralsCount)
@@ -129,7 +130,27 @@ const AuthConsumerContent: FC = () => {
         if (isAuthorized || !userProfile || !dailyReward) return
         if (userProfile.isFirstLogin) setIsFirstTimeLogin(true)
         setIsAuthorized(true)
+        mixpanel.identify(userProfile.telegramId.toString())
+        mixpanel.people.set("$first_name", userProfile.firstName)
+        mixpanel.people.set("$last_name", userProfile.lastName)
+        mixpanel.people.set("username", userProfile.username)
     }, [isAuthorized, userProfile, dailyReward])
+
+    useEffect(() => {
+        if (!userProfile) return
+        mixpanel.people.set("points", userProfile.points)
+        mixpanel.people.set("game_tickets", userProfile.gameTickets)
+    }, [userProfile])
+
+    useEffect(() => {
+        if (!hourlyReward) return
+        mixpanel.people.set("hourly_income", hourlyReward.income)
+    }, [hourlyReward])
+
+    useEffect(() => {
+        if (!dailyReward) return
+        mixpanel.people.set("daily_streak", dailyReward.days)
+    }, [dailyReward])
 
     return null
 }

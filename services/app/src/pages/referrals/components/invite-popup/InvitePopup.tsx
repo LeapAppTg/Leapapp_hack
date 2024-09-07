@@ -3,6 +3,7 @@ import { ApiRoutes, useData } from "@hooks";
 import { IconSize, TelegramIcon } from "@icons";
 import { useAlerts, useTelegram } from "@providers";
 import { FlexGapColumn20FullWidth } from "@utils";
+import mixpanel from "mixpanel-browser";
 import { FC } from "react";
 
 export const InvitePopup: FC = () => {
@@ -17,11 +18,13 @@ export const InvitePopup: FC = () => {
         sendAlert({
             message: 'Copied invite link'
         })
+        mixpanel.track("copy_invite_link")
     }
 
     function onShare () {
         if (!inviteLink) return
         shareLink(inviteLink.inviteLink)
+        mixpanel.track("share_invite_link")
     }
 
     return (

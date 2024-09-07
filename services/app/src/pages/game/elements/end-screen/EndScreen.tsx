@@ -10,6 +10,7 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import { GameState } from "../../config";
+import mixpanel from "mixpanel-browser";
 
 type Props = {
     score: number,
@@ -50,6 +51,7 @@ export const EndScreen: FC<Props> = ({ gameState, reset, score }) => {
             try {
                 await postEndGame(authToken, score)
                 setScoreSubmitted(true)
+                mixpanel.track("end_game", { "points": score, "end_type": gameState === GameState.BombEnd ? "bomb" : "time" })
             } catch (e) {
                 if (retries <= 2) {
                     retries += 1
@@ -63,6 +65,7 @@ export const EndScreen: FC<Props> = ({ gameState, reset, score }) => {
     function share () {
         if (!inviteLink) return
         shareLink(inviteLink.inviteLink)
+        mixpanel.track("share_invite_link")
     }
 
     if (!scoreSubmitted) return null
