@@ -8,6 +8,7 @@ import { useAlerts, useAuth } from "@providers";
 import { ApiError } from "@builders";
 import { ApiRoutes, useData } from "@hooks";
 import { GameState } from "../../config";
+import mixpanel from "mixpanel-browser";
 
 type Props = {
     setGameState: Dispatch<SetStateAction<GameState>>,
@@ -28,6 +29,7 @@ export const Loader: FC<Props> = ({ setGameState, startTimer }) => {
                 await postStartGame(authToken)
                 setGameSubmitted(true)
                 mutateUser(user => user ? { ...user, gameTickets: user.gameTickets - 1 } : undefined)
+                mixpanel.track("start_game")
                 const timeout = setTimeout(() => {
                     setGameState(GameState.Play)
                     startTimer()

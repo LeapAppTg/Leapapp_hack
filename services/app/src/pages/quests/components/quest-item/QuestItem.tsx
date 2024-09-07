@@ -8,6 +8,7 @@ import { EnumMatcher, EnumToFCMatcher, FlexGapColumn4AlignFlexStart, FlexGapRow1
 import { FC, useState } from "react";
 import styles from "./styles.module.css";
 import { ApiRoutes, useData } from "@hooks";
+import mixpanel from "mixpanel-browser";
 
 const IconMatcher = new EnumToFCMatcher<QuestType, FC, FC>(
     {
@@ -50,6 +51,14 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
             if (rewardGameTickets) message += ` +${rewardGameTickets.format()} tickets`
             if (!rewardPoints && !rewardGameTickets) message += ` reward successfully`
             sendAlert({ status: AlertStatus.Success, withConfetti: true, message })
+            mixpanel.track(
+                "claim_quest_reward",
+                {
+                    "quest_type": type,
+                    "points": rewardPoints,
+                    "game_tickets": rewardGameTickets
+                }
+            )
             onClaim()
         } catch (e) {
             sendApiErrorAlert(e)
@@ -58,7 +67,19 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
 
     const onClick = async () => {
         if (isClaimed) return
+        mixpanel.track(
+            "click_quest",
+            {
+                "quest_type": type
+            }
+        )
         if (link && [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube, QuestType.Telegram].includes(type)) {
+            mixpanel.track(
+                "visit_link",
+                {
+                    "link": link
+                }
+            )
             if (type === QuestType.Telegram) openTelegramLink(link)
             else openLink(link)
             setShowLoader(true)
@@ -68,6 +89,7 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
             }, 10_000)
         }
         if (type === QuestType.Invite && refLink) {
+            mixpanel.track("share_invite_link")
             shareLink(refLink.inviteLink)
         }
     }

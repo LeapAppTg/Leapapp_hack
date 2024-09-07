@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './AppRouter';
 import { useEffect } from 'react';
 import { SvgSharedColors } from '@components';
+import mixpanel from 'mixpanel-browser';
+import { MIXPANEL_TOKEN } from '@constants';
 
 function App() {
 
@@ -21,6 +23,12 @@ function App() {
     for (let path of paths) {
       new Image().src = path
     }
+  }, [])
+
+  useEffect(() => {
+    mixpanel.init(MIXPANEL_TOKEN, {
+      track_pageview: 'url-with-path'
+    })
   }, [])
 
   return (
