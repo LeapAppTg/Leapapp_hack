@@ -1,6 +1,7 @@
 import { ApiTypeBuilder } from "@builders"
 
 export type UserProfileApi = {
+    telegram_id: number,
     username: string | null,
     first_name: string,
     last_name: string,
@@ -11,6 +12,7 @@ export type UserProfileApi = {
 }
 
 export type UserProfile = {
+    telegramId: number,
     username: string | null,
     firstName: string,
     lastName: string,
@@ -22,6 +24,7 @@ export type UserProfile = {
 
 export const UserProfileApiTypeBuilder = new ApiTypeBuilder<UserProfileApi, UserProfile>(
     (i) => ({
+        telegramId: i.telegram_id,
         username: i.username,
         firstName: i.first_name,
         lastName: i.last_name,
