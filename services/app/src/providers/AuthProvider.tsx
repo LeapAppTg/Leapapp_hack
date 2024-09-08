@@ -31,7 +31,7 @@ export const useAuth = () => useContext(AuthContext)
 
 export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
 
-    const [authToken, setAuthToken] = useLocalStorage('auth_token')
+    const [authToken, setAuthToken] = useState<string | null>(null)
 
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
     const [isFirstTimeLogin, setIsFirstTimeLogin] = useState<boolean>(false)
