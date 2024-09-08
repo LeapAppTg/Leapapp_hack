@@ -5,15 +5,9 @@
     gap: 32px;
 
 }
-.frog, .frog_static {
-    position: relative;
-    width: 80px;
-    height: 80px;
-}
-
-.frog_static {
-    position: absolute;
-    z-index: -1;
+.frog {
+    width: 120px;
+    height: 120px;
 }
 
 .loader_wrapper {
@@ -42,4 +36,13 @@
     height: 16px;
     background: var(--color-main-accent);
     border-radius: 12px;
+}
+
+.bg_a {
+    top: -10%;
+}
+
+.bg_b {
+    top: unset;
+    bottom: 0;
 }

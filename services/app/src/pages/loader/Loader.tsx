@@ -2,12 +2,22 @@ import { HeroGood } from "@assets";
 import { PageTitleBackground, PageTitleBackgroundColor } from "@components";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { FlexGapBuilder, FlexGapColumn8, TextColor, TextSize, TextStyleBuilder, TextWeight, TextXSMedium } from "@utils";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.css";
 
 export const LoaderPage: FC = () => {
 
     const [progress, setProgress] = useState(0)
+    const skins = ["hero_happy", "hero_skin_a", "hero_skin_b", "hero_skin_c", "hero_skin_d", "hero_skin_e", "hero_skin_f"]
+    const [currentSrc, setSrc] = useState(0)
+
+    useEffect(() => {
+        const paths = skins.map(e => `/loader/${e}.svg`)
+    
+        for (let path of paths) {
+          new Image().src = path
+        }
+      }, [])
 
     useEffect(() => {
         let int: NodeJS.Timeout
@@ -21,23 +31,26 @@ export const LoaderPage: FC = () => {
         return () => clearInterval(int)
     }, [])
 
+    useEffect(() => {
+        let int: NodeJS.Timeout
+        int = setInterval(() => setSrc(prev => {
+            if (prev === skins.length - 1) return 0
+            return prev + 1
+        }), 300)
+
+        return () => clearInterval(int)
+    }, [])
+
     return (
         <div className={styles.wrapper}>
+            <PageTitleBackground color={PageTitleBackgroundColor.Purple} className={styles.bg_a}/>
             <div className={new FlexGapBuilder({ relativePosition: true }).className}>
                 <h1 className={new TextStyleBuilder({ size: TextSize.XXLarge, weight: TextWeight.Bold, color: TextColor.MainWhite }).className}>
                     Learn crypto<br/>
                     earn coins
                 </h1>
-                <PageTitleBackground color={PageTitleBackgroundColor.Purple}/>
             </div>
-            <div className={styles.frog}>
-                <HeroGood className={styles.frog_static}/>
-                <DotLottieReact
-                    autoplay
-                    loop
-                    src="/animations/frog.lottie"
-                />
-            </div>
+            <img className={styles.frog} src={`/loader/${skins[currentSrc] || skins[0]}.svg`}/>
 
             <div className={FlexGapColumn8.className}>
                 <div className={styles.loader_wrapper}>
@@ -48,6 +61,7 @@ export const LoaderPage: FC = () => {
                     {progress.toString()}%
                 </p>
             </div>
+            <PageTitleBackground color={PageTitleBackgroundColor.Purple} className={styles.bg_b}/>
         </div>
     )
 }

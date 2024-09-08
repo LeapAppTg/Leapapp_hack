@@ -1,7 +1,7 @@
 import { Navigation } from '@elements'
 import { BoostPage, CustomizePage, GamePage, HomePage, LeaderboardPage, LoaderPage, OnboardingPage, QrCodePage, QuestsPage, ReferralsPage, StreakPage } from '@pages'
 import { useAuth, useTelegram } from '@providers'
-import { FC, PropsWithChildren, useEffect } from 'react'
+import { FC, PropsWithChildren, useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 type PageWrapperProps = {
@@ -26,6 +26,13 @@ const AppRouter: FC = () => {
     const { pathname } = useLocation()
     const { initData, isMobile } = useTelegram()
     const { isAuthorized, isFirstTimeLogin } = useAuth()
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    useEffect(() => {
+        if (!isAuthorized) return
+        const to = setTimeout(() => setIsLoaded(true), 1500)
+        return () => clearTimeout(to)
+    }, [isAuthorized])
 
     useEffect(() => {
         const timeout = setTimeout(() => window.scrollTo({
@@ -47,7 +54,7 @@ const AppRouter: FC = () => {
         </>
     )
 
-    if (!isAuthorized) return (
+    if (!isAuthorized || !isLoaded) return (
         <>
             <section className='page'>
             <Routes>
