@@ -1,11 +1,11 @@
 import { ApiError } from "@builders"
-import { ApiRoutes, useData, useLocalStorage } from "@hooks"
+import { ApiRoutes, useData } from "@hooks"
 import { postTokenRefresh, postUserAuth } from "@services"
+import { QuestCategory } from "@types"
+import mixpanel from "mixpanel-browser"
 import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useContext, useEffect, useState } from "react"
 import { SWRConfig } from "swr"
 import { useTelegram } from "./"
-import { QuestCategory } from "@types"
-import mixpanel from "mixpanel-browser"
 
 type AuthContextLayout = {
     authToken: string | null,
@@ -31,7 +31,7 @@ export const useAuth = () => useContext(AuthContext)
 
 export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
 
-    const [authToken, setAuthToken] = useLocalStorage('auth_token')
+    const [authToken, setAuthToken] = useState<string | null>(null)
 
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
     const [isFirstTimeLogin, setIsFirstTimeLogin] = useState<boolean>(false)
