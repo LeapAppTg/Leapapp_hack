@@ -135,7 +135,7 @@ export const StreakPage: FC = () => {
             </div>
 
             <Button style={ButtonStyle.Primary} fillFullWidth onClick={onClaim} disabled={buttonDisabled}>
-                Take and continue
+                Claim and continue
             </Button>
         </div>
     )
