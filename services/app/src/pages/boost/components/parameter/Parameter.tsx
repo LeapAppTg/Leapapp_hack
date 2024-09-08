@@ -7,7 +7,6 @@ import { MarketItem, MarketItemCategory } from "@types";
 import { useAlerts, useAuth } from "@providers";
 import { postUpgradeMarketItem } from "@services";
 import { ApiRoutes, useData } from "@hooks";
-import mixpanel from "mixpanel-browser";
 
 const IconMapping = new EnumMatcher<string, TelegramEmojiType, TelegramEmojiType.Eye>(
     {
@@ -47,14 +46,6 @@ export const Parameter: FC<MarketItem & { upgradeCallback: () => any }> = ({
                 status: AlertStatus.Success,
                 message: `${name} was upgraded`
             })
-            mixpanel.track(
-                "upgrade_boost",
-                {
-                    "boost": name,
-                    "price": upgradePrice,
-                    "new_level": level + 1
-                }
-            )
             upgradeCallback()
             mutate(prev => prev ? { ...prev, points: prev.points - upgradePrice } : undefined)
         } catch (e) {

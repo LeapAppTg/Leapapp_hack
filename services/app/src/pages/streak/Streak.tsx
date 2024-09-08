@@ -9,7 +9,6 @@ import { FlexGapColumn, FlexGapColumn8, FlexGapColumn8FullWidth, FlexGapRow12Ful
 import { FC, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import styles from "./styles.module.css";
-import mixpanel from "mixpanel-browser";
 
 export const StreakPage: FC = () => {
     
@@ -31,13 +30,6 @@ export const StreakPage: FC = () => {
                 message,
                 status: AlertStatus.Success,
             })
-            mixpanel.track(
-                "claim_daily_reward",
-                {
-                    "points": data.points,
-                    "game_tickets": data.gameTickets
-                }
-            )
             mutate({ ...data, canClaim: false })
             mutateUser(userProfile ? { ...userProfile, points: userProfile.points + data.points, gameTickets: userProfile.gameTickets + data.gameTickets } : undefined)
         } catch (e) {

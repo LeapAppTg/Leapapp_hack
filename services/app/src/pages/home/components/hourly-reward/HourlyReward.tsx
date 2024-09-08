@@ -7,7 +7,6 @@ import { postHourlyReward } from "@services";
 import { FlexGapColumn16FullWidth, FlexGapRow4, FlexGapRowFullWidthJustifySpaceBetween, TextAlign, TextColor, TextMSemiBold, TextXSRegular, TextXSRegularGrey400, TimeObject } from "@utils";
 import { CSSProperties, FC, useMemo } from "react";
 import styles from "./styles.module.css";
-import mixpanel from "mixpanel-browser";
 
 const rewardPeriod = 60 * 60
 
@@ -40,13 +39,6 @@ export const HourlyReward: FC = () => {
             })
             mutateUserProfile(userProfile ? {...userProfile, points: userProfile.points + data.points + data.income, gameTickets: userProfile.gameTickets + data.gameTickets} : undefined)
             mutate(data ? {...data, nextClaimTime: timestamp + rewardPeriod, canClaim: false } : undefined)
-            mixpanel.track(
-                "claim_hourly_reward",
-                {
-                    "points": data.income,
-                    "game_tickets": data.gameTickets
-                }
-            )
         } catch (e) {
             sendAlert({
                 message: ApiError.isApiError(e) ? e.detail || 'Something went wrong' : 'Something went wrong',

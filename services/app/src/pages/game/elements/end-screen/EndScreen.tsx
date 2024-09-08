@@ -65,7 +65,6 @@ export const EndScreen: FC<Props> = ({ gameState, reset, score }) => {
     function share () {
         if (!inviteLink) return
         shareLink(inviteLink.inviteLink)
-        mixpanel.track("share_invite_link")
     }
 
     if (!scoreSubmitted) return null
