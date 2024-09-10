@@ -26,7 +26,7 @@ export const Milestone: FC<MilestoneProps> = ({
 
     async function onClaim () {
         try {
-            await postClaimReferralsMilestoneReward(authToken, 1)
+            await postClaimReferralsMilestoneReward(authToken, uuid)
             sendAlert({
                 message: `Claimed +${pointsReward.format()} points`,
                 status: AlertStatus.Success,
