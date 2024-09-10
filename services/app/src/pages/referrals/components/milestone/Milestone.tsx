@@ -7,16 +7,15 @@ import { AlertStatus, Button, ButtonStyle, CircleIconWrapper, CircleIconWrapperC
 import { ApiRoutes, useData } from "@hooks";
 import { postClaimReferralsMilestoneReward } from "@services";
 import { useAlerts, useAuth } from "@providers";
+import { Milestone as MilestoneT } from "@types";
 
-type MilestoneProps = {
-    referralsMilestone: number,
-    pointsReward: number,
+type MilestoneProps = MilestoneT & {
     claimed?: boolean,
     prevClaimed?: boolean
 }
 
 export const Milestone: FC<MilestoneProps> = ({
-    claimed, prevClaimed, pointsReward, referralsMilestone
+    claimed, prevClaimed, pointsReward, referralsMilestone, uuid
 }) => {
 
     const { authToken } = useAuth()
