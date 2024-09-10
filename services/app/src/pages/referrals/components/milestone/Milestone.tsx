@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { ElementRef, FC, useEffect, useMemo, useRef } from "react";
 import styles from "./styles.module.css";
 import { FlexGapColumn4, FlexGapRow4, TextSSemiBold, TextXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
 import { Coin } from "@assets";
@@ -18,6 +18,8 @@ type MilestoneProps = MilestoneT & {
 export const Milestone: FC<MilestoneProps> = ({
     claimed, prevClaimed, pointsReward, referralsMilestone, uuid, claimCallback
 }) => {
+
+    const ref = useRef<ElementRef<"div">>(null)
 
     const { authToken } = useAuth()
     const { sendAlert, sendApiErrorAlert } = useAlerts()
@@ -39,8 +41,14 @@ export const Milestone: FC<MilestoneProps> = ({
         }
     }
 
+    useEffect(() => {
+        if (!claimed && prevClaimed) {
+            ref.current?.scrollIntoView({ inline: "center", behavior: "instant" })
+        }
+    }, [ref.current])
+
     return (
-        <div className={FlexGapColumn4.withExtraClasses(styles.wrapper)}>
+        <div className={FlexGapColumn4.withExtraClasses(styles.wrapper)} ref={ref}>
             <p className={TextXXSRegularGrey400.className}>
                 Invite
                 {claimed ? "d" : null}
