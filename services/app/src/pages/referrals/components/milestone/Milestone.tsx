@@ -3,8 +3,10 @@ import styles from "./styles.module.css";
 import { FlexGapColumn4, FlexGapRow4, TextSSemiBold, TextXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
 import { Coin } from "@assets";
 import { CheckmarkIcon, IconBox, IconSize, UserProfileIcon } from "@icons";
-import { Button, ButtonStyle, CircleIconWrapper, CircleIconWrapperColor } from "@components";
+import { AlertStatus, Button, ButtonStyle, CircleIconWrapper, CircleIconWrapperColor } from "@components";
 import { ApiRoutes, useData } from "@hooks";
+import { postClaimReferralsMilestoneReward } from "@services";
+import { useAlerts, useAuth } from "@providers";
 
 type MilestoneProps = {
     referralsMilestone: number,
@@ -17,9 +19,24 @@ export const Milestone: FC<MilestoneProps> = ({
     claimed, prevClaimed, pointsReward, referralsMilestone
 }) => {
 
+    const { authToken } = useAuth()
+    const { sendAlert, sendApiErrorAlert } = useAlerts()
     const { data: referralsCount } = useData(ApiRoutes.GetReferralsCount)
 
     const isClaimable = useMemo(() => claimed ? false : 3 >= referralsMilestone ? true : false, [referralsCount, claimed])
+
+    async function onClaim () {
+        try {
+            await postClaimReferralsMilestoneReward(authToken, 1)
+            sendAlert({
+                message: `Claimed +${pointsReward.format()} points`,
+                status: AlertStatus.Success,
+                withConfetti: true
+            })
+        } catch (e) {
+            sendApiErrorAlert(e)
+        }
+    }
 
     return (
         <div className={FlexGapColumn4.withExtraClasses(styles.wrapper)}>
@@ -42,7 +59,7 @@ export const Milestone: FC<MilestoneProps> = ({
             {
                 isClaimable
                 ?
-                <Button style={ButtonStyle.Primary} className={styles.button}>
+                <Button style={ButtonStyle.Primary} className={styles.button} onClick={onClaim}>
                     Claim
                     <PointsWrapper points={pointsReward}/>
                 </Button>
