@@ -1,22 +1,32 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import styles from "./styles.module.css";
 import { Milestone } from "../../components";
 import { classJoiner } from "@utils";
+import { ApiRoutes, useData } from "@hooks";
 
 export const Milestones: FC = () => {
+
+    const { data: milestones } = useData(ApiRoutes.GetReferralsMilestonesList)
+
+    if (!milestones) return
 
     return (
         <div className={styles.wrapper}>
             <div>
-                <Milestone referralsMilestone={0} pointsReward={0} claimed/>
-                <div className={classJoiner(styles.separator, styles.highlighted)}/>
-                <Milestone referralsMilestone={1} pointsReward={1_000} claimed/>
-                <div className={styles.separator}/>
-                <Milestone referralsMilestone={3} pointsReward={5_000} nextGoal/>
-                <div className={styles.separator}/>
-                <Milestone referralsMilestone={5} pointsReward={10_000}/>
-                <div className={styles.separator}/>
-                <Milestone referralsMilestone={10} pointsReward={100_000}/>
+                {
+                    milestones.milestones.map(({ isClaimed, milestone }, i) => (
+                        <Fragment key={milestone.uuid}>
+                            {
+                                i === 0
+                                ?
+                                null
+                                :
+                                <div className={classJoiner(styles.separator, milestones.milestones[i - 1].isClaimed && !isClaimed ? styles.highlighted : undefined)}/>
+                            }
+                            <Milestone referralsMilestone={milestone.referralsMilestone} pointsReward={milestone.pointsReward} claimed={isClaimed} prevClaimed={i !== 0 && milestones.milestones[i - 1].isClaimed}/>
+                        </Fragment>
+                    ))
+                }
             </div>
         </div>
     )

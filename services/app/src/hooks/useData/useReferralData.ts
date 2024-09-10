@@ -1,6 +1,6 @@
 import { ApiRoutes } from "@hooks"
 import { useAuth } from "@providers"
-import { getInviteLink, getReferralsCount, getReferralsList, getUnclaimedPoints } from "@services"
+import { getInviteLink, getReferralsCount, getReferralsList, getReferralsMilestonesList, getUnclaimedPoints } from "@services"
 import { ReferralsList } from "@types"
 import useSWR from "swr"
 import useSWRInfinite from "swr/infinite"
@@ -41,5 +41,13 @@ export function useReferralsListData () {
         {
             revalidateFirstPage: false
         }
+    )
+}
+
+export function useReferralsMilestonesListData () {
+    const { authToken } = useAuth()
+    return useSWR(
+        authToken ? [ApiRoutes.GetReferralsMilestonesList, authToken] : null,
+        ([_, authToken]) => getReferralsMilestonesList(authToken, {})
     )
 }

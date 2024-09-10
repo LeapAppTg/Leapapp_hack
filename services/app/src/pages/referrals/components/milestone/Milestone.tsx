@@ -10,11 +10,11 @@ type MilestoneProps = {
     referralsMilestone: number,
     pointsReward: number,
     claimed?: boolean,
-    nextGoal?: boolean
+    prevClaimed?: boolean
 }
 
 export const Milestone: FC<MilestoneProps> = ({
-    claimed, nextGoal, pointsReward, referralsMilestone
+    claimed, prevClaimed, pointsReward, referralsMilestone
 }) => {
 
     const { data: referralsCount } = useData(ApiRoutes.GetReferralsCount)
@@ -30,7 +30,7 @@ export const Milestone: FC<MilestoneProps> = ({
             <p className={TextSSemiBold.className}>
                 {referralsMilestone.format()}
             </p>
-            <div className={classJoiner(styles.icon_wrapper, claimed ? styles.claimed : nextGoal ? styles.next_goal : undefined)}>
+            <div className={classJoiner(styles.icon_wrapper, claimed ? styles.claimed : prevClaimed ? styles.next_goal : undefined)}>
                 {
                     claimed
                     ?
