@@ -1,7 +1,7 @@
 import { PageTitle, PageTitleBackgroundColor, TelegramEmojiType } from "@components";
 import { FC } from "react";
 import { ClaimButton, Stats } from "./components";
-import { Table, InviteButton } from "./elements";
+import { Table, InviteButton, Milestones } from "./elements";
 import { FlexGapColumn12FullWidth } from "@utils";
 
 export const ReferralsPage: FC = () => {
@@ -13,7 +13,7 @@ export const ReferralsPage: FC = () => {
             <Stats/>
             <ClaimButton/>
         </div>
-        <Table/>
+        <Milestones/>
         <InviteButton/>
         </>
     )
