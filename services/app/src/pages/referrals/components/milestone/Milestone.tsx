@@ -11,11 +11,12 @@ import { Milestone as MilestoneT } from "@types";
 
 type MilestoneProps = MilestoneT & {
     claimed?: boolean,
-    prevClaimed?: boolean
+    prevClaimed?: boolean,
+    claimCallback: (uuid: number) => any
 }
 
 export const Milestone: FC<MilestoneProps> = ({
-    claimed, prevClaimed, pointsReward, referralsMilestone, uuid
+    claimed, prevClaimed, pointsReward, referralsMilestone, uuid, claimCallback
 }) => {
 
     const { authToken } = useAuth()
@@ -32,6 +33,7 @@ export const Milestone: FC<MilestoneProps> = ({
                 status: AlertStatus.Success,
                 withConfetti: true
             })
+            claimCallback(uuid)
         } catch (e) {
             sendApiErrorAlert(e)
         }
