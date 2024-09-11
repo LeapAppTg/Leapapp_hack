@@ -9,7 +9,7 @@ export const ReferralsPage: FC = () => {
     return (
         <>
         <div className={FlexGapColumn12FullWidth.className}>
-            <PageTitle icon={TelegramEmojiType.ChampangeGlasses} color={PageTitleBackgroundColor.Blue} title="Referrals" subtitle="Earn 10% from frens + 3% from their referrals. Get a game ticket for each fren"/>
+            <PageTitle icon={TelegramEmojiType.ChampangeGlasses} color={PageTitleBackgroundColor.Blue} title="Referrals" subtitle="Earn 10% from frens earnings"/>
             <Stats/>
             <ClaimButton/>
         </div>
