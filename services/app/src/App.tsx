@@ -4,8 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './AppRouter';
 import { useEffect } from 'react';
 import { SvgSharedColors } from '@components';
-import mixpanel from 'mixpanel-browser';
-import { MIXPANEL_TOKEN } from '@constants';
+import Analytics from "./utils/analytics";
 
 function App() {
 
@@ -26,10 +25,8 @@ function App() {
   }, [])
 
   useEffect(() => {
-    mixpanel.init(MIXPANEL_TOKEN, {
-      track_pageview: 'url-with-path'
-    })
-  }, [])
+    Analytics.init();
+  }, []);
 
   return (
     <BrowserRouter>
