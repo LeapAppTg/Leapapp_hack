@@ -35,7 +35,7 @@ export const Milestones: FC = () => {
                                 :
                                 <div className={classJoiner(styles.separator, milestone.isPrevClaimed && !milestone.isClaimed ? styles.highlighted : undefined)}/>
                             }
-                            <Milestone {...milestone} prevClaimed={milestone.isPrevClaimed} claimCallback={claimCallback}/>
+                            <Milestone {...milestone} isFirst={i === 0} prevClaimed={milestone.isPrevClaimed} claimCallback={claimCallback}/>
                         </Fragment>
                     ))
                 }

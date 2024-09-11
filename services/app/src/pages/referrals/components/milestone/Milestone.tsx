@@ -11,11 +11,12 @@ import { Milestone as MilestoneT } from "@types";
 
 type MilestoneProps = MilestoneT & {
     prevClaimed?: boolean,
+    isFirst?: boolean,
     claimCallback: (uuid: number) => any
 }
 
 export const Milestone: FC<MilestoneProps> = ({
-    isClaimed, prevClaimed, pointsReward, referralsMilestone, uuid, claimCallback
+    isClaimed, prevClaimed, pointsReward, referralsMilestone, uuid, claimCallback, isFirst
 }) => {
 
     const ref = useRef<ElementRef<"div">>(null)
@@ -24,7 +25,13 @@ export const Milestone: FC<MilestoneProps> = ({
     const { sendAlert, sendApiErrorAlert } = useAlerts()
     const { data: referralsCount } = useData(ApiRoutes.GetReferralsCount)
 
-    const isClaimable = useMemo(() => isClaimed ? false : 3 >= referralsMilestone ? true : false, [referralsCount, isClaimed])
+    const isClaimable = useMemo(() => {
+        if (prevClaimed || isFirst) {
+            if (isClaimed) return false
+            if (3 >= referralsMilestone) return true
+        }
+        return false
+    }, [referralsCount, isClaimed, prevClaimed])
 
     async function onClaim () {
         try {
