@@ -23,15 +23,15 @@ export const Milestone: FC<MilestoneProps> = ({
 
     const { authToken } = useAuth()
     const { sendAlert, sendApiErrorAlert } = useAlerts()
-    const { data: referralsCount } = useData(ApiRoutes.GetReferralsCount)
+    const { data: referralInfo } = useData(ApiRoutes.GetReferralInfo)
 
     const isClaimable = useMemo(() => {
         if (prevClaimed || isFirst) {
-            if (isClaimed || !referralsCount) return false
-            if (referralsCount.count >= referralsMilestone) return true
+            if (isClaimed || !referralInfo) return false
+            if (referralInfo.invitedUsersCount >= referralsMilestone) return true
         }
         return false
-    }, [referralsCount, isClaimed, prevClaimed])
+    }, [referralInfo, isClaimed, prevClaimed])
 
     async function onClaim () {
         try {

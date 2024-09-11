@@ -4,7 +4,7 @@ import { FC } from "react";
 
 export const Stats: FC = () => {
 
-    const { data: referralsCount } = useData(ApiRoutes.GetReferralsCount)
+    const { data: referralInfo } = useData(ApiRoutes.GetReferralInfo)
     
     return (
         <div className={FlexGapRow24.className}>
@@ -13,7 +13,7 @@ export const Stats: FC = () => {
                     Invited:
                 </p>
                 <p className={TextSSemiBold.className}>
-                    {referralsCount?.count.format() || '-'}
+                    {referralInfo?.invitedUsersCount.format() || '-'}
                 </p>
             </div>
             <div className={FlexGapRow4.className}>
@@ -21,7 +21,7 @@ export const Stats: FC = () => {
                     Claimed:
                 </p>
                 <p className={TextSSemiBold.className}>
-                    2 113
+                    {referralInfo?.claimedPointsCount.format() || '-'}
                 </p>
             </div>
         </div>
