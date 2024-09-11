@@ -1,7 +1,7 @@
 import { PageTitle, PageTitleBackgroundColor, TelegramEmojiType } from "@components";
 import { FC } from "react";
 import { ClaimButton, Stats } from "./components";
-import { Table, InviteButton, Milestones } from "./elements";
+import { InviteButton, Milestones } from "./elements";
 import { FlexGapColumn12FullWidth } from "@utils";
 
 export const ReferralsPage: FC = () => {

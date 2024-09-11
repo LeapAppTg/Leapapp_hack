@@ -1,7 +1,4 @@
-export * from './table-item/TableItem'
 export * from './claim-button/ClaimButton'
 export * from './invite-popup/InvitePopup'
-export * from './table-title/TableTitle'
-export * from './no-referrals/NoReferrals'
 export * from './stats/Stats'
 export * from './milestone/Milestone'
