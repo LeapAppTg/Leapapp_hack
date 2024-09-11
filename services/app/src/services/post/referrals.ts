@@ -11,7 +11,7 @@ export async function postClaimReferralsPoints (authToken: string | null) {
 
 export async function postClaimReferralsMilestoneReward (authToken: string | null, milestoneId: number) {
     return new ApiPostRequestBuilder<{}, {}>({
-        path: `api/v1/referrals/milestones/${milestoneId}`,
+        path: `api/v1/referrals/milestones/${milestoneId}/`,
         responseTypeBuilder: new ApiTypeBuilder((i) => i)
     })
     .setAccessToken(authToken)
