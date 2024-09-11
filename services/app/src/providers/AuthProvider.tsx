@@ -120,7 +120,7 @@ const AuthConsumerContent: FC = () => {
     const { data: hourlyReward } = useData(ApiRoutes.GetHourlyReward)
     useData(ApiRoutes.GetQuests, QuestCategory.Leap)
     useData(ApiRoutes.GetQuests, QuestCategory.Partnership)
-    useData(ApiRoutes.GetReferralsCount)
+    useData(ApiRoutes.GetReferralInfo)
     useData(ApiRoutes.GetReferralsList)
     useData(ApiRoutes.GetUnclaimedPoints)
     useData(ApiRoutes.GetGameLeaderboard)

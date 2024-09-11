@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 
 export const TableTitle: FC = () => {
 
-    const { data: referralsCount } = useData(ApiRoutes.GetReferralsCount)
+    const { data: referralsCount } = useData(ApiRoutes.GetReferralInfo)
 
     return (
         <div className={styles.table_title}>
@@ -13,7 +13,7 @@ export const TableTitle: FC = () => {
             <div className={FlexGapRow4.className}>
                 <p className={TextXSRegularGrey400.className}>Total:</p>
                 <p className={TextXSRegular.className}>
-                    {referralsCount ? referralsCount.count.format() : '0'}
+                    {referralsCount ? referralsCount.invitedUsersCount.format() : '0'}
                 </p>
             </div>
         </div>
