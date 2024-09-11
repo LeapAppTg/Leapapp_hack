@@ -48,6 +48,6 @@ export function useReferralsMilestonesListData () {
     const { authToken } = useAuth()
     return useSWR(
         authToken ? [ApiRoutes.GetReferralsMilestonesList, authToken] : null,
-        ([_, authToken]) => getReferralsMilestonesList(authToken, {})
+        ([_, authToken]) => getReferralsMilestonesList(authToken, { limit: '9', dynamic_offset: 'true' })
     )
 }

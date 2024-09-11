@@ -50,6 +50,7 @@ export async function getReferralInfo (accessToken: string) {
 type GetReferralsMilestonesListParams = {
     limit?: string,
     offset?: string,
+    dynamic_offset?: string
 }
 
 export async function getReferralsMilestonesList (accessToken: string, params: GetReferralsMilestonesListParams) {
