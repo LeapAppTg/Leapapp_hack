@@ -28,7 +28,7 @@ export const Milestone: FC<MilestoneProps> = ({
     const isClaimable = useMemo(() => {
         if (prevClaimed || isFirst) {
             if (isClaimed) return false
-            if (3 >= referralsMilestone) return true
+            if (referralsCount?.count || 0 >= referralsMilestone) return true
         }
         return false
     }, [referralsCount, isClaimed, prevClaimed])
@@ -48,7 +48,7 @@ export const Milestone: FC<MilestoneProps> = ({
     }
 
     useEffect(() => {
-        if (!isClaimed && prevClaimed) {
+        if (!isClaimed && (prevClaimed || isFirst)) {
             ref.current?.scrollIntoView({ inline: "center", behavior: "instant" })
         }
     }, [ref.current])
