@@ -17,7 +17,7 @@ export const Milestones: FC = () => {
     }, [milestones])
 
     const claimCallback = useCallback((uuid: number) => {
-        mutate(prev => prev ? { count: prev.count, milestones: prev.milestones.map(m => m.milestone.uuid === uuid ? { isClaimed: true, milestone: m.milestone } : m) } : prev)
+        mutate(prev => prev ? { count: prev.count, milestones: prev.milestones.map(m => m.uuid === uuid ? { ...m, isClaimed: true } : m) } : prev)
     }, [mutate])
 
     if (!list.length) return
@@ -26,16 +26,16 @@ export const Milestones: FC = () => {
         <div className={styles.wrapper}>
             <div>
                 {
-                    list.map(({ isPrevClaimed, isClaimed, milestone }, i) => (
+                    list.map((milestone, i) => (
                         <Fragment key={milestone.uuid}>
                             {
                                 i === 0
                                 ?
                                 null
                                 :
-                                <div className={classJoiner(styles.separator, isPrevClaimed && !isClaimed ? styles.highlighted : undefined)}/>
+                                <div className={classJoiner(styles.separator, milestone.isPrevClaimed && !milestone.isClaimed ? styles.highlighted : undefined)}/>
                             }
-                            <Milestone {...milestone} claimed={isClaimed} prevClaimed={isPrevClaimed} claimCallback={claimCallback}/>
+                            <Milestone {...milestone} prevClaimed={milestone.isPrevClaimed} claimCallback={claimCallback}/>
                         </Fragment>
                     ))
                 }

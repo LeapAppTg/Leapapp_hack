@@ -1,19 +1,19 @@
 import { ApiTypeBuilder } from "@builders"
-import { MilestoneWithStatus, MilestoneWithStatusApi, MilestoneWithStatusApiTypeBuilder, Referral, ReferralApi, ReferralApiTypeBuilder } from "."
+import { Milestone, MilestoneApi, MilestoneApiTypeBuilder } from "."
 
 export type MilestonesListApi = {
     count: number,
-    milestones: MilestoneWithStatusApi[]
+    milestones: MilestoneApi[]
 }
 
 export type MilestonesList = {
     count: number,
-    milestones: MilestoneWithStatus[]
+    milestones: Milestone[]
 }
 
 export const MilestonesListApiTypeBuilder = new ApiTypeBuilder<MilestonesListApi, MilestonesList>(
     (i) => ({
         count: i.count,
-        milestones: i.milestones.map(m => MilestoneWithStatusApiTypeBuilder.convert(m))
+        milestones: i.milestones.map(m => MilestoneApiTypeBuilder.convert(m))
     })
 )

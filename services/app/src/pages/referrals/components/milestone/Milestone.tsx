@@ -10,13 +10,12 @@ import { useAlerts, useAuth } from "@providers";
 import { Milestone as MilestoneT } from "@types";
 
 type MilestoneProps = MilestoneT & {
-    claimed?: boolean,
     prevClaimed?: boolean,
     claimCallback: (uuid: number) => any
 }
 
 export const Milestone: FC<MilestoneProps> = ({
-    claimed, prevClaimed, pointsReward, referralsMilestone, uuid, claimCallback
+    isClaimed, prevClaimed, pointsReward, referralsMilestone, uuid, claimCallback
 }) => {
 
     const ref = useRef<ElementRef<"div">>(null)
@@ -25,7 +24,7 @@ export const Milestone: FC<MilestoneProps> = ({
     const { sendAlert, sendApiErrorAlert } = useAlerts()
     const { data: referralsCount } = useData(ApiRoutes.GetReferralsCount)
 
-    const isClaimable = useMemo(() => claimed ? false : 3 >= referralsMilestone ? true : false, [referralsCount, claimed])
+    const isClaimable = useMemo(() => isClaimed ? false : 3 >= referralsMilestone ? true : false, [referralsCount, isClaimed])
 
     async function onClaim () {
         try {
@@ -42,7 +41,7 @@ export const Milestone: FC<MilestoneProps> = ({
     }
 
     useEffect(() => {
-        if (!claimed && prevClaimed) {
+        if (!isClaimed && prevClaimed) {
             ref.current?.scrollIntoView({ inline: "center", behavior: "instant" })
         }
     }, [ref.current])
@@ -51,14 +50,14 @@ export const Milestone: FC<MilestoneProps> = ({
         <div className={FlexGapColumn4.withExtraClasses(styles.wrapper)} ref={ref}>
             <p className={TextXXSRegularGrey400.className}>
                 Invite
-                {claimed ? "d" : null}
+                {isClaimed ? "d" : null}
             </p>
             <p className={TextSSemiBold.className}>
                 {referralsMilestone.format()}
             </p>
-            <div className={classJoiner(styles.icon_wrapper, claimed ? styles.claimed : prevClaimed ? styles.next_goal : undefined)}>
+            <div className={classJoiner(styles.icon_wrapper, isClaimed ? styles.claimed : prevClaimed ? styles.next_goal : undefined)}>
                 {
-                    claimed
+                    isClaimed
                     ?
                     <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
                     :
@@ -76,7 +75,7 @@ export const Milestone: FC<MilestoneProps> = ({
                 <>
                 <p className={TextXXSRegularGrey400.className}>
                     Reward
-                    {claimed ? "ed" : null}
+                    {isClaimed ? "ed" : null}
                 </p>
                 <PointsWrapper points={pointsReward}/>
                 </>
