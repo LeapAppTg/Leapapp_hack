@@ -1,6 +1,6 @@
 import { ElementRef, FC, useEffect, useMemo, useRef } from "react";
 import styles from "./styles.module.css";
-import { FlexGapColumn4, FlexGapRow4, TextSSemiBold, TextXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
+import { FlexGapColumn4, FlexGapRow4, TextColor, TextSSemiBold, TextXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
 import { Coin } from "@assets";
 import { CheckmarkIcon, IconBox, IconSize, UserProfileIcon } from "@icons";
 import { AlertStatus, Button, ButtonStyle, CircleIconWrapper, CircleIconWrapperColor } from "@components";
@@ -49,7 +49,7 @@ export const Milestone: FC<MilestoneProps> = ({
 
     useEffect(() => {
         if (!isClaimed && (prevClaimed || isFirst)) {
-            ref.current?.scrollIntoView({ inline: "center", behavior: "instant" })
+            setTimeout(() => ref.current?.scrollIntoView({ inline: "center", behavior: "smooth" }), 20)
         }
     }, [ref.current])
 
@@ -62,7 +62,7 @@ export const Milestone: FC<MilestoneProps> = ({
             <p className={TextSSemiBold.className}>
                 {referralsMilestone.format()}
             </p>
-            <div className={classJoiner(styles.icon_wrapper, isClaimed ? styles.claimed : prevClaimed ? styles.next_goal : undefined)}>
+            <div className={classJoiner(styles.icon_wrapper, isClaimed ? styles.claimed : (prevClaimed || isFirst) ? styles.next_goal : undefined)}>
                 {
                     isClaimed
                     ?
@@ -84,18 +84,18 @@ export const Milestone: FC<MilestoneProps> = ({
                     Reward
                     {isClaimed ? "ed" : null}
                 </p>
-                <PointsWrapper points={pointsReward}/>
+                <PointsWrapper points={pointsReward} isClaimed={isClaimed}/>
                 </>
             }
         </div>
     )
 }
 
-const PointsWrapper: FC<{ points: number }> = ({ points }) => {
+const PointsWrapper: FC<{ points: number, isClaimed?: boolean }> = ({ points, isClaimed }) => {
     return (
         <span className={FlexGapRow4.className}>
             <Coin width={24} height={24}/>
-            <p className={TextXSRegular.update({ noLineBreak: true }).className}>
+            <p className={TextXSRegular.update({ noLineBreak: true, color: isClaimed ? TextColor.Grey400 : undefined }).className}>
                 {points.format()}
             </p>
         </span>
