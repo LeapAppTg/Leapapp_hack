@@ -121,7 +121,7 @@ const AuthConsumerContent: FC = () => {
     useData(ApiRoutes.GetQuests, QuestCategory.Leap)
     useData(ApiRoutes.GetQuests, QuestCategory.Partnership)
     useData(ApiRoutes.GetReferralInfo)
-    useData(ApiRoutes.GetReferralsList)
+    useData(ApiRoutes.GetReferralsMilestonesList)
     useData(ApiRoutes.GetUnclaimedPoints)
     useData(ApiRoutes.GetGameLeaderboard)
     useData(ApiRoutes.GetMarketItemsList)
