@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { Milestone } from "../../components";
 import { classJoiner } from "@utils";
 import { ApiRoutes, useData } from "@hooks";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export const Milestones: FC = () => {
 
@@ -33,7 +34,15 @@ export const Milestones: FC = () => {
                                 ?
                                 null
                                 :
-                                <div className={classJoiner(styles.separator, milestone.isPrevClaimed && !milestone.isClaimed ? styles.highlighted : undefined)}/>
+                                milestone.isPrevClaimed && !milestone.isClaimed
+                                ?
+                                <div className={classJoiner(styles.separator, styles.highlighted)}>
+                                    <div className={styles.plane}>
+                                        <DotLottieReact src="/animations/paperplane.lottie" loop autoplay/>
+                                    </div>
+                                </div>
+                                :
+                                <div className={styles.separator}/>
                             }
                             <Milestone {...milestone} isFirst={i === 0} prevClaimed={milestone.isPrevClaimed} claimCallback={claimCallback}/>
                         </Fragment>

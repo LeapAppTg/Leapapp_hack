@@ -20,5 +20,13 @@
 }
 
 .highlighted {
+    position: relative;
     background: linear-gradient(to right, #30293D 0%, #671D80 100%);
+}
+
+.plane {
+    position: absolute;
+    width: 66px;
+    height: 50px;
+    bottom: -8px;
 }
