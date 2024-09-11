@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 export const LoaderPage: FC = () => {
 
     const [progress, setProgress] = useState(0)
-    const skins = ["hero_happy", "hero_skin_a", "hero_skin_b", "hero_skin_c", "hero_skin_d", "hero_skin_e", "hero_skin_f"]
+    const skins = ["hero_happy", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     const [currentSrc, setSrc] = useState(0)
 
     useEffect(() => {
