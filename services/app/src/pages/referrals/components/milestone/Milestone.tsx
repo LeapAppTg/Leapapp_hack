@@ -27,8 +27,8 @@ export const Milestone: FC<MilestoneProps> = ({
 
     const isClaimable = useMemo(() => {
         if (prevClaimed || isFirst) {
-            if (isClaimed) return false
-            if (referralsCount?.count || 0 >= referralsMilestone) return true
+            if (isClaimed || !referralsCount) return false
+            if (referralsCount.count >= referralsMilestone) return true
         }
         return false
     }, [referralsCount, isClaimed, prevClaimed])
