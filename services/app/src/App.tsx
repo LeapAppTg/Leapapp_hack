@@ -1,10 +1,9 @@
-import { AlertsConsumer, AlertsProvider, AuthConsumer, AuthProvider, BottomPopupConsumer, BottomPopupProvider, TelegramConsumer, TelegramProvider } from '@providers';
+import { AlertsConsumer, AlertsProvider, AuthConsumer, AuthProvider, BottomPopupConsumer, BottomPopupProvider, TelegramConsumer, TelegramProvider, AnalyticsProvider } from '@providers';
 import '@styles';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './AppRouter';
 import { useEffect } from 'react';
 import { SvgSharedColors } from '@components';
-import Analytics from "./utils/analytics";
 
 function App() {
 
@@ -24,22 +23,20 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    Analytics.init();
-  }, []);
-
   return (
     <BrowserRouter>
       <TelegramProvider>
         <AuthProvider>
           <AlertsProvider>
             <BottomPopupProvider>
-              <AlertsConsumer/>
-              <AppRouter/>
-              <TelegramConsumer/>
-              <AuthConsumer/>
-              <BottomPopupConsumer/>
-              <SvgSharedColors/>
+              <AnalyticsProvider>
+                <AlertsConsumer/>
+                <AppRouter/>
+                <TelegramConsumer/>
+                <AuthConsumer/>
+                <BottomPopupConsumer/>
+                <SvgSharedColors/>
+              </AnalyticsProvider>
             </BottomPopupProvider>
           </AlertsProvider>
         </AuthProvider>

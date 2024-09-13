@@ -29,7 +29,7 @@ export const Loader: FC<Props> = ({ setGameState, startTimer }) => {
                 await postStartGame(authToken)
                 setGameSubmitted(true)
                 mutateUser(user => user ? { ...user, gameTickets: user.gameTickets - 1 } : undefined)
-                Analytics.trackGameStart();
+                Analytics.trackEvent("start_game");
                 const timeout = setTimeout(() => {
                     setGameState(GameState.Play)
                     startTimer()

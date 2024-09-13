@@ -1,5 +1,13 @@
 import mixpanel from 'mixpanel-browser';
 import { MIXPANEL_TOKEN } from '@constants';
+import {DailyReward, HourlyReward, UserProfile} from "@types";
+
+type TrackEventTypes = {
+    "end_game": [number, string];
+    "start_game": [];
+};
+
+type TrackEventParams<K extends keyof TrackEventTypes> = TrackEventTypes[K];
 
 class Analytics {
     static init() {
@@ -8,7 +16,7 @@ class Analytics {
         });
     }
 
-    static identifyUser(userProfile: any) {
+    static identifyUser(userProfile: UserProfile) {
         if (userProfile) {
             mixpanel.identify(userProfile.telegramId.toString());
             mixpanel.people.set({
@@ -19,7 +27,7 @@ class Analytics {
         }
     }
 
-    static syncUserData(userProfile: any, hourlyReward: any, dailyReward: any) {
+    static syncUserData(userProfile: UserProfile, hourlyReward: HourlyReward, dailyReward: DailyReward) {
         if (userProfile) {
             mixpanel.people.set({
                 points: userProfile.points,
@@ -38,16 +46,13 @@ class Analytics {
         }
     }
 
-    static trackEvent(eventName: string, data?: Record<string, any>) {
-        mixpanel.track(eventName, data);
-    }
-
-    static trackGameEnd(score: number, endType: string) {
-        this.trackEvent("end_game", { "points": score, "end_type": endType });
-    }
-
-    static trackGameStart() {
-        this.trackEvent("start_game");
+    static trackEvent<K extends keyof TrackEventTypes>(eventName: K, ...params: TrackEventParams<K>) {
+        if (eventName === "end_game") {
+            const [points, end_type] = params;
+            mixpanel.track(eventName, { points, end_type });
+        } else {
+            mixpanel.track(eventName);
+        }
     }
 }
 

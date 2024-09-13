@@ -51,7 +51,7 @@ export const EndScreen: FC<Props> = ({ gameState, reset, score }) => {
             try {
                 await postEndGame(authToken, score)
                 setScoreSubmitted(true)
-                Analytics.trackGameEnd(score, gameState === GameState.BombEnd ? "bomb" : "time");
+                Analytics.trackEvent("end_game", score, gameState === GameState.BombEnd ? "bomb" : "time");
             } catch (e) {
                 if (retries <= 2) {
                     retries += 1
