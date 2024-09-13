@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useEffect } from "react";
-import Analytics from "../utils/analytics";
+import { Analytics } from "@utils";
 
 export const AnalyticsProvider: FC<PropsWithChildren> = ({ children }) => {
     useEffect(() => {

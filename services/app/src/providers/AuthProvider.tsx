@@ -5,7 +5,7 @@ import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useCont
 import { SWRConfig } from "swr"
 import { useTelegram } from "./"
 import { QuestCategory } from "@types"
-import Analytics from "../utils/analytics";
+import { Analytics } from "@utils";
 
 type AuthContextLayout = {
     authToken: string | null,

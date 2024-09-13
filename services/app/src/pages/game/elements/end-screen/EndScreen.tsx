@@ -10,7 +10,7 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import { GameState } from "../../config";
-import Analytics from "../../../../utils/analytics";
+import { Analytics } from "@utils";
 
 type Props = {
     score: number,

@@ -8,7 +8,7 @@ import { useAlerts, useAuth } from "@providers";
 import { ApiError } from "@builders";
 import { ApiRoutes, useData } from "@hooks";
 import { GameState } from "../../config";
-import Analytics from "../../../../utils/analytics";
+import { Analytics } from "@utils";
 
 type Props = {
     setGameState: Dispatch<SetStateAction<GameState>>,

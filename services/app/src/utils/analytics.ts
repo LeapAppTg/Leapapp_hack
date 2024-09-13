@@ -9,7 +9,7 @@ type TrackEventTypes = {
 
 type TrackEventParams<K extends keyof TrackEventTypes> = TrackEventTypes[K];
 
-class Analytics {
+export class Analytics {
     static init() {
         mixpanel.init(MIXPANEL_TOKEN, {
             track_pageview: 'url-with-path',
@@ -55,5 +55,3 @@ class Analytics {
         }
     }
 }
-
-export default Analytics;
