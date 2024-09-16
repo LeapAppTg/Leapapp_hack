@@ -5,7 +5,6 @@ import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useCont
 import { SWRConfig } from "swr"
 import { useTelegram } from "./"
 import { QuestCategory } from "@types"
-import { Analytics } from "@utils";
 
 type AuthContextLayout = {
     authToken: string | null,
@@ -117,7 +116,6 @@ const AuthConsumerContent: FC = () => {
 
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile)
     const { data: dailyReward } = useData(ApiRoutes.GetDailyReward)
-    const { data: hourlyReward } = useData(ApiRoutes.GetHourlyReward)
     useData(ApiRoutes.GetQuests, QuestCategory.Leap)
     useData(ApiRoutes.GetQuests, QuestCategory.Partnership)
     useData(ApiRoutes.GetReferralsCount)
@@ -130,13 +128,7 @@ const AuthConsumerContent: FC = () => {
         if (isAuthorized || !userProfile || !dailyReward) return
         if (userProfile.isFirstLogin) setIsFirstTimeLogin(true)
         setIsAuthorized(true)
-        Analytics.identifyUser(userProfile);
     }, [isAuthorized, userProfile, dailyReward])
-
-    useEffect(() => {
-        if (!userProfile || !hourlyReward || !dailyReward) return;
-        Analytics.syncUserData(userProfile, hourlyReward, dailyReward);
-    }, [userProfile, hourlyReward, dailyReward]);
 
     return null
 }

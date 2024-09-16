@@ -3,10 +3,9 @@ import { MIXPANEL_TOKEN } from '@constants';
 import {DailyReward, HourlyReward, UserProfile} from "@types";
 
 type TrackEventTypes = {
-    "end_game": [number, string];
-    "start_game": [];
+    "end_game": { points: number; end_type: string };
+    "start_game": {};
 };
-
 type TrackEventParams<K extends keyof TrackEventTypes> = TrackEventTypes[K];
 
 export class Analytics {
@@ -27,31 +26,27 @@ export class Analytics {
         }
     }
 
-    static syncUserData(userProfile: UserProfile, hourlyReward: HourlyReward, dailyReward: DailyReward) {
-        if (userProfile) {
-            mixpanel.people.set({
-                points: userProfile.points,
-                game_tickets: userProfile.gameTickets,
-            });
-        }
-        if (hourlyReward) {
-            mixpanel.people.set({
-                hourly_income: hourlyReward.income,
-            });
-        }
-        if (dailyReward) {
-            mixpanel.people.set({
-                daily_streak: dailyReward.days,
-            });
-        }
+    static syncUserProfile(userProfile: UserProfile) {
+        mixpanel.people.set({
+            points: userProfile.points,
+            game_tickets: userProfile.gameTickets,
+        });
     }
 
-    static trackEvent<K extends keyof TrackEventTypes>(eventName: K, ...params: TrackEventParams<K>) {
-        if (eventName === "end_game") {
-            const [points, end_type] = params;
-            mixpanel.track(eventName, { points, end_type });
-        } else {
-            mixpanel.track(eventName);
-        }
+    static syncHourlyReward(hourlyReward: HourlyReward) {
+        mixpanel.people.set({
+            hourly_income: hourlyReward.income,
+        });
+    }
+
+    static syncDailyReward(dailyReward: DailyReward) {
+        mixpanel.people.set({
+            daily_streak: dailyReward.days,
+        });
+    }
+
+
+    static trackEvent<K extends keyof TrackEventTypes>(eventName: K, params?: TrackEventParams<K>) {
+        mixpanel.track(eventName, params);
     }
 }
