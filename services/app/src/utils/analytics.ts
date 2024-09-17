@@ -16,18 +16,11 @@ export class Analytics {
     }
 
     static identifyUser(userProfile: UserProfile) {
-        if (userProfile) {
-            mixpanel.identify(userProfile.telegramId.toString());
-            mixpanel.people.set({
-                "$first_name": userProfile.firstName,
-                "$last_name": userProfile.lastName,
-                "username": userProfile.username,
-            });
-        }
-    }
-
-    static syncUserProfile(userProfile: UserProfile) {
+        mixpanel.identify(userProfile.telegramId.toString());
         mixpanel.people.set({
+            $first_name: userProfile.firstName,
+            $last_name: userProfile.lastName,
+            username: userProfile.username,
             points: userProfile.points,
             game_tickets: userProfile.gameTickets,
         });

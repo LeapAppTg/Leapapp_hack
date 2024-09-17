@@ -14,7 +14,6 @@ export const AnalyticsProvider = () => {
     useEffect(() => {
         if (userProfile) {
             Analytics.identifyUser(userProfile);
-            Analytics.syncUserProfile(userProfile);
         }
     }, [userProfile]);
 
