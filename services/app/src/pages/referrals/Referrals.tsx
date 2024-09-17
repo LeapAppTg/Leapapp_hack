@@ -1,15 +1,19 @@
 import { PageTitle, PageTitleBackgroundColor, TelegramEmojiType } from "@components";
 import { FC } from "react";
-import { ClaimButton } from "./components";
-import { Table, InviteButton } from "./elements";
+import { ClaimButton, Stats } from "./components";
+import { InviteButton, Milestones } from "./elements";
+import { FlexGapColumn12FullWidth } from "@utils";
 
 export const ReferralsPage: FC = () => {
 
     return (
         <>
-        <PageTitle icon={TelegramEmojiType.ChampangeGlasses} color={PageTitleBackgroundColor.Blue} title="Referrals" subtitle="Earn 10% from frens + 3% from their referrals. Get a game ticket for each fren"/>
-        <ClaimButton/>
-        <Table/>
+        <div className={FlexGapColumn12FullWidth.className}>
+            <PageTitle icon={TelegramEmojiType.ChampangeGlasses} color={PageTitleBackgroundColor.Blue} title="Referrals" subtitle="Earn 10% from frens earnings"/>
+            <Stats/>
+            <ClaimButton/>
+        </div>
+        <Milestones/>
         <InviteButton/>
         </>
     )

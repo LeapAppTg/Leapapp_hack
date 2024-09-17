@@ -2,7 +2,7 @@ import { CircleIconWrapper, CircleIconWrapperColor } from "@components";
 import { CheckmarkIcon, CloseIcon, IconFC } from "@icons";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useTelegram } from "@providers";
-import { EnumMatcher, EnumToFCMatcher, TextXSRegular, classJoiner } from "@utils";
+import { EnumMatcher, EnumToFCMatcher, TextAlign, TextXSRegular, classJoiner } from "@utils";
 import { FC, useEffect, useState } from "react";
 import { AlertProps, AlertStatus } from "./Alert.t";
 import styles from "./styles.module.css";
@@ -80,7 +80,7 @@ export const Alert: FC<AlertProps> = ({
                 :
                 null
             }
-            <p className={TextXSRegular.className}>
+            <p className={TextXSRegular.update({ textAlign: TextAlign.Left }).className}>
                 {message}
             </p>
             {

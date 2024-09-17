@@ -109,7 +109,7 @@
 }
 
 .level_10 .icon, .level_10 .progress > div {
-    background: linear-gradient(90deg, #29313D 0%, #8E203E 33.5%, #267687 59.37%, #531591 100%);
+    background: linear-gradient(90deg, #9F0FB6 0%, #E93767 33.5%, #48D0EE 59.37%, #9C45F3 100%);
 }
 .level_10 .icon {
     box-shadow: 0px 0px 32px 0px rgba(38, 13, 80, 0.60);

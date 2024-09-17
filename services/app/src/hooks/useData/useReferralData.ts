@@ -1,6 +1,6 @@
 import { ApiRoutes } from "@hooks"
 import { useAuth } from "@providers"
-import { getInviteLink, getReferralsCount, getReferralsList, getUnclaimedPoints } from "@services"
+import { getInviteLink, getReferralInfo, getReferralsList, getReferralsMilestonesList, getUnclaimedPoints } from "@services"
 import { ReferralsList } from "@types"
 import useSWR from "swr"
 import useSWRInfinite from "swr/infinite"
@@ -13,11 +13,11 @@ export function useUnclaimedPointsData () {
     )
 }
 
-export function useReferralsCountData () {
+export function useReferralInfoData () {
     const { authToken } = useAuth()
     return useSWR(
-        authToken ? [ApiRoutes.GetReferralsCount, authToken] : null,
-        ([_, authToken]) => getReferralsCount(authToken)
+        authToken ? [ApiRoutes.GetReferralInfo, authToken] : null,
+        ([_, authToken]) => getReferralInfo(authToken)
     )
 }
 
@@ -41,5 +41,13 @@ export function useReferralsListData () {
         {
             revalidateFirstPage: false
         }
+    )
+}
+
+export function useReferralsMilestonesListData () {
+    const { authToken } = useAuth()
+    return useSWR(
+        authToken ? [ApiRoutes.GetReferralsMilestonesList, authToken] : null,
+        ([_, authToken]) => getReferralsMilestonesList(authToken, { limit: '9', dynamic_offset: 'true' })
     )
 }

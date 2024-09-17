@@ -1,5 +1,5 @@
 import { ApiGetParamsBuilder, ApiGetRequestBuilder } from "@builders";
-import { InviteLinkApiTypeBuilder, ReferralsCountApiTypeBuilder, ReferralsListApiTypeBuilder, UnclaimedPointsApiTypeBuilder } from "@types";
+import { InviteLinkApiTypeBuilder, MilestonesListApiTypeBuilder, ReferralInfoApiTypeBuilder, ReferralsListApiTypeBuilder, UnclaimedPointsApiTypeBuilder } from "@types";
 
 export async function getInviteLink (accessToken: string) {
     return new ApiGetRequestBuilder({
@@ -37,12 +37,29 @@ export async function getReferralsList (accessToken: string, params: GetReferral
     .sendRequest()
 }
 
-export async function getReferralsCount (accessToken: string) {
+export async function getReferralInfo (accessToken: string) {
     return new ApiGetRequestBuilder({
-        path: 'api/v1/referrals/count/',
-        typeBuilder: ReferralsCountApiTypeBuilder,
+        path: 'api/v1/referrals/info/',
+        typeBuilder: ReferralInfoApiTypeBuilder,
         paramsBuilder: new ApiGetParamsBuilder<Record<string, never>>()
     })
     .setAccessToken(accessToken)
+    .sendRequest()
+}
+
+type GetReferralsMilestonesListParams = {
+    limit?: string,
+    offset?: string,
+    dynamic_offset?: string
+}
+
+export async function getReferralsMilestonesList (accessToken: string, params: GetReferralsMilestonesListParams) {
+    return new ApiGetRequestBuilder({
+        path: 'api/v1/referrals/milestones/',
+        typeBuilder: MilestonesListApiTypeBuilder,
+        paramsBuilder: new ApiGetParamsBuilder<GetReferralsMilestonesListParams>()
+    })
+    .setAccessToken(accessToken)
+    .setParams(params)
     .sendRequest()
 }

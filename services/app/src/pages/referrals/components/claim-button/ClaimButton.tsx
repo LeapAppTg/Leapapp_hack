@@ -9,6 +9,7 @@ import { FC } from "react";
 export const ClaimButton: FC = () => {
 
     const { data: unclaimedPoints, mutate } = useData(ApiRoutes.GetUnclaimedPoints)
+    const { mutate: mutateInfo } = useData(ApiRoutes.GetReferralInfo)
     const { sendAlert, sendApiErrorAlert } = useAlerts()
     const { authToken } = useAuth()
 
@@ -21,6 +22,7 @@ export const ClaimButton: FC = () => {
                 withConfetti: true
             })
             mutate({ count: 0 })
+            if (unclaimedPoints) mutateInfo(prev => prev ? { ...prev, claimedPointsCount: prev.claimedPointsCount + unclaimedPoints.count } : undefined)
         } catch (e) {
             sendApiErrorAlert(e)
         }

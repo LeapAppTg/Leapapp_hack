@@ -1,10 +1,11 @@
 import { ApiError } from "@builders"
-import { ApiRoutes, useData, useLocalStorage } from "@hooks"
+import { ApiRoutes, useData } from "@hooks"
 import { postTokenRefresh, postUserAuth } from "@services"
+import { QuestCategory } from "@types"
+import mixpanel from "mixpanel-browser"
 import { Dispatch, FC, PropsWithChildren, SetStateAction, createContext, useContext, useEffect, useState } from "react"
 import { SWRConfig } from "swr"
 import { useTelegram } from "./"
-import { QuestCategory } from "@types"
 
 type AuthContextLayout = {
     authToken: string | null,
@@ -30,7 +31,7 @@ export const useAuth = () => useContext(AuthContext)
 
 export const AuthProvider: FC<PropsWithChildren> = ({children}) => {
 
-    const [authToken, setAuthToken] = useLocalStorage('auth_token')
+    const [authToken, setAuthToken] = useState<string | null>(null)
 
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
     const [isFirstTimeLogin, setIsFirstTimeLogin] = useState<boolean>(false)
@@ -118,8 +119,8 @@ const AuthConsumerContent: FC = () => {
     const { data: dailyReward } = useData(ApiRoutes.GetDailyReward)
     useData(ApiRoutes.GetQuests, QuestCategory.Leap)
     useData(ApiRoutes.GetQuests, QuestCategory.Partnership)
-    useData(ApiRoutes.GetReferralsCount)
-    useData(ApiRoutes.GetReferralsList)
+    useData(ApiRoutes.GetReferralInfo)
+    useData(ApiRoutes.GetReferralsMilestonesList)
     useData(ApiRoutes.GetUnclaimedPoints)
     useData(ApiRoutes.GetGameLeaderboard)
     useData(ApiRoutes.GetMarketItemsList)

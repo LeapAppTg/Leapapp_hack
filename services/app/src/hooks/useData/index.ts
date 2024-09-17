@@ -1,7 +1,7 @@
 import { useGameLeaderboardData } from "./useLeaderboardData";
 import { useMarketItemsListData } from "./useMarketData";
 import { UseQuestsDataProps, useQuestsData } from "./useQuestsData";
-import { useInviteLinkData, useReferralsCountData, useReferralsListData, useUnclaimedPointsData } from "./useReferralData";
+import { useInviteLinkData, useReferralInfoData, useReferralsListData, useReferralsMilestonesListData, useUnclaimedPointsData } from "./useReferralData";
 import { useDailyRewardData, useHourlyRewardData, useUserProfileData } from "./useUserData";
 
 export enum ApiRoutes {
@@ -12,7 +12,8 @@ export enum ApiRoutes {
     GetInviteLink = '/get/invite-link/',
     GetUnclaimedPoints = '/get/unclaimed-points/',
     GetReferralsList = '/get/referrals-list/',
-    GetReferralsCount = '/get/referrals-count/',
+    GetReferralInfo = '/get/referral-info/',
+    GetReferralsMilestonesList = '/get/referrals/milestones-list/',
     GetGameLeaderboard = '/get/game-leaderboard/',
     GetMarketItemsList = '/get/market-items/'
 }
@@ -25,7 +26,8 @@ type UseDataTypesMap = {
     [ApiRoutes.GetInviteLink]: [[], ReturnType<typeof useInviteLinkData>],
     [ApiRoutes.GetUnclaimedPoints]: [[], ReturnType<typeof useUnclaimedPointsData>],
     [ApiRoutes.GetReferralsList]: [[], ReturnType<typeof useReferralsListData>],
-    [ApiRoutes.GetReferralsCount]: [[], ReturnType<typeof useReferralsCountData>],
+    [ApiRoutes.GetReferralInfo]: [[], ReturnType<typeof useReferralInfoData>],
+    [ApiRoutes.GetReferralsMilestonesList]: [[], ReturnType<typeof useReferralsMilestonesListData>],
     [ApiRoutes.GetGameLeaderboard]: [[], ReturnType<typeof useGameLeaderboardData>],
     [ApiRoutes.GetMarketItemsList]: [[], ReturnType<typeof useMarketItemsListData>]
 }
@@ -54,8 +56,10 @@ export function useData<
             return useUnclaimedPointsData() as UseDataReturnType<K>;
         case ApiRoutes.GetReferralsList:
             return useReferralsListData() as UseDataReturnType<K>;
-        case ApiRoutes.GetReferralsCount:
-            return useReferralsCountData() as UseDataReturnType<K>;
+        case ApiRoutes.GetReferralsMilestonesList:
+            return useReferralsMilestonesListData() as UseDataReturnType<K>;
+        case ApiRoutes.GetReferralInfo:
+            return useReferralInfoData() as UseDataReturnType<K>;
         case ApiRoutes.GetGameLeaderboard:
             return useGameLeaderboardData() as UseDataReturnType<K>;
         case ApiRoutes.GetMarketItemsList:
