@@ -1,11 +1,9 @@
-import { AlertsConsumer, AlertsProvider, AuthConsumer, AuthProvider, BottomPopupConsumer, BottomPopupProvider, TelegramConsumer, TelegramProvider } from '@providers';
+import { AlertsConsumer, AlertsProvider, AuthConsumer, AuthProvider, BottomPopupConsumer, BottomPopupProvider, TelegramConsumer, TelegramProvider, AnalyticsProvider } from '@providers';
 import '@styles';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './AppRouter';
 import { useEffect } from 'react';
 import { SvgSharedColors } from '@components';
-import mixpanel from 'mixpanel-browser';
-import { MIXPANEL_TOKEN } from '@constants';
 
 function App() {
 
@@ -25,18 +23,13 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    mixpanel.init(MIXPANEL_TOKEN, {
-      track_pageview: 'url-with-path'
-    })
-  }, [])
-
   return (
     <BrowserRouter>
       <TelegramProvider>
         <AuthProvider>
           <AlertsProvider>
             <BottomPopupProvider>
+              <AnalyticsProvider/>
               <AlertsConsumer/>
               <AppRouter/>
               <TelegramConsumer/>
