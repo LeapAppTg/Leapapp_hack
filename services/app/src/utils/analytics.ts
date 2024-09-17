@@ -38,7 +38,6 @@ export class Analytics {
         });
     }
 
-
     static trackEvent<K extends keyof TrackEventTypes>(eventName: K, params?: TrackEventParams<K>) {
         mixpanel.track(eventName, params);
     }
