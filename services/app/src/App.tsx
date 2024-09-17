@@ -29,13 +29,13 @@ function App() {
         <AuthProvider>
           <AlertsProvider>
             <BottomPopupProvider>
-                <AnalyticsProvider/>
-                <AlertsConsumer/>
-                <AppRouter/>
-                <TelegramConsumer/>
-                <AuthConsumer/>
-                <BottomPopupConsumer/>
-                <SvgSharedColors/>
+              <AnalyticsProvider/>
+              <AlertsConsumer/>
+              <AppRouter/>
+              <TelegramConsumer/>
+              <AuthConsumer/>
+              <BottomPopupConsumer/>
+              <SvgSharedColors/>
             </BottomPopupProvider>
           </AlertsProvider>
         </AuthProvider>
