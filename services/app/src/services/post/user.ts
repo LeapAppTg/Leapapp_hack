@@ -8,12 +8,3 @@ export async function postDailyReward (accessToken: string) {
     .setAccessToken(accessToken)
     .sendRequest()
 }
-
-export async function postHourlyReward (accessToken: string) {
-    return new ApiPostRequestBuilder<{}, {}>({
-        path: 'api/v1/game/hours-reward/',
-        responseTypeBuilder: new ApiTypeBuilder(i => i)
-    })
-    .setAccessToken(accessToken)
-    .sendRequest()
-}

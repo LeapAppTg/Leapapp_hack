@@ -1,6 +1,6 @@
 import { ApiRoutes } from "@hooks"
 import { useAuth } from "@providers"
-import { getDailyReward, getHourlyReward, getUserProfile } from "@services"
+import { getDailyReward, getUserProfile } from "@services"
 import useSWR from "swr"
 
 export function useDailyRewardData () {
@@ -8,14 +8,6 @@ export function useDailyRewardData () {
     return useSWR(
         authToken ? [ApiRoutes.GetDailyReward, authToken] : null,
         ([_, authToken]) => getDailyReward(authToken)
-    )
-}
-
-export function useHourlyRewardData () {
-    const { authToken } = useAuth()
-    return useSWR(
-        authToken ? [ApiRoutes.GetHourlyReward, authToken] : null,
-        ([_, authToken]) => getHourlyReward(authToken)
     )
 }
 
