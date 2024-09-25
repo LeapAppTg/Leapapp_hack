@@ -1,39 +1,50 @@
 import { Coin } from "@assets";
 import { AlertStatus, Button, ButtonStyle, CircleIconWrapper, CircleIconWrapperColor } from "@components";
+import { ApiRoutes, useData } from "@hooks";
 import { ArrowIcon, CalendarIcon, CheckmarkIcon, DiscordIcon, IconBox, IconSize, InstagramIcon, StarsLightSparkleIcon, TelegramIcon, TiktokIcon, UserProfileIcon, XIcon, YoutubeIcon } from "@icons";
 import { useAlerts, useAuth, useTelegram } from "@providers";
 import { postClaimQuest } from "@services";
-import { Quest, QuestType } from "@types";
+import { Quest, QuestStatus, QuestType, isLinkQuestObjective, isUserMilestoneQuestObjective } from "@types";
 import { EnumMatcher, EnumToFCMatcher, FlexGapColumn4AlignFlexStart, FlexGapRow12FullWidth, FlexGapRow4, JustifyContent, TextXSMedium, TextXSRegular, TextXXSRegularGrey400, classJoiner } from "@utils";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import styles from "./styles.module.css";
-import { ApiRoutes, useData } from "@hooks";
 
-const IconMatcher = new EnumToFCMatcher<QuestType, FC, FC>(
+const MilestionIconMatcher = new EnumToFCMatcher<QuestType, FC, FC>(
     {
-        [QuestType.Telegram]: TelegramIcon,
-        [QuestType.X]: XIcon,
-        [QuestType.Instagram]: InstagramIcon,
-        [QuestType.Youtube]: YoutubeIcon,
-        [QuestType.Discord]: DiscordIcon,
-        [QuestType.Tiktok]: TiktokIcon,
-        [QuestType.Days]: CalendarIcon,
-        [QuestType.Invite]: UserProfileIcon
+        [QuestType.ConsecutiveDaysMilestone]: CalendarIcon,
+        [QuestType.ReferralsMilestone]: UserProfileIcon,
+        [QuestType.PointsMilestone]: StarsLightSparkleIcon
     },
     StarsLightSparkleIcon
 )
 
+const matchLinkIcon = (url: string): FC => {
+    const iconMap = [
+        { includes: ['x', 'twitter'], icon: XIcon },
+        { includes: ['instagram'], icon: InstagramIcon },
+        { includes: ['youtube', 'youtu.be'], icon: YoutubeIcon },
+        { includes: ['discord'], icon: DiscordIcon },
+        { includes: ['tiktok'], icon: TiktokIcon },
+    ];
+
+    const match = iconMap.find(({ includes }) => 
+        includes.some(keyword => url.includes(keyword))
+    );
+
+    return match ? match.icon : StarsLightSparkleIcon;
+};
+
 const TypeProgressLabelStringMatcher = new EnumMatcher<QuestType, string, ''>(
     {
-        [QuestType.Days]: 'days',
-        [QuestType.Game]: 'games',
-        [QuestType.Points]: 'points'
+        [QuestType.ConsecutiveDaysMilestone]: 'days',
+        [QuestType.ReferralsMilestone]: 'frens',
+        [QuestType.PointsMilestone]: 'points'
     },
     ''
 )
 
 export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
-    uuid, name, isClaimed, type, progress, required, rewardPoints, rewardGameTickets, link, onClaim
+    id, name, status, objective, rewardPoints, onClaim
 }) => {
 
     const { authToken } = useAuth()
@@ -44,11 +55,10 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
 
     const claimQuest = async () => {
         try {
-            await postClaimQuest(authToken, uuid)
+            await postClaimQuest(authToken, id)
             let message: string = 'Claimed'
             if (rewardPoints) message += ` +${rewardPoints.format()} points`
-            if (rewardGameTickets) message += ` +${rewardGameTickets.format()} tickets`
-            if (!rewardPoints && !rewardGameTickets) message += ` reward successfully`
+            if (!rewardPoints) message += ` reward successfully`
             sendAlert({ status: AlertStatus.Success, withConfetti: true, message })
             onClaim()
         } catch (e) {
@@ -57,28 +67,33 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
     }
 
     const onClick = async () => {
-        if (isClaimed) return
-        if (link && [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube, QuestType.Telegram].includes(type)) {
-            if (type === QuestType.Telegram) openTelegramLink(link)
-            else openLink(link)
+        if (status === QuestStatus.Claimed) return
+        if (isLinkQuestObjective(objective)) {
+            if (objective.type === QuestType.Link) openLink(objective.url)
+            else openTelegramLink(objective.url)
             setShowLoader(true)
             setTimeout(async () => {
                 await claimQuest()
                 setShowLoader(false)
             }, 10_000)
-        }
-        if (type === QuestType.Invite && refLink) {
+        } else if (objective.type === QuestType.ReferralsMilestone && refLink) {
             shareLink(refLink.inviteLink)
         }
     }
 
+    const questIcon = useMemo(() => {
+        if (isUserMilestoneQuestObjective(objective)) return MilestionIconMatcher.match(objective.type)
+        if (objective.type === QuestType.Link) return matchLinkIcon(objective.url)
+        return TelegramIcon
+    }, [objective])
+
     return (
         <div className={classJoiner(
             FlexGapRow12FullWidth.update({ justifyContent: JustifyContent.SpaceBetween }).className, styles.task,
-            isClaimed ? styles.half_opacity : undefined
+            status === QuestStatus.Claimed ? styles.half_opacity : undefined
         )} onClick={onClick}>
             <div className={styles.icon_wrapper}>
-                <IconBox icon={IconMatcher.match(type)} size={IconSize.MediumBig}/>
+                <IconBox icon={questIcon} size={IconSize.MediumBig}/>
                 <svg className={styles.border} xmlns="http://www.w3.org/2000/svg" width="54" height="60" viewBox="0 0 54 60">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M51.0811 42.5242V17.4758C51.0811 16.4116 50.5017 15.4318 49.5691 14.9188L28.4069 3.27969C27.5309 2.79788 26.4691 2.79788 25.5931 3.27969L4.43094 14.9188C3.49833 15.4318 2.91892 16.4116 2.91892 17.4758V42.5242C2.91892 43.5884 3.49833 44.5682 4.43094 45.0812L25.5931 56.7203C26.4691 57.2021 27.5309 57.2021 28.4069 56.7203L49.5691 45.0812C50.5017 44.5682 51.0811 43.5884 51.0811 42.5242ZM3.02405 12.3619C1.15882 13.3877 0 15.3474 0 17.4758V42.5242C0 44.6526 1.15881 46.6123 3.02405 47.6381L24.1862 59.2773C25.9383 60.2409 28.0617 60.2409 29.8138 59.2773L50.976 47.6381C52.8412 46.6123 54 44.6526 54 42.5242V17.4758C54 15.3474 52.8412 13.3877 50.976 12.3619L29.8138 0.722721C28.0617 -0.240906 25.9383 -0.240908 24.1862 0.722719L3.02405 12.3619Z"/>
                 </svg>
@@ -93,10 +108,10 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
                     <p className={TextXSRegular.className}>{rewardPoints.format()}</p>
                 </div>
                 {
-                    required !== null && progress !== null
+                    isUserMilestoneQuestObjective(objective)
                     ?
                     <p className={TextXXSRegularGrey400.className}>
-                        {progress.format()}/{required.format()} {TypeProgressLabelStringMatcher.match(type)}
+                        {objective.progress.format()}/{objective.goal.format()} {TypeProgressLabelStringMatcher.match(objective.type)}
                     </p>
                     :
                     null
@@ -110,19 +125,19 @@ export const QuestItem: FC<Quest & { onClaim: () => any }> = ({
                     <path d="M12 1.5C13.9229 1.5 15.8089 2.02803 17.4522 3.02651C19.0955 4.02498 20.4331 5.45555 21.3191 7.16218C22.2051 8.86881 22.6054 10.786 22.4763 12.7045C22.3473 14.6231 21.6939 16.4694 20.5874 18.042" stroke="#B51CF7" stroke-width="3" stroke-linecap="round"/>
                 </svg>
                 :
-                isClaimed
+                status === QuestStatus.Claimed
                 ?
                 <CircleIconWrapper color={CircleIconWrapperColor.Green600} icon={CheckmarkIcon}/>
                 :
-                [QuestType.Discord, QuestType.Facebook, QuestType.Instagram, QuestType.Link, QuestType.Telegram, QuestType.Threads, QuestType.Telegram, QuestType.X, QuestType.Youtube].includes(type)
+                [QuestType.Link, QuestType.TelegramLink].includes(objective.type)
                 ?
                 <IconBox icon={ArrowIcon} size={IconSize.MediumBig}/>
                 :
-                required !== null && progress !== null
+                isUserMilestoneQuestObjective(objective)
                 ?
-                required > progress
+                objective.goal > objective.progress
                 ?
-                type === QuestType.Invite
+                objective.type === QuestType.ReferralsMilestone
                 ?
                 <IconBox icon={ArrowIcon} size={IconSize.MediumBig}/>
                 :

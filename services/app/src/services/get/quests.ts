@@ -7,7 +7,7 @@ type GetQuestsParams = {
 
 export async function getQuests (accessToken: string, params: GetQuestsParams) {
     return new ApiGetRequestBuilder({
-        path: 'api/v1/game/quests/',
+        path: 'api/v1/quests/',
         typeBuilder: QuestsListApiTypeBuilder,
         paramsBuilder: new ApiGetParamsBuilder<GetQuestsParams>()
     })
