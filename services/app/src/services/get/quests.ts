@@ -2,7 +2,11 @@ import { ApiGetParamsBuilder, ApiGetRequestBuilder } from "@builders";
 import { QuestsListApiTypeBuilder } from "@types";
 
 type GetQuestsParams = {
-    category?: string
+    category?: string,
+    objective_type?: string,
+    status?: string[],
+    limit?: string,
+    offset?: string
 }
 
 export async function getQuests (accessToken: string, params: GetQuestsParams) {

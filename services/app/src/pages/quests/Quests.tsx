@@ -10,7 +10,7 @@ import { QuestCategory, QuestStatus } from "@types";
 export const QuestsPage: FC = () => {
 
     const [isLeapTasks, setIsLeapTasks] = useState<boolean>(true)
-    const { data: quests, mutate } = useData(ApiRoutes.GetQuests, isLeapTasks ? QuestCategory.Leap : QuestCategory.Partnership)
+    const { data: quests, mutate } = useData(ApiRoutes.GetQuests, isLeapTasks ? QuestCategory.Leap : QuestCategory.Partnership, [QuestStatus.InProgress, QuestStatus.Completed])
 
     const onClaim = useCallback((id: string) => {
         mutate(prev => prev ? prev.map(i => i.id === id ? { ...i, status: QuestStatus.Claimed } : i) : undefined)
