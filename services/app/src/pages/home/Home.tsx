@@ -2,7 +2,7 @@ import { Button, ButtonStyle, TelegramEmoji, TelegramEmojiSize, TelegramEmojiTyp
 import { ArrowIcon } from "@icons";
 import { FlexGapColumn12FullWidthFullHeight } from "@utils";
 import { FC } from "react";
-import { Balance, GamePreview, HourlyReward } from "./components";
+import { Balance, GamePreview } from "./components";
 
 export const HomePage: FC = () => {
     return (
@@ -15,7 +15,6 @@ export const HomePage: FC = () => {
             </Button>
             <GamePreview/>
         </div>
-        <HourlyReward/>
         </>
     )
 }
