@@ -6,10 +6,12 @@ import { FC } from "react";
 import styles from "./styles.module.css";
 
 type Props = {
-    inTime?: number
+    inTime?: number,
+    title?: string,
+    subtitle?: string
 }
 
-export const ComingSoon: FC<Props> = ({ inTime }) => {
+export const ComingSoon: FC<Props> = ({ inTime, title, subtitle }) => {
     return (
         <div className={styles.coming_soon}>
             <div className={styles.hero}>
@@ -17,10 +19,10 @@ export const ComingSoon: FC<Props> = ({ inTime }) => {
                 <Wrench width={38} height={41} className={styles.wrench}/>
             </div>
             <p className={TextMSemiBold.className}>
-                Coming soon
+                { title || 'Coming soon' }
             </p>
             <p className={TextXSRegularGrey400.className}>
-                We are on it
+                { subtitle || 'We are on it' }
             </p>
             {
                 inTime
