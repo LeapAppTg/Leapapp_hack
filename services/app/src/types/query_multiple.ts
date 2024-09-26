@@ -1,17 +1,13 @@
 import { ApiTypeBuilder } from "@builders"
 
 export type QueryMultipleApi<ResultTApi> = {
-    count: string | null,
-    next: string | null,
-    previous: string | null,
-    results?: ResultTApi[]
+    next: boolean,
+    array?: ResultTApi[]
 }
 
 export type QueryMultiple<ResultT> = {
-    count: number | null,
-    nextRequest: string | null,
-    previousRequest: string | null,
-    results: ResultT[]
+    next: boolean,
+    array: ResultT[]
 }
 
 export class ApiMultipleQueryTypeBuilder<ResultTApi, ResultT> extends ApiTypeBuilder<QueryMultipleApi<ResultTApi>, QueryMultiple<ResultT>> {
@@ -19,10 +15,8 @@ export class ApiMultipleQueryTypeBuilder<ResultTApi, ResultT> extends ApiTypeBui
         super(
             (i) => {
                 return {
-                    count: i.count ? Number(i.count) : null,
-                    nextRequest: i.next || null,
-                    previousRequest: i.previous || null,
-                    results: i.results?.map((r) => resultBuilder.convert(r)) || []
+                    next: i.next,
+                    array: i.array?.map((r) => resultBuilder.convert(r)) || []
                 }
             }
         )

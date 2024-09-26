@@ -36,5 +36,3 @@ export const QuestApiTypeBuilder = new ApiTypeBuilder<QuestApi, Quest>(
         active_until: i.active_until ? new Date(i.active_until) : null
     })
 )
-
-export const QuestsListApiTypeBuilder = new ApiArrayTypeBuilder(QuestApiTypeBuilder)

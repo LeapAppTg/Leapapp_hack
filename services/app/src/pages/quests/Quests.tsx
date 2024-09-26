@@ -1,5 +1,5 @@
 import { PageTitle, PageTitleBackgroundColor, TelegramEmojiType } from "@components";
-import { ApiRoutes, useData } from "@hooks";
+import { ApiRoutes, useData, usePagination } from "@hooks";
 import { FlexGapRow8FullWidth, TextXSMedium, TextXSRegular, classJoiner } from "@utils";
 import { FC, useCallback, useState } from "react";
 import { QuestItem } from "./components";
@@ -10,11 +10,13 @@ import { QuestCategory, QuestStatus } from "@types";
 export const QuestsPage: FC = () => {
 
     const [isLeapTasks, setIsLeapTasks] = useState<boolean>(true)
-    const { data: quests, mutate } = useData(ApiRoutes.GetQuests, isLeapTasks ? QuestCategory.Leap : QuestCategory.Partnership, [QuestStatus.InProgress, QuestStatus.Completed])
+    const { setSize, isValidating, data: quests, mutate } = useData(ApiRoutes.GetQuests, isLeapTasks ? QuestCategory.Leap : QuestCategory.Partnership, [QuestStatus.InProgress, QuestStatus.Completed])
 
     const onClaim = useCallback((id: string) => {
-        mutate(prev => prev ? prev.map(i => i.id === id ? { ...i, status: QuestStatus.Claimed } : i) : undefined)
+        mutate(prev => prev ? prev.map(list => list.array.some(i => i.id === id) ? { next: list.next, array: list.array.map(i => i.id === id ? { ...i, status: QuestStatus.Claimed } : i) } : list) : undefined)
     }, [mutate])
+
+    const ref = usePagination(setSize, isValidating, quests ? !quests[quests.length - 1].next : false)
 
     return (
         <>
@@ -36,13 +38,13 @@ export const QuestsPage: FC = () => {
             </div>
         </div>
 
-        <div className={styles.quests}>
+        <div className={styles.quests} ref={ref}>
             {
                 quests
                 ?
-                quests.length
+                quests.length && quests[0].array.length
                 ?
-                quests.map(q => <QuestItem {...q} onClaim={() => onClaim(q.id)} key={q.id}/>)
+                quests.flatMap(q => q.array).map(q => <QuestItem {...q} onClaim={() => onClaim(q.id)} key={q.id}/>)
                 :
                 <p className={TextXSMedium.className}>
                     You've done all the tasks. Stay tuned for updates!
