@@ -1,6 +1,6 @@
 import { ApiGetParamsBuilder, ApiTypeBuilder } from "@builders"
 
-export type ApiGetRequestConstructorParams<Input, Output, Params extends Record<string, string>> = {
+export type ApiGetRequestConstructorParams<Input, Output, Params extends Record<string, string | string[]>> = {
     path?: string,
     typeBuilder: ApiTypeBuilder<Input, Output>
     accessToken?: string,

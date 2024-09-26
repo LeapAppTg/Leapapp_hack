@@ -4,7 +4,7 @@ import { ApiDeleteRequestConstructorParams, ApiGetRequestConstructorParams, ApiP
 import axios from 'axios'
 
 export class ApiGetRequestBuilder<
-    Input, Output, Params extends Record<string, string>
+    Input, Output, Params extends Record<string, string | string[]>
 > {
     private path?: string
     private accessToken: string | null

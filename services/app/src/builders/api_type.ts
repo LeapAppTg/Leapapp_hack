@@ -16,7 +16,7 @@ export class ApiTypeBuilder<InputType, OutputType, Nullable extends boolean = fa
     }
 }
 
-export class ApiGetParamsBuilder<InputType extends Record<string, string>> {
+export class ApiGetParamsBuilder<InputType extends Record<string, string | string[]>> {
     private defaults?: ApiGetRequestParameter[]
 
     constructor(defaults?: ApiGetRequestParameter[]) {
@@ -27,10 +27,17 @@ export class ApiGetParamsBuilder<InputType extends Record<string, string>> {
         const converted = this.defaults ? this.defaults : []
         if (!params) return converted
         return converted.concat(
-            Object.keys(params).filter(k => params[k] !== undefined).map(k => ({
-                key: k,
-                value: params[k]
-            }))
+            Object.keys(params).filter(k => params[k] !== undefined).flatMap(k => {
+                const value = params[k]
+                if (typeof value === "string") return {
+                    key: k,
+                    value
+                }
+                return value.map(value => ({
+                    key: k,
+                    value
+                }))
+            })
         )
     }
 }

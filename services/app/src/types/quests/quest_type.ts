@@ -1,43 +1,23 @@
 import { ApiTypeBuilder } from "@builders"
 
 export enum QuestType {
-    None = 'none',
-    
     Link = 'link',
-    Telegram = 'telegram',
-    X = 'x',
-    Youtube = 'youtube',
-    Instagram = 'instagram',
-    Facebook = 'facebook',
-    Discord = 'discord',
-    Threads = 'threads',
-    Tiktok = 'tiktok',
-
-    Invite = 'invite',
-    Game = 'game',
-    Days = 'days',
-    Points = 'points'
+    TelegramLink = 'telegram_link',
+    ConsecutiveDaysMilestone = 'consecutive_days_milestone',
+    PointsMilestone = 'points_milestone',
+    ReferralsMilestone = 'referrals_milestone',
 }
 
 const QuestTypeMapping: Record<string, QuestType> = {
-    'none': QuestType.None,
     'link': QuestType.Link,
-    'invite': QuestType.Invite,
-    'game': QuestType.Game,
-    'x': QuestType.X,
-    'telegram': QuestType.Telegram,
-    'days': QuestType.Days,
-    'points': QuestType.Points,
-    'discord': QuestType.Discord,
-    'facebook': QuestType.Facebook,
-    'instagram': QuestType.Instagram,
-    'youtube': QuestType.Youtube,
-    'threads': QuestType.Threads,
-    'tiktok': QuestType.Tiktok
+    'telegram_link': QuestType.TelegramLink,
+    'consecutive_days_milestone': QuestType.ConsecutiveDaysMilestone,
+    'points_milestone': QuestType.PointsMilestone,
+    'referrals_milestone': QuestType.ReferralsMilestone
 }
 
 export const QuestTypeApiTypeBuilder = new ApiTypeBuilder<string, QuestType, false>(
     (i) => {
-        return QuestTypeMapping[i] || QuestType.None
+        return QuestTypeMapping[i] || QuestType.Link
     }
 )

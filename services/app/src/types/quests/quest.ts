@@ -1,42 +1,39 @@
 import { ApiTypeBuilder } from "@builders"
-import { QuestType, QuestTypeApiTypeBuilder } from "."
+import { QuestCategory, QuestCategoryApiTypeBuilder, QuestObjective, QuestObjectiveApi, QuestObjectiveApiTypeBuilder, QuestStatus, QuestStatusApiTypeBuilder } from "."
 import { ApiArrayTypeBuilder } from "../query_multiple"
 
 export type QuestApi = {
-    uuid: number,
+    id: string,
     name: string,
-    type: string,
-    link?: string,
-    is_claimed: boolean,
-    required?: number,
-    progress?: number,
+    category: string,
     reward_points: number,
-    reward_game_tickets?: number,
+    status: string,
+    objective: QuestObjectiveApi,
+    active_since: string | null,
+    active_until: string | null
 }
 
 export type Quest = {
-    uuid: number,
+    id: string,
     name: string,
-    type: QuestType,
-    link: string | null,
-    isClaimed: boolean,
-    required: number | null,
-    progress: number | null,
+    category: QuestCategory,
     rewardPoints: number,
-    rewardGameTickets: number | null
+    status: QuestStatus,
+    objective: QuestObjective,
+    active_since: Date | null,
+    active_until: Date | null
 }
 
 export const QuestApiTypeBuilder = new ApiTypeBuilder<QuestApi, Quest>(
     (i) => ({
-        uuid: i.uuid,
+        id: i.id,
         name: i.name,
-        type: QuestTypeApiTypeBuilder.convert(i.type),
-        link: i.link || null,
-        isClaimed: i.is_claimed,
-        required: i.required === undefined ? null : i.required,
-        progress: i.progress === undefined ? null : i.progress,
+        category: QuestCategoryApiTypeBuilder.convert(i.category),
         rewardPoints: i.reward_points,
-        rewardGameTickets: i.reward_game_tickets || null
+        status: QuestStatusApiTypeBuilder.convert(i.status),
+        objective: QuestObjectiveApiTypeBuilder.convert(i.objective),
+        active_since: i.active_since ? new Date(i.active_since) : null,
+        active_until: i.active_until ? new Date(i.active_until) : null
     })
 )
 
