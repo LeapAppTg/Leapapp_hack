@@ -1,5 +1,5 @@
 import { ApiGetParamsBuilder, ApiGetRequestBuilder } from "@builders";
-import { QuestsListApiTypeBuilder } from "@types";
+import { ApiMultipleQueryTypeBuilder, QuestApiTypeBuilder } from "@types";
 
 type GetQuestsParams = {
     category?: string,
@@ -12,7 +12,7 @@ type GetQuestsParams = {
 export async function getQuests (accessToken: string, params: GetQuestsParams) {
     return new ApiGetRequestBuilder({
         path: 'api/v1/quests/',
-        typeBuilder: QuestsListApiTypeBuilder,
+        typeBuilder: new ApiMultipleQueryTypeBuilder(QuestApiTypeBuilder),
         paramsBuilder: new ApiGetParamsBuilder<GetQuestsParams>()
     })
     .setAccessToken(accessToken)
