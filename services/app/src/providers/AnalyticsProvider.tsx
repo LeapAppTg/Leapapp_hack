@@ -5,7 +5,6 @@ import {ApiRoutes, useData} from "@hooks";
 export const AnalyticsProvider = () => {
     const { data: userProfile } = useData(ApiRoutes.GetUserProfile);
     const { data: dailyReward } = useData(ApiRoutes.GetDailyReward);
-    const { data: hourlyReward } = useData(ApiRoutes.GetHourlyReward);
 
     useEffect(() => {
         Analytics.init();
@@ -16,12 +15,6 @@ export const AnalyticsProvider = () => {
             Analytics.identifyUser(userProfile);
         }
     }, [userProfile]);
-
-    useEffect(() => {
-        if (hourlyReward) {
-            Analytics.syncHourlyReward(hourlyReward);
-        }
-    }, [hourlyReward]);
 
     useEffect(() => {
         if (dailyReward) {

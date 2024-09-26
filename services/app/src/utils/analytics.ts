@@ -1,6 +1,6 @@
 import mixpanel from 'mixpanel-browser';
 import { MIXPANEL_TOKEN } from '@constants';
-import {DailyReward, HourlyReward, UserProfile} from "@types";
+import {DailyReward, UserProfile} from "@types";
 
 type TrackEventTypes = {
     "end_game": { points: number; end_type: string };
@@ -23,12 +23,6 @@ export class Analytics {
             username: userProfile.username,
             points: userProfile.points,
             game_tickets: userProfile.gameTickets,
-        });
-    }
-
-    static syncHourlyReward(hourlyReward: HourlyReward) {
-        mixpanel.people.set({
-            hourly_income: hourlyReward.income,
         });
     }
 

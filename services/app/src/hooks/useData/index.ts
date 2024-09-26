@@ -2,11 +2,10 @@ import { useGameLeaderboardData } from "./useLeaderboardData";
 import { useMarketItemsListData } from "./useMarketData";
 import { UseQuestsDataProps, useQuestsData } from "./useQuestsData";
 import { useInviteLinkData, useReferralInfoData, useReferralsListData, useReferralsMilestonesListData, useUnclaimedPointsData } from "./useReferralData";
-import { useDailyRewardData, useHourlyRewardData, useUserProfileData } from "./useUserData";
+import { useDailyRewardData, useUserProfileData } from "./useUserData";
 
 export enum ApiRoutes {
     GetDailyReward = '/get/daily-reward/',
-    GetHourlyReward = '/get/hourly-reward/',
     GetUserProfile = '/get/user-profile/',
     GetQuests = '/get/quests/',
     GetInviteLink = '/get/invite-link/',
@@ -20,7 +19,6 @@ export enum ApiRoutes {
 
 type UseDataTypesMap = {
     [ApiRoutes.GetDailyReward]: [[], ReturnType<typeof useDailyRewardData>],
-    [ApiRoutes.GetHourlyReward]: [[], ReturnType<typeof useHourlyRewardData>],
     [ApiRoutes.GetUserProfile]: [[], ReturnType<typeof useUserProfileData>],
     [ApiRoutes.GetQuests]: [UseQuestsDataProps, ReturnType<typeof useQuestsData>],
     [ApiRoutes.GetInviteLink]: [[], ReturnType<typeof useInviteLinkData>],
@@ -44,8 +42,6 @@ export function useData<
     switch (key) {
         case ApiRoutes.GetDailyReward:
             return useDailyRewardData() as UseDataReturnType<K>;
-        case ApiRoutes.GetHourlyReward:
-            return useHourlyRewardData() as UseDataReturnType<K>;
         case ApiRoutes.GetUserProfile:
             return useUserProfileData() as UseDataReturnType<K>;
         case ApiRoutes.GetQuests:
